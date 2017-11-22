@@ -1,0 +1,97 @@
+.add_vacancy{
+    background: #f9f9f9;
+    border: 1px solid #e9e9e9;
+    padding: 40px;
+    border-radius: 4px;
+    max-width: 100%;
+    width: 60%;
+    margin: 0 auto 20px auto;
+}
+.add_vacancy input, .add_vacancy select{
+    padding: 10px;
+    display: block;
+    min-width: 300px;
+    width: 90%;
+}
+
+.add_vacancy select{
+    min-width: 325px;
+    margin-right: 0;
+    width: 94%;
+}
+
+.add_vacancy textarea{
+    resize: vertical;
+    min-width: 305px;
+    min-height: 200px;
+    width: 90%;
+    padding: 10px;
+}
+
+.add_vacancy form{
+    max-width: 100%;
+}
+
+main{
+    width: 100%;
+}
+
+.add_vacancy h3{
+    margin-bottom: 5px;
+}
+
+.add_vacancy form input[type="submit"]{
+    min-width: 325px;
+    margin: 20px auto 0 auto;
+    cursor: pointer;
+    width: 89%;
+}
+
+.add_vacancy .option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    background: #ffffff;
+    border: 1px solid #e9e9e9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.add_vacancy .opt{
+    width: 94%;
+}
+.add_vacancy .row{
+    display: flex;
+}
+
+.add_vacancy .row button{
+    padding: 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    width: 40px;
+}
+
+.add_vacancy .m{
+    margin-top: 5px;
+}
+
+.error{
+    background: #cf4f4f;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+    display: none;
+    width: 91%;
+    text-align: center;
+}
+
+.error2{
+    width: 96% !important;
+}
+
+.error-border{
+    border: 1px solid #da0000;
+    box-shadow: inset 0 0 7px 0px #d60e0e;
+}

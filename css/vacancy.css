@@ -1,0 +1,58 @@
+
+.vacancy header{
+    margin-bottom: 10px;
+}
+
+.vacancy header .top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.vacancy header .bottom{
+    display: flex;
+}
+
+.vacancy header .bottom div{
+    margin-right: 20px;
+    color: #727272;
+}
+
+.vacancy header .company{
+    color: #1878af;
+}
+
+.vacancy header .emp{
+    color: #000000;
+}
+
+.vacancy footer{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.vacancy .salary{
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.vacancy header a{
+    text-decoration: none;
+    color: #3498db;
+    font-size: 25px;
+}
+
+.vacancy header a:hover{
+    color: #009b40;
+}
+
+.vacancy footer{
+    color: #727272;
+    font-size: 15px;
+}
+
+.vacancy p{
+    color: #3a3a3a;
+}

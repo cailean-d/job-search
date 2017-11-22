@@ -1,0 +1,50 @@
+aside{
+    border-left: 1px solid #bdbdbd;
+    margin-left: 20px;
+    width: 30%;
+    padding: 10px;
+}
+
+aside h3{
+    text-align: center;
+    display: block;
+}
+
+aside input{
+    width: 100%;
+}
+
+aside .option{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+aside .option select{
+    width: 100%;
+}
+
+aside .option:last-child{
+    border:none;
+}
+
+aside .option h4{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+aside .option a, aside .option a:visited, aside .option a:active{
+    display: block;
+    padding: 3px;
+    color: #3498db;
+    text-decoration: none;
+}
+
+aside .option a:hover{
+    color: #009b40;
+}
+
+aside .apply{
+    width: 100%;
+    padding: 10px;
+}
