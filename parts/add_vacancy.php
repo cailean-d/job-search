@@ -48,7 +48,7 @@
             <h3>Тип занятости</h3>
             <select name="schedule" required>
                 <?php while($res = $schedule->fetch(PDO::FETCH_BOTH)): ?>
-                    <option value=<?=$res['id']?>><?=$res['name']?></option>
+                    <option value=<?=$res['id']?>><?=$res['schedule_name']?></option>
                 <?php endwhile ?>
             </select>
         </div>
@@ -56,7 +56,7 @@
             <h3>Отрасль</h3>
             <select name="industry" required>
                 <?php while($res = $industry->fetch(PDO::FETCH_BOTH)) :?>
-                    <option value="<?=$res['id']?>"><?=$res['name']?></option>
+                    <option value="<?=$res['id']?>"><?=$res['industry_name']?></option>
                 <? endwhile ?>
             </select>
         </div>

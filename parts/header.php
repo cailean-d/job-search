@@ -4,15 +4,22 @@
  strpos($page, "index") || (strpos($page, "/") == "0" && strlen($page) == 1) ? $class1 = "active" : $class1 = "";
  strpos($page, "add_vacancy") ? $class2 = "active" : $class2 = "";
  strpos($page, "registration") ? $class3 = "active" : $class3 = "";
+ strpos($page, "resume") ? $class4 = "active" : $class4 = "";
 ?>
 <header id="header">
     <nav>
-        <a href="index.php" class=<?=$class1?>>Найти работу</a>
+        <a href="index.php" class=<?=$class1?>>Главная</a>
+        <?php if($_SESSION['type'] == '0') : ?>
         <a href="add_vacancy.php" class=<?=$class2?>>Разместить вакансию</a>
+        <?php else : ?>
+        <a href="resume.php" class=<?=$class4?>>Мое резюме</a>
+        <?php endif ?>        
     </nav>
     <div class="search">
         <form action="../index.php">
-            <input name="query" type="text" placeholder="найти...">
+            <input name="query" type="text" placeholder="найти..."
+            value="<?=($_GET['query']) ? $_GET['query'] : ''?>"
+            >
             <button type="submit">Поиск</button>
         </form>
     </div>
