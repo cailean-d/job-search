@@ -1,7 +1,7 @@
 <?php 
     try{
         session_start();
-        $db = new PDO('mysql:host=localhost;dbname=job;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        include("db_connection.php");
     
         $email = htmlspecialchars(trim($_POST['email']));
         $password = htmlspecialchars(trim($_POST['password']));

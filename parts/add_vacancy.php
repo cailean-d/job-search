@@ -1,12 +1,4 @@
-<?php
-    try{
-        $db = new PDO('mysql:host=localhost;dbname=job;charset=utf8', 'root', '');
-        $schedule = $db->query("SELECT * FROM `schedule`");
-        $industry = $db->query("SELECT * FROM `industry`");
-    } catch (Exception $e) {
-        echo $e->getMessage(); 
-    }
-?>
+<?php include('scripts/get_filter_data.php');?>
 <div class="add_vacancy">
     <form action="scripts/vacancy.php" method="post" id="vacancy">
         <div class="option">

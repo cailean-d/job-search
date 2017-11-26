@@ -1,7 +1,7 @@
 <?php 
     try{
         session_start();
-        $db = new PDO('mysql:host=localhost;dbname=job;charset=utf8', 'root', '');
+        include('get_vacancies.php');
 
         $regexp_email = '/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ui';
         $regexp_name = '/^[A-ZА-ЯЁ]{1}[a-zа-яё\s?]{2,}$/ui';

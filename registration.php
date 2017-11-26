@@ -1,3 +1,5 @@
+<?php session_start();?>
+<?php if(isset($_SESSION['authorized'])){header("Location: /index.php");}?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

@@ -1,14 +1,4 @@
-<?php
-    try{
-        $db = new PDO('mysql:host=localhost;dbname=job;charset=utf8', 'root', '');
-        $schedule = $db->query("SELECT * FROM `schedule`");
-        $industry = $db->query("SELECT * FROM `industry`");
-        $cities   = $db->query("SELECT DISTINCT location FROM vacancies");
-        
-    } catch (Exception $e) {
-        echo $e->getMessage(); 
-    }
-?>
+<?php include('scripts/get_filter_data.php');?>
 <h3>Фильтры</h3>
 <form id="filters">
     <div class="option">

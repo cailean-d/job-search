@@ -1,4 +1,5 @@
 <?php session_start();?>
+<?php if($_SESSION['type'] != '1'){header("Location: /index.php");}?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -26,6 +27,6 @@
         </div>
     </div>
 <script src="js/modal.js?ewewewewqew"></script>
-<script src="js/add_vacancy.js?eqeeweweqeqwqewewewewewweewewwwqew"></script>
+<script src="js/vacancy_valid.js?eqew"></script>
 </body>
 </html>

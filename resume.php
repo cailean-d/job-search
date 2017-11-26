@@ -1,3 +1,5 @@
+<?php session_start();?>
+<?php if($_SESSION['type'] != '0'){header("Location: /index.php");}?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

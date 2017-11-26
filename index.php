@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -22,6 +23,6 @@
         </div>
     </div>
 <script src="js/script.js?eqйqws"></script>
-<script src="js/modal.js?eqqws"></script>
+<script src="js/modal.js?eewewewewewewqqws"></script>
 </body>
 </html>
