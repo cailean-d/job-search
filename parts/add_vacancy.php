@@ -1,6 +1,6 @@
 <?php include('scripts/get_filter_data.php');?>
 <div class="add_vacancy">
-    <form action="scripts/vacancy.php" method="post" id="vacancy">
+    <form action="scripts/set_vacancy.php" method="post" id="vacancy">
         <div class="option">
             <h3>Название вашей компании</h3>
             <input name="company" type="text" placeholder='Допустимы только буквы и ""' required>

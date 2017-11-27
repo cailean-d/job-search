@@ -1,9 +1,20 @@
 <?php
+    include('scripts/db_connection.php');
+
+    $a = $_GET['a'];
+    $hash =  md5("SELECT * FROM `schedule`".$a);
+    
     try{
-        $redis = new Redis();
-        $redis->connect('127.0.0.1', 6379);
-        $redis->set("test", "123");
-        $redis->rPush("qwe", "qeqw");
+
+
+        if($redis->exists($hash)){
+            echo "Переменная существует в Redis<br>";
+            echo $redis->get($hash);
+        } else {
+            echo "Переменная НЕ СУЩЕСТВУЕТ в Redis<br>";
+            $redis->set($hash, 'test = '.$a);
+        }
+
     } catch (Exception $e) {
         echo $e->getMessage(); 
     }

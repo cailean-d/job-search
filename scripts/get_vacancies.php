@@ -1,6 +1,8 @@
 <?php
     try {
-        include('db_connection.php');
+        // $start = microtime(true); 
+        
+        include('redis_connection.php');
         
         $sort = 'date';
         $salary = '';
@@ -84,19 +86,39 @@
             '.$query.'
             ORDER BY '.$sort.' DESC
         ';
-        
-        $result = $db->prepare($sql);
-        $result->execute();
-    
-        $error = $result->errorInfo();
-    
-        if($error && $error[0] != 00000){
-            $is_error = true;
+
+        $hash = md5($sql);
+
+
+        if($result = $redis->hget("vacancies", $hash)){
+            $is_result = true;
         } else {
-            if($result->rowCount() > 0){
-                $is_result = true;
+        
+            include('db_connection.php');
+            $result = $db->prepare($sql);
+            $result->execute();
+                
+            $error = $result->errorInfo();
+        
+            if($error && $error[0] != 00000){
+                $is_error = true;
+                die();
+            } else {
+        
+                $result = json_encode($result->fetchAll(PDO::FETCH_BOTH));
+
+                $redis->hset("vacancies", $hash, $result);
             }
         }
+
+        $result = json_decode($result);
+
+        if(count($result) > 0){
+            $is_result = true;
+        }
+
+        // printf('Скрипт выполнялся %.5F сек.', microtime(true) - $start);
+
     } catch (Exception $e) {
         echo "Error!: " . $e->getMessage() . "<br/>";
         die();
