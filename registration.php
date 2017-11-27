@@ -21,5 +21,6 @@
     </div>
 <script src="js/modal.js?qуцeeq"></script>
 <script src="js/reg_valid.js?qуewewewуйуйуйцeqeqweqqeeweqewqewцуц"></script>
+<script src="js/active_page.js?e"></script>
 </body>
 </html>

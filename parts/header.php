@@ -1,11 +1,11 @@
-<?php include('scripts/active_page.php');?>
 <header id="header">
     <nav>
-        <a href="index.php" class=<?=$class1?>>Главная</a>
+        <a id="index_page" href="index.php">Главная</a>
         <?php if($_SESSION['type'] == '1') : ?>
-        <a href="add_vacancy.php" class=<?=$class2?>>Разместить вакансию</a>
+        <a id="add_vacancy_page" href="add_vacancy.php">Разместить вакансию</a>
+        <a id="my_vacancies_page" href="my_vacancies.php">Мои вакансии</a>
         <?php elseif($_SESSION['type'] == '0') : ?>
-        <a href="resume.php" class=<?=$class4?>>Мое резюме</a>
+        <a id="resume_page" href="resume.php">Мое резюме</a>
         <?php endif ?>        
     </nav>
     <div class="search">
@@ -18,7 +18,7 @@
     </div>
     <?php if(!isset($_SESSION['authorized'])) : ?>
         <div class="profile">
-            <a href="registration.php" class=<?=$class3?>>Регистрация</a>
+            <a id="registration_page" href="registration.php">Регистрация</a>
             <a id="show_modal_login">Войти</a>
         </div>
     <?php else : ?>

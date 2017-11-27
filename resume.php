@@ -20,5 +20,6 @@
     </div>
 <script src="js/script.js?eqйqws"></script>
 <script src="js/modal.js?eqqws"></script>
+<script src="js/active_page.js?e"></script>
 </body>
 </html>

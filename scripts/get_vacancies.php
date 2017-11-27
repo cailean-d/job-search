@@ -91,7 +91,7 @@
 
 
         if($result = $redis->hget("vacancies", $hash)){
-            $is_result = true;
+            
         } else {
         
             include('db_connection.php');

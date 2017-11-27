@@ -4,7 +4,8 @@ var show_login = document.getElementById("show_login");
 var name = document.querySelector(".name");
 var logout = document.querySelector(".logout");
 
-if(modal_button != 'null'){
+
+if(modal_button != null){
     modal_button.onclick = function(){
         modal.style.display = "flex";
     }
@@ -29,7 +30,7 @@ if(modal_button != 'null'){
     }
 }
 
-if(name != 'null'){
+if(name != null){
     var isOpen = false;
     
     document.querySelector(".name").onclick = function(e){

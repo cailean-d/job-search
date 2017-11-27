@@ -28,5 +28,6 @@
     </div>
 <script src="js/modal.js?ewewewewqew"></script>
 <script src="js/vacancy_valid.js?eqew"></script>
+<script src="js/active_page.js?e"></script>
 </body>
 </html>
