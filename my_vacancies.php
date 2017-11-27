@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="favicon.png">
     <link rel="stylesheet" href="css/style.css?qssqqqqqqewqqesqgq">
     <title>Вакансии</title>
 </head>

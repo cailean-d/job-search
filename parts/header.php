@@ -8,14 +8,6 @@
         <a id="resume_page" href="resume.php">Мое резюме</a>
         <?php endif ?>        
     </nav>
-    <div class="search">
-        <form action="../index.php">
-            <input name="query" type="text" placeholder="найти..."
-            value="<?=($_GET['query']) ? $_GET['query'] : ''?>"
-            >
-            <button type="submit">Поиск</button>
-        </form>
-    </div>
     <?php if(!isset($_SESSION['authorized'])) : ?>
         <div class="profile">
             <a id="registration_page" href="registration.php">Регистрация</a>

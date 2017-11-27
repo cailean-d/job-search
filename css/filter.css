@@ -48,3 +48,12 @@ aside .apply{
     width: 100%;
     padding: 10px;
 }
+
+aside .search input{
+    padding: 7px;
+    width: 94%;
+}
+
+aside .option select{
+    padding: 7px;
+}

@@ -1,6 +1,12 @@
 <?php include('scripts/get_filter_data.php');?>
 <h3>Фильтры</h3>
 <form id="filters">
+    <div class="option search">
+        <h4>Поиск</h4>
+        <input name="query" type="text" placeholder="найти..."
+            value="<?=($_GET['query']) ? $_GET['query'] : ''?>"
+        >
+    </div>
     <div class="option">
         <h4>Зарплата от: </h4>
         <span id="salary-view">0</span><span> p.</span>
