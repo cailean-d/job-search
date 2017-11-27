@@ -127,9 +127,9 @@ function addInputRow(e, that){
 function sendData(that){
     var data = new FormData(that);
     var xhr = new XMLHttpRequest();
-    data.set("demands", data.getAll("demands").join())
-    data.set("duties", data.getAll("duties").join())
-    data.set("conditions", data.getAll("conditions").join())
+    data.set("demands", data.getAll("demands").join(';'))
+    data.set("duties", data.getAll("duties").join(';'))
+    data.set("conditions", data.getAll("conditions").join(';'))
     if(data.get("desc") == ""){ data.delete("desc"); }
     xhr.open('POST', that.action);
     xhr.send(data);
@@ -216,7 +216,7 @@ function checkInputs(that){
 }
 
 function checkArrayInputs(that){
-    var regexp = /^[A-zА-яЁё\\-\\.\\!\"\s?]{5,}$/;
+    var regexp = /^[A-zА-яЁё0-9\\-\\.\\!\\(\\)\\,\-\"\s?]{5,}$/;
     var error = that.parentNode.parentNode.querySelector(".error");
     if(that.value == ""){
         error.innerHTML = "Это поле обязательно для заполения!";

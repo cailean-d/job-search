@@ -101,12 +101,9 @@
             $error = $result->errorInfo();
         
             if($error && $error[0] != 00000){
-                $is_error = true;
-                die();
+                die($error);
             } else {
-        
                 $result = json_encode($result->fetchAll(PDO::FETCH_BOTH));
-
                 $redis->hset("vacancies", $hash, $result);
             }
         }

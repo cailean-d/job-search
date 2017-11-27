@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png">
     <link rel="stylesheet" href="css/style.css?qssqqqqqqewqqesqgq">
+    <link rel="stylesheet" href="css/vacancy.css?qssqqqqqqewqqesqgq">
     <title>Вакансии</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
         <?php include("parts/header.php")?>
         <div class="app-body">
             <main>
-                <h2>Мои вакансии</h2>
+                <?php include('parts/my_vacancies.php');?>
             </main>
         </div>
     </div>

@@ -7,7 +7,7 @@
         $REGEXP_phone = '/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/ui';
         $REGEXP_exp = '/(^\d+[-]*\d+$)|(^\d+$)/ui';
         $REGEXP_company = '/^[A-zА-яЁё\"\s?]{5,}$/ui';
-        $REGEXP_sentence = '/^[A-zА-яЁё0-9\\-\\.\\!\"\s?]{5,}$/ui';
+        $REGEXP_sentence = '/^[A-zА-яЁё0-9\\-\\.\\!\\(\\)\\,\-\"\s?]{5,}$/ui';
         $REGEXP_city = '/^[A-zА-яЁё\-\"\s?]{4,}$/ui';
     
         if(!$_POST['company']){

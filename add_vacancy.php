@@ -15,19 +15,12 @@
         <?php include("parts/header.php")?>
         <div class="app-body">
             <main>
-                <?php if(isset($_SESSION['authorized'])) :
-                    include("parts/add_vacancy.php");
-                else :?>
-                <p style="font-size: 22px">Для того, чтобы разместить вакансию, необходимо 
-                    <a href="registration.php">зарегистрироваться</a> или 
-                    <a id="show_login" href="">войти</a>
-                </p>
-                <?php endif ?>
+                <?php include("parts/add_vacancy.php"); ?>
             </main>
         </div>
     </div>
 <script src="js/modal.js?ewewewewqew"></script>
-<script src="js/vacancy_valid.js?eqew"></script>
+<script src="js/vacancy_valid.js?eqeqeqqqew"></script>
 <script src="js/active_page.js?e"></script>
 </body>
 </html>
