@@ -156,8 +156,8 @@ function checkInputs(that){
     var REGEXP_phone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     var REGEXP_exp = /(^\d+[-]*\d+$)|(^\d+$)/;
     var REGEXP_company = /^[A-zА-яЁё\"\s?]{5,}$/;
-    var REGEXP_sentence = /^[A-zА-яЁё0-9\\-\\.\\!\"\s?]{5,}$/;
-    var REGEXP_city = /^[A-zА-яЁё\-\"\s?]{4,}$/;
+    var REGEXP_sentence = /^[A-zА-яЁё0-9-\.,!:\"\s?]{5,}$/;
+    var REGEXP_city = /^[A-zА-яЁё-\"\s?]{4,}$/;
 
     var regexp;
     var error = that.parentNode.querySelector(".error");

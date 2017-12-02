@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/style.css?qssqqqqqeewwwewqewqqesqgq">
-    <link rel="stylesheet" href="css/vacancy.css?qewqeeweweqqeqq">
-    <link rel="stylesheet" href="css/filter.css?qewqewqqqewewweqqeqq">
+    <link rel="stylesheet" href="css/style.css?qssqqqqqeewewwwewqewqqesqgq">
+    <link rel="stylesheet" href="css/vacancy.css?qewqeeewweweqqeqq">
+    <link rel="stylesheet" href="css/filter.css?qewqewqewqqewewweqqeqq">
+    <link rel="stylesheet" href="css/login_modal.css?qqwq">
     <title>Вакансии</title>
 </head>
 <body>
@@ -25,5 +26,6 @@
 <script src="js/filter.js?eqйqws"></script>
 <script src="js/modal.js?eewewewewewweewewewewewewqqws"></script>
 <script src="js/active_page.js?e"></script>
+<script src="js/login_valid.js?eew"></script>
 </body>
 </html>
