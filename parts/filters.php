@@ -17,27 +17,27 @@
         <h4>Отрасль : </h4>
         <select name="industry">
             <option value="-1">Не имеет значения</option>
-            <?php while($res = $industry->fetch(PDO::FETCH_BOTH)) :?>
+            <?php foreach($industry as $res) :?>
                 <option 
                 value="<?=$res['id']?>"
                 <?=($_GET['industry'] == $res['id']) ? 'selected' : '' ?>
                 >
                     <?=$res['industry_name']?>
                 </option>
-            <? endwhile ?>
+            <? endforeach ?>
         </select>
     </div>
     <div class="option">
         <h4>Город : </h4>
         <select name="location">
             <option value="-1">Любой город</option>
-            <?php while($res = $cities->fetch(PDO::FETCH_BOTH)): ?>
+            <?php foreach($cities as $res): ?>
                 <option value=<?=$res['location']?>
                 <?=($_GET['location'] == $res['location']) ? 'selected' : '' ?>
                 >
                 <?=$res['location']?>
                 </option>
-            <?php endwhile ?>
+            <?php endforeach ?>
         </select>
     </div>
     <div class="option">
@@ -54,13 +54,13 @@
         <h4>Тип занятости : </h4>
         <select name="schedule">
             <option value="-1">Не имеет значения</option>
-            <?php while($res = $schedule->fetch(PDO::FETCH_BOTH)): ?>
+            <?php foreach($schedule as $res): ?>
                 <option value=<?=$res['id']?>
                 <?=($_GET['schedule'] == $res['id']) ? 'selected' : '' ?>
                 >
                 <?=$res['schedule_name']?>
                 </option>
-            <?php endwhile ?>
+            <?php endforeach ?>
         </select>
     </div>
     <button type="submit" class="apply">Применить фильтр</button>

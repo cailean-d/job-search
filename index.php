@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/style.css?qssqqqqqeewewwwewqewqqesqgq">
+    <link rel="stylesheet" href="css/style.css?qssqqqqqeeewewewwwewqewqqesqgq">
     <link rel="stylesheet" href="css/vacancy.css?qewqeeewweweqqeqq">
     <link rel="stylesheet" href="css/filter.css?qewqewqewqqewewweqqeqq">
     <link rel="stylesheet" href="css/login_modal.css?qqwq">
@@ -15,7 +15,7 @@
     <div class="wrapper">
         <?php include("parts/header.php")?>
         <div class="app-body">
-            <main>
+            <main class="w70">
                 <?php include("parts/vacancies.php")?>
             </main>
             <aside>

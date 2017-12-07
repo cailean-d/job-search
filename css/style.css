@@ -51,7 +51,7 @@ a:not(.active){
     color: #ffffff;
 }
 
-.active{
+header .active{
     background: rgba(0, 0, 0, 0.7);
     color: #ffffff !important;
 }
@@ -68,8 +68,12 @@ a:not(.active){
     border-bottom: 1px solid #bdbdbd;
 }
 
+.w70{
+    width: 70% !important;
+}
+
 main{
-    width: 70%;
+    width: 100%;
 }
 
 .modal_login{
@@ -167,4 +171,12 @@ main{
 
 .dem{
     color: #cccccc;
+}
+
+.hand{
+    cursor: pointer;
+}
+
+.ns{
+    user-select: none;
 }
