@@ -381,7 +381,7 @@ include('scripts/get_filter_data.php');
 
 
 
-<!-- Modal -->
+<!-- Modal Alert -->
 <div class="modal fade ns" id="modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -400,6 +400,29 @@ include('scripts/get_filter_data.php');
     </div>
   </div>
 </div>
+
+
+<!-- Modal Confirm -->
+<div class="modal fade ns" id="confirm">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary hand option1">Закрыть</button>
+        <button type="button" class="btn btn-outline-primary hand option2">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- 
                                     <div class="card mb-4" style="font-size: 14px;">
