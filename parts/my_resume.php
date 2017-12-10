@@ -64,8 +64,8 @@ include('scripts/get_filter_data.php');
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
                                 <select class="form-control custom-select" name="gender">
-                                    <option value="male">Мужской</option>
-                                    <option value="female">Женский</option>
+                                    <option value="Мужской">Мужской</option>
+                                    <option value="Женский">Женский</option>
                                 </select>
                             </div>
                         </div>

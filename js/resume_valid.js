@@ -44,8 +44,6 @@
     var add_lang = document.getElementById("add_lang");
     // родительский блок для языков
     var lang_block = document.querySelector(".lang_block");
-    // валидность формы
-    var isValid = -1;
     // если есть опыт, то поля проверяются на валидность
     var hasExp = true;
     // если тип образования имеет факультет, то поле проверяется на валидность
@@ -123,34 +121,35 @@
     form.onsubmit = function (e){
         e.preventDefault();
 
-        // if(isValid != 0){
-        //     modal_message_text.innerHTML = "Форма заполнена неверно.";
-        //     $('#modal').modal('show');
-        // }
+        // проверка на валидность основных полей
+        validate_primary_form(function(){
 
-        // // добавление языков в БД
-        // get_languages();
-        // if(lang_array.length > 0){
-        //     send_languages();
-        // } 
+            // проверка на валидность ОР
+            validate_exp(function(){
 
-        validate_exp(function(){
-
-            get_languages();
-
-            send_work_exp(function(){
+                // проверка на валидность образования
                 validate_education(function(){
-                    send_education(function(){
-                        send_languages();
+
+                    // отправка основных данных формы
+                    send_primary_data(function(){
+
+                        // отправка данных об ОР
+                        send_work_exp(function(){
+                            
+                            // отправка данных об образовании
+                            send_education(function(){
+                                
+                                // формирования массива с языками
+                                get_languages();
+                                
+                                // отправка данных о языках
+                                send_languages();
+                            });
+                        });
                     });
                 });
             });
         });
-
-
-
-
-
     }
 
     // проверка валидности полей при потери фокуса
@@ -772,9 +771,7 @@
         var encoding;
 
         // устанавливаем кодировку, если это post запрос
-        if(method == "POST" && ismultidata == true){
-            encoding = "multipart/form-data";
-        } else if(method == "POST"){
+        if(method == "POST"){
             encoding = "application/x-www-form-urlencoded";
         }
 
@@ -787,7 +784,7 @@
             xhr.send();        
         } else {
             xhr.open(method, script, true);
-            xhr.setRequestHeader('Content-Type', encoding);
+            if(ismultidata == false) xhr.setRequestHeader('Content-Type', encoding);
             xhr.send(data);
         }
         
@@ -824,6 +821,7 @@
         } 
     }
 
+    // отправка массива данных с ОР
     function send_work_exp(next){
         if(exp_array.length > 0){
 
@@ -843,6 +841,7 @@
         }
     }
 
+    // отправка массива данных с образованием
     function send_education(next){
         if(edu_array.length > 0){
             
@@ -860,6 +859,42 @@
         } else {
             if(next) next();
         }
+    }
+
+    // массив данных с основными данными
+    function send_primary_data(next){
+
+        var data = new FormData();
+
+        // добавление данных в объект FormData
+        if(avatar_input.files[0]){data.append('avatar', avatar_input.files[0], 'avatar.jpg');}
+        data.append('firstname', form.elements["firstname"].value);
+        data.append('lastname', form.elements["lastname"].value);
+        data.append('patronymic', form.elements["patronymic"].value);
+        data.append('gender', form.elements["gender"].value);
+        data.append('birthday', form.elements["birth"].value);
+        data.append('city', form.elements["city"].value);
+        data.append('phone', form.elements["phone"].value);
+        data.append('email', form.elements["email"].value);
+        data.append('post', form.elements["post"].value);
+        data.append('industry_id', form.elements["industry"].value);
+        data.append('schedule_id', form.elements["schedule"].value);
+        data.append('salary', form.elements["salary"].value);
+        data.append('work_place_id', form.elements["work_place"].value);
+        data.append('comp_skill_id', form.elements["comp_skills"].value);
+        data.append('car', form.elements["add_auto_exist"].value);
+        data.append('courses', form.elements["add_courses"].value);
+        data.append('skills', form.elements["add_skills"].value);
+
+        // отправка данных
+        ajax("POST", "scripts/set_resume.php", data, true, 
+        function(status, res){
+            if(next) next(status, res);
+        }, 
+        function(status, res){
+            alert(status + ': ' + res);
+        });
+
     }
 
     function validate_exp(next){
@@ -1067,6 +1102,7 @@
                 modal_message_text.innerHTML = "Поля об образовании заполнены неверно!";
                 $('#modal').modal('show');
             } else {
+                
                 // добавить данные в массив для отправки
                 edu_array.push({
                     "edu_level" : form.elements["edu_level"].value,
@@ -1078,6 +1114,25 @@
 
                 if(next) next();
             }
+        }
+    }
+
+    function validate_primary_form(next){
+
+        var valid = 0;
+
+        for(var i = 0; i < fields.length; i++){
+            var field = fields[i];
+            if(fields_exp.indexOf(field) == -1 && fields_edu.indexOf(field) == -1){
+                valid += validate_inputs(field);
+            }
+        } 
+
+        if(valid !== 0){
+            modal_message_text.innerHTML = "Форма заполнена неверно.";
+            $('#modal').modal('show');
+        } else {
+            if(next) next();
         }
     }
 
