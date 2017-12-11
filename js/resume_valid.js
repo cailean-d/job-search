@@ -175,7 +175,7 @@
         var regexp_birth = /^[\d]{2}\.[\d]{2}\.[\d]{4}$/;
         var regexp_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var regexp_sentence = /^[A-zА-яЁё0-9\.,!:\\(\)#"-\s?]{4,}$/;
-        var regexp_numbers = /^[\d]{3,}$/;
+        var regexp_numbers = /^[\d]{1,}$/;
         var regexp_work_period = /^[A-zА-яЁё]{3,8}\s[\d]{4}\s\-\s[A-zА-яЁё]{3,8}\s[\d]{4}$/;
         var regexp_edu_period = /^[\d]{4}\s\-\s[\d]{4}$/;
 
