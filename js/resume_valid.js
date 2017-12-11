@@ -816,7 +816,8 @@
                 $('#modal').modal('show');
             }, 
             function(status, res){
-                alert(xhr.status + ': ' + xhr.responseText);
+                modal_message_text.innerHTML = status + ': ' + res;
+                $('#modal').modal('show');
             });
         } 
     }
@@ -833,7 +834,8 @@
                 if(next) next();
             }, 
             function(status, res){
-                alert(xhr.status + ': ' + xhr.responseText);
+                modal_message_text.innerHTML = status + ': ' + res;
+                $('#modal').modal('show');
             });
             
         } else {
@@ -853,7 +855,8 @@
                 if(next) next(status, res);
             }, 
             function(status, res){
-                alert(xhr.status + ': ' + xhr.responseText);
+                modal_message_text.innerHTML = status + ': ' + res;
+                $('#modal').modal('show');
             });
             
         } else {
@@ -892,7 +895,8 @@
             if(next) next(status, res);
         }, 
         function(status, res){
-            alert(status + ': ' + res);
+            modal_message_text.innerHTML = status + ': ' + res;
+            $('#modal').modal('show');
         });
 
     }
