@@ -12,11 +12,13 @@
         $regexp_numbers = '/^[\d]{1,}$/ui';
         $regexp_edu_period = '/^[\d]{4}\s\-\s[\d]{4}$/ui';
 
+        // выдать оошибку, если нет массива с данными
         if(!$_POST['data']){
             http_response_code(400);
             exit("необходим data");
         }
 
+        // парсинг json объекта
         $data = json_decode($_POST['data']);
         $user_id = $_SESSION['id'];
 
