@@ -2,7 +2,7 @@
     try{
         include("db_connection.php");
 
-        $sql = 'SELECT * FROM resumes WHERE user_id ='.$_SESSION['id'];
+        $sql = 'SELECT * FROM user_resume WHERE user_id ='.$_SESSION['id'];
 
         $result = $db->prepare($sql);
         $result->execute();

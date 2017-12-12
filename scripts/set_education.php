@@ -7,10 +7,10 @@
         include('db_connection.php');
 
         // регулярные выражения для проверки валидности
-        $regexp_city = '/^[A-zА-яЁё\"-\s?]{4,}$/ui';
-        $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"-\s?]{4,}$/ui';
-        $regexp_numbers = '/^[\d]{1,}$/ui';
-        $regexp_edu_period = '/^[\d]{4}\s\-\s[\d]{4}$/ui';
+        $regexp_city = '/^[A-zА-яЁё\"\-\s?]{4,}$/u';
+        $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"\-\s?]{4,}$/u';
+        $regexp_numbers = '/^[\d]{1,}$/u';
+        $regexp_edu_period = '/^[\d]{4}\s\-\s[\d]{4}$/u';
 
         // выдать оошибку, если нет массива с данными
         if(!$_POST['data']){
@@ -37,10 +37,6 @@
                 http_response_code(400);
                 exit("необходим edu_city");
             }
-            elseif(!$object->edu_fac){
-                http_response_code(400);
-                exit("необходим edu_fac");
-            }
             elseif(!$object->edu_period){
                 http_response_code(400);
                 exit("необходим edu_period");
@@ -59,7 +55,7 @@
                 http_response_code(400);
                 exit("Поле -edu_city- заполнено некорректно!");
             }
-            elseif(!preg_match($regexp_sentence, $object->edu_fac)){
+            elseif(!empty($object->edu_fac) && !preg_match($regexp_sentence, $object->edu_fac)){
                 http_response_code(400);
                 exit("Поле -edu_fac- заполнено некорректно!");
             }

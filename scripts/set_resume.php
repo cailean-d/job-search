@@ -4,13 +4,13 @@
         session_start();
 
         // регулярные выражения для проверки валидности
-        $regexp_name = '/^[A-ZА-ЯЁ]{1}[a-zа-яё\s?]{2,}$/ui';
-        $regexp_phone = '/^\+[\d]{11}$/ui';
-        $regexp_city = '/^[A-zА-яЁё\"-\s?]{4,}$/ui';
-        $regexp_birth = '/^[\d]{2}\.[\d]{2}\.[\d]{4}$/ui';
-        $regexp_email = '/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ui';
-        $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"-\s?]{4,}$/ui';
-        $regexp_numbers = '/^[\d]{1,}$/ui';
+        $regexp_name = '/^[A-ZА-ЯЁ]{1}[a-zа-яё\s?]{2,}$/u';
+        $regexp_phone = '/^\+[\d]{11}$/u';
+        $regexp_city = '/^[A-zА-яЁё\"\-\s?]{4,}$/u';
+        $regexp_birth = '/^[\d]{2}\.[\d]{2}\.[\d]{4}$/u';
+        $regexp_email = '/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/u';
+        $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"\-\s?]{4,}$/u';
+        $regexp_numbers = '/^[\d]{1,}$/u';
     
         // если нет необходимых переменных, выдать ошибку
         if(!$_POST['firstname']){
@@ -210,7 +210,7 @@
         }
 
         // подготовка запроса на добавление основных данных
-        $query = $db->prepare("INSERT INTO resumes
+        $query = $db->prepare("INSERT INTO user_resume
             (
                 user_id, firstname, lastname, patronymic,
                 gender, birthday, city, phone, email, post,

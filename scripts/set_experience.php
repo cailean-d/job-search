@@ -8,10 +8,10 @@
         include('db_connection.php');
 
         // регулярные выражения для проверки валидности
-        $regexp_city = '/^[A-zА-яЁё\"-\s?]{4,}$/ui';
-        $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"-\s?]{4,}$/ui';
-        $regexp_numbers = '/^[\d]{1,}$/ui';
-        $regexp_work_period = '/^[A-zА-яЁё]{3,8}\s[\d]{4}\s\-\s[A-zА-яЁё]{3,8}\s[\d]{4}$/ui';
+        $regexp_city = '/^[A-zА-яЁё\"\-\s?]{4,}$/u';
+        $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"\-\s?]{4,}$/u';
+        $regexp_numbers = '/^[\d]{1,}$/u';
+        $regexp_work_period = '/^[A-zА-яЁё]{3,8}\s[\d]{4}\s\-\s[A-zА-яЁё]{3,8}\s[\d]{4}$/u';
 
         // выдать оошибку, если нет массива с данными
         if(!$_POST['data']){
