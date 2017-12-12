@@ -194,3 +194,11 @@ main{
     cursor: not-allowed;
     display: none;
 }
+
+.resume-info td, .resume-info th{
+    padding: 5px 0 !important;
+}
+
+.w-35{
+    width: 35%;
+}
