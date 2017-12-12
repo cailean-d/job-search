@@ -185,7 +185,7 @@
             // генерация случайного имени файла
             $dot = strpos($_FILES["avatar"]["name"], ".");
             $ext = substr($_FILES["avatar"]["name"], $dot);
-            $filename = md5($_FILES["avatar"]["name"]).$ext;
+            $filename = uniqid().$ext;
 
             // перемещение файла из временной папки в основную
             if(is_uploaded_file($_FILES["avatar"]["tmp_name"])){

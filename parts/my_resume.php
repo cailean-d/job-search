@@ -1,10 +1,8 @@
-<?php  
-include('scripts/get_resume.php'); 
-include('scripts/get_filter_data.php');
-?>
+<?php include('scripts/get_filter_data.php'); ?>
 
-<?php if($_GET['add']) : ?>
+<?php if($_GET['page'] === "add") : ?>
     <div class="container">
+        <div class="modal-disable"></div>
         <div class="row ml-0 mr-0">
             <nav class="nav nav-tabs list-group col-3" role="tablist">
                 <a class="list-group-item list-group-item-action active" href="#uinfo" role="tab" data-toggle="tab">
@@ -359,22 +357,36 @@ include('scripts/get_filter_data.php');
                 <input type="submit" id="sub_form" hidden>
             </form>
         </div>
-        <label for="sub_form" class="btn btn-outline-primary btn-lg btn-block mt-4 mb-5" role="button">
+        <label for="sub_form" class="btn btn-outline-primary btn-lg btn-block mt-4 mb-5" role="button" id="send_form">
                 Отправить
         </label>
     </div>
 <?php else : ?>
     <?php if(!isset($is_result)) : ?>
-        <div class="mx-auto col-9">
+        <div class="mx-auto">
             <div class="alert alert-info" role="alert">
                 <strong>Вы еще не заполнили резюме.</strong>
             </div>
-            <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?add=1" role="button">
+            <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?page=add" role="button">
                 Заполнить резюме
             </a>
         </div>
     <?php else : ?>
-        <h2>У вас есть резюме</h2>
+        <div class="mx-auto d-flex">
+            <div class="col-8">
+                <div class="alert alert-info" role="alert">
+                    <strong>У вас есть резюме.</strong>
+                </div>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?page=edit" role="button">
+                    Редактировать резюме
+                </a>
+                <a class="btn btn-outline-primary btn-lg btn-block" href="#" role="button" id="delete_resume">
+                    Удалить резюме
+                </a>
+            </div>
+        </div>
     <?php endif ?>
 <?php endif ?>
 
@@ -387,7 +399,7 @@ include('scripts/get_filter_data.php');
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Alert</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -395,7 +407,7 @@ include('scripts/get_filter_data.php');
         <p></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary hand" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-secondary hand btn-close" data-dismiss="modal">Закрыть</button>
       </div>
     </div>
   </div>
