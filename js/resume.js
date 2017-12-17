@@ -4,7 +4,8 @@
 (function(){
 
     // если это не страница для создания резюме, то не выполнять код
-    if(window.location.href.indexOf("resume.php?page=add") == -1){
+    if(window.location.href.indexOf("resume.php?page=add") == -1 ||
+       window.location.href.indexOf("resume.php?page=edit") == -1){
         return;
     }
 

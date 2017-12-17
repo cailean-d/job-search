@@ -2,6 +2,14 @@
     try{
         include("db_connection.php");
 
+        if($_GET['page'] === "add" || $_GET['page'] === "edit"){
+            $id = $_SESSION['id'];
+        } else if(!empty(isset($_GET['id']))){
+            $id = $_GET['id'];
+        } else {
+            $id = $_SESSION['id'];
+        }
+
         $sql = "
             SELECT 
             user_resume.*,
@@ -14,7 +22,7 @@
             INNER JOIN industry ON user_resume.industry_id = industry.id 
             INNER JOIN work_place ON user_resume.work_place_id = work_place.id 
             INNER JOIN comp_skills ON user_resume.comp_skill_id = comp_skills.id 
-            WHERE user_id =" . $_SESSION['id'];
+            WHERE user_id =" . $id;
 
         $resume_data = $db->prepare($sql);
         $resume_data->execute();

@@ -1,10 +1,11 @@
+<?php if($_GET['page'] === "edit") include('scripts/get_resume_secondary_data.php'); ?>
 <?php include('scripts/get_filter_data.php'); ?>
 
-<?php if($_GET['page'] === "add") : ?>
+<?php if($_GET['page'] === "add" || $_GET['page'] === "edit") : ?>
     <div class="container">
         <div class="modal-disable"></div>
         <div class="row ml-0 mr-0">
-            <nav class="nav nav-tabs list-group col-3" role="tablist">
+            <nav class="nav nav-tabs list-group col-3 border-bottom-0" role="tablist">
                 <a class="list-group-item list-group-item-action active" href="#uinfo" role="tab" data-toggle="tab">
                     Личная информация
                 </a>
@@ -29,7 +30,8 @@
                     <div role="tabpanel" class="card card-block bg-faded tab-pane fade show active" id="uinfo">
                         <div class="group d-inline-block d-flex justify-content-center">
                             <label for="avatar" style="cursor: pointer;">
-                                <img src="../images/user.jpg" alt="avatar" title="загрузить фото" class="img-thumbnail rounded" style="width: 200px; height: auto" id="avatar_img">
+                                <img src=<?= (!empty($avatar_data['source'])) ? "../" . $avatar_data['source'] : "../images/user.jpg";?> 
+                                alt="avatar" title="загрузить фото" class="img-thumbnail rounded" style="width: 200px; height: auto" id="avatar_img">
                             </label>
                             <input type="file" name="avatar" id="avatar" hidden><br>
                         </div>
@@ -37,7 +39,7 @@
                             <label for="lastname" class="d-block text-center">Фамилия :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="lastname" type="text" class="form-control" id="lastname">
+                                <input name="lastname" type="text" class="form-control" id="lastname" <?="value=" . $resume_data['lastname']?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -45,7 +47,7 @@
                             <label for="firstname" class="d-block text-center">Имя :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="firstname" type="text" class="form-control" id="firstname">
+                                <input name="firstname" type="text" class="form-control" id="firstname" <?="value=" . $resume_data['firstname']?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -53,7 +55,7 @@
                             <label for="patronymic" class="d-block text-center">Отчество :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="patronymic" type="text" class="form-control" id="patronymic">
+                                <input name="patronymic" type="text" class="form-control" id="patronymic" <?="value=" . $resume_data['patronymic'] ?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -62,8 +64,10 @@
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
                                 <select class="form-control custom-select" name="gender">
-                                    <option value="Мужской">Мужской</option>
-                                    <option value="Женский">Женский</option>
+                                    <option value="Мужской" 
+                                    <?php if($resume_data['gender'] == "Мужской") echo "selected" ?>
+                                    >Мужской</option>
+                                    <option value="Женский" <?php if($resume_data['gender'] == "Женский") echo "selected" ?>>Женский</option>
                                 </select>
                             </div>
                         </div>
@@ -71,7 +75,7 @@
                             <label for="birth_input" class="d-block text-center">Дата рождения :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="birth" type="text" class="form-control datepicker-here" id="birth_input">
+                                <input name="birth" type="text" class="form-control datepicker-here" id="birth_input" <?="value=" . $resume_data['birthday'] ?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -79,7 +83,8 @@
                             <label for="city" class="d-block text-center">Город :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="city" type="text" class="form-control" id="city">
+                                <input name="city" type="text" class="form-control" id="city" 
+                                <?="value=" . $resume_data['city'] ?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -87,7 +92,8 @@
                             <label for="phone" class="d-block text-center">Телефон :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="phone" type="text" class="form-control" id="phone">
+                                <input name="phone" type="text" class="form-control" id="phone" 
+                                <?="value=" . $resume_data['phone'] ?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -95,7 +101,8 @@
                             <label for="email" class="d-block text-center">Почта :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="email" type="text" class="form-control" id="email">
+                                <input name="email" type="text" class="form-control" id="email" 
+                                <?="value=" . $resume_data['email'] ?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -105,7 +112,8 @@
                             <label for="post_input" class="d-block text-center">Должность :</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="post" type="text" class="form-control" id="post_input">
+                                <input name="post" type="text" class="form-control" id="post_input" 
+                                <?="value=" . $resume_data['post'] ?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -115,7 +123,13 @@
                                 <div class="input-group-addon">@</div>
                                 <select class="form-control custom-select" name="industry">
                                     <?php foreach($industry as $res) :?>
-                                        <option value="<?=$res['id']?>"><?=$res['industry_name']?></option>
+                                        <option value="<?=$res['id']?>" 
+                                        <?php 
+                                            if($resume_data['industy_name'] == $res['industry_name']){
+                                                echo "selected";
+                                            }
+                                        ?>
+                                        ><?=$res['industry_name']?></option>
                                     <? endforeach ?>
                                 </select>
                             </div>
@@ -126,7 +140,13 @@
                                 <div class="input-group-addon">@</div>
                                 <select class="form-control custom-select" name="schedule">
                                 <?php foreach($schedule as $res): ?>
-                                    <option value=<?=$res['id']?>><?=$res['schedule_name']?></option>
+                                    <option value=<?=$res['id']?> 
+                                    <?php 
+                                        if($resume_data['schedule_name'] == $res['schedule_name']){
+                                            echo "selected";
+                                        }
+                                    ?>
+                                    ><?=$res['schedule_name']?></option>
                                 <?php endforeach ?>
                                 </select>
                             </div>
@@ -135,7 +155,7 @@
                             <label for="salary_input" class="d-block text-center">Желаемый доход (рублей):</label>
                             <div class="input-group mb-2">
                                 <div class="input-group-addon">@</div>
-                                <input name="salary" type="text" class="form-control" id="salary_input">
+                                <input name="salary" type="text" class="form-control" id="salary_input" <?="value=" . $resume_data['salary']?>>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -145,7 +165,13 @@
                                 <div class="input-group-addon">@</div>
                                 <select class="form-control custom-select" name="work_place">
                                     <?php foreach($work_place as $res): ?>
-                                        <option value=<?=$res['id']?>><?=$res['work_place_name']?></option>
+                                        <option value=<?=$res['id']?> 
+                                        <?php 
+                                            if($resume_data['work_place_name'] == $res['work_place_name']){
+                                                echo "selected";
+                                            }
+                                        ?>
+                                        ><?=$res['work_place_name']?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>
@@ -153,13 +179,57 @@
                     </div>
                     <div role="tabpanel" class="card card-block bg-faded tab-pane fade" id="exp" style="min-height: 500px;">
                         <div class="exp_group">
-                            <div id="exp_block">
-                                <div class="group col-10 pl-0 pr-0 mx-auto hide_exp_block">
+                            <div id="exp_block 
+                                <?php if($_GET['page'] == "edit" && 
+                                    count($experience_data) == 0){
+                                        echo "hidden-xl-down";
+                                    }
+                                ?>">
+                                <div class="group col-10 pl-0 pr-0 mx-auto hide_exp_block 
+                                <?php if($_GET['page'] == "edit" && 
+                                count($experience_data) > 0){
+                                    echo "hidden-xl-down";
+                                }
+                                ?>">
                                     <button class="btn btn-outline-primary btn-lg btn-block mt-4 mb-4" role="button" id="remove_exp">
                                         Без опыта работы
                                     </button>
                                 </div>
                                 <div class="completed_exp_forms col-10 pl-0 pr-0 mx-auto">
+                                    <?php if ($_GET['page'] == "edit")?>
+                                    <?php if(count($experience_data) > 0) :
+                                        foreach ($experience_data as $exp) :?>
+                                            <div class="exp_job">
+                                                <div class="card mb-4" style="font-size: 14px;">
+                                                    <div class="card-block">
+                                                        <h3 class="card-title"><?=$exp['post']?></h3>
+                                                        <div class="card-text mb-2">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="left d-flex">
+                                                                    <div class="company mr-2 text-muted">
+                                                                        <?=$exp['company']?>
+                                                                    </div>
+                                                                    <div class="city text-muted">
+                                                                        <?=$exp['city']?>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="right text-muted">
+                                                                    <?=$exp['work_period']?>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-muted">
+                                                                <?=$exp['industry_name']?>
+                                                            </div>
+                                                            <div>
+                                                                <?=$exp['functions']?>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" class="btn btn-primary mr-1 edit_job">Редактировать</a>
+                                                        <a href="#" class="btn btn-secondary delete_job">Удалить</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <?php endforeach; endif; ?>
                                 </div>
                                 <div class="group col-10 pl-0 pr-0 mx-auto">
                                     <label for="exp_post_input" class="d-block text-center">Должность :</label>
@@ -222,7 +292,14 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="no_exp_block hidden-xl-down col-10 pl-0 pr-0 mx-auto mt-4">
+                            <div class="no_exp_block 
+                                <?php 
+                                    if($_GET['page'] == "edit" && count($experience_data) == 0){
+                                        echo "";
+                                    } else {
+                                        echo "hidden-xl-down";
+                                    }
+                                ?> col-10 pl-0 pr-0 mx-auto mt-4">
                                 <div class="alert alert-info" role="alert">
                                     <strong class="d-block text-center">У Вас нет опыта работы.</strong> 
                                 </div>
@@ -237,6 +314,39 @@
                     <div role="tabpanel" class="card card-block bg-faded tab-pane fade" id="edu" style="min-height: 500px;">
                     <div class="edu_group">
                             <div class="completed_edu_forms col-10 pl-0 pr-0 mx-auto">
+                                <?php if ($_GET['page'] == "edit")?>
+                                <?php if(count($education_data) > 0) :
+                                    foreach ($education_data as $edu) :?>
+                                        <div class="edu">
+                                            <div class="card mb-4" style="font-size: 14px;">
+                                            <div class="card-block">
+                                                <h3 class="card-title">
+                                                    <?=$edu['inst']?>
+                                                </h3>
+                                                <div class="card-text mb-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="left d-flex">
+                                                            <div class="company mr-2 text-muted">
+                                                                <?=$edu['education_name']?>
+                                                            </div>
+                                                            <div class="city text-muted">
+                                                                <?=$edu['city']?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="right text-muted">
+                                                            <?=$edu['study_period']?> гг.
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-muted">
+                                                        <?=$edu['faculty']?>
+                                                    </div>
+                                                </div>
+                                                <a href="#" class="btn btn-primary mr-1 edit_edu">Редактировать</a>
+                                                <a href="#" class="btn btn-secondary delete_edu">Удалить</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <?php endforeach; endif; ?>
                             </div>
                             <div class="group col-10 pl-0 pr-0 mx-auto">
                                 <label class="d-block text-center">Уровень образования :</label>
@@ -294,7 +404,50 @@
                         </div>
                     </div>
                     <div role="tabpanel" class="card card-block bg-faded tab-pane fade" id="lang" style="min-height: 500px;">
-                        <div class="lang_block"></div>
+                        <div class="lang_block">
+                            <?php if ($_GET['page'] == "edit")?>
+                                <?php if(count($lang_data) > 0) :
+                                    foreach ($lang_data as $lang) :?>
+                                        <div class="d-flex col-10 pl-0 pr-0 mx-auto">
+                                            <div class="group col-11">
+                                                <div class="form-group row">
+                                                    <div class="hidden-xl-down lang_id"><?=$lang['lang_id']?></div>
+                                                    <label class="col-3 col-form-label pl-0"><?=$lang['lang_name']?></label>
+                                                    <div class="col-9">
+                                                        <select class="form-control custom-select" name="lang">
+                                                            <option value="Не владею" 
+                                                            <?php if($lang['lang_level'] == "Не владею"){
+                                                                echo "selected";
+                                                            }?>
+                                                            >Не владею</option>
+                                                            <option value="Базовый" 
+                                                            <?php if($lang['lang_level'] == "Базовый"){
+                                                                echo "selected";
+                                                            }?>
+                                                            >Базовый</option>
+                                                            <option value="Технический" 
+                                                            <?php if($lang['lang_level'] == "Технический"){
+                                                                echo "selected";
+                                                            }?>
+                                                            >Технический</option>
+                                                            <option value="Разговорный"  
+                                                            <?php if($lang['lang_level'] == "Разговорный"){
+                                                                echo "selected";
+                                                            }?>
+                                                            >Разговорный</option>
+                                                            <option value="Свободно владею"  
+                                                            <?php if($lang['lang_level'] == "Свободно владею"){
+                                                                echo "selected";
+                                                            }?>
+                                                            >Свободно владею</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="btn btn-outline-primary col-1 delete_lang" href="#" role="button" style="height: 37px; padding: .5rem .3rem;">&#151;</a>
+                                        </div>
+                            <?php endforeach; endif; ?>
+                        </div>
                         <div class="add_lang">
                             <div class="group col-10 pl-0 pr-0 mx-auto">
                                 <label class="d-block text-center">Языки :</label>
@@ -322,7 +475,13 @@
                                 <select class="form-control custom-select" name="comp_skills">
                                         <option value=""></option>
                                     <?php foreach($comp_skills as $res) :?>
-                                        <option value="<?=$res['id']?>"><?=$res['cs_name']?></option>
+                                        <option value="<?=$res['id']?>" 
+                                        <?php 
+                                            if($resume_data['cs_name'] == $res['cs_name']){
+                                                echo "selected";
+                                            }
+                                        ?>
+                                        ><?=$res['cs_name']?></option>
                                     <? endforeach ?>
                                 </select>
                             </div>
@@ -333,22 +492,34 @@
                                 <div class="input-group-addon">@</div>
                                 <select class="form-control custom-select" name="add_auto_exist">
                                     <option value=""></option>
-                                    <option value="Нет">Нет</option>
-                                    <option value="Да">Да</option>
+                                    <option value="Нет" 
+                                    <?php 
+                                        if($resume_data['car'] == "Нет"){
+                                            echo "selected";
+                                        }
+                                    ?>
+                                    >Нет</option>
+                                    <option value="Да" 
+                                    <?php 
+                                        if($resume_data['car'] == "Да"){
+                                            echo "selected";
+                                        }
+                                    ?>
+                                    >Да</option>
                                 </select>
                             </div>
                         </div>
                         <div class="group col-10 pl-0 pr-0 mx-auto">
                             <label for="add_couses_input" class="d-block text-center">Курсы и тренинги :</label>
                             <div class="input-group mb-2">
-                                <textarea name="add_courses" id="add_courses_input" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="add_courses" id="add_courses_input" cols="30" rows="10" class="form-control"><?=$resume_data['courses'] ?></textarea>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
                         <div class="group col-10 pl-0 pr-0 mx-auto">
                             <label for="add_skills_input" class="d-block text-center">Навыки и умения :</label>
                             <div class="input-group mb-2">
-                                <textarea name="add_skills" id="add_skills_input" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="add_skills" id="add_skills_input" cols="30" rows="10" class="form-control"><?=$resume_data['skills'] ?></textarea>
                             </div>
                             <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                         </div>
@@ -358,18 +529,30 @@
             </form>
         </div>
         <label for="sub_form" class="btn btn-outline-primary btn-lg btn-block mt-4 mb-5" role="button" id="send_form">
-                Отправить
+            <?php 
+                if($_GET['page'] == 'edit'){
+                    echo "Редактировать";
+                } else {
+                    echo "Отправить";
+                }
+            ?>
         </label>
     </div>
 <?php else : ?>
     <?php if(!isset($is_result)) : ?>
         <div class="mx-auto">
-            <div class="alert alert-info" role="alert">
-                <strong>Вы еще не заполнили резюме.</strong>
-            </div>
-            <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?page=add" role="button">
-                Заполнить резюме
-            </a>
+            <?php if($_SESSION['id'] == $id) : ?>
+                <div class="alert alert-info" role="alert">
+                    <strong>Вы еще не заполнили резюме.</strong>
+                </div>
+                <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?page=add" role="button">
+                    Заполнить резюме
+                </a>
+            <? else : ?>
+                <div class="alert alert-info" role="alert">
+                    <strong>Пользователь еще не создал резюме.</strong>
+                </div>
+            <? endif ?>
         </div>
     <?php else : ?>
     <?php include('scripts/get_resume_secondary_data.php'); ?>
@@ -464,6 +647,10 @@
                                             <th scope="row" class="text-muted">Учебное заведение</th>
                                             <td><?=$edu['inst']?></td>
                                         </tr>
+                                        <tr>
+                                            <th scope="row" class="text-muted">Город</th>
+                                            <td><?=$edu['city']?></td>
+                                        </tr>
                                         <?php if(!empty($edu['faculty'])) : ?>
                                         <tr>
                                             <th scope="row" class="text-muted">Факультет</th>
@@ -541,14 +728,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <a class="btn btn-primary btn-lg btn-block" href="resume.php?page=edit" role="button">
-                    Редактировать резюме
-                </a>
-                <a class="btn btn-outline-primary btn-lg btn-block" href="#" role="button" id="delete_resume">
-                    Удалить резюме
-                </a>
-            </div>
+            <?php if($_SESSION['id'] == $id) : ?>
+                <div class="col-4">
+                    <a class="btn btn-primary btn-lg btn-block" href="resume.php?page=edit" role="button">
+                        Редактировать резюме
+                    </a>
+                    <a class="btn btn-outline-primary btn-lg btn-block" href="#" role="button" id="delete_resume">
+                        Удалить резюме
+                    </a>
+                </div>
+            <? endif ?>
         </div>
     <?php endif ?>
 <?php endif ?>
@@ -597,6 +786,10 @@
     </div>
   </div>
 </div>
+
+
+
+
 
 
 <!-- 
