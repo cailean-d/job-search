@@ -200,9 +200,11 @@
                                     <?php if(count($experience_data) > 0) :
                                         foreach ($experience_data as $exp) :?>
                                             <div class="exp_job">
+                                                <div hidden class="job_id"><?=$exp['id']?></div>
+                                                <div hidden class="industry_id"><?=$exp['industry_id']?></div>
                                                 <div class="card mb-4" style="font-size: 14px;">
                                                     <div class="card-block">
-                                                        <h3 class="card-title"><?=$exp['post']?></h3>
+                                                        <h3 class="card-title post"><?=$exp['post']?></h3>
                                                         <div class="card-text mb-2">
                                                             <div class="d-flex justify-content-between">
                                                                 <div class="left d-flex">
@@ -217,10 +219,10 @@
                                                                     <?=$exp['work_period']?>
                                                                 </div>
                                                             </div>
-                                                            <div class="text-muted">
+                                                            <div class="text-muted industry">
                                                                 <?=$exp['industry_name']?>
                                                             </div>
-                                                            <div>
+                                                            <div class="func">
                                                                 <?=$exp['functions']?>
                                                             </div>
                                                         </div>
@@ -318,15 +320,17 @@
                                 <?php if(count($education_data) > 0) :
                                     foreach ($education_data as $edu) :?>
                                         <div class="edu">
+                                            <div hidden class="edu_id"><?=$edu['id']?></div>
+                                            <div hidden class="level_id"><?=$edu['level_id']?></div>
                                             <div class="card mb-4" style="font-size: 14px;">
                                             <div class="card-block">
-                                                <h3 class="card-title">
+                                                <h3 class="card-title inst">
                                                     <?=$edu['inst']?>
                                                 </h3>
                                                 <div class="card-text mb-2">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="left d-flex">
-                                                            <div class="company mr-2 text-muted">
+                                                            <div class=" mr-2 text-muted">
                                                                 <?=$edu['education_name']?>
                                                             </div>
                                                             <div class="city text-muted">
@@ -337,7 +341,7 @@
                                                             <?=$edu['study_period']?> гг.
                                                         </div>
                                                     </div>
-                                                    <div class="text-muted">
+                                                    <div class="text-muted fac">
                                                         <?=$edu['faculty']?>
                                                     </div>
                                                 </div>
@@ -409,6 +413,7 @@
                                 <?php if(count($lang_data) > 0) :
                                     foreach ($lang_data as $lang) :?>
                                         <div class="d-flex col-10 pl-0 pr-0 mx-auto">
+                                            <div hidden class="xlang_id"><?=$lang['id']?></div>
                                             <div class="group col-11">
                                                 <div class="form-group row">
                                                     <div class="hidden-xl-down lang_id"><?=$lang['lang_id']?></div>

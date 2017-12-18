@@ -4,7 +4,7 @@
 (function(){
 
     // если это не страница для создания резюме, то не выполнять код
-    if(window.location.href.indexOf("resume.php?page=add") == -1 ||
+    if(window.location.href.indexOf("resume.php?page=add") == -1 &&
        window.location.href.indexOf("resume.php?page=edit") == -1){
         return;
     }
@@ -61,6 +61,12 @@
     var edu_array = [];
     // массив с языками
     var lang_array = [];
+    // массив с id удаленных EXP
+    var exp_del_array = [];
+    // массив с id удаленных EDU
+    var edu_del_array = [];
+    // массив с id удаленных LANG
+    var lang_del_array = [];
 
 
     // все поля, требующие проверки
@@ -124,6 +130,154 @@
     ];
 
 
+
+    (function(){
+
+        /*
+            Если страница редактирования, то нужно занести все данные в массивы, которые при создании резюме генерировались динамически
+        */
+
+        // если это не страница для редактирования резюме, то не выполнять код
+        if(window.location.href.indexOf("resume.php?page=edit") == -1){
+            return;
+        }
+
+        /* 
+            Запись данных и добавление обработчиков для массива ОР  
+        */
+
+        var exp_blocks = document.querySelectorAll(".exp_job");
+
+        for(var i = 0; i < exp_blocks.length; i++){
+
+            var exp = exp_blocks[i];
+            
+            // добавить данные в массив для отправки
+            exp_array.push({
+                "exp_post" : exp.querySelector(".post").innerHTML.trim(),
+                "exp_company" : exp.querySelector(".company").innerHTML.trim(),
+                "exp_city" : exp.querySelector(".city").innerHTML.trim(),
+                "work_period" : exp.querySelector(".right").innerHTML.trim(),
+                "exp_func" : exp.querySelector(".func").innerHTML.trim(),
+                "exp_industry" : exp.querySelector(".industry_id").innerHTML.trim()
+            });
+
+            // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
+            exp.classList.add("job" + (exp_array.length -1));
+        }
+
+        // позволяет удалять сгенерированные блоки с ОР
+        delete_exp_job();
+
+        // позволяет редактировать сгенерированные блоки с ОР
+        edit_exp_job();
+
+        // массивы кнопок
+        var delete_job_btn = document.querySelectorAll(".delete_job");
+        var edit_job_btn = document.querySelectorAll(".edit_job");
+
+
+        // генерация массива id для ОР, которые были удалены
+        function get_job_deleted_id(button){
+
+            var job = this.parentNode.parentNode.parentNode;
+            var id = job.querySelector(".job_id").innerHTML;
+            exp_del_array.push(id);
+
+        }
+
+        // вешаем дополнительное событие на эти кнопки
+        for(var i = 0; i < delete_job_btn.length; i++){
+            var btn = delete_job_btn[i];
+            btn.addEventListener("click", get_job_deleted_id);
+        }
+
+        for(var i = 0; i < edit_job_btn.length; i++){
+            var btn = edit_job_btn[i];
+            btn.addEventListener("click", get_job_deleted_id);
+        }
+
+        /* 
+            Запись данных и добавление обработчиков для массива с образованием  
+        */
+
+        var edu_blocks = document.querySelectorAll(".edu");
+        
+            for(var i = 0; i < edu_blocks.length; i++){
+
+                var edu = edu_blocks[i];
+                
+                // добавить данные в массив для отправки
+                edu_array.push({
+                    "edu_level" : edu.querySelector(".level_id").innerHTML.trim(),
+                    "edu_inst" : edu.querySelector(".inst").innerHTML.trim(),
+                    "edu_city" : edu.querySelector(".city").innerHTML.trim(),
+                    "edu_fac" : edu.querySelector(".fac").innerHTML.trim(),
+                    "edu_period" : edu.querySelector(".right").innerHTML.trim().slice(0, -4)
+                });
+    
+                // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
+                edu.classList.add("edu" + (edu_array.length -1));
+            }
+
+        // позволяет удалять сгенерированные блоки с EDU
+        delete_edu();
+        
+        // позволяет редактировать сгенерированные блоки с EDU
+        edit_edu();
+
+
+        // массивы кнопок
+        var delete_edu_btn = document.querySelectorAll(".delete_edu");
+        var edit_edu_btn = document.querySelectorAll(".edit_edu");
+
+
+        // генерация массива id для ОР, которые были удалены
+        function get_edu_deleted_id(button){
+
+            var edu = this.parentNode.parentNode.parentNode;
+            var id = edu.querySelector(".edu_id").innerHTML;
+            edu_del_array.push(id);
+
+        }
+
+        // вешаем дополнительное событие на эти кнопки
+        for(var i = 0; i < delete_edu_btn.length; i++){
+            var btn = delete_edu_btn[i];
+            btn.addEventListener("click", get_edu_deleted_id);
+        }
+
+        for(var i = 0; i < edit_edu_btn.length; i++){
+            var btn = edit_edu_btn[i];
+            btn.addEventListener("click", get_edu_deleted_id);
+        }
+
+
+        // позволяет удалять сгенерированные блоки с LANG
+        delete_lang();
+
+        var delete_lang_btn = document.querySelectorAll(".delete_lang");
+        
+        // генерация массива id для LANG, которые были удалены
+        function get_lang_deleted_id(button){
+            
+            var lang = this.parentNode;
+            var id = lang.querySelector(".xlang_id").innerHTML;
+            lang_del_array.push(id);
+
+        }
+
+        // вешаем дополнительное событие на эти кнопки
+        for(var i = 0; i < delete_lang_btn.length; i++){
+            var btn = delete_lang_btn[i];
+            btn.addEventListener("click", get_lang_deleted_id);
+        }
+
+        
+
+    })();
+
+
     // нажатие на кнопку отправки
     form.onsubmit = function (e){
         e.preventDefault();
@@ -151,6 +305,13 @@
                                 
                                 // отправка данных о языках
                                 send_languages();
+
+                                // если страница редактирования, удалить все нужные записи
+                                if(window.location.href.indexOf("resume.php?page=edit") != -1){
+                                    delete_education();
+                                    delete_experience();
+                                    delete_language();
+                                }
                             });
                         });
                     });
@@ -910,6 +1071,8 @@
 
         var data = new FormData();
 
+        var xcar = form.elements["add_auto_exist"].value;
+
         // добавление данных в объект FormData
         if(avatar_input.files[0]){data.append('avatar', avatar_input.files[0], 'avatar.jpg');}
         data.append('firstname', form.elements["firstname"].value);
@@ -926,7 +1089,7 @@
         data.append('salary', form.elements["salary"].value);
         data.append('work_place_id', form.elements["work_place"].value);
         data.append('comp_skill_id', form.elements["comp_skills"].value);
-        data.append('car', form.elements["add_auto_exist"].value);
+        data.append('car', (xcar == "") ? "" : xcar);
         data.append('courses', form.elements["add_courses"].value);
         data.append('skills', form.elements["add_skills"].value);
 
@@ -939,7 +1102,16 @@
         modal_disable.style.display = "block";
         
         // отправка данных
-        ajax("POST", "scripts/set_resume.php", data, true, 
+
+        var server_script;
+
+        if(window.location.href.indexOf("resume.php?page=edit") != -1){
+            server_script = "scripts/update/update_resume.php"
+        } else {
+            server_script = "scripts/set_resume.php";
+        }
+
+        ajax("POST", server_script, data, true, 
         function(status, res){
             if(next) next(status, res);
         }, 
@@ -1197,6 +1369,27 @@
         }
     }
 
+    function delete_experience(){
+        if(exp_del_array.length > 0){
+            var data = "data=" + exp_del_array;
+            ajax("POST", "scripts/delete/del_experience.php", data, false, null, null);
+        }
+    }
+
+    function delete_education(){
+        if(edu_del_array.length > 0){
+            var data = "data=" + edu_del_array;
+            ajax("POST", "scripts/delete/del_education.php", data, false, null, null);
+        }
+    }
+
+    function delete_language(){
+        if(lang_del_array.length > 0){
+            var data = "data=" + lang_del_array;
+            ajax("POST", "scripts/delete/del_language.php", data, false, null, null);
+        }
+    }
+
 })();
 
 (function(){
@@ -1239,7 +1432,7 @@
         var xhr = new XMLHttpRequest();
         
             // отправка запроса
-            xhr.open("GET", "scripts/del_resume.php", true);
+            xhr.open("GET", "scripts/delete/del_resume.php", true);
             xhr.send();        
     
             // заблокировать кнопку

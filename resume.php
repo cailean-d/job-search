@@ -28,9 +28,6 @@
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/datepicker.min.js"></script>
-    <script src="js/resume.js?wwqwqqwqwwwwq"></script>
+    <script src="js/resume.js?wwqwqqqqwqwwwwq"></script>
     </body>
 </html>
-
-
-
