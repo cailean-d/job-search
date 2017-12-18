@@ -80,7 +80,7 @@
                 http_response_code(400);
                 exit("Поле -exp_func- заполнено некорректно!");
             }
-            elseif(!preg_match($regexp_numbers, $object->record_id)){
+            elseif(!preg_match($regexp_numbers, (string)$object->record_id)){
                 http_response_code(400);
                 exit("Поле -record_id- заполнено некорректно!");
             }

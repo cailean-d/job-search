@@ -18,10 +18,10 @@
             work_place.work_place_name,
             comp_skills.cs_name
             FROM user_resume 
-            INNER JOIN schedule ON user_resume.schedule_id = schedule.id
-            INNER JOIN industry ON user_resume.industry_id = industry.id 
-            INNER JOIN work_place ON user_resume.work_place_id = work_place.id 
-            INNER JOIN comp_skills ON user_resume.comp_skill_id = comp_skills.id 
+            LEFT JOIN schedule ON user_resume.schedule_id = schedule.id
+            LEFT JOIN industry ON user_resume.industry_id = industry.id 
+            LEFT JOIN work_place ON user_resume.work_place_id = work_place.id 
+            LEFT JOIN comp_skills ON user_resume.comp_skill_id = comp_skills.id 
             WHERE user_id =" . $id;
 
         $resume_data = $db->prepare($sql);

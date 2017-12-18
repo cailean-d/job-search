@@ -208,30 +208,29 @@
         }
 
         $sql = "UPDATE user_resume SET 
-                firstname =  ?
-                lastname = ?
-                patronymic = ?
-                gender = ?
-                birthday = ?
-                city = ?
-                phone = ?
-                email = ?
-                post = ?
-                industry_id = ?
-                schedule_id = ?
-                salary = ?
-                work_place_id = ?
-                comp_skill_id = ?
-                car = ?
-                cources = ?
-                skills ? 
+                firstname =  ?,
+                lastname = ?,
+                patronymic = ?,
+                gender = ?,
+                birthday = ?,
+                city = ?,
+                phone = ?,
+                email = ?,
+                post = ?,
+                industry_id = ?,
+                schedule_id = ?,
+                salary = ?,
+                work_place_id = ?,
+                comp_skill_id = ?,
+                car = ?,
+                courses = ?,
+                skills = ? 
                 WHERE user_id = ?
             ";
         
         $sql_array = [
                 $firstname,
                 $lastname,
-                $lastname, 
                 $patronymic,
                 $gender, 
                 $birthday, 
@@ -252,9 +251,12 @@
 
         // подготовка запроса на добавление основных данных
         $query = $db->prepare($sql);
+
+        
             
         // выполнение запроса
         $query->execute($sql_array);
+              
 
         $error = $query->errorInfo();
 

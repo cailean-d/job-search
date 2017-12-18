@@ -711,22 +711,30 @@
                                         <th scope="row" class="text-muted">Владение языками</th>
                                         <td><?=$langs?></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row" class="text-muted w-35">Владение компьютером</th>
-                                        <td><?=$resume_data['cs_name']?></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="text-muted">Наличие автомобиля</th>
-                                        <td><?=$resume_data['car']?></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="text-muted">Пройденные курсы</th>
-                                        <td><?=$resume_data['courses']?></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="text-muted">Навыки</th>
-                                        <td><?=$resume_data['skills']?></td>
-                                    </tr>
+                                    <?php if(!empty($resume_data['cs_name'])) :?>
+                                        <tr>
+                                            <th scope="row" class="text-muted w-35">Владение компьютером</th>
+                                            <td><?=$resume_data['cs_name']?></td>
+                                        </tr>
+                                    <?php endif ?>
+                                    <?php if(!empty($resume_data['car'])) : ?>
+                                        <tr>
+                                            <th scope="row" class="text-muted">Наличие автомобиля</th>
+                                            <td><?=$resume_data['car']?></td>
+                                        </tr>
+                                    <?php endif ?>
+                                    <?php if(!empty($resume_data['courses'])) :?>
+                                        <tr>
+                                            <th scope="row" class="text-muted">Навыки</th>
+                                            <td><?=$resume_data['courses']?></td>
+                                        </tr>
+                                    <?php endif ?>
+                                    <?php if(!empty($resume_data['skills'])) :?>
+                                        <tr>
+                                            <th scope="row" class="text-muted">Пройденные курсы</th>
+                                            <td><?=$resume_data['skills']?></td>
+                                        </tr>
+                                    <?php endif ?>
                                 </tbody>
                             </table>
                         </div>

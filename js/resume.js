@@ -67,6 +67,17 @@
     var edu_del_array = [];
     // массив с id удаленных LANG
     var lang_del_array = [];
+    // массив с EXP для обновления
+    var exp_upd_array = [];
+    // массив с EDU для обновления
+    var edu_upd_array = [];
+    // массив с LANG для обновления
+    var lang_upd_array = [];
+    // bool если форма EXP в решиме обновления
+    var exp_is_update = false;
+    // bool если форма EDU в решиме обновления
+    var edu_is_update = false;
+
 
 
     // все поля, требующие проверки
@@ -149,30 +160,51 @@
         // позволяет редактировать сгенерированные блоки с ОР
         edit_exp_job();
 
-        // массивы кнопок
-        var delete_job_btn = document.querySelectorAll(".delete_job");
-        var edit_job_btn = document.querySelectorAll(".edit_job");
 
 
-        // генерация массива id для ОР, которые были удалены
-        function get_job_deleted_id(button){
+        function qwe(){
 
-            var job = this.parentNode.parentNode.parentNode;
-            var id = job.querySelector(".job_id").innerHTML;
-            exp_del_array.push(id);
+            // массивы кнопок
+            var delete_job_btn = document.querySelectorAll(".delete_job");
+            var edit_job_btn = document.querySelectorAll(".edit_job");
 
+            // вешаем дополнительное событие на эти кнопки
+            for(var i = 0; i < delete_job_btn.length; i++){
+                var btn = delete_job_btn[i];
+                btn.addEventListener("click", function(){
+                    var job = this.parentNode.parentNode.parentNode;
+                    var id = job.querySelector(".job_id");
+                    if (id){
+                        id = id.innerHTML;
+                        if(exp_del_array.indexOf(id) == -1){
+                            exp_del_array.push(id);
+                        }
+                    }
+ 
+                });
+            }
+
+            
+            for(var i = 0; i < edit_job_btn.length; i++){
+                var btn = edit_job_btn[i];
+                btn.addEventListener("click", function(){
+                    var job = this.parentNode.parentNode.parentNode;
+                    var id = job.querySelector(".job_id");
+                    if(id){
+                        id = id.innerHTML.trim();
+                        exp_is_update = id;
+                        add_exp.innerHTML = "Обновить запись";
+                    }
+                });
+            }
         }
 
-        // вешаем дополнительное событие на эти кнопки
-        for(var i = 0; i < delete_job_btn.length; i++){
-            var btn = delete_job_btn[i];
-            btn.addEventListener("click", get_job_deleted_id);
-        }
+        qwe();
 
-        for(var i = 0; i < edit_job_btn.length; i++){
-            var btn = edit_job_btn[i];
-            btn.addEventListener("click", get_job_deleted_id);
-        }
+        // динамически выполняется функция при добавлении новых элементов в DOM
+        completed_exp_forms.addEventListener('DOMNodeInserted', qwe);
+        completed_exp_forms.addEventListener('DOMNodeRemoved', qwe);
+
 
         /* 
             Запись данных и добавление обработчиков для массива с образованием  
@@ -186,30 +218,50 @@
         edit_edu();
 
 
-        // массивы кнопок
-        var delete_edu_btn = document.querySelectorAll(".delete_edu");
-        var edit_edu_btn = document.querySelectorAll(".edit_edu");
+        function qwer(){
+
+            // массивы кнопок
+            var delete_edu_btn = document.querySelectorAll(".delete_edu");
+            var edit_edu_btn = document.querySelectorAll(".edit_edu");
 
 
-        // генерация массива id для ОР, которые были удалены
-        function get_edu_deleted_id(button){
+            // вешаем дополнительное событие на эти кнопки
+            for(var i = 0; i < delete_edu_btn.length; i++){
+                var btn = delete_edu_btn[i];
+                btn.addEventListener("click", function(){
+                    var job = this.parentNode.parentNode.parentNode;
+                    var id = job.querySelector(".edu_id");
+                    if (id){
+                        id = id.innerHTML;
+                        if(edu_del_array.indexOf(id) == -1){
+                            edu_del_array.push(id);
+                        }
+                    }
 
-            var edu = this.parentNode.parentNode.parentNode;
-            var id = edu.querySelector(".edu_id").innerHTML;
-            edu_del_array.push(id);
+                });
+            }
+
+            for(var i = 0; i < edit_edu_btn.length; i++){
+                var btn = edit_edu_btn[i];
+                btn.addEventListener("click", function(){
+                    var job = this.parentNode.parentNode.parentNode;
+                    var id = job.querySelector(".edu_id");
+                    if (id){
+                        id = id.innerHTML.trim();
+                        edu_is_update = id;
+                        add_edu.innerHTML = "Обновить запись";
+                    }
+                });
+            }
 
         }
 
-        // вешаем дополнительное событие на эти кнопки
-        for(var i = 0; i < delete_edu_btn.length; i++){
-            var btn = delete_edu_btn[i];
-            btn.addEventListener("click", get_edu_deleted_id);
-        }
 
-        for(var i = 0; i < edit_edu_btn.length; i++){
-            var btn = edit_edu_btn[i];
-            btn.addEventListener("click", get_edu_deleted_id);
-        }
+        qwer();
+
+         // динамически выполняется функция при добавлении новых элементов в DOM
+        completed_edu_forms.addEventListener('DOMNodeInserted', qwer);
+        completed_edu_forms.addEventListener('DOMNodeRemoved', qwer);
 
 
         // позволяет удалять сгенерированные блоки с LANG
@@ -250,26 +302,52 @@
                 // проверка на валидность образования
                 validate_education(function(){
 
+                    // console.log(lang_array);
+                    // console.log(lang_upd_array);
+                    // console.log(lang_del_array);
+                    // console.log("");
+
+                    // console.log(exp_array);
+                    // console.log(exp_upd_array);
+                    // console.log(exp_del_array);
+                    // console.log("");
+
+                    // console.log(edu_array);
+                    // console.log(edu_upd_array);
+                    // console.log(edu_del_array);
+                    // console.log("");
+
+
                     // отправка основных данных формы
                     send_primary_data(function(){
 
                         // отправка данных об ОР
-                        send_work_exp(function(){
+                        send_work_exp("create", function(){
                             
                             // отправка данных об образовании
-                            send_education(function(){
+                            send_education("create", function(){
                                 
                                 // формирования массива с языками
                                 get_languages();
                                 
                                 // отправка данных о языках
-                                send_languages(function(){
+                                send_languages("create", function(){
                                     
                                 // если страница редактирования, удалить все нужные записи
                                 if(window.location.href.indexOf("resume.php?page=edit") != -1){
-                                    delete_education();
-                                    delete_experience();
-                                    delete_language();
+
+                                    // удаление и обновление LANG
+                                    send_languages("update");
+                                    send_languages("delete");
+
+                                    // удаление и обновление EXP
+                                    send_work_exp("update");
+                                    send_work_exp("delete");
+
+                                    // удаление и обновление EDU
+                                    send_education("update");
+                                    send_education("delete");
+                                    
                                 }
 
                                 // вызов функции после всех операций
@@ -498,26 +576,50 @@
 
         // ... если ошибок нет
 
+        var xid = "";
+
+        if(exp_is_update){
+            xid = "<div hidden class=\"job_id\">"+exp_is_update+"</div>";
+        }
+
         // генерация блока
         var block = document.createElement("div");
         block.classList.add("exp_job");
-        block.innerHTML = '<div hidden class="industry_id">' + form.elements["exp_industry"].value +'</div><div class="card mb-4" style="font-size: 14px;"><div class="card-block"><h3 class="card-title post">'+form.elements["exp_post"].value+'</h3><div class="card-text mb-2"><div class="d-flex justify-content-between"><div class="left d-flex"><div class="company mr-2 text-muted">'+form.elements["exp_company"].value+'</div><div class="city text-muted">'+form.elements["exp_city"].value+'</div></div><div class="right text-muted">'+form.elements["work_period"].value+'</div></div><div class="text-muted industry">'+form.elements["exp_industry"].options[form.elements["exp_industry"].selectedIndex ].text+'</div><div class="func">'+form.elements["exp_func"].value+'</div></div><a href="#" class="btn btn-primary mr-1 edit_job">Редактировать</a><a href="#" class="btn btn-secondary delete_job">Удалить</a></div></div>';
+        block.innerHTML = xid+'<div hidden class="industry_id">' + form.elements["exp_industry"].value +'</div><div class="card mb-4" style="font-size: 14px;"><div class="card-block"><h3 class="card-title post">'+form.elements["exp_post"].value+'</h3><div class="card-text mb-2"><div class="d-flex justify-content-between"><div class="left d-flex"><div class="company mr-2 text-muted">'+form.elements["exp_company"].value+'</div><div class="city text-muted">'+form.elements["exp_city"].value+'</div></div><div class="right text-muted">'+form.elements["work_period"].value+'</div></div><div class="text-muted industry">'+form.elements["exp_industry"].options[form.elements["exp_industry"].selectedIndex ].text+'</div><div class="func">'+form.elements["exp_func"].value+'</div></div><a href="#" class="btn btn-primary mr-1 edit_job">Редактировать</a><a href="#" class="btn btn-secondary delete_job">Удалить</a></div></div>';
 
         // значение поля select `отрасль`, которое не проходит проверку
         var industry = form.elements["exp_industry"];
 
         // добавить данные в массив для отправки
-        exp_array.push({
-            "exp_post" : fields_exp[0].value,
-            "exp_company" : fields_exp[1].value,
-            "exp_city" : fields_exp[2].value,
-            "work_period" : fields_exp[3].value,
-            "exp_func" : fields_exp[4].value,
-            "exp_industry" : industry.value
-        });
 
-        // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
-        block.classList.add("job" + (exp_array.length -1));
+        if(exp_is_update){
+            exp_upd_array.push({
+                "exp_post" : fields_exp[0].value,
+                "exp_company" : fields_exp[1].value,
+                "exp_city" : fields_exp[2].value,
+                "work_period" : fields_exp[3].value,
+                "exp_func" : fields_exp[4].value,
+                "exp_industry" : industry.value,
+                "record_id" : exp_is_update
+            });
+
+            // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
+            block.classList.add("job" + (exp_is_update.length -1));
+        } else {
+            exp_array.push({
+                "exp_post" : fields_exp[0].value,
+                "exp_company" : fields_exp[1].value,
+                "exp_city" : fields_exp[2].value,
+                "work_period" : fields_exp[3].value,
+                "exp_func" : fields_exp[4].value,
+                "exp_industry" : industry.value
+            });
+
+            // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
+            block.classList.add("job" + (exp_array.length -1));
+        }
+
+        
 
         // скрыть блок, где кнопка с удалением формы
         hide_exp_block.classList.add("hidden-xl-down");
@@ -531,6 +633,9 @@
             var field = fields_exp[i];
             field.value = "";
         }
+
+        exp_is_update = false;
+        this.innerHTML = "Добавить место работы";
 
     }
 
@@ -565,9 +670,16 @@
 
                     // id записи
                     var job_id = xclass.slice(3);
-                    
+
+                    var q = job.querySelector(".job_id");
+
                     // удалить объект из массива данных
-                    delete exp_array[+job_id];
+                    if(q){
+                        delete exp_upd_array[+job_id];
+                    } else {
+                        delete exp_array[+job_id];
+                    }
+                    
                 }
                
             
@@ -607,8 +719,14 @@
                     // id записи
                     var job_id = xclass.slice(3);
                     
+                    var q = job.querySelector(".job_id");
+                    
                     // удалить объект из массива данных
-                    delete exp_array[+job_id];
+                    if(q){
+                        delete exp_upd_array[+job_id];
+                    } else {
+                        delete exp_array[+job_id];
+                    }
                 }
                 
                 // удаляем узел в DOM
@@ -665,22 +783,42 @@
 
         // ... если ошибок нет
 
+        var xid = "";
+        
+        if(edu_is_update){
+            xid = "<div hidden class=\"edu_id\">"+edu_is_update+"</div>";
+        }
+
         // генерация блока
         var block = document.createElement("div");
         block.classList.add("edu");
-        block.innerHTML = '<div hidden class="level_id">'+form.elements["edu_level"].value+'</div><div class="card mb-4" style="font-size: 14px;"><div class="card-block"><h3 class="card-title inst">'+form.elements["edu_inst"].value+'</h3><div class="card-text mb-2"><div class="d-flex justify-content-between"><div class="left d-flex"><div class=" mr-2 text-muted">'+form.elements["edu_level"].options[form.elements["edu_level"].selectedIndex ].text+'</div><div class="city text-muted">'+form.elements["edu_city"].value+'</div></div><div class="right text-muted">'+form.elements["edu_period"].value+' гг.</div></div><div class="text-muted fac">'+form.elements["edu_fac"].value+'</div></div><a href="#" class="btn btn-primary mr-1 edit_edu">Редактировать</a><a href="#" class="btn btn-secondary delete_edu">Удалить</a></div></div>';
+        block.innerHTML = xid+'<div hidden class="level_id">'+form.elements["edu_level"].value+'</div><div class="card mb-4" style="font-size: 14px;"><div class="card-block"><h3 class="card-title inst">'+form.elements["edu_inst"].value+'</h3><div class="card-text mb-2"><div class="d-flex justify-content-between"><div class="left d-flex"><div class=" mr-2 text-muted">'+form.elements["edu_level"].options[form.elements["edu_level"].selectedIndex ].text+'</div><div class="city text-muted">'+form.elements["edu_city"].value+'</div></div><div class="right text-muted">'+form.elements["edu_period"].value+' гг.</div></div><div class="text-muted fac">'+form.elements["edu_fac"].value+'</div></div><a href="#" class="btn btn-primary mr-1 edit_edu">Редактировать</a><a href="#" class="btn btn-secondary delete_edu">Удалить</a></div></div>';
 
         // добавить данные в массив для отправки
-        edu_array.push({
-            "edu_level" : form.elements["edu_level"].value,
-            "edu_inst" : fields_edu[0].value,
-            "edu_city" : fields_edu[1].value,
-            "edu_fac" : fields_edu[2].value,
-            "edu_period" : fields_edu[3].value
-        });
+        if(edu_is_update){
+            edu_upd_array.push({
+                "edu_level" : form.elements["edu_level"].value,
+                "edu_inst" : fields_edu[0].value,
+                "edu_city" : fields_edu[1].value,
+                "edu_fac" : fields_edu[2].value,
+                "edu_period" : fields_edu[3].value,
+                "record_id" : edu_is_update
+            });
 
-        // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
-        block.classList.add("edu" + (edu_array.length -1));
+            // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
+            block.classList.add("edu" + (edu_upd_array.length -1));
+        } else {
+            edu_array.push({
+                "edu_level" : form.elements["edu_level"].value,
+                "edu_inst" : fields_edu[0].value,
+                "edu_city" : fields_edu[1].value,
+                "edu_fac" : fields_edu[2].value,
+                "edu_period" : fields_edu[3].value
+            });
+
+            // добавить класс с номером в массиве, чтобы потом можно было корректо удалить
+            block.classList.add("edu" + (edu_array.length -1));
+        }
         
         // добавить сгенерированный блок в родительский
         completed_edu_forms.appendChild(block);
@@ -696,6 +834,9 @@
             var field = fields_edu[i];
             field.value = "";
         }
+
+        edu_is_update = false;
+        this.innerHTML = "Добавить место учебы";
 
     }
 
@@ -719,9 +860,16 @@
 
                     // id записи
                     var edu_id = xclass.slice(3);
+
+                    var q = edu.querySelector(".edu_id");
                     
                     // удалить объект из массива данных
-                    delete edu_array[+edu_id];
+                    if(q){
+                        delete edu_upd_array[+edu_id];
+                    } else {
+                        delete edu_array[+edu_id];
+                    }
+
                 }
                 
             
@@ -754,8 +902,14 @@
                     // id записи
                     var edu_id = xclass.slice(3);
                     
+                    var q = edu.querySelector(".edu_id");
+                    
                     // удалить объект из массива данных
-                    delete edu_array[+edu_id];
+                    if(q){
+                        delete edu_upd_array[+edu_id];
+                    } else {
+                        delete edu_array[+edu_id];
+                    }
                 }
                 
                 // удаляем узел в DOM
@@ -875,24 +1029,29 @@
         var langs = document.querySelectorAll(".xlang");
 
         lang_array = [];
+        lang_upd_array = [];
 
         for(var i = 0; i < langs.length; i++){
 
             var el = langs[i];
 
-            if(el.querySelector(".xlang_id")){
-                continue;
-            }
-
+            var record_id = el.querySelector(".xlang_id");
             var lang_id = el.querySelector(".lang_id");
             var lang_value = el.querySelector("[name=lang]");
 
-            lang_array.push({
-                "lang_id" : lang_id.innerHTML,
-                "lang_level" : lang_value.value
-            });
+            if(record_id){
+                lang_upd_array.push({
+                    "record_id" : record_id.innerHTML,
+                    "lang_id" : lang_id.innerHTML,
+                    "lang_level" : lang_value.value
+                });
+            } else {
+                lang_array.push({
+                    "lang_id" : lang_id.innerHTML,
+                    "lang_level" : lang_value.value
+                });
+            }
         }
-
 
         if(next) next();
 
@@ -939,90 +1098,222 @@
     }
 
     // отправить асинхронный запрос на добавление языков в БД
-    function send_languages(next){
-                    
-        if(lang_array.length > 0){
+    function send_languages(mode, next){
 
-            // данные для отправки
-            var data = "data=" + JSON.stringify(lang_array);
-    
-            ajax("POST", "scripts/set_language.php", data, false, 
-            function(status, res){
+        var data, server_script;
+
+        // данные для отправки
+        if(mode == "create"){
+
+            if(lang_array.length > 0){
+
+                data = "data=" + JSON.stringify(lang_array);
+                server_script = "scripts/set_language.php";
+
+            } else {
+
                 if (next) next();
-            }, 
-            function(status, res){
-                modal_message_text.innerHTML = status + ': ' + res;
-                $('#modal').modal('show');
+                return;
 
-                // разблокировать кнопку
-                send_form.disabled = false;
-                send_form.classList.remove("disabled");
-                send_form.innerHTML = "Отправить";
+            }
 
-                // разблокировать форму
-                modal_disable.style.display = "block";
-            });
+        } else if (mode == "update"){
+
+            if (lang_upd_array.length > 0){
+
+                data = "data=" + JSON.stringify(lang_upd_array);
+                server_script = "scripts/update/update_language.php";
+
+            } else {
+
+                if (next) next();
+                return;
+
+            }
+            
+        } else if (mode == "delete") {
+
+            if(lang_del_array.length > 0){
+
+                data = "data=" + lang_del_array;
+                server_script = "scripts/delete/del_language.php";
+
+            } else {
+
+                if (next) next();
+                return;
+                
+            }
         } else {
+
             if (next) next();
+            return;
+
         }
+
+        ajax("POST", server_script, data, false, 
+        function(status, res){
+            if (next) next();
+        }, 
+        function(status, res){
+            modal_message_text.innerHTML = status + ': ' + res;
+            $('#modal').modal('show');
+
+            // разблокировать кнопку
+            send_form.disabled = false;
+            send_form.classList.remove("disabled");
+            send_form.innerHTML = "Отправить";
+
+            // разблокировать форму
+            modal_disable.style.display = "block";
+        });
+
     }
 
     // отправка массива данных с ОР
-    function send_work_exp(next){
-        if(exp_array.length > 0){
+    function send_work_exp(mode, next){
 
-            // данные для отправки
-            var data = "data=" + JSON.stringify(exp_array);
-
-            ajax("POST", "scripts/set_experience.php", data, false, 
-            function(status, res){
-                if(next) next();
-            }, 
-            function(status, res){
-                modal_message_text.innerHTML = status + ': ' + res;
-                $('#modal').modal('show');
-
-                // разблокировать кнопку
-                send_form.disabled = false;
-                send_form.classList.remove("disabled");
-                send_form.innerHTML = "Отправить";
-
-                // разблокировать форму
-                modal_disable.style.display = "block";
-            });
+        var data, server_script;
+        
+        // данные для отправки
+        if(mode == "create"){
             
+            if(exp_array.length > 0){
+
+                data = "data=" + JSON.stringify(exp_array);
+                server_script = "scripts/set_experience.php";
+
+            } else {
+
+                if (next) next();
+                return;
+
+            }
+
+        } else if (mode == "update"){
+
+            if (exp_upd_array.length > 0){
+
+                data = "data=" + JSON.stringify(exp_upd_array);
+                server_script = "scripts/update/update_experience.php";
+
+            } else {
+
+                if (next) next();
+                return;
+
+            }
+            
+        } else if (mode == "delete") {
+
+            if(exp_del_array.length > 0){
+
+                data = "data=" + exp_del_array;
+                server_script = "scripts/delete/del_experience.php";
+
+            } else {
+
+                if (next) next();
+                return;
+                
+            }
         } else {
-            if(next) next();
+
+            if (next) next();
+            return;
+
         }
+
+        ajax("POST", server_script, data, false, 
+        function(status, res){
+            if(next) next();
+        }, 
+        function(status, res){
+            modal_message_text.innerHTML = status + ': ' + res;
+            $('#modal').modal('show');
+
+            // разблокировать кнопку
+            send_form.disabled = false;
+            send_form.classList.remove("disabled");
+            send_form.innerHTML = "Отправить";
+
+            // разблокировать форму
+            modal_disable.style.display = "block";
+        });
+ 
     }
 
     // отправка массива данных с образованием
-    function send_education(next){
-        if(edu_array.length > 0){
+    function send_education(mode, next){
+        
+        var data, server_script;
+        
+        // данные для отправки
+        if(mode == "create"){
             
-            // данные для отправки
-            var data = "data=" + JSON.stringify(edu_array);
+            if(edu_array.length > 0){
 
-            ajax("POST", "scripts/set_education.php", data, false, 
-            function(status, res){
-                if(next) next(status, res);
-            }, 
-            function(status, res){
-                modal_message_text.innerHTML = status + ': ' + res;
-                $('#modal').modal('show');
+                data = "data=" + JSON.stringify(edu_array);
+                server_script = "scripts/set_education.php";
+
+            } else {
+
+                if (next) next();
+                return;
+
+            }
+
+        } else if (mode == "update"){
+
+            if (edu_upd_array.length > 0){
+
+                data = "data=" + JSON.stringify(edu_upd_array);
+                server_script = "scripts/update/update_education.php";
+
+            } else {
+
+                if (next) next();
+                return;
+
+            }
+            
+        } else if (mode == "delete") {
+
+            if(edu_del_array.length > 0){
+
+                data = "data=" + edu_del_array;
+                server_script = "scripts/delete/del_education.php";
+
+            } else {
+
+                if (next) next();
+                return;
                 
-                // разблокировать кнопку
-                send_form.disabled = false;
-                send_form.classList.remove("disabled");
-                send_form.innerHTML = "Отправить";
-
-                // разблокировать форму
-                modal_disable.style.display = "block";
-            });
-            
+            }
         } else {
-            if(next) next();
+
+            if (next) next();
+            return;
+
         }
+
+        ajax("POST", server_script, data, false, 
+        function(status, res){
+            if(next) next(status, res);
+        }, 
+        function(status, res){
+            modal_message_text.innerHTML = status + ': ' + res;
+            $('#modal').modal('show');
+            
+            // разблокировать кнопку
+            send_form.disabled = false;
+            send_form.classList.remove("disabled");
+            send_form.innerHTML = "Отправить";
+
+            // разблокировать форму
+            modal_disable.style.display = "block";
+        });
+
     }
 
     // массив данных с основными данными
@@ -1031,6 +1322,7 @@
         var data = new FormData();
 
         var xcar = form.elements["add_auto_exist"].value;
+        var xskill = form.elements["add_courses"].value;
 
         // добавление данных в объект FormData
         if(avatar_input.files[0]){data.append('avatar', avatar_input.files[0], 'avatar.jpg');}
@@ -1049,7 +1341,7 @@
         data.append('work_place_id', form.elements["work_place"].value);
         data.append('comp_skill_id', form.elements["comp_skills"].value);
         data.append('car', (xcar == "") ? "" : xcar);
-        data.append('courses', form.elements["add_courses"].value);
+        data.append('courses', (xskill == "") ? "" : xskill);
         data.append('skills', form.elements["add_skills"].value);
 
         // заблокировать кнопку
@@ -1122,7 +1414,12 @@
                     // если поля заполнены некорректно
                     if(exp_valid !== 0){
                         // сообщение модального окна
-                        confirm_message_text.innerHTML = "Форма об опыте работы заполнена некорректно! Если вы хотите добавить эти данные для отправки, необходимо исправить ее, либо нажмите \"Не добавлять\"";
+                        if(exp_is_update){
+                            confirm_message_text.innerHTML = "Форма об опыте работы заполнена некорректно! Если вы хотите обновить данную запись, необходимо исправить ее, либо нажмите \"Не обновлять\"";
+                        } else {
+                            confirm_message_text.innerHTML = "Форма об опыте работы заполнена некорректно! Если вы хотите добавить эти данные для отправки, необходимо исправить ее, либо нажмите \"Не добавлять\"";
+                        }
+                        
                         // текст левой кнопки
                         confirm_btn1.innerHTML = "Я хочу исправить";
                         // текст правой кнопки
@@ -1149,14 +1446,27 @@
                         confirm_btn1.onclick = function(){
 
                             // добавить данные в массив для отправки
-                            exp_array.push({
-                                "exp_post" : fields_exp[0].value,
-                                "exp_company" : fields_exp[1].value,
-                                "exp_city" : fields_exp[2].value,
-                                "work_period" : fields_exp[3].value,
-                                "exp_func" : fields_exp[4].value,
-                                "exp_industry" : form.elements["exp_industry"].value
-                            });
+                            if(exp_is_update){
+                                exp_upd_array.push({
+                                    "exp_post" : fields_exp[0].value,
+                                    "exp_company" : fields_exp[1].value,
+                                    "exp_city" : fields_exp[2].value,
+                                    "work_period" : fields_exp[3].value,
+                                    "exp_func" : fields_exp[4].value,
+                                    "exp_industry" : form.elements["exp_industry"].value,
+                                    "record_id" : exp_is_update
+                                });
+                            } else {
+                                exp_array.push({
+                                    "exp_post" : fields_exp[0].value,
+                                    "exp_company" : fields_exp[1].value,
+                                    "exp_city" : fields_exp[2].value,
+                                    "work_period" : fields_exp[3].value,
+                                    "exp_func" : fields_exp[4].value,
+                                    "exp_industry" : form.elements["exp_industry"].value
+                                });
+                            }
+
 
                             $('#confirm').modal('hide');
                             if(next) next();
@@ -1243,7 +1553,12 @@
 
                 // если поля заполнены некорректно
                 if(edu_valid !== 0){
-                    confirm_message_text.innerHTML = "Форма об образовании заполнена некорректно! Если вы хотите добавить эти данные для отправки, необходимо исправить ее, либо нажмите \"Не добавлять\"";
+                    if(edu_is_update){
+                        confirm_message_text.innerHTML = "Форма об образовании заполнена некорректно! Если вы хотите обновить эту запись, необходимо исправить ее, либо нажмите \"Не обновлять\"";
+                    } else {
+                        confirm_message_text.innerHTML = "Форма об образовании заполнена некорректно! Если вы хотите добавить эти данные для отправки, необходимо исправить ее, либо нажмите \"Не добавлять\"";
+                    }
+                    
                     confirm_btn1.innerHTML = "Я хочу исправить";
                     confirm_btn2.innerHTML = "Не добавлять";
                     confirm_btn1.onclick = function(){
@@ -1262,13 +1577,24 @@
                     confirm_btn1.onclick = function(){
 
                         // добавить данные в массив для отправки
-                        edu_array.push({
-                            "edu_level" : form.elements["edu_level"].value,
-                            "edu_inst" : fields_edu[0].value,
-                            "edu_city" : fields_edu[1].value,
-                            "edu_fac" : fields_edu[2].value,
-                            "edu_period" : fields_edu[3].value
-                        });
+                        if(edu_is_update){
+                            edu_upd_array.push({
+                                "edu_level" : form.elements["edu_level"].value,
+                                "edu_inst" : fields_edu[0].value,
+                                "edu_city" : fields_edu[1].value,
+                                "edu_fac" : fields_edu[2].value,
+                                "edu_period" : fields_edu[3].value,
+                                "record_id" : edu_is_update
+                            });
+                        } else {
+                            edu_array.push({
+                                "edu_level" : form.elements["edu_level"].value,
+                                "edu_inst" : fields_edu[0].value,
+                                "edu_city" : fields_edu[1].value,
+                                "edu_fac" : fields_edu[2].value,
+                                "edu_period" : fields_edu[3].value
+                            });
+                        }
 
                         $('#confirm').modal('hide');
                         if(next) next();
@@ -1334,27 +1660,6 @@
             $('#modal').modal('show');
         } else {
             if(next) next();
-        }
-    }
-
-    function delete_experience(){
-        if(exp_del_array.length > 0){
-            var data = "data=" + exp_del_array;
-            ajax("POST", "scripts/delete/del_experience.php", data, false, null, null);
-        }
-    }
-
-    function delete_education(){
-        if(edu_del_array.length > 0){
-            var data = "data=" + edu_del_array;
-            ajax("POST", "scripts/delete/del_education.php", data, false, null, null);
-        }
-    }
-
-    function delete_language(){
-        if(lang_del_array.length > 0){
-            var data = "data=" + lang_del_array;
-            ajax("POST", "scripts/delete/del_language.php", data, false, null, null);
         }
     }
 

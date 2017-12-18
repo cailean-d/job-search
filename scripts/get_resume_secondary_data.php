@@ -16,21 +16,21 @@
             user_education.*,
             education.education_name
             FROM user_education
-            INNER JOIN education ON user_education.level_id = education.id
+            LEFT JOIN education ON user_education.level_id = education.id
             WHERE user_id =" . $id;
         $sql_experience = "
             SELECT 
             user_experience.*,
             industry.industry_name
             FROM user_experience
-            INNER JOIN industry ON user_experience.industry_id = industry.id
+            LEFT JOIN industry ON user_experience.industry_id = industry.id
             WHERE user_id =" . $id;
         $sql_lang = "
             SELECT 
             user_lang_skills.*,
             languages.lang_name
             FROM user_lang_skills
-            INNER JOIN languages ON user_lang_skills.lang_id = languages.id
+            LEFT JOIN languages ON user_lang_skills.lang_id = languages.id
             WHERE user_id =" . $id;
 
         $avatar_data = $db->query($sql_avatar);
