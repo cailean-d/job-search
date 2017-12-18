@@ -179,12 +179,12 @@
                     </div>
                     <div role="tabpanel" class="card card-block bg-faded tab-pane fade" id="exp" style="min-height: 500px;">
                         <div class="exp_group">
-                            <div id="exp_block 
+                            <div id="exp_block" 
                                 <?php if($_GET['page'] == "edit" && 
                                     count($experience_data) == 0){
-                                        echo "hidden-xl-down";
+                                        echo "class=\"hidden-xl-down\"";
                                     }
-                                ?>">
+                                ?>>
                                 <div class="group col-10 pl-0 pr-0 mx-auto hide_exp_block 
                                 <?php if($_GET['page'] == "edit" && 
                                 count($experience_data) > 0){
@@ -412,7 +412,7 @@
                             <?php if ($_GET['page'] == "edit")?>
                                 <?php if(count($lang_data) > 0) :
                                     foreach ($lang_data as $lang) :?>
-                                        <div class="d-flex col-10 pl-0 pr-0 mx-auto">
+                                        <div class="d-flex col-10 pl-0 pr-0 mx-auto xlang">
                                             <div hidden class="xlang_id"><?=$lang['id']?></div>
                                             <div class="group col-11">
                                                 <div class="form-group row">
@@ -791,62 +791,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-<!-- 
-                                    <div class="card mb-4" style="font-size: 14px;">
-                                        <div class="card-block">
-                                            <h3 class="card-title">Парикмахер</h3>
-                                            <div class="card-text mb-2">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="left d-flex">
-                                                        <div class="company mr-2 text-muted">
-                                                            ООО Васи Пупкина
-                                                        </div>
-                                                        <div class="city text-muted">
-                                                            Архангельск
-                                                        </div>
-                                                    </div>
-                                                    <div class="right text-muted">
-                                                        Май 2017 - Июнь 2017
-                                                    </div>
-                                                </div>
-                                                <div class="text-muted">
-                                                    Отрасль
-                                                </div>
-                                                <div>
-                                                    Описание
-                                                </div>
-                                            </div>
-                                            <button href="#" class="btn btn-primary">
-                                                Редактировать
-                                            </button>
-                                            <button href="#" class="btn btn-secondary">
-                                                Удалить
-                                            </button>
-                                        </div>
-                                    </div> -->
-
-
-    <!-- <div class="d-flex col-10 pl-0 pr-0 mx-auto">
-        <div class="group col-11">
-            <div class="form-group row">
-                <div class="hidden-xl-down lang_id">1</div>
-                <label class="col-3 col-form-label">Английский</label>
-                <div class="col-9">
-                    <select class="form-control custom-select" name="lang">
-                            <option value="Не владею">Не владею</option>
-                            <option value="Базовый">Базовый</option>
-                            <option value="Технический">Технический</option>
-                            <option value="Разговорный">Разговорный</option>
-                            <option value="Свободно владею">Свободно владею</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <a class="btn btn-outline-primary col-1 delete_lang" href="#" role="button" style="height: 37px; padding: .5rem .3rem;">&#151;</a>
-    </div> -->

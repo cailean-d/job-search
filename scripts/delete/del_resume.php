@@ -4,7 +4,7 @@
         session_start();
 
         // подключение БД
-        include('db_connection.php');
+        include('../db_connection.php');
 
         // не выполнять скрипт, если пользователь не авторизирован
         if(!isset($_SESSION['id'])){

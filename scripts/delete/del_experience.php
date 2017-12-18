@@ -27,7 +27,7 @@
         foreach ($data as $id) {
 
             // подготовка запроса
-            $query = $db->prepare("DELETE FROM `user_lang_skills` WHERE user_id = ? AND id = ?");
+            $query = $db->prepare("DELETE FROM `user_experience` WHERE user_id = ? AND id = ?");
 
             // выполнение запросов
             $query->execute([$user_id, $id]);
