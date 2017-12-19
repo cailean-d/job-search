@@ -96,11 +96,11 @@
 
 
             $sql = "UPDATE user_experience SET 
-                    post = ?
-                    company = ?
-                    city = ?
-                    industry_id = ?
-                    work_period = ?
+                    post = ?,
+                    company = ?,
+                    city = ?,
+                    industry_id = ?,
+                    work_period = ?,
                     functions = ?
                     WHERE user_id = ? AND id = ?
                     ";

@@ -64,7 +64,7 @@
 
 
             $sql = "UPDATE user_lang_skills SET 
-                    lang_id = ?
+                    lang_id = ?,
                     lang_level = ?
                     WHERE user_id = ? AND id = ?
                    ";

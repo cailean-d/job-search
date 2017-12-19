@@ -81,10 +81,10 @@
             $record_id = htmlspecialchars(trim($object->record_id));
 
             $sql = "UPDATE user_education SET 
-                    level_id = ?
-                    inst = ?
-                    city = ?
-                    faculty = ?
+                    level_id = ?,
+                    inst = ?,
+                    city = ?,
+                    faculty = ?,
                     study_period = ?
                     WHERE user_id = ? AND id = ?
                     ";
