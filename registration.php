@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="favicon.png">
     <link rel="stylesheet" href="css/style.css?qqseeewweуцwewsqgq">
     <link rel="stylesheet" href="css/reg.css?qqseeweewуцqwqewsqgq">
+    <link rel="stylesheet" href="css/header.css?qqxqwwqqqqwwwqwwwqqwqwq">
     <title>Регистрация</title>
 </head>
 <body>
@@ -19,8 +20,8 @@
             </main>
         </div>
     </div>
-<script src="js/modal.js?qуцeeq"></script>
-<script src="js/reg_valid.js?qуewewewуйуйуйцeqeqweqqeeweqewqewцуц"></script>
+<script src="js/modal.js?qуцeweeq"></script>
+<script src="js/reg_valid.js?qуwqewцуц"></script>
 <script src="js/active_page.js?e"></script>
 </body>
 </html>
