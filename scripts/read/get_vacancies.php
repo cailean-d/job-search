@@ -2,7 +2,7 @@
     try {
         // $start = microtime(true); 
         
-        include('redis_connection.php');
+        // include('redis_connection.php');
         
         $sort = 'date';
         $salary = '';
@@ -76,7 +76,7 @@
             vacancies.*,
             schedule.schedule_name
             FROM `vacancies` 
-            INNER JOIN schedule ON vacancies.schedule = schedule.id
+            LEFT JOIN schedule ON vacancies.schedule = schedule.id
             WHERE status="1"
             '.$salary.'
             '.$industry.'
@@ -87,14 +87,13 @@
             ORDER BY '.$sort.' DESC
         ';
 
-        $hash = md5($sql);
+        // $hash = md5($sql);
 
-
-        if($result = $redis->hget("vacancies", $hash)){
+        // if($result = $redis->hget("vacancies", $hash)){
             
-        } else {
+        // } else {
         
-            include('db_connection.php');
+            include('scripts/db_connection.php');
             $result = $db->prepare($sql);
             $result->execute();
                 
@@ -103,12 +102,12 @@
             if($error && $error[0] != 00000){
                 die($error);
             } else {
-                $result = json_encode($result->fetchAll(PDO::FETCH_BOTH));
-                $redis->hset("vacancies", $hash, $result);
+                $result = $result->fetchAll(PDO::FETCH_BOTH);
+                // $redis->hset("vacancies", $hash, $result);
             }
-        }
+        // }
 
-        $result = json_decode($result);
+        // $result = json_decode($result);
 
         if(count($result) > 0){
             $is_result = true;

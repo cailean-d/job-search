@@ -3,8 +3,8 @@
     var modal_button = document.getElementById("show_modal_login");
     var modal = document.querySelector(".modal_login");
     var show_login = document.getElementById("show_login");
-    var name = document.querySelector(".name");
-    var logout = document.querySelector(".logout");
+    var name = document.querySelector("#header .name");
+    var logout = document.querySelector("#header .logout");
     
     
     if(modal_button != null){
@@ -35,7 +35,7 @@
     if(name != null){
         var isOpen = false;
         
-        document.querySelector(".name .dd").onclick = function(e){
+        document.querySelector("#header .name .dd").onclick = function(e){
         e.preventDefault();
                 if(isOpen){
                     logout.style.display = "none";

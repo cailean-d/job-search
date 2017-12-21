@@ -8,31 +8,34 @@
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css?qssqqqqqqqeeqqgq">
-    <link rel="stylesheet" href="css/vacancy.css?qewqeeewweweqqeqq">
-    <link rel="stylesheet" href="css/filter.css?qewqewqewqqewewweqqeqq">
+    <link rel="stylesheet" href="css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="css/style.css?qssqqqqqewwqqeeqqgq">
+    <link rel="stylesheet" href="css/vacancy.css?eqweweqqeqq">
+    <link rel="stylesheet" href="css/filter.css?qqeewqq">
     <link rel="stylesheet" href="css/login_modal.css?qqwq">
-    <link rel="stylesheet" href="css/header.css?qqxqwwqqqqwwwqwwwqqwqwq">
-    <title>Вакансии</title>qqqqqqq
+    <link rel="stylesheet" href="css/header.css?qqxqwwqqqwqwwwqwwwqqwqwq">
+    <title>Вакансии</title>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="container">
         <?php include("parts/header.php")?>
         <div class="app-body">
-            <main class="w70">
+            <main class="col-8">
                 <?php include("parts/vacancies.php")?>
             </main>
-            <aside>
+            <aside class="col-4">
                 <?php include("parts/filters.php")?>
             </aside>
         </div>
     </div>
-<script src="js/jquery.min.js"></script>
-<script src="js/tether.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/filter.js?eqйqws"></script>
-<script src="js/modal.js?eeweweewwwqqws"></script>
-<script src="js/active_page.js?e"></script>
-<script src="js/login_valid.js?eewqqqew"></script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-slider.min.js"></script>
+    <script src="js/filter.js?ewqqqqqqqqqqws"></script>
+    <script src="js/modal.js?eeweweqwqqeewwwqqws"></script>
+    <script src="js/active_page.js?e"></script>
+    <script src="js/login_valid.js?eewqqqew"></script>
 </body>
 </html>

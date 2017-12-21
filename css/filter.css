@@ -1,59 +1,30 @@
-aside{
-    border-left: 1px solid #bdbdbd;
-    margin-left: 20px;
-    width: 30%;
-    padding: 10px;
+#filters .option{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #cccccc;
 }
 
-aside h3{
-    text-align: center;
-    display: block;
-}
-
-aside input{
-    width: 100%;
-}
-
-aside .option{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #bdbdbd;
-}
-
-aside .option select{
-    width: 100%;
-}
-
-aside .option:last-child{
+#filters .option:last-child{
     border:none;
 }
 
-aside .option h4{
-    font-weight: bold;
-    margin-bottom: 10px;
+.slider-selection {
+	background: #bfc9e0;
 }
 
-aside .option a, aside .option a:visited, aside .option a:active{
-    display: block;
-    padding: 3px;
-    color: #3498db;
-    text-decoration: none;
+.slider-track-low, .slider-track-high{
+    background: #fff;
+    border: 1px solid #c3c3c3;
 }
 
-aside .option a:hover{
-    color: #009b40;
-}
-
-aside .apply{
+.slider.slider-horizontal{
     width: 100%;
-    padding: 10px;
 }
 
-aside .search input{
-    padding: 7px;
-    width: 94%;
+.slider-handle{
+    cursor: pointer;
 }
 
-aside .option select{
-    padding: 7px;
+h5{
+    color: #7d7d7d;
 }
