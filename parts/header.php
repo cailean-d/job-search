@@ -18,12 +18,12 @@
     </nav>
     <?php if(!isset($_SESSION['authorized'])) : ?>
         <div class="side-menu">
-            <a id="registration_page" href="registration.php">
+            <a id="reg_link" data-toggle="modal" data-target="#modal_reg">
                 <span>
                     Регистрация
                 </span> 
             </a>
-            <a id="show_modal_login">
+            <a id="login_link" data-toggle="modal" data-target="#modal_login">
                 <span>
                     Войти
                 </span> 

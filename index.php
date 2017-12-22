@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="css/style.css?qssqqqqqewwqqeeqqgq">
-    <link rel="stylesheet" href="css/vacancy.css?eqweweqqeqq">
-    <link rel="stylesheet" href="css/filter.css?qqeewqq">
-    <link rel="stylesheet" href="css/login_modal.css?qqwq">
-    <link rel="stylesheet" href="css/header.css?qqxqwwqqqwqwwwqwwwqqwqwq">
+    <link rel="stylesheet" href="css/style.css?qqwgq">
+    <link rel="stylesheet" href="css/vacancy.css?eqwewweqqeqq">
+    <link rel="stylesheet" href="css/filter.css?qqeewwqq">
+    <link rel="stylesheet" href="css/header.css?qqxqwwqqwq">
     <title>Вакансии</title>
 </head>
 <body>
@@ -33,9 +32,9 @@
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-slider.min.js"></script>
-    <script src="js/filter.js?ewqqqqqqqqqqws"></script>
-    <script src="js/modal.js?eeweweqwqqeewwwqqws"></script>
-    <script src="js/active_page.js?e"></script>
-    <script src="js/login_valid.js?eewqqqew"></script>
+    <script src="js/filter.js?ewqqqqqeqqqqqws"></script>
+    <script src="js/modal.js?eeweeqwewqqws"></script>
+    <script src="js/active_page.js?eewq"></script>
+    <script src="js/login_valid.js?eewqwуцqewqqqqqqqqew"></script>
 </body>
 </html>

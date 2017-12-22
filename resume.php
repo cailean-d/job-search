@@ -23,12 +23,12 @@
                 </main>
             </div>
         </div>
-    <script src="js/modal.js?eqqws"></script>
-    <script src="js/active_page.js?e"></script>
+    <script src="js/modal.js?eqqeqws"></script>
+    <script src="js/active_page.js?ew"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/datepicker.min.js"></script>
-    <script src="js/resume.js?kqwwqwwq"></script>
+    <script src="js/resume.js?kqwewwwqwwq"></script>
     </body>
 </html>
