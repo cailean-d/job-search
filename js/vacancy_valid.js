@@ -79,7 +79,7 @@ form.onsubmit = function(e){
 
 function removeInputRow(){
     del_buttons = document.querySelectorAll("button.del");
-    for(let i = 0; i < del_buttons.length; i++){
+    for(var i = 0; i < del_buttons.length; i++){
         var del_button = del_buttons[i];
         del_button.onclick = function(e){
             e.preventDefault();
@@ -156,8 +156,8 @@ function checkInputs(that){
     var REGEXP_phone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     var REGEXP_exp = /(^\d+[-]*\d+$)|(^\d+$)/;
     var REGEXP_company = /^[A-zА-яЁё\"\s?]{5,}$/;
-    var REGEXP_sentence = /^[A-zА-яЁё0-9-\.,!:\"\s?]{5,}$/;
-    var REGEXP_city = /^[A-zА-яЁё-\"\s?]{4,}$/;
+    var REGEXP_sentence = /^[A-zА-яЁё0-9\-\.,!:\"\s?]{5,}$/;
+    var REGEXP_city = /^[A-zА-яЁё\-\"\s?]{4,}$/;
 
     var regexp;
     var error = that.parentNode.querySelector(".error");

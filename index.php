@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png">
+
+    <!--<Deject>-->
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -13,6 +15,10 @@
     <link rel="stylesheet" href="css/vacancy.css?eqwewweqqeqq">
     <link rel="stylesheet" href="css/filter.css?qqeewwqq">
     <link rel="stylesheet" href="css/header.css?qqxqwwqqwq">
+    <!--</Deject>-->
+    
+    <!-- inject:css -->
+    <!-- endinject -->
     <title>Вакансии</title>
 </head>
 <body>
@@ -28,6 +34,7 @@
         </div>
     </div>
 
+    <!--<Deject>-->
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -37,5 +44,9 @@
     <script src="js/active_page.js?eewq"></script>
     <script src="js/login_valid.js?eewqwуqqqqqew"></script>
     <script src="js/reg_valid.js?qqqqqqцqeqe"></script>
+    <!--</Deject>-->
+    
+    <!-- inject:js -->
+    <!-- endinject -->
 </body>
 </html>
