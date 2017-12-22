@@ -20,7 +20,7 @@
     ];
     
 
-    // при потери фокуса поля проверять на валидность
+    // при потере фокуса поля проверять на валидность
     validateForm();
     
 
@@ -38,8 +38,8 @@
         // отправка данных, если нет ошибом
         if (isValid == 0) {
             sendData(this);
-            $("#ajax-error").addClass("hidden-xl-down");
-            $("#ajax-error > div").text("");
+            $("#ajax-error-reg").addClass("hidden-xl-down");
+            $("#ajax-error-reg > div").text("");
         } else {
         // вывод ошибки
             $("#ajax-error").removeClass("hidden-xl-down");
@@ -60,8 +60,16 @@
     
         // проверки для поля "password"
         if(that.name == "password"){
-            // длина должна быть не менее 6 символов
-            if(that.value.length < 6){
+            // поле не должно быть пустым
+            if(that.value.length == 0){
+                // показать стили для ошибки
+                error_message.innerHTML = "Это поле обязательно для заполения!";
+                error_message.classList.remove("hidden-xl-down");
+                if(!outer_block.classList.contains("has-danger")){isValid--;}
+                outer_block.classList.add("has-danger");
+                return;
+            } else if(that.value.length < 6){
+                // длина должна быть не менее 6 символов
                 // показать стили для ошибки
                 error_message.innerHTML = "Не менее 6 символов!";
                 error_message.classList.remove("hidden-xl-down");
@@ -148,7 +156,7 @@
         $("#ajax-error").addClass("hidden-xl-down");
         $("#ajax-error > div").text("");
 
-        // отправка запроса и отслеживание состояния 
+        // отслеживание состояния 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4){
                 if (xhr.status == 200) {
@@ -181,15 +189,6 @@
         document.getElementById("login_link").classList.remove("active");
     })
 
-    // добавить стили для отображения "активности" кнопки
-    document.getElementById("reg_link").onclick = function(){
-        this.classList.add("active");
-    }
-
-    // убрать стили для отображения "активности" кнопки
-    $('#modal_reg').on('hidden.bs.modal', function (e) {
-        document.getElementById("reg_link").classList.remove("active");
-    })
 
 })();
 

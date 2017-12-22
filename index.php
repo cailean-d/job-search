@@ -35,6 +35,7 @@
     <script src="js/filter.js?ewqqqqqeqqqqqws"></script>
     <script src="js/modal.js?eeweeqwewqqws"></script>
     <script src="js/active_page.js?eewq"></script>
-    <script src="js/login_valid.js?eewqwуцqewqqqqqqqqew"></script>
+    <script src="js/login_valid.js?eewqwуqqqqqew"></script>
+    <script src="js/reg_valid.js?qqqqqqцqeqe"></script>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <?php 
     try{
         session_start();
-        include('get_vacancies.php');
+        include('db_connection.php');
 
         $regexp_email = '/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ui';
         $regexp_name = '/^[A-ZА-ЯЁ]{1}[a-zа-яё\s?]{2,}$/ui';
-    
+
         if(!$_POST['firstname']){
             http_response_code(400);
             exit("необходим firstname");
@@ -22,7 +22,7 @@
             http_response_code(400);
             exit("необходим password");
         }
-        if(!$_POST['type']){
+        if(!isset($_POST['type'])){
             http_response_code(400);
             exit("необходим type");
         }

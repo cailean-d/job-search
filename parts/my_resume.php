@@ -531,17 +531,17 @@
                     </div>
                 </div>
                 <input type="submit" id="sub_form" hidden>
+                <label for="sub_form" class="btn btn-outline-primary btn-lg btn-block mt-4 mb-5" role="button" id="send_form">
+                    <?php 
+                        if($_GET['page'] == 'edit'){
+                            echo "Редактировать";
+                        } else {
+                            echo "Отправить";
+                        }
+                    ?>
+                </label>
             </form>
         </div>
-        <label for="sub_form" class="btn btn-outline-primary btn-lg btn-block mt-4 mb-5" role="button" id="send_form">
-            <?php 
-                if($_GET['page'] == 'edit'){
-                    echo "Редактировать";
-                } else {
-                    echo "Отправить";
-                }
-            ?>
-        </label>
     </div>
 <?php else : ?>
     <?php if(!isset($is_result)) : ?>

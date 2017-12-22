@@ -52,6 +52,6 @@
 </header>
 <?php 
     if(!isset($_SESSION['authorized'])){
-        include('parts/login_modal.php');
+        include('parts/header_modal.php');
     }
 ?>
