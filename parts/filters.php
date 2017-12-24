@@ -1,4 +1,4 @@
-<?php include('scripts/get_filter_data.php');?>
+<?php include('scripts/read/get_filter_data.php');?>
 <div class="card">
     <div class="card-block bg-faded">
         <h5 class="text-center">Фильтры</h5>

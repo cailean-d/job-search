@@ -1,5 +1,5 @@
-<?php if($_GET['page'] === "edit") include('scripts/get_resume_secondary_data.php'); ?>
-<?php include('scripts/get_filter_data.php'); ?>
+<?php if($_GET['page'] === "edit") include('scripts/read/get_resume_secondary_data.php'); ?>
+<?php include('scripts/read/get_filter_data.php'); ?>
 
 <?php if($_GET['page'] === "add" || $_GET['page'] === "edit") : ?>
     <div class="container">
@@ -560,7 +560,7 @@
             <? endif ?>
         </div>
     <?php else : ?>
-    <?php include('scripts/get_resume_secondary_data.php'); ?>
+    <?php include('scripts/read/get_resume_secondary_data.php'); ?>
         <div class="mx-auto d-flex">
             <div class="col-8 mb-4">
                 <div class="card">

@@ -1,4 +1,4 @@
-<?php include('scripts/get_filter_data.php');?>
+<?php include('scripts/read/get_filter_data.php');?>
 <div class="add_vacancy">
     <form action="scripts/set_vacancy.php" method="post" id="vacancy">
         <div class="option">

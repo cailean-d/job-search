@@ -1,5 +1,5 @@
 <?php 
-    include('scripts/get_my_vacancies.php');
+    include('scripts/read/get_my_vacancies.php');
     if(!isset($is_result)) : ?>
         <h2>Вакансий нет</h2>
     <?php else : 
