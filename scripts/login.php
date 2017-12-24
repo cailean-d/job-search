@@ -16,7 +16,6 @@
                 $_SESSION['firstname'] = $data['firstname'];
                 $_SESSION['lastname'] = $data['lastname'];
                 $_SESSION['type'] = $data['type'];
-                header("Location: /index.php");
             } else {
                 http_response_code(400);
                 exit("Неверный пароль");

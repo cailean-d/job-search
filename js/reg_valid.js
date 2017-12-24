@@ -217,7 +217,7 @@
             if (xhr.readyState == 4){
                 if (xhr.status == 200) {
                     // перезагрузить страницу, если данные верны
-                    window.location.href = "/";
+                    window.location.reload();
                 } else {
                     // показать блок с ошибкой
                     $("#ajax-error-reg").removeClass("hidden-xl-down");

@@ -26,8 +26,8 @@
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/modal.js?eqqqqqqqwew"></script>
-<script src="js/login_valid.js?eewqwуqqqqqew"></script>
-<script src="js/reg_valid.js?qqqqqqцqeqe"></script>
+<script src="js/login_valid.js?eewewqwуqqqqqew"></script>
+<script src="js/reg_valid.js?qqqqewqqцqeqe"></script>
 <script src="js/vacancy_send_resume.js?qqqewqeqqwewew"></script>
 </body>
 </html>
