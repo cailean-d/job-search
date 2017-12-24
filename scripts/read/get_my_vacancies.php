@@ -1,6 +1,6 @@
 <?php
     try{
-        include("db_connection.php");
+        include("./scripts/db_connection.php");
 
         $sql = '
             SELECT 

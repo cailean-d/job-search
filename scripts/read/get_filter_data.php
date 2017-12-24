@@ -1,6 +1,6 @@
 <?php
     try{
-        include("db_connection.php");
+        include("./scripts/db_connection.php");
         $schedule = $db->query("SELECT * FROM `schedule`");
         $industry = $db->query("SELECT * FROM `industry`");
         $work_place = $db->query("SELECT * FROM `work_place`");

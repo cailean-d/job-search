@@ -5,7 +5,7 @@
     }
 
     // получение данных о резюме
-    include('scripts/get_resume.php'); 
+    include('./scripts/read/get_resume.php'); 
 
     // если это не обычный пользователь, не пускать на страницу резюме или есть нет id
     if( ($_GET['page'] === "add" && $_SESSION['type'] != "0") || 

@@ -54,3 +54,12 @@ main{
 .w-35{
     width: 35%;
 }
+
+.minw-30{
+    min-width: 30%;
+}
+
+.minw-30 img{
+    width: 100%;
+    height: auto;
+}

@@ -561,20 +561,20 @@
         </div>
     <?php else : ?>
     <?php include('scripts/read/get_resume_secondary_data.php'); ?>
-        <div class="mx-auto d-flex">
-            <div class="col-8 mb-4">
+        <div class="mx-auto d-flex <?php if($_SESSION['id'] != $id){echo 'justify-content-center';} ?>">
+            <div class="col-9 mb-4">
                 <div class="card">
                     <div class="card-block bg-faded">
                         <div class="d-flex">
-                            <div class="avatar col-4 pl-0">
+                            <div class="avatar pl-0 col-4 minw-30">
                                 <img src="../<?=$avatar_data['source']?>" alt="" class="img-thumbnail rounded">
                             </div>
-                            <div class="info col-8 pr-0">
+                            <div class="info pl-2 pr-0">
                                 <h4>Личная информация</h4>
                                 <table class="table resume-info">
                                     <tbody>
                                         <tr>
-                                            <th scope="row" class="text-muted">Ф.И.О.</th>
+                                            <th scope="row" class="text-muted w-35">Ф.И.О.</th>
                                             <td>
                                                 <?=$resume_data['lastname']?> 
                                                 <?=$resume_data['firstname']?> 
@@ -744,12 +744,12 @@
                 </div>
             </div>
             <?php if($_SESSION['id'] == $id) : ?>
-                <div class="col-4">
+                <div class="col-3">
                     <a class="btn btn-primary btn-lg btn-block" href="resume.php?page=edit" role="button">
-                        Редактировать резюме
+                        Редактировать
                     </a>
                     <a class="btn btn-outline-primary btn-lg btn-block" href="#" role="button" id="delete_resume">
-                        Удалить резюме
+                        Удалить
                     </a>
                 </div>
             <? endif ?>

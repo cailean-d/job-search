@@ -1382,6 +1382,11 @@
     }
 
     function validate_exp(next){
+
+        if(experience_block.classList.contains("hidden-xl-down")){
+            hasExp = false;
+        }
+
         // если не нажата кнопка об отсутствии опыта
         if(hasExp){
 

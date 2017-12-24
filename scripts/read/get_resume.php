@@ -1,6 +1,6 @@
 <?php
     try{
-        include("db_connection.php");
+        include("./scripts/db_connection.php");
 
         if($_GET['page'] === "add" || $_GET['page'] === "edit"){
             $id = $_SESSION['id'];

@@ -1,5 +1,7 @@
 <?php
     try{
+        session_start();
+
         include("scripts/db_connection.php");
 
         $id = $_SESSION['id'];
