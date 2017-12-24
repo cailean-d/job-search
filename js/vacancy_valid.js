@@ -1,7 +1,8 @@
 var vacancy_block = document.querySelector(".add_vacancy");
-var buttons = document.querySelectorAll("button:not(.del)");
+var buttons = document.querySelectorAll("button.add");
 var del_buttons = document.querySelectorAll("button.del");
 var form = document.getElementById("vacancy");
+var modal_message_text = document.querySelector("#modal .modal-body p");
 var isValid = 0;
 
 var fields = [
@@ -48,9 +49,11 @@ form.onsubmit = function(e){
         form.elements["conditions"]
     ];
 
+    isValid = 0;
+
     for(var i = 0; i < fields.length; i++){
         var field = fields[i];
-        checkInputs(field);
+        isValid += checkInputs(field);
     }
 
     for(var j = 0; j < array_fields.length; j++){
@@ -58,17 +61,18 @@ form.onsubmit = function(e){
         if(field.length){
             for(var i = 0; i < field.length; i++){
                 var el = field[i];
-                checkArrayInputs(el);
+                isValid +=  checkArrayInputs(el);
             }
         } else {
-            checkArrayInputs(field);
+            isValid += checkArrayInputs(field);
         }
     }
 
     if (isValid == 0) {
         sendData(this);
     } else {
-        alert("Форма заполнена неверно!");
+        modal_message_text.innerHTML = "Форма заполнена неверно! " + isValid;
+        $('#modal').modal('show');
     }
 }
 
@@ -83,11 +87,11 @@ function removeInputRow(){
         var del_button = del_buttons[i];
         del_button.onclick = function(e){
             e.preventDefault();
-            var row = this.parentNode;
-            var input = row.querySelector("input");
-            if(input.classList.contains("error-border")){
-                isValid++;
-            }
+            // var row = this.parentNode;
+            // var input = row.querySelector("input");
+            // if(input.classList.contains("error-border")){
+            //     isValid++;
+            // }
             var opt = this.parentNode.parentNode;
             opt.parentNode.removeChild(opt);
         }
@@ -101,25 +105,13 @@ function addInputRow(e, that){
     newInput.classList.add("opt");
     if(that.id == "demand"){
         newInput.innerHTML = 
-        '<div class="row m">' +
-            '<input name="demands" type="text" placeholder="Требование">' +
-            '<button class="del" title="Удалить поле">-</button>' +
-        '</div>' + 
-        '<div class="error error2">';
+        '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon">@</div><input name="demands" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
     } else if(that.id == "dutie"){
         newInput.innerHTML = 
-        '<div class="row m">' +
-            '<input name="duties" type="text" placeholder="Обязанность">' +
-            '<button class="del" title="Удалить поле">-</button>' +
-        '</div>' + 
-        '<div class="error error2">';
+        '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon">@</div><input name="duties" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
     } else if(that.id == "condition"){
         newInput.innerHTML = 
-        '<div class="row m">' +
-            '<input name="conditions" type="text" placeholder="Условие">' +
-            '<button class="del" title="Удалить поле">-</button>' +
-        '</div>' + 
-        '<div class="error error2">';
+        '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon">@</div><input name="conditions" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
     }
     option.appendChild(newInput);
 }
@@ -131,19 +123,42 @@ function sendData(that){
     data.set("duties", data.getAll("duties").join(';'))
     data.set("conditions", data.getAll("conditions").join(';'))
     if(data.get("desc") == ""){ data.delete("desc"); }
-    xhr.open('POST', that.action);
+    xhr.open('POST', "scripts/create/set_vacancy.php");
     xhr.send(data);
     var submit = form.querySelector("input[type=submit]");
+    var btn_close = document.querySelectorAll(".btn-close");
     submit.disabled = true;
-    submit.style.cursor = "not-allowed";
+    submit.classList.add("disabled");
+    submit.style.pointerEvents = "auto";
+    submit.innerHTML = "Отправка данных...";
+
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4){
             if (xhr.status == 200) {
-                alert(xhr.responseText);
-            } else {
-                alert(xhr.status + ': ' + xhr.statusText + ", " + xhr.responseText);
+
+                modal_message_text.innerHTML = "Данные успешно отправлены!";
+                $('#modal').modal('show');
+
+
+                // перезагрузить страницу при закрытии модального окна
+                for(var i = 0; i < btn_close.length; i++){
+                    var btn = btn_close[i];
+                    btn.onclick = function(){
+                        window.location.reload();
+                    }
+                }
+
                 submit.disabled = false;
-                submit.style.cursor = "pointer";
+                submit.classList.remove("disabled");
+                submit.innerHTML = "Отправить";
+
+            } else {
+                modal_message_text.innerHTML = xhr.status + ': ' + xhr.statusText + ", " + xhr.responseText;
+                $('#modal').modal('show');
+
+                submit.disabled = false;
+                submit.classList.remove("disabled");
+                submit.innerHTML = "Отправить";
             }
         } 
     }
@@ -152,15 +167,22 @@ function sendData(that){
 
 function checkInputs(that){
 
+    var valid = 0;
+
     var REGEXP_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var REGEXP_phone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     var REGEXP_exp = /(^\d+[-]*\d+$)|(^\d+$)/;
     var REGEXP_company = /^[A-zА-яЁё\"\s?]{5,}$/;
-    var REGEXP_sentence = /^[A-zА-яЁё0-9\-\.,!:\"\s?]{5,}$/;
+    var REGEXP_sentence = /^[A-zА-яЁё0-9\(\)\-\.,!\:\"\s?]{5,}$/;
     var REGEXP_city = /^[A-zА-яЁё\-\"\s?]{4,}$/;
 
     var regexp;
-    var error = that.parentNode.querySelector(".error");
+
+    //внешний блок поля
+    var outer_block = that.parentNode.parentNode;
+
+    //блок для генерации ошибки
+    var error_message = outer_block.querySelector(".error-block");
 
     if(that.name == "company"){
         regexp = REGEXP_company;
@@ -181,35 +203,34 @@ function checkInputs(that){
     }
 
     if(that.value == "" && that.name != "desc"){
-        error.innerHTML = "Это поле обязательно для заполения!";
-        error.style.display = "block";
-        if(!that.classList.contains("error-border")){isValid--;}
-        that.classList.add("error-border");
-        return;
+        error_message.innerHTML = "Это поле обязательно для заполения!";
+        error_message.classList.remove("hidden-xl-down");
+        outer_block.classList.add("has-danger");
+        return valid -1;
     }
     if(that.name != "desc"){
         if(!regexp.test(that.value)){
-            error.innerHTML = "Поле заполнено некорректно!";
-            error.style.display = "block";
-            if(!that.classList.contains("error-border")){isValid--;}
-            that.classList.add("error-border");
+            error_message.innerHTML = "Поле заполнено некорректно!";
+            error_message.classList.remove("hidden-xl-down");
+            outer_block.classList.add("has-danger");
+            return valid -1;
         } else {
-            error.innerHTML = "";
-            error.style.display = "none";
-            if(that.classList.contains("error-border")){isValid++;}
-            that.classList.remove("error-border");
+            error_message.innerHTML = "";
+            error_message.classList.add("hidden-xl-down");
+            outer_block.classList.remove("has-danger");
+            return valid;
         }
     } else {
         if(!regexp.test(that.value) && that.value.length > 0){
-            error.innerHTML = "Поле заполнено некорректно!";
-            error.style.display = "block";
-            if(!that.classList.contains("error-border")){isValid--;}
-            that.classList.add("error-border");
+            error_message.innerHTML = "Поле заполнено некорректно!";
+            error_message.classList.remove("hidden-xl-down");
+            outer_block.classList.add("has-danger");
+            return valid -1;
         } else {
-            error.innerHTML = "";
-            error.style.display = "none";
-            if(that.classList.contains("error-border")){isValid++;}
-            that.classList.remove("error-border");
+            error_message.innerHTML = "";
+            error_message.classList.add("hidden-xl-down");
+            outer_block.classList.remove("has-danger");
+            return valid;
         }
     }
 
@@ -217,23 +238,29 @@ function checkInputs(that){
 
 function checkArrayInputs(that){
     var regexp = /^[A-zА-яЁё0-9\\-\\.\\!\\(\\)\\,\-\"\s?]{5,}$/;
-    var error = that.parentNode.parentNode.querySelector(".error");
+    var valid = 0;
+    //внешний блок поля
+    var outer_block = that.parentNode.parentNode.parentNode;
+
+    //блок для генерации ошибки
+    var error_message = outer_block.querySelector(".error-block");
+
     if(that.value == ""){
-        error.innerHTML = "Это поле обязательно для заполения!";
-        error.style.display = "block";
-        if(!that.classList.contains("error-border")){isValid--;}
-        that.classList.add("error-border");
+        error_message.innerHTML = "Это поле обязательно для заполения!";
+        error_message.classList.remove("hidden-xl-down");
+        outer_block.classList.add("has-danger");
+        return valid -1;
     }
     if(!regexp.test(that.value)){
-        error.innerHTML = "Поле заполнено некорректно!";
-        error.style.display = "block";
-        if(!that.classList.contains("error-border")){isValid--;}
-        that.classList.add("error-border");
+        error_message.innerHTML = "Поле заполнено некорректно!";
+        error_message.classList.remove("hidden-xl-down");
+        outer_block.classList.add("has-danger");
+        return valid -1;
     } else {
-        error.innerHTML = "";
-        error.style.display = "none";
-        if(that.classList.contains("error-border")){isValid++;}
-        that.classList.remove("error-border");
+        error_message.innerHTML = "";
+        error_message.classList.add("hidden-xl-down");
+        outer_block.classList.remove("has-danger");
+        return valid;
     }
 }
 

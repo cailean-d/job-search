@@ -6,8 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="css/header.css?qqxqwwqqwq">
     <link rel="stylesheet" href="css/style.css?qqsessweweweweeqwqsqgq">
-    <link rel="stylesheet" href="css/add_vacancy.css?qseeewewweewweweweweewweewewewwwwqqqqssq">
     <title>Разместить вакансию</title>
 </head>
 <body>
@@ -19,8 +23,14 @@
             </main>
         </div>
     </div>
-<script src="js/modal.js?ewewewewqew"></script>
-<script src="js/vacancy_valid.js?eqeqeqqqew"></script>
-<script src="js/active_page.js?e"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/tether.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-slider.min.js"></script>
+<script src="js/modal.js?eeweeqwewqqws"></script>
+<script src="js/active_page.js?eeqqqйqqewq"></script>
+<script src="js/login_valid.js?eewqwуewqqqqqew"></script>
+<script src="js/reg_valid.js?qqqqqqewцqeqe"></script>
+<script src="js/vacancy_valid.js?eqeqeqeqeqeqqqew"></script>
 </body>
 </html>

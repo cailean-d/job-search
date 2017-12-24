@@ -1,14 +1,15 @@
 <?php 
     try{
         session_start();
-        include(realpath("../db_connection.php"));
+        include("../db_connection.php");
 
         $REGEXP_email = '/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ui';
         $REGEXP_phone = '/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/ui';
         $REGEXP_exp = '/(^\d+[-]*\d+$)|(^\d+$)/ui';
         $REGEXP_company = '/^[A-zА-яЁё\"\s?]{5,}$/ui';
-        $REGEXP_sentence = '/^[A-zА-яЁё0-9\.!,-:\"\s?]{5,}$/ui';
-        $REGEXP_city = '/^[A-zА-яЁё-\"\s?]{4,}$/ui';
+        $REGEXP_sentence = '/^[A-zА-яЁё0-9\(\)\-\.,!\:\"\s?]{5,}$/ui';
+        $REGEXP_city = '/^[A-zА-яЁё\-\"\s?]{4,}$/ui';
+   
     
         if(!$_POST['company']){
             http_response_code(400);
@@ -58,11 +59,16 @@
             http_response_code(400);
             exit("необходим email");
         }
+
+                    
+        
+ 
         
         if(!preg_match($REGEXP_company, $_POST['company'])){
             http_response_code(400);
             exit("Поле -company- заполнено некорректно!");
         }
+        
         if(!preg_match($REGEXP_phone, $_POST['phone'])){
             http_response_code(400);
             exit("Поле -phone- заполнено некорректно!");
@@ -87,6 +93,7 @@
             http_response_code(400);
             exit("Поле -desc- заполнено некорректно!");
         }
+
 
         $company = htmlspecialchars(trim($_POST['company']));
         $phone = htmlspecialchars(trim($_POST['phone']));
@@ -142,6 +149,7 @@
             'conditions' => $conditions,
             'email' => $email
         ];
+
 
         $query->execute($values);
 
