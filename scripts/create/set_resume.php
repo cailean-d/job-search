@@ -148,6 +148,8 @@
             exit("Поле -skills- заполнено некорректно!");
         }
 
+
+
         // преобразование спецсимволов
         $user_id = $_SESSION['id'];        
         $firstname = htmlspecialchars(trim($_POST['firstname']));
@@ -168,9 +170,11 @@
         $courses = (!empty($_POST['courses'])) ? htmlspecialchars(trim($_POST['courses'])) : "";
         $skills = (!empty($_POST['skills'])) ? htmlspecialchars(trim($_POST['skills'])) : "";
 
+
+
         // подключение к БД, если все проверки были успешно пройдены
-        include('db_connection.php');
-        
+        include(realpath("../db_connection.php"));
+
         // сохранить файл, если добавлен аватар
         if($_FILES["avatar"]){
             // выдать ошибку, если размер более 3 мб.
@@ -180,7 +184,7 @@
             }
             
             // директория для сохранения аватарок
-            $basedir = "../images/avatar/";
+            $basedir = "../../images/avatar/";
 
             // генерация случайного имени файла
             $dot = strpos($_FILES["avatar"]["name"], ".");

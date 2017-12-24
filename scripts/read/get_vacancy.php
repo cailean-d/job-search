@@ -1,6 +1,6 @@
 <?php
     try{
-        include("db_connection.php");
+        include("./scripts/db_connection.php");
 
         $sql = '
             SELECT 
@@ -8,8 +8,8 @@
             schedule.schedule_name,
             industry.industry_name
             FROM `vacancies` 
-            INNER JOIN schedule ON vacancies.schedule = schedule.id
-            INNER JOIN industry ON vacancies.industry = industry.id
+            LEFT JOIN schedule ON vacancies.schedule = schedule.id
+            LEFT JOIN industry ON vacancies.industry = industry.id
             WHERE vacancies.id='.$_GET['id'];
 
         $result = $db->prepare($sql);

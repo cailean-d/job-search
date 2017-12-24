@@ -1108,7 +1108,7 @@
             if(lang_array.length > 0){
 
                 data = "data=" + JSON.stringify(lang_array);
-                server_script = "scripts/set_language.php";
+                server_script = "scripts/create/set_language.php";
 
             } else {
 
@@ -1181,7 +1181,7 @@
             if(exp_array.length > 0){
 
                 data = "data=" + JSON.stringify(exp_array);
-                server_script = "scripts/set_experience.php";
+                server_script = "scripts/create/set_experience.php";
 
             } else {
 
@@ -1254,7 +1254,7 @@
             if(edu_array.length > 0){
 
                 data = "data=" + JSON.stringify(edu_array);
-                server_script = "scripts/set_education.php";
+                server_script = "scripts/create/set_education.php";
 
             } else {
 
@@ -1359,7 +1359,7 @@
         if(window.location.href.indexOf("resume.php?page=edit") != -1){
             server_script = "scripts/update/update_resume.php"
         } else {
-            server_script = "scripts/set_resume.php";
+            server_script = "scripts/create/set_resume.php";
         }
 
         ajax("POST", server_script, data, true, 
@@ -1376,7 +1376,7 @@
             send_form.innerHTML = "Отправить";
 
             // разблокировать форму
-            modal_disable.style.display = "block";
+            modal_disable.style.display = "none";
         });
 
     }
@@ -1725,8 +1725,8 @@
         // добавить данные в массив и продолжить
         confirm_btn1.onclick = function(){
 
-        // новый объект
-        var xhr = new XMLHttpRequest();
+            // новый объект
+            var xhr = new XMLHttpRequest();
         
             // отправка запроса
             xhr.open("GET", "scripts/delete/del_resume.php", true);

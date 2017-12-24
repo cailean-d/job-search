@@ -707,10 +707,12 @@
                             <h4>Дополнительная информация</h4>
                             <table class="table resume-info">
                                 <tbody>
+                                    <?php if(!empty($langs)) : ?>
                                     <tr>
                                         <th scope="row" class="text-muted">Владение языками</th>
                                         <td><?=$langs?></td>
                                     </tr>
+                                    <?php endif ?>
                                     <?php if(!empty($resume_data['cs_name'])) :?>
                                         <tr>
                                             <th scope="row" class="text-muted w-35">Владение компьютером</th>

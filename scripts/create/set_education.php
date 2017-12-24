@@ -4,7 +4,7 @@
         session_start();
 
         // подключение БД
-        include('db_connection.php');
+        include(realpath("../db_connection.php"));
 
         // регулярные выражения для проверки валидности
         $regexp_city = '/^[A-zА-яЁё\"\-\s?]{4,}$/u';

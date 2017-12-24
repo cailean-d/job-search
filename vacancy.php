@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png">
-    <link rel="stylesheet" href="css/style.css?qewewqeqwewewsesqewgq">
-    <link rel="stylesheet" href="css/full_vacancy.css?qewqqqqqqqqqqseseqewgq">
-    <link rel="stylesheet" href="css/header.css?qqxqqeqeqqqqqqqwqwq">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css?qewewqeqwewewewsesqewgq">
+    <link rel="stylesheet" href="css/full_vacancy.css?qewqqqqqqqqqqqqqqqseseqewgq">
+    <link rel="stylesheet" href="css/header.css?qqxqqeqeqqeqqqqqwqwq">
     <title>Вакансия</title>
 </head>
 <body>
@@ -23,5 +26,8 @@
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/modal.js?eqqqqqqqwew"></script>
+<script src="js/login_valid.js?eewqwуqqqqqew"></script>
+<script src="js/reg_valid.js?qqqqqqцqeqe"></script>
+<script src="js/vacancy_send_resume.js?qqqewqeqqwewew"></script>
 </body>
 </html>

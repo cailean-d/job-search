@@ -29,6 +29,6 @@
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/datepicker.min.js"></script>
-    <script src="js/resume.js?kqwewwwqwwq"></script>
+    <script src="js/resume.js?kqwqqqqqqqewwwqwwq"></script>
     </body>
 </html>
