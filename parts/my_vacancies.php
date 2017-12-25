@@ -4,7 +4,8 @@
         <h2>Вакансий нет</h2>
     <?php else : 
         foreach($result as $res) :?>
-            <div class="card mb-4">
+            <div class="card mb-4 col-10 vacancyz mx-auto">
+                <div class="id" hidden="hidden"><?=$res['id']?></div> 
                 <div class="card-block">
                     <article class='vacancy'>
                         <header>
@@ -40,6 +41,16 @@
                         </footer>
                     </article>
                 </div>
+                <div class="edit-buttons">
+                    <a class="btn btn-primary btn-block" role="button" href="add_vacancy.php?page=edit&id=<?=$res['id']?>">
+                        Редактировать
+                    </a>
+                    <a class="btn btn-outline-primary btn-block del" role="button" href="#">
+                        Удалить
+                    </a>
+                </div>
             </div>
         <?php endforeach; 
     endif ?>
+
+<?php include("./parts/modal_alert.php"); ?>

@@ -31,6 +31,6 @@
 <script src="js/active_page.js?eeqqqйqqewq"></script>
 <script src="js/login_valid.js?eewqwуewqqqqqew"></script>
 <script src="js/reg_valid.js?qqqqqqewцqeqe"></script>
-<script src="js/vacancy_valid.js?eqeqeqeqeqeqqqew"></script>
+<script src="js/vacancy_valid.js?eqqqeeqweqqqqew"></script>
 </body>
 </html>

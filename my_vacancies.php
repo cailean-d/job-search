@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/style.css?qssqqqqqqewqqesqgq">
     <link rel="stylesheet" href="css/vacancy.css?qssqqqqqqewqqesqgq">
     <link rel="stylesheet" href="css/header.css?qqqqqqqwqqwqqqwqwq">
+    <link rel="stylesheet" href="css/my_vacancies.css?qqewewqqqqqqewqqwqwqq">
     <title>Вакансии</title>
 </head>
 <body>
@@ -23,7 +24,12 @@
             </main>
         </div>
     </div>
+<script src="js/jquery.min.js"></script>
+<script src="js/tether.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-slider.min.js"></script>
 <script src="js/modal.js?eqqws"></script>
 <script src="js/active_page.js?e"></script>
+<script src="js/del_vacancy.js?eqqeqqqqwqqwqqqq"></script>
 </body>
 </html>

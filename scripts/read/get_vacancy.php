@@ -1,6 +1,12 @@
 <?php
     try{
+        session_start();
         include("./scripts/db_connection.php");
+
+
+        if($_GET['page'] == 'edit'){
+            $a = ' AND sender_id='.$_SESSION['id'];
+        }
 
         $sql = '
             SELECT 
@@ -10,7 +16,7 @@
             FROM `vacancies` 
             LEFT JOIN schedule ON vacancies.schedule = schedule.id
             LEFT JOIN industry ON vacancies.industry = industry.id
-            WHERE vacancies.id='.$_GET['id'];
+            WHERE vacancies.id='.$_GET['id'].$a;
 
         $result = $db->prepare($sql);
         $result->execute();

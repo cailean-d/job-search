@@ -22,3 +22,6 @@
     $_GET['qwerty'] = "test";
 
     var_dump($_GET);
+
+
+    echo "HELLOqqqqqqqwwwwqqaaa";

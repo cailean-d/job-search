@@ -126,24 +126,30 @@
                 <?php endif ?>
             <?php endif ?>
             <?php if($_SESSION['type'] == '1') : ?>
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="text-muted mb-4">Оставленные резюме : </h4>
-                        <?php include('scripts/read/get_vacancy_resume_ids.php') ?>
-                        <?php foreach($data_id as $row) :
-                            $_POST['id'] = $row['user_id'];
-                            include('scripts/read/get_user_data.php')
-                            ?>
-                            <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?id=<?=$row['user_id']?>" role="button">
-                                <?php
-                                    echo $user_data['firstname'] . " ";
-                                    echo $user_data['lastname'] . " &lt;";
-                                    echo $user_data['email'] . "&gt;";
+                <?php include('scripts/read/get_vacancy_resume_ids.php') ?>
+                <?php if(count($data_id) > 0) : ?>
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="text-muted mb-4">Оставленные резюме : </h4>
+                            <?php foreach($data_id as $row) :
+                                $_POST['id'] = $row['user_id'];
+                                include('scripts/read/get_user_data.php')
                                 ?>
-                            </a>
-                        <?php endforeach ?>
+                                <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?id=<?=$row['user_id']?>" role="button">
+                                    <?php
+                                        echo $user_data['firstname'] . " ";
+                                        echo $user_data['lastname'] . " &lt;";
+                                        echo $user_data['email'] . "&gt;";
+                                    ?>
+                                </a>
+                            <?php endforeach ?>
+                        </div>
                     </div>
-                </div>
+                <?php else : ?>
+                    <div class="alert alert-info mb-0" role="alert">
+                        <strong>Еще никто не оставил резюме.</strong>
+                    </div>
+                <?php endif ?>
             <?php endif ?>
             <?php if(!isset($_SESSION['authorized'])) :?>
                 <div class="alert alert-info mb-0" role="alert">

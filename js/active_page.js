@@ -14,6 +14,6 @@ if(page.indexOf("index") != -1 || (page.indexOf("/") == 0 && page.length == 1)){
     }
 } else if(page.indexOf("my_vacancies") != -1){
     if(document.getElementById("my_vacancies_page")){
-        document.getElementById("my_vacancies_page").classList.add("active");x
+        document.getElementById("my_vacancies_page").classList.add("active");
     }
 } 

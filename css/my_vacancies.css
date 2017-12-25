@@ -1,0 +1,19 @@
+.edit-buttons{
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #ffffff;
+    padding: 10px;
+    display: none;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.vacancyz:hover{
+    background: #f7f7f7;
+}
+
+.vacancyz:hover .edit-buttons{
+    display: flex;
+}
