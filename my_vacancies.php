@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/vacancy.css?qssqqqqqqewqqesqgq">
     <link rel="stylesheet" href="css/header.css?qqqqqqqwqqwqqqwqwq">
     <link rel="stylesheet" href="css/my_vacancies.css?qqewewqqqqqqewqqwqwqq">
-    <title>Вакансии</title>
+    <title>Мои Вакансии</title>
 </head>
 <body>
     <div class="wrapper">

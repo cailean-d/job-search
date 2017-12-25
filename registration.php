@@ -1,5 +1,5 @@
 <?php session_start();?>
-<?php if(isset($_SESSION['authorized'])){header("Location: /index.php");}?>
+<?php include("view_access/registration.php"); ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

@@ -1,5 +1,5 @@
 <?php session_start();?>
-<?php if($_SESSION['type'] != '1'){header("Location: /index.php");}?>
+<?php include("view_access/edit_vacancy.php"); ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
