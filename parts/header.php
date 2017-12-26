@@ -38,7 +38,10 @@
                 </span>
             </a>
             <div class="avatar">
-                <img src="<?=$avatar?>" alt="avatar">
+                <label for="avatar_upload" class="avatar mb-0 hand" title="Загрузить фото">
+                    <img src="<?=$avatar?>" alt="avatar" id="avatar_preload">
+                </label>
+                <input type="file" id="avatar_upload" hidden>
             </div>
             <div class='logout triangle-up'>
                 <div>
@@ -53,5 +56,11 @@
 <?php 
     if(!isset($_SESSION['authorized'])){
         include('parts/header_modal.php');
+    }
+?>
+<?php 
+    if(isset($_SESSION['authorized'])){
+        include('parts/modal_confirm.php');
+        include('parts/modal_alert.php');
     }
 ?>

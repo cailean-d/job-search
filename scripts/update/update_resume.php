@@ -200,10 +200,19 @@
                 exit("Ошибка загрузки файла");
             }
             
-            // добавление записи с аватаром в БД
-            $query = $db->prepare("UPDATE user_avatar SET source = ? WHERE user_id = ?");
-            $values = ['source' => $_FILES['img']['name']];
-            $query->execute(["images/avatar/".$filename, $user_id]);
+            $sql_avatar = "SELECT * FROM user_avatar WHERE user_id = " . $_SESSION['id'];
+            $avatar_data = $db->query($sql_avatar);
+            $avatar_data = $avatar_data->fetch();
+
+            if(count($avatar_data) > 0){
+                $query = $db->prepare("UPDATE user_avatar SET source = ? WHERE user_id = ?");
+                $values = ['source' => $_FILES['img']['name']];
+                $query->execute(["images/avatar/".$filename, $_SESSION['id']]);
+            } else {
+                $query = $db->prepare("INSERT INTO user_avatar(user_id, source) VALUES (?, ?)");
+                $values = ['source' => $_FILES['img']['name']];
+                $query->execute([$_SESSION['id'],"images/avatar/".$filename]);
+            }
 
         }
 

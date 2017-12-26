@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="css/style.css?qqwgq">
+    <link rel="stylesheet" href="css/style.css?qqweqeqqgq">
     <link rel="stylesheet" href="css/vacancy.css?eqwewweqqeqq">
     <link rel="stylesheet" href="css/filter.css?qqeewwqq">
     <link rel="stylesheet" href="css/header.css?qqxqwwqqwq">
@@ -40,7 +40,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-slider.min.js"></script>
     <script src="js/filter.js?ewqqqqqeqqqqqws"></script>
-    <script src="js/modal.js?eeweeqwewqqws"></script>
+    <script src="js/modal.js?eeweqeqeqqqqewqqws"></script>
     <script src="js/active_page.js?eewewq"></script>
     <script src="js/login_valid.js?eewqwуewqqqqqew"></script>
     <script src="js/reg_valid.js?qqqqqqewцqeqe"></script>
