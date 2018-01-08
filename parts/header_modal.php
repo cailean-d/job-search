@@ -11,13 +11,17 @@
             <div class="modal-body">
                 <form action="scripts/login.php" method="post" id="login">
                     <div class="form-group">
-                        <label for="email" class="form-control-label">Почта :</label>
-                        <input type="text" class="form-control" id="email" name="email">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Почта">
+                        </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="form-control-label">Пароль :</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                        </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <input type="submit" id="sub_form" hidden>
@@ -48,35 +52,49 @@
             <div class="modal-body">
                 <form action="scripts/reg.php" method="post" id="registration">
                     <div class="form-group">
-                        <label for="firstname" class="form-control-label">Имя :</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Имя">
+                        </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
-                        <label for="lastname" class="form-control-label">Фамилия :</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Фамилия">
+                        </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="form-control-label">Почта :</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Почта">
+                        </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
-                        <label class="form-control-label">Тип учетной записи :</label>
-                        <select name="type" class="form-control custom-select">
-                            <option value="0">Пользователь</option>
-                            <option value="1">Работодатель</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="form-control-label">Пароль :</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <select name="type" class="form-control custom-select">
+                                <option value="" disabled selected>Тип учетной записи</option>
+                                <option value="0">Пользователь</option>
+                                <option value="1">Работодатель</option>
+                            </select>
+                        </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
-                        <label for="password2" class="form-control-label">Повторите пароль :</label>
-                        <input type="password" class="form-control" id="password2" name="password2">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                        </div>
+                        <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="password" class="form-control" id="password2" name="password2" placeholder="Повторите пароль">
+                        </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <input type="submit" id="sub_form_reg" hidden>

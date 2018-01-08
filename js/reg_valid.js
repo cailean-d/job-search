@@ -17,6 +17,7 @@
         form.elements["email"],
         form.elements["password"],
         form.elements["password2"],
+        form.elements["type"],
     ];
 
     // при потере фокуса поля проверять на валидность
@@ -54,7 +55,7 @@
         var regexp;
 
         //внешний блок поля
-        var outer_block = that.parentNode;
+        var outer_block = that.parentNode.parentNode;
 
         //блок для генерации ошибки
         var error_message = outer_block.querySelector(".error-block");
@@ -109,6 +110,23 @@
             // поле должно совпадать с полем "password"
             } else if(form.elements["password"].value != form.elements["password2"].value){
                 error_message.innerHTML = "Пароли не совпадают!";
+                error_message.classList.remove("hidden-xl-down");
+                if(!outer_block.classList.contains("has-danger")){isValid--;}
+                outer_block.classList.add("has-danger");
+                return;
+            } else {
+                // скрыть ошибки, если все верно
+                error_message.innerHTML = "";
+                error_message.classList.add("hidden-xl-down");
+                if(outer_block.classList.contains("has-danger")){isValid++;}
+                outer_block.classList.remove("has-danger");
+                return;
+            }
+        }
+
+        if(that.name == "type"){
+            if(that.value == ""){
+                error_message.innerHTML = "Выберите тип учетной записи!";
                 error_message.classList.remove("hidden-xl-down");
                 if(!outer_block.classList.contains("has-danger")){isValid--;}
                 outer_block.classList.add("has-danger");

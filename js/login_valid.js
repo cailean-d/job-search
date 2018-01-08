@@ -54,7 +54,7 @@
         var regexp = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
         //внешний блок поля
-        var outer_block = that.parentNode;
+        var outer_block = that.parentNode.parentNode;
         //блок для генерации ошибки
         var error_message = outer_block.querySelector(".error-block");
     

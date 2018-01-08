@@ -42,8 +42,8 @@
     <script src="js/filter.js?ewqqqqqeqqqqqws"></script>
     <script src="js/modal.js?eeweqeqeqqqqewqqws"></script>
     <script src="js/active_page.js?eewewq"></script>
-    <script src="js/login_valid.js?eewqwуewqqqqqew"></script>
-    <script src="js/reg_valid.js?qqqqqqewцqeqe"></script>
+    <script src="js/login_valid.js?eewewewewqwуewqqqqqew"></script>
+    <script src="js/reg_valid.js?qqqqqewqewewwwцqeqe"></script>
     <!--</Deject>-->
     
     <!-- inject:js -->
