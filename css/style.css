@@ -38,13 +38,15 @@ main{
 }
 
 .modal-disable{
-    position: absolute;
+    position: fixed;
     z-index: 4;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     cursor: not-allowed;
     display: none;
+    justify-content: center;
+    align-items: center;
 }
 
 .resume-info td, .resume-info th{
@@ -62,4 +64,11 @@ main{
 .minw-30 img{
     width: 100%;
     height: auto;
+}
+
+.input-type{
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

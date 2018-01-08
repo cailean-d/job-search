@@ -12,14 +12,18 @@
                 <form action="scripts/login.php" method="post" id="login">
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-at"></i>
+                            </div>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Почта">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-unlock-alt"></i>
+                            </div>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
@@ -28,7 +32,9 @@
                 </form>
             </div>
             <div class="modal-footer d-block">
-                <label for="sub_form" class="btn btn-primary btn-block btn-lg" role="button" id="send_form">Войти</label>
+                <label for="sub_form" class="btn btn-primary btn-block btn-lg" role="button" id="send_form">
+                    Войти
+                </label>
                 <div class="hidden-xl-down ml-0" id="ajax-error">
                     <hr>
                     <div class="error-block form-control-feedback text-center mb-2 bg-danger text-white rounded p-3">
@@ -53,28 +59,36 @@
                 <form action="scripts/reg.php" method="post" id="registration">
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
                             <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Имя">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
                             <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Фамилия">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-at"></i>
+                            </div>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Почта">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-user-secret"></i>
+                            </div>
                             <select name="type" class="form-control custom-select">
                                 <option value="" disabled selected>Тип учетной записи</option>
                                 <option value="0">Пользователь</option>
@@ -85,14 +99,18 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-unlock-alt"></i>
+                            </div>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <div class="input-group-addon">@</div>
+                            <div class="input-group-addon">
+                                <i class="fas fa-unlock-alt"></i>
+                            </div>
                             <input type="password" class="form-control" id="password2" name="password2" placeholder="Повторите пароль">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>

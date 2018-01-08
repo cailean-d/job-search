@@ -11,10 +11,15 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-slider.min.css">
     <link rel="stylesheet" href="css/header.css?qqxqwwqqwq">
-    <link rel="stylesheet" href="css/style.css?qqsessweweweweeqwqsqgq">
+    <link rel="stylesheet" href="css/style.css?qqsessweweweqeqeweeqwqsqgq">
+
+    <script defer src="js/fontawesome-all.min.js"></script>
     <title>Разместить вакансию</title>
 </head>
 <body>
+    <div class="modal-disable">
+        <i class="fas fa-spinner fa-pulse fa-10x"></i>
+    </div>
     <div class="wrapper">
         <?php include("parts/header.php")?>
         <div class="app-body">
@@ -31,6 +36,6 @@
 <script src="js/active_page.js?eeqqqйqqewq"></script>
 <script src="js/login_valid.js?eewqwуewqqqqqew"></script>
 <script src="js/reg_valid.js?qqqqqqewцqeqe"></script>
-<script src="js/vacancy_valid.js?eqqqeeqweqqqqew"></script>
+<script src="js/vacancy_valid.js?eqqqeeeqeqwqweqqqqew"></script>
 </body>
 </html>

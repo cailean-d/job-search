@@ -23,7 +23,7 @@
             this.disabled = true;
             this.classList.add("disabled");
             this.style.pointerEvents = "auto";
-            this.innerHTML = "Удаление записи...";
+            this.innerHTML = "Удаление записи <i class=\"fas fa-spinner fa-pulse\"></i>";
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4){

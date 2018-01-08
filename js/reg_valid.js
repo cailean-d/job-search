@@ -223,7 +223,7 @@
         submit_label.disabled = true;
         submit_label.classList.add("disabled");
         submit_label.style.pointerEvents = "auto";
-        submit_label.innerHTML = "Отправка данных...";
+        submit_label.innerHTML = "Отправка данных <i class=\"fas fa-spinner fa-pulse\"></i>";
 
 
         // скрыть блок с ошибкой

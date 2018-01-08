@@ -1,7 +1,9 @@
 <?php 
     include('scripts/read/get_my_vacancies.php');
     if(!isset($is_result)) : ?>
-        <h2>Вакансий нет</h2>
+        <div class="alert alert-info" role="alert">
+            <strong>Вакансий нет.</strong>
+        </div>
     <?php else : 
         foreach($result as $res) :?>
             <div class="card mb-4 col-10 vacancyz mx-auto">

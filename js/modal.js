@@ -68,7 +68,7 @@
                         btn.disabled = true;
                         btn.classList.add("disabled");
                         btn.style.pointerEvents = "auto";
-                        btn.innerHTML = "Отправка данных...";
+                        btn.innerHTML = "Отправка данных <i class=\"fas fa-spinner fa-pulse\"></i>";
                     
                         xhr.onreadystatechange = function() {
                             if (xhr.readyState == 4){

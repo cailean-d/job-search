@@ -1165,7 +1165,7 @@
             send_form.innerHTML = "Отправить";
 
             // разблокировать форму
-            modal_disable.style.display = "block";
+            modal_disable.style.display = "none";
         });
 
     }
@@ -1238,7 +1238,7 @@
             send_form.innerHTML = "Отправить";
 
             // разблокировать форму
-            modal_disable.style.display = "block";
+            modal_disable.style.display = "none";
         });
  
     }
@@ -1311,7 +1311,7 @@
             send_form.innerHTML = "Отправить";
 
             // разблокировать форму
-            modal_disable.style.display = "block";
+            modal_disable.style.display = "none";
         });
 
     }
@@ -1347,10 +1347,10 @@
         // заблокировать кнопку
         send_form.disabled = true;
         send_form.classList.add("disabled");
-        send_form.innerHTML = "Отправка данных...";
+        send_form.innerHTML = "Отправка данных <i class=\"fas fa-spinner fa-pulse\"></i>";
 
         // заблокировать форму
-        modal_disable.style.display = "block";
+        modal_disable.style.display = "flex";
         
         // отправка данных
 
@@ -1682,6 +1682,7 @@
         $('#modal').modal('show');
 
         send_form.innerHTML = message;
+        modal_disable.style.display = "none";
         
         // перезагрузить страницу при закрытии модального окна
         for(var i = 0; i < btn_close.length; i++){
@@ -1741,7 +1742,7 @@
             delete_resume_button.disabled = true;
             delete_resume_button.classList.add("disabled");
             delete_resume_button.style.pointerEvents = "auto";
-            delete_resume_button.innerHTML = "Удаление...";
+            delete_resume_button.innerHTML = "Удаление <i class=\"fas fa-spinner fa-pulse\"></i>";
     
             // отправка запроса и отслеживание состояния 
             xhr.onreadystatechange = function() {

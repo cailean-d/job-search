@@ -8,6 +8,7 @@
     height: 100%;
     flex-direction: column;
     justify-content: center;
+    margin-left: 1px;
 }
 
 .vacancyz:hover{

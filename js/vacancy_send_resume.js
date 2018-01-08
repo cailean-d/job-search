@@ -23,7 +23,7 @@
         this.disabled = true;
         this.classList.add("disabled");
         this.style.pointerEvents = "auto";
-        this.innerHTML = "Отправка данных...";
+        this.innerHTML = "Отправка данных <i class=\"fas fa-spinner fa-pulse\"></i>";
 
         // отправка запроса и отслеживание состояния 
         xhr.onreadystatechange = function() {
@@ -79,7 +79,7 @@
         this.disabled = true;
         this.classList.add("disabled");
         this.style.pointerEvents = "auto";
-        this.innerHTML = "Удаление данных...";
+        this.innerHTML = "Удаление данных <i class=\"fas fa-spinner fa-pulse\"></i>";
 
         // отправка запроса и отслеживание состояния 
         xhr.onreadystatechange = function() {

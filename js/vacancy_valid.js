@@ -9,6 +9,7 @@
     var del_buttons = document.querySelectorAll("button.del");
     var form = document.getElementById("vacancy");
     var modal_message_text = document.querySelector("#modal .modal-body p");
+    var modal_disable = document.querySelector(".modal-disable");
     var isValid = 0;
     
     var fields = [
@@ -106,13 +107,13 @@
         newInput.classList.add("opt");
         if(that.id == "demand"){
             newInput.innerHTML = 
-            '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon">@</div><input name="demands" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
+            '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon"><i class="fas fa-check-circle"></i></div><input name="demands" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
         } else if(that.id == "dutie"){
             newInput.innerHTML = 
-            '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon">@</div><input name="duties" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
+            '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon"><i class="fas fa-check-circle"></i></div><input name="duties" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
         } else if(that.id == "condition"){
             newInput.innerHTML = 
-            '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon">@</div><input name="conditions" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
+            '<div class="d-flex justify-content-between"><div class="input-group mb-2 col-11 pl-0"><div class="input-group-addon"><i class="fas fa-check-circle"></i></div><input name="conditions" type="text" class="form-control" id="conditions"></div><button class="btn btn-outline-primary col-1 del" role="button" style="height: 37px; padding: .5rem .3rem;">-</button></div><div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>';
         }
         option.appendChild(newInput);
     }
@@ -137,10 +138,12 @@
         xhr.send(data);
         var submit = form.querySelector("input[type=submit]");
         var btn_close = document.querySelectorAll(".btn-close");
+
+        modal_disable.style.display = "flex";
         submit.disabled = true;
         submit.classList.add("disabled");
         submit.style.pointerEvents = "auto";
-        submit.innerHTML = "Отправка данных...";
+        submit.innerHTML = "Отправка данных <i class=\"fas fa-spinner fa-pulse\"></i>";
     
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4){
@@ -157,6 +160,8 @@
                             window.location.reload();
                         }
                     }
+
+                    modal_disable.style.display = "none";
     
                     submit.disabled = false;
                     submit.classList.remove("disabled");
@@ -169,6 +174,7 @@
                     submit.disabled = false;
                     submit.classList.remove("disabled");
                     submit.innerHTML = "Отправить";
+                    modal_disable.style.display = "none";
                 }
             } 
         }
