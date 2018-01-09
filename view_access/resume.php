@@ -1,7 +1,7 @@
 <?php 
     // не пускать на страницу, если пользователь не авторизирован
     if(!isset($_SESSION['authorized'])){
-        header("Location: /index.php");
+        header("Location: /");
     }
 
     // получение данных о резюме
@@ -11,7 +11,7 @@
     if( ($_GET['page'] === "add" && $_SESSION['type'] != "0") || 
         ($_GET['page'] === "edit" && $_SESSION['type'] != "0") || 
         (!isset($_GET['id']) && $_SESSION['type'] != "0") ){
-        header("Location: /index.php");
+        header("Location: /");
     }
     
     // не пускать на страницу создания резюме, если оно уже создано

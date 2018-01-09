@@ -9,7 +9,7 @@ AddDefaultCharset utf-8
 
 
 <IfModule dir_module>
-    DirectoryIndex index.php
+    DirectoryIndex router.php
 </IfModule>
 
 
@@ -74,7 +74,14 @@ AddDefaultCharset utf-8
 FileETag None
 
 ### Перенаправление всех запросов на index.php
-#<IfModule mod_rewrite.c>
-#    RewriteEngine on
-#    RewriteRule . index.php [L]
-#</IfModule>
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RedirectMatch /(.*)/(public/(.*))$ /$2
+    RedirectMatch /(.*)/(favicon.png)$ /$2
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    RewriteRule ^ router.php [L,QSA]
+</IfModule>

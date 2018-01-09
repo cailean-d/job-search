@@ -1,17 +1,17 @@
 <header id="header">
     <nav>
-        <a id="index_page" href="index.php">
+        <a id="index_page" href="/">
         <span>Главная</span>
         </a>
         <?php if($_SESSION['type'] == '1') : ?>
-            <a id="add_vacancy_page" href="add_vacancy.php">
+            <a id="add_vacancy_page" href="vacancy/add">
                 <span>Разместить вакансию</span> 
             </a>
-            <a id="my_vacancies_page" href="my_vacancies.php">
+            <a id="my_vacancies_page" href="vacancy">
                 <span>Мои вакансии</span>
             </a>
         <?php elseif($_SESSION['type'] == '0') : ?>
-            <a id="resume_page" href="resume.php">
+            <a id="resume_page" href="resume">
                 <span>Мое резюме</span>
             </a>
         <?php endif ?>        
@@ -55,12 +55,7 @@
 </header>
 <?php 
     if(!isset($_SESSION['authorized'])){
-        include('parts/header_modal.php');
-    }
-?>
-<?php 
-    if(isset($_SESSION['authorized'])){
-        include('parts/modal_confirm.php');
-        include('parts/modal_alert.php');
+        include('views/parts/modal_login.php');
+        include('views/parts/modal_reg.php');
     }
 ?>

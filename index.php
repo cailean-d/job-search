@@ -1,4 +1,3 @@
-<?php session_start();?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,45 +6,67 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <!--<Deject>-->
-    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="css/style.css?qqweqeqqgq">
-    <link rel="stylesheet" href="css/vacancy.css?eqwewweqqeqq">
-    <link rel="stylesheet" href="css/filter.css?qqeewwqq">
-    <link rel="stylesheet" href="css/header.css?qqxqwwqqwq">
+    <link rel="stylesheet" href="public/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="public/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="public/css/datepicker.min.css">
+    <link rel="stylesheet" href="public/css/style.css?qqweqeeeqqeqqqgq">
+    <link rel="stylesheet" href="public/css/vacancy.css?eqweeeqwqwweqqeqq">
+    <link rel="stylesheet" href="public/css/filter.css?qqeeeqewqwwwqq">
+    <link rel="stylesheet" href="public/css/header.css?qqxqweweqwqwqqwq">
+    <link rel="stylesheet" href="public/css/my_vacancies.css?qqqeqweqwwqq">
+    <link rel="stylesheet" href="public/css/full_vacancy.css?qeeeqwewqqewgq">
     <!--</Deject>-->
 
-    <script defer src="js/fontawesome-all.min.js"></script>
     
     <!-- inject:css -->
     <!-- endinject -->
-    <title>Вакансии</title>
+    <title><?=$pageTitle?></title>
 </head>
 <body>
-    <div class="container">
-        <?php include("parts/header.php")?>
+
+    <div class="wrapper">
+
+        <!-- шапка сайта -->
+        <?php include("views/parts/header.php")?>
+
         <div class="app-body">
-            <main class="col-8">
-                <?php include("parts/vacancies.php")?>
-            </main>
-            <aside class="col-4">
-                <?php include("parts/filters.php")?>
-            </aside>
+
+            <!-- загрузка основного части страницы -->
+            <?php include($pageBodyURL)?>
+
         </div>
     </div>
 
+
+    <!-- модальное окно загрузки -->
+    <div class="modal-disable">
+        <i class="fas fa-spinner fa-pulse fa-10x"></i>
+    </div>
+    
+    <!-- модальный Alert -->
+    <?php include("views/parts/modal_alert.php")?>
+
+    <!-- модальный Confirm -->
+    <?php include("views/parts/modal_confirm.php")?>    
+    
+
     <!--<Deject>-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-slider.min.js"></script>
-    <script src="js/filter.js?ewqqqqqeqqqqqws"></script>
-    <script src="js/modal.js?eeweqeqeqqqqewqqws"></script>
-    <script src="js/active_page.js?eewewq"></script>
-    <script src="js/login_valid.js?eewewewewqeqwуewqqqqqew"></script>
-    <script src="js/reg_valid.js?qqqqqewqeweeqeqwwwцqeqe"></script>
+    <script src="public/js/jquery.min.js"></script>
+    <script src="public/js/tether.min.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+    <script src="public/js/bootstrap-slider.min.js"></script>
+    <script src="public/js/fontawesome-all.min.js"></script>
+    <script src="public/js/filter.js?ewqqqqqqws"></script>
+    <script src="public/js/modal.js?ews"></script>
+    <script src="public/js/active_page.js?eeeewqweqwewq"></script>
+    <script src="public/js/login_valid.js?wqqeqwqewqqqew"></script>
+    <script src="public/js/reg_valid.js?qqwwцewqewqqeqe"></script>
+    <script src="public/js/vacancy_valid.js?eqewqqewqeqqqqew"></script>
+    <script src="public/js/del_vacancy.js?eqqewqeqwqq"></script>
+    <script src="public/js/resume.js?kqwwqeqweqeqwq"></script>
+    <script src="public/js/vacancy_send_resume.js?qqqqewewew"></script>
     <!--</Deject>-->
     
     <!-- inject:js -->

@@ -1,3 +1,4 @@
+<main>
 <?php 
     include('scripts/read/get_my_vacancies.php');
     if(!isset($is_result)) : ?>
@@ -13,7 +14,7 @@
                         <header>
                             <div class="top">
                                 <div class='title'>
-                                    <a href='vacancy.php?id=<?=$res['id']?>'><?=$res['vacancy']?></a>
+                                    <a href='vacancy/<?=$res['id']?>'><?=$res['vacancy']?></a>
                                 </div>
                                 <div class='salary'>
                                     <span>
@@ -44,7 +45,7 @@
                     </article>
                 </div>
                 <div class="edit-buttons">
-                    <a class="btn btn-primary btn-block" role="button" href="add_vacancy.php?page=edit&id=<?=$res['id']?>">
+                    <a class="btn btn-primary btn-block" role="button" href="vacancy/edit/<?=$res['id']?>">
                         Редактировать
                     </a>
                     <a class="btn btn-outline-primary btn-block del" role="button" href="#">
@@ -54,5 +55,4 @@
             </div>
         <?php endforeach; 
     endif ?>
-
-<?php include("./parts/modal_alert.php"); ?>
+</main>

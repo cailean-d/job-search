@@ -4,8 +4,8 @@
 (function(){
 
     // если это не страница для создания резюме, то не выполнять код
-    if(window.location.href.indexOf("resume.php?page=add") == -1 &&
-       window.location.href.indexOf("resume.php?page=edit") == -1){
+    if(window.location.href.indexOf("resume/add") == -1 &&
+       window.location.href.indexOf("resume/edit") == -1){
         return;
     }
 
@@ -145,7 +145,7 @@
     (function(){
 
         // если это не страница для редактирования резюме, то не выполнять код
-        if(window.location.href.indexOf("resume.php?page=edit") == -1){
+        if(window.location.href.indexOf("resume/edit") == -1){
             return;
         }
 
@@ -334,7 +334,7 @@
                                 send_languages("create", function(){
                                     
                                 // если страница редактирования, удалить все нужные записи
-                                if(window.location.href.indexOf("resume.php?page=edit") != -1){
+                                if(window.location.href.indexOf("resume/edit") != -1){
 
                                     // удаление и обновление LANG
                                     send_languages("update");
@@ -1356,7 +1356,7 @@
 
         var server_script;
 
-        if(window.location.href.indexOf("resume.php?page=edit") != -1){
+        if(window.location.href.indexOf("resume/edit") != -1){
             server_script = "scripts/update/update_resume.php"
         } else {
             server_script = "scripts/create/set_resume.php";
@@ -1672,7 +1672,7 @@
 
         var message;
         
-        if(window.location.href.indexOf("resume.php?page=edit") != -1){
+        if(window.location.href.indexOf("resume/edit") != -1){
             message = "Данные успешно обновлены";
         } else {
             message = "Данные успешно отправлены";
@@ -1688,7 +1688,7 @@
         for(var i = 0; i < btn_close.length; i++){
             var btn = btn_close[i];
             btn.onclick = function(){
-                window.location.href = "/resume.php";
+                window.location.href = "/resume";
             }
         }
     }
@@ -1698,7 +1698,7 @@
 (function(){
     
     // не выполнять код, если это не главная страница резюме
-    if(window.location.pathname !== "/resume.php"){
+    if(window.location.pathname !== "/resume"){
         return;
     }
     
