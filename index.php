@@ -6,11 +6,11 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <!--<Deject>-->
-    <link rel="stylesheet" href="public/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="public/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="public/css/datepicker.min.css">
+    <link rel="stylesheet" href="public/css/lib/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="public/css/lib/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="public/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/lib/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="public/css/lib/datepicker.min.css">
     <link rel="stylesheet" href="public/css/style.css?qqweqeeeqqeqqqgq">
     <link rel="stylesheet" href="public/css/vacancy.css?eqweeeqwqwweqqeqq">
     <link rel="stylesheet" href="public/css/filter.css?qqeeeqewqwwwqq">
@@ -53,11 +53,12 @@
     
 
     <!--<Deject>-->
-    <script src="public/js/jquery.min.js"></script>
-    <script src="public/js/tether.min.js"></script>
-    <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/bootstrap-slider.min.js"></script>
-    <script src="public/js/fontawesome-all.min.js"></script>
+    <script src="public/js/lib/jquery.min.js"></script>
+    <script src="public/js/lib/tether.min.js"></script>
+    <script src="public/js/lib/bootstrap.min.js"></script>
+    <script src="public/js/lib/bootstrap-slider.min.js"></script>
+    <script src="public/js/lib/fontawesome-all.min.js"></script>
+    <script src="public/js/lib/datepicker.min.js"></script>
     <script src="public/js/filter.js?ewqqqqqqws"></script>
     <script src="public/js/modal.js?ews"></script>
     <script src="public/js/active_page.js?eeeewqweqwewq"></script>
