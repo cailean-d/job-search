@@ -9,7 +9,7 @@ AddDefaultCharset utf-8
 
 
 <IfModule dir_module>
-    DirectoryIndex router.php
+    DirectoryIndex server.php
 </IfModule>
 
 
@@ -77,12 +77,11 @@ FileETag None
 <IfModule mod_rewrite.c>
     RewriteEngine on
 
-    RedirectMatch /(.*)/(public/(.*))$ /$2
-    RedirectMatch /(.*)/(favicon.png)$ /$2
+    # Redirect Trailing Slashes...
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-    RewriteCond %{REQUEST_FILENAME} !-f
+    # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
-    
-    RewriteRule /index.php router.php [L,QSA]
-    RewriteRule ^ router.php [L,QSA]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ server.php [L]
 </IfModule>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
     <link rel="shortcut icon" href="favicon.png">
 
     <!--<Deject>-->
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="public/css/header.css?qqxqweweqwqwqqwq">
     <link rel="stylesheet" href="public/css/my_vacancies.css?qqqeqweqwwqq">
     <link rel="stylesheet" href="public/css/full_vacancy.css?qeeeqwewqqewgq">
+    <link rel="stylesheet" href="public/css/404.css?eqqqqeeqqewqew">
     <!--</Deject>-->
 
     
@@ -34,7 +36,12 @@
         <div class="app-body">
 
             <!-- загрузка основного части страницы -->
-            <?php include($pageBodyURL)?>
+            <?php 
+            
+                include($pageBodyURL);
+            
+            ?>
+            
 
         </div>
     </div>

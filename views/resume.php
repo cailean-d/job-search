@@ -1,5 +1,6 @@
 <main>
     <?php if($_GET['page'] === "edit") include('scripts/read/get_resume_secondary_data.php'); ?>
+    <?php if($_GET['page'] === "edit") include('scripts/read/get_resume.php'); ?>
     <?php include('scripts/read/get_filter_data.php'); ?>
 
     <?php if($_GET['page'] === "add" || $_GET['page'] === "edit") : ?>

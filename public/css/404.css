@@ -1,16 +1,13 @@
-body{
-    padding: 0;
-    margin: 0;
-    user-select: none;
-}
-
 .wrapper-404{
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
 }
 
 .wrapper-404 img{
@@ -18,22 +15,4 @@ body{
     width: auto;
     max-width: 100%;
     max-height: 100%;
-}
-
-.wrapper-404 a, .wrapper-404 a:visited , .wrapper-404 a:active {
-    position: absolute;
-    bottom: 0;
-    display: block;
-    text-align: center;
-    padding: 10px;
-    font-size: 40px;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: capitalize;
-    color: #575757;
-}
-
-.wrapper-404 a:hover{
-    text-decoration: underline;
-    color: #555555;
 }
