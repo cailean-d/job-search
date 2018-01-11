@@ -10,12 +10,12 @@
 
     } else if(getRoute("resume")){
 
-        drawPage("Мое резюме", "views/resume.php");
+        drawPage("Мое резюме", "views/resume_show.php");
 
     } else if(getRoute("resume/:id[number]", $routeVars)){
 
         $_GET['id'] = $routeVars['id'];
-        drawPage("Резюме", "views/resume.php");
+        drawPage("Резюме", "views/resume_show.php");
 
     } else if(getRoute("resume/add")){
 

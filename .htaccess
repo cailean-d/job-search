@@ -83,5 +83,6 @@ FileETag None
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     
+    RewriteRule /index.php router.php [L,QSA]
     RewriteRule ^ router.php [L,QSA]
 </IfModule>
