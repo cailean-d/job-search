@@ -71,6 +71,38 @@
     
     });
 
+    Router::get("test", function($vars){
+
+        require __DIR__.'/app/models/User.php';
+
+
+        $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");;
+
+
+        echo "<pre>";
+        var_dump($user);
+        echo "</pre>";
+
+        // var_dump($user->isValidPassword("123456"));
+
+        $user->setFirstname("Василий");
+        $user->setLastname("Петрович");
+        $user->encodePassword();
+
+        $user->save();
+
+        // var_dump($res);
+
+        // if($res instanceof Exception){
+        //     echo 'ERROR = '.$res;
+        // }
+        
+    
+        echo "<pre>";
+        var_dump($user);
+        echo "</pre>";
+    });
+
     Router::PageNotFound(function(){
 
         Router::renderView("Страница не найдена", "404");
