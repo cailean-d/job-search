@@ -53,35 +53,35 @@
 
         public function setFirstname($firstname){
 
-            $this->firstname = $firstname;
+            $this->firstname = htmlspecialchars(trim($firstname));
             return $this;
-            
+
         }
 
         public function setLastname($lastname){
 
-            $this->lastname = $lastname;
+            $this->lastname = htmlspecialchars(trim($lastname));
             return $this;
 
         }
 
         public function setEmail($email){
 
-            $this->email = $email;
+            $this->email = htmlspecialchars(trim($email));
             return $this;
 
         }
 
         public function setPassword($password){
 
-            $this->password = $password;
+            $this->password = htmlspecialchars(trim($password));
             return $this;
 
         }
 
         public function setType($type){
 
-            $this->type = $type;
+            $this->type = htmlspecialchars(trim($type));
             return $this;
 
         }

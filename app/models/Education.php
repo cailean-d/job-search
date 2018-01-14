@@ -59,44 +59,44 @@
 
         public function setUserId($userid){
 
-            $this->userid = $userid;
+            $this->userid = htmlspecialchars(trim($userid));
             return $this;
 
         }
 
         public function setLevelId($levelId){
 
-            $this->levelId = $levelId;
+            $this->levelId = htmlspecialchars(trim($levelId));
             return $this;
 
         }
 
         public function setInstitute($institute){
 
-            $this->institute = $institute;
+            $this->institute = htmlspecialchars(trim($institute));
             return $this;
 
         }
 
         public function setCity($city){
 
-            $this->city = $city;
+            $this->city = htmlspecialchars(trim($city));
             return $this;
 
         }
 
         public function setFaculty($faculty){
         
-            $this->faculty = $faculty;
+            $this->faculty = htmlspecialchars(trim($faculty));
             return $this;
         
         }
 
         public function setStudyPeriod($id){
 
-            $this->studyPeriod = $studyPeriod;
+            $this->studyPeriod = htmlspecialchars(trim($studyPeriod));
             return $this;
-            
+
         }
 
         public function reset(){
