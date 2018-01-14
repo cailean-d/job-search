@@ -73,23 +73,25 @@
 
     Router::get("test", function($vars){
 
-        require __DIR__.'/app/models/User.php';
+        // require __DIR__.'/app/models/User.php';
+        require __DIR__.'/app/models/Avatar.php';
 
 
-        $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");;
+        // $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");
 
+        $avatar = Avatar::get(3);
 
         echo "<pre>";
-        var_dump($user);
+        var_dump($avatar);
         echo "</pre>";
 
         // var_dump($user->isValidPassword("123456"));
 
-        $user->setFirstname("Василий");
-        $user->setLastname("Петрович");
-        $user->encodePassword();
+        // $user->setFirstname("Василий");
+        // $user->setLastname("Петрович");
+        // $user->encodePassword();
 
-        $user->save();
+        // $user->save();
 
         // var_dump($res);
 
@@ -98,9 +100,9 @@
         // }
         
     
-        echo "<pre>";
-        var_dump($user);
-        echo "</pre>";
+        // echo "<pre>";
+        // var_dump($user);
+        // echo "</pre>";
     });
 
     Router::PageNotFound(function(){

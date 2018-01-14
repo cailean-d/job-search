@@ -17,7 +17,7 @@
 
         public static function instance() {
 
-            self::setProps();
+            self::applyConfig();
 
             if (self::$instance === null) {
 
@@ -55,16 +55,16 @@
 
         }
 
-        private static function setProps() {
+        private static function applyConfig() {
 
-            $cfg = require __DIR__.'/../config/database.php';
+            $conn = require __DIR__.'/../config/database_connection.php';
 
-            self::$type = $cfg['type'];
-            self::$host = $cfg['host'];
-            self::$db_name = $cfg['database_name'];
-            self::$user = $cfg['user'];
-            self::$password = $cfg['password'];
-            self::$options = $cfg['options'];
+            self::$type = $conn['type'];
+            self::$host = $conn['host'];
+            self::$db_name = $conn['database_name'];
+            self::$user = $conn['user'];
+            self::$password = $conn['password'];
+            self::$options = $conn['options'];
 
         }
     }

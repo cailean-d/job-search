@@ -69,7 +69,7 @@
             $this->type = $type;
         }
 
-        public function resetUser(){
+        public function reset(){
 
             $this->id = null;
             $this->firstname = null;
@@ -114,7 +114,7 @@
 
             $this->validate();
 
-            $query = Database::run('INSERT INTO users(firstname, lastname, email, password, type) 
+            $query = Database::run('INSERT INTO '. self::$table .'(firstname, lastname, email, password, type) 
                            VALUES (?, ?, ?, ?, ?)', 
             [
                 $this->firstname,
@@ -125,8 +125,6 @@
             ]);
 
             $this->id = Database::lastInsertId();
-
-            echo Database::lastInsertId();
 
             return $query;
 
@@ -159,7 +157,7 @@
 
             $query = Database::run('DELETE FROM '. self::$table .' WHERE id = ? ', [$this->id]);
 
-            $this->resetUser();
+            $this->reset();
             
             return $query;
 
@@ -169,7 +167,7 @@
 
             $user = User::get($this->id);
 
-            if($user->getId() === ''){
+            if($user->getId() === '' || is_null($user->getId())){
 
                 $this->create();
 
