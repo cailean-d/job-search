@@ -4,7 +4,7 @@
 
     class User {
 
-        private static $table = 'users';
+        private static $table;
 
         private $id;
         private $firstname;
@@ -16,6 +16,8 @@
         public function __construct(string $id = null,  string $firstname = null,  
                                     string $lastname = null, string $email = null, 
                                     string $password = null, string $type = null){
+
+            self::applyConfig();
 
             $this->id = htmlspecialchars(trim($id));
             $this->firstname = htmlspecialchars(trim($firstname));
@@ -82,6 +84,8 @@
 
         public static function get($id){
 
+            self::applyConfig();
+
             $user = Database::run('SELECT * FROM '. self::$table .' WHERE id = ? ', [$id]);
 
             return new User(
@@ -96,6 +100,8 @@
         }
 
         public static function getByEmail(string $email){
+
+            self::applyConfig();
 
             $user = Database::run('SELECT * FROM '. self::$table .' WHERE email = ? ', [$email]);
 
@@ -236,6 +242,14 @@
             if($this->type != '0' && $this->type != '1'){
                 throw new Exception('type');
             }
+
+        }
+
+        private function applyConfig(){
+            
+            $table = require __DIR__.'/../config/database_tables.php';
+
+            self::$table = $table['user'];
 
         }
 

@@ -14,6 +14,8 @@
 
         public function __construct($id = null, $userid = null, $source = null, $file = null){
 
+            self::applyConfig();
+
             $this->id = $id;
             $this->userid = $userid;
             $this->source = $source;
@@ -81,8 +83,6 @@
 
         public function create(){
 
-            self::applyConfig();
-
             $this->validate();
 
             $this->saveFile();
@@ -101,8 +101,6 @@
 
         public function update(){
 
-            self::applyConfig();
-
             $this->validate();
 
             $this->saveFile();
@@ -114,8 +112,6 @@
 
         public function delete(){
 
-            self::applyConfig();
-
             $query = Database::run('DELETE FROM '. self::$table .' WHERE id = ? ', [$this->id]);
 
             $this->reset();
@@ -125,8 +121,6 @@
         }
             
         public function save(){
-
-            self::applyConfig();
 
             $avatar = Avatar::get($this->id);
 
@@ -180,8 +174,6 @@
         }
 
         private function saveFile(){
-
-            self::applyConfig();
 
             $PROJECT_ROOT = __DIR__.'/../../';
             $dir = $PROJECT_ROOT . self::$folder . '/';
