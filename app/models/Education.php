@@ -58,27 +58,45 @@
         }
 
         public function setUserId($userid){
+
             $this->userid = $userid;
+            return $this;
+
         }
 
         public function setLevelId($levelId){
+
             $this->levelId = $levelId;
+            return $this;
+
         }
 
         public function setInstitute($institute){
+
             $this->institute = $institute;
+            return $this;
+
         }
 
         public function setCity($city){
+
             $this->city = $city;
+            return $this;
+
         }
 
         public function setFaculty($faculty){
+        
             $this->faculty = $faculty;
+            return $this;
+        
         }
 
         public function setStudyPeriod($id){
+
             $this->studyPeriod = $studyPeriod;
+            return $this;
+            
         }
 
         public function reset(){

@@ -86,8 +86,8 @@
         echo "</pre>";
 
 
-        $avatar[0]->setCity("Москва");
-        $avatar[0]->save();
+        $avatar[0]->setFaculty("ФМФИТ")->save();
+        // $avatar[0]->save();
 
 
         // var_dump($user->isValidPassword("123456"));

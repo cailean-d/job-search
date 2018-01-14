@@ -52,23 +52,38 @@
         }
 
         public function setFirstname($firstname){
+
             $this->firstname = $firstname;
+            return $this;
+            
         }
 
         public function setLastname($lastname){
+
             $this->lastname = $lastname;
+            return $this;
+
         }
 
         public function setEmail($email){
+
             $this->email = $email;
+            return $this;
+
         }
 
         public function setPassword($password){
+
             $this->password = $password;
+            return $this;
+
         }
 
         public function setType($type){
+
             $this->type = $type;
+            return $this;
+
         }
 
         public function reset(){
