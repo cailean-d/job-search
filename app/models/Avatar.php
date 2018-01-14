@@ -16,10 +16,10 @@
 
             self::applyConfig();
 
-            $this->id = $id;
-            $this->userid = $userid;
-            $this->source = $source;
-            $this->file = $file;
+            $this->id = htmlspecialchars(trim($id));
+            $this->userid = htmlspecialchars(trim($userid));
+            $this->source = htmlspecialchars(trim($source));
+            $this->file = htmlspecialchars(trim($file));
 
         }
 

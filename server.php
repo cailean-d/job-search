@@ -74,16 +74,21 @@
     Router::get("test", function($vars){
 
         // require __DIR__.'/app/models/User.php';
-        require __DIR__.'/app/models/Avatar.php';
+        require __DIR__.'/app/models/Education.php';
 
 
         // $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");
 
-        $avatar = Avatar::get(3);
+        $avatar = Education::getAll();
 
         echo "<pre>";
         var_dump($avatar);
         echo "</pre>";
+
+
+        $avatar[0]->setCity("Москва");
+        $avatar[0]->save();
+
 
         // var_dump($user->isValidPassword("123456"));
 
