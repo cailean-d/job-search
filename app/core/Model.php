@@ -7,7 +7,7 @@
         protected $id;
         
         abstract public static function get($id);
-
+        
         abstract public static function getAll();
 
         abstract public function create();

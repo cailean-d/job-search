@@ -74,7 +74,7 @@
     Router::get("test", function($vars){
 
         // require __DIR__.'/app/models/User.php';
-        require __DIR__.'/app/models/Experience.php';
+        require __DIR__.'/app/models/Language.php';
 
 
         // $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");
@@ -82,13 +82,13 @@
         // $avatar = Experience::getAll();
         // $avatar = new Experience("eqeq", "13", "new post", "new company", "new city", "3", "Январь 2012 - Сентябрь 2014", "new functions");
 
-        // $avatar = Experience::get(3);
+        $avatar = Language::getAll();
 
-        // echo "<pre>";
-        // var_dump($avatar);
-        // echo "</pre>";
+        echo "<pre>";
+        var_dump($avatar);
+        echo "</pre>";
 
-        Experience::get(3)->setPost("NEW NEW POST")->save();
+        // Experience::get(3)->setPost("NEW NEW POST")->save();
 
         // $avatar->save();
 
