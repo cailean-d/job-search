@@ -3,7 +3,7 @@
     require __DIR__.'/../core/Database.php';
     require __DIR__.'/../core/Model.php';
 
-    class Education extends Model {
+    final class Education extends Model {
 
         private $userid;
         private $levelId;
