@@ -7,6 +7,8 @@
         'avatar' => 'user_avatar',
 
         'education' => 'user_education',
+        
+        'experience' => 'user_experience',
 
         'language' => 'user_lang_skills',
 

@@ -1,6 +1,6 @@
 <?php 
 
-    require __DIR__.'/../Database.php';
+    require __DIR__.'/../core/Database.php';
 
     class Avatar{
 
