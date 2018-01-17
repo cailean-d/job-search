@@ -1,12 +1,10 @@
 <?php
 
     require __DIR__.'/../core/Database.php';
+    require __DIR__.'/../core/Model.php';
 
-    class Education {
+    class Education extends Model {
 
-        private static $table;
-
-        private $id;
         private $userid;
         private $levelId;
         private $institute;
@@ -27,10 +25,6 @@
             $this->faculty = htmlspecialchars(trim($faculty));
             $this->studyPeriod = htmlspecialchars(trim($studyPeriod));
 
-        }
-
-        public function getId(){
-            return $this->id;
         }
 
         public function getUserId(){
@@ -101,7 +95,8 @@
 
         public function reset(){
 
-            $this->id = null;
+            parent::reset();
+
             $this->userid = null;
             $this->userLevel = null;
             $this->institute = bull;
@@ -241,22 +236,7 @@
 
         }
 
-        public function save(){
-
-            $education = Education::get($this->id);
-
-            if($education->getId() === '' || is_null($education->getId())){
-
-                $this->create();
-
-            } else {
-
-                $this->update();
-
-            }
-        }
-
-        private function validate(){
+        protected function validate(){
 
             $regexp_city = '/^[A-zА-яЁё\"\-\s?]{4,}$/u';
             $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"\-\s?]{4,}$/u';
@@ -306,14 +286,6 @@
             if(!preg_match($regexp_edu_period, $this->studyPeriod)){
                 throw new Exception('studyPeriod');
             }
-
-        }
-
-        private function applyConfig(){
-            
-            $table = require __DIR__.'/../config/database_tables.php';
-
-            self::$table = $table['education'];
 
         }
 

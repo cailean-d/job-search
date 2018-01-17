@@ -1,12 +1,10 @@
 <?php
 
     require __DIR__.'/../core/Database.php';
+    require __DIR__.'/../core/Model.php';
 
-    class User {
+    final class User extends Model {
 
-        private static $table;
-
-        private $id;
         private $firstname;
         private $lastname;
         private $email;
@@ -25,10 +23,6 @@
             $this->email = htmlspecialchars(trim($email));
             $this->password = htmlspecialchars(trim($password));
             $this->type = htmlspecialchars(trim($type));
-        }
-
-        public function getId(){
-            return $this->id;
         }
 
         public function getFirstname(){
@@ -88,7 +82,8 @@
 
         public function reset(){
 
-            $this->id = null;
+            parent::reset();
+
             $this->firstname = null;
             $this->lastname = null;
             $this->email = null;
@@ -184,21 +179,6 @@
 
         }
 
-        public function save(){
-
-            $user = User::get($this->id);
-
-            if($user->getId() === '' || is_null($user->getId())){
-
-                $this->create();
-
-            } else {
-
-                $this->update();
-
-            }
-        }
-
         public function encodePassword(){
             $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         }
@@ -217,7 +197,7 @@
 
         }
 
-        private function validate(){
+        protected function validate(){
 
             $regexp_email = '/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/u';
             $regexp_name = '/^[A-ZА-ЯЁ]{1}[a-zа-яё\s?]{2,}$/u';
@@ -257,14 +237,6 @@
             if($this->type != '0' && $this->type != '1'){
                 throw new Exception('type');
             }
-
-        }
-
-        private function applyConfig(){
-            
-            $table = require __DIR__.'/../config/database_tables.php';
-
-            self::$table = $table['user'];
 
         }
 

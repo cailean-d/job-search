@@ -24,16 +24,16 @@
 
         }
 
-        public static function getTable(){
-
-            return self::$table;
-
-        }
-
         public function setId($id){
 
             $this->id = htmlspecialchars(trim($id));
             return $this;
+
+        }
+
+        public static function getTable(){
+
+            return self::$table;
 
         }
 

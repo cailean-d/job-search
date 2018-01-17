@@ -1,13 +1,12 @@
 <?php 
 
     require __DIR__.'/../core/Database.php';
+    require __DIR__.'/../core/Model.php';
 
-    class Avatar{
+    final class Avatar extends Model{
 
-        private static $table;
         private static $folder;
 
-        private $id;
         private $userid;
         private $source;
         private $file;
@@ -20,12 +19,6 @@
             $this->userid = htmlspecialchars(trim($userid));
             $this->source = htmlspecialchars(trim($source));
             $this->file = htmlspecialchars(trim($file));
-
-        }
-
-        public function getId(){
-
-            return $this->id;
 
         }
 
@@ -54,6 +47,8 @@
         }
 
         public function reset(){
+
+            parent::reset();
 
             $this->id = null;
             $this->userid = null;
@@ -113,25 +108,8 @@
             return $query;
 
         }
-            
-        public function save(){
 
-            $avatar = Avatar::get($this->id);
-
-            if($avatar->getId() === '' || is_null($avatar->getId())){
-
-                $this->create();
-
-            } else {
-
-                $this->update();
-
-            }
-
-
-        }
-
-        private function validate(){
+        protected function validate(){
 
             if(is_null($this->file) || is_null($this->file["tmp_name"])){
                 throw new Exception('FILE_DOES_NOT_EXISTS');
@@ -151,23 +129,23 @@
 
         }
 
-        private function applyConfig(){
+        protected function applyConfig(){
+
+            parent::applyConfig();
             
             $folder = require __DIR__.'/../config/paths.php';
-            $table = require __DIR__.'/../config/database_tables.php';
 
-            self::$table = $table['avatar'];
             self::$folder = $folder['avatar'];
 
         }
 
-        private function getFileExtension(){
+        protected function getFileExtension(){
 
             return substr($this->file["name"], strpos($this->file["name"], "."));
 
         }
 
-        private function saveFile(){
+        protected function saveFile(){
 
             $PROJECT_ROOT = __DIR__.'/../../';
             $dir = $PROJECT_ROOT . self::$folder . '/';
