@@ -41,12 +41,6 @@
 
         }
 
-        public function setId($id){
-
-            $this->id = $id;
-
-        }
-
         public function setUserid($userid){
 
             $this->userid = $userid;
