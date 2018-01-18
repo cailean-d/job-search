@@ -7,18 +7,18 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <!--<Deject>-->
-    <link rel="stylesheet" href="public/css/lib/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="public/css/lib/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="public/css/lib/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/lib/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="public/css/lib/datepicker.min.css">
-    <link rel="stylesheet" href="public/css/style.css?qqweqeeeqqeqqqgq">
-    <link rel="stylesheet" href="public/css/vacancy.css?eqweeeqwqwweqqeqq">
-    <link rel="stylesheet" href="public/css/filter.css?qqeeeqewqwwwqq">
-    <link rel="stylesheet" href="public/css/header.css?qqxqweweqwqwqqwq">
-    <link rel="stylesheet" href="public/css/my_vacancies.css?qqqeqweqwwqq">
-    <link rel="stylesheet" href="public/css/full_vacancy.css?qeeeqwewqqewgq">
-    <link rel="stylesheet" href="public/css/404.css?eqqqqeeqqewqew">
+    <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="public/stylesheet/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="public/stylesheet/lib/datepicker.min.css">
+    <link rel="stylesheet" href="public/stylesheet/style.css?qqweqeeeqqeqqqgq">
+    <link rel="stylesheet" href="public/stylesheet/vacancy.css?eqweeeqwqwweqqeqq">
+    <link rel="stylesheet" href="public/stylesheet/filter.css?qqeeeqewqwwwqq">
+    <link rel="stylesheet" href="public/stylesheet/header.css?qqxqweweqwqwqqwq">
+    <link rel="stylesheet" href="public/stylesheet/my_vacancies.css?qqqeqweqwwqq">
+    <link rel="stylesheet" href="public/stylesheet/full_vacancy.css?qeeeqwewqqewgq">
+    <link rel="stylesheet" href="public/stylesheet/404.css?eqqqqeeqqewqew">
     <!--</Deject>-->
 
     
@@ -60,21 +60,21 @@
     
 
     <!--<Deject>-->
-    <script src="public/js/lib/jquery.min.js"></script>
-    <script src="public/js/lib/tether.min.js"></script>
-    <script src="public/js/lib/bootstrap.min.js"></script>
-    <script src="public/js/lib/bootstrap-slider.min.js"></script>
-    <script src="public/js/lib/fontawesome-all.min.js"></script>
-    <script src="public/js/lib/datepicker.min.js"></script>
-    <script src="public/js/filter.js?ewqqqqqqws"></script>
-    <script src="public/js/modal.js?ews"></script>
-    <script src="public/js/active_page.js?eeeewqweqwewq"></script>
-    <script src="public/js/login_valid.js?wqqeqwqewqqqew"></script>
-    <script src="public/js/reg_valid.js?qqwwцewqewqqeqe"></script>
-    <script src="public/js/vacancy_valid.js?eqewqqewqeqqqqew"></script>
-    <script src="public/js/del_vacancy.js?eqqewqeqwqq"></script>
-    <script src="public/js/resume.js?kqwwqeqweqeqwq"></script>
-    <script src="public/js/vacancy_send_resume.js?qqqqewewew"></script>
+    <script src="public/javascript/lib/jquery.min.js"></script>
+    <script src="public/javascript/lib/tether.min.js"></script>
+    <script src="public/javascript/lib/bootstrap.min.js"></script>
+    <script src="public/javascript/lib/bootstrap-slider.min.js"></script>
+    <script src="public/javascript/lib/fontawesome-all.min.js"></script>
+    <script src="public/javascript/lib/datepicker.min.js"></script>
+    <script src="public/javascript/filter.js?ewqqqqqqws"></script>
+    <script src="public/javascript/modal.js?ews"></script>
+    <script src="public/javascript/active_page.js?eeeewqweqwewq"></script>
+    <script src="public/javascript/login_valid.js?wqqeqwqewqqqew"></script>
+    <script src="public/javascript/reg_valid.js?qqwwцewqewqqeqe"></script>
+    <script src="public/javascript/vacancy_valid.js?eqewqqewqeqqqqew"></script>
+    <script src="public/javascript/del_vacancy.js?eqqewqeqwqq"></script>
+    <script src="public/javascript/resume.js?kqwwqeqweqeqwq"></script>
+    <script src="public/javascript/vacancy_send_resume.js?qqqqewewew"></script>
     <!--</Deject>-->
     
     <!-- inject:js -->
