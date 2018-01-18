@@ -32,7 +32,7 @@
             $title = $this->title;
             $body = $this->folder.'/'.$this->view.'.php';
             
-            include __DIR__.'/../../index.php';
+            include __DIR__.'/../../public/index.php';
 
         }
 
