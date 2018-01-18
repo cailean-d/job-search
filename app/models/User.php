@@ -207,7 +207,10 @@
         }
 
         public function encodePassword(){
+
             $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+            return $this;
+            
         }
 
         public function isValidPassword(string $password){
