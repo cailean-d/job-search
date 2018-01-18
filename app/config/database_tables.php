@@ -14,6 +14,18 @@
 
         'resume' => 'user_resume',
 
-        'vacancy' => 'vacancies'
+        'vacancy' => 'vacancies',
+
+        'helperschedule' => 'schedule',
+
+        'helperindustry' => 'industry',
+
+        'helperworkplace' => 'work_place',
+
+        'helpereducation' => 'education',
+
+        'helpercompskills' => 'comp_skills',
+
+        'helperlanguages' => 'languages'
 
     );
