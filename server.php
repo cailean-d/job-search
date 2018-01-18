@@ -74,7 +74,7 @@
     Router::get("test", function($vars){
 
         // require __DIR__.'/app/models/User.php';
-        require __DIR__.'/app/models/HelperIndustry.php';
+        require __DIR__.'/app/models/HelperLanguage.php';
 
 
         // $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");
@@ -82,7 +82,7 @@
         // $avatar = Experience::getAll();
         // $avatar = new Experience("eqeq", "13", "new post", "new company", "new city", "3", "Январь 2012 - Сентябрь 2014", "new functions");
 
-        $avatar = HelperIndustry::getAll();
+        $avatar = HelperLanguage::getAll();
 
 
         echo "<pre>";

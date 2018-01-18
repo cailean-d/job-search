@@ -24,8 +24,8 @@
 
         'helpereducation' => 'education',
 
-        'helpercompskills' => 'comp_skills',
+        'helpercompskill' => 'comp_skills',
 
-        'helperlanguages' => 'languages'
+        'helperlanguage' => 'languages'
 
     );
