@@ -176,7 +176,7 @@
             $pageTitle = $title;
             $pageBodyURL = 'views/'.$view.'.php';
             
-            include __DIR__.'/../index.php';
+            include __DIR__.'/../public/index.php';
 
         }
 

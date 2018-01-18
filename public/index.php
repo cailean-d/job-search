@@ -38,7 +38,7 @@
             <!-- загрузка основного части страницы -->
             <?php 
             
-                include($pageBodyURL);
+                include(__DIR__.'/../'. $pageBodyURL);
             
             ?>
             
