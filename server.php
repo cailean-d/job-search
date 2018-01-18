@@ -82,7 +82,7 @@
         // $avatar = Experience::getAll();
         // $avatar = new Experience("eqeq", "13", "new post", "new company", "new city", "3", "Январь 2012 - Сентябрь 2014", "new functions");
 
-        $avatar = Vacancy::getPublished();
+        $avatar = Vacancy::getCities();
 
         echo "<pre>";
         var_dump($avatar);

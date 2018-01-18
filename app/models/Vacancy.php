@@ -392,8 +392,18 @@
         public static function getCities(){
 
             self::applyConfig();
+
+            $a = array();
             
-            return Database::run('SELECT DISTINCT location FROM '. self::$table);
+            $res = Database::run('SELECT DISTINCT location FROM '. self::$table);
+
+            foreach($res as $r){
+
+                array_push($a, $r['location']);
+
+            }
+
+            return $a;
 
         }
 
@@ -434,6 +444,28 @@
             }
 
             return $vacancyAll;
+
+        }
+
+        public static function getMaxSalary(){
+
+            self::applyConfig();
+            
+            $res = Database::run('SELECT MAX(salary_max) as MAX FROM '. self::$table.
+                                ' WHERE status= ?', ['1']);
+
+            return $res[0]['MAX'];
+
+        }
+
+        public static function getMinSalary(){
+
+            self::applyConfig();
+            
+            $res = Database::run('SELECT MIN(salary_min) as MIN FROM '. self::$table.
+                                ' WHERE status=? ', ['1']);
+
+            return $res[0]['MIN'];
 
         }
 
