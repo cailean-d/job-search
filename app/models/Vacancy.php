@@ -389,6 +389,14 @@
 
         }
 
+        public static function getCities(){
+
+            self::applyConfig();
+            
+            return Database::run('SELECT DISTINCT location FROM '. self::$table);
+
+        }
+
         public static function getPublished(){
             
             self::applyConfig();
