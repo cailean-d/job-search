@@ -125,6 +125,33 @@
             );
 
         }
+        
+        public static function getAll(){
+
+            self::applyConfig();
+
+            $dataAll = array();
+
+            $data = Database::run('SELECT * FROM '. self::$table);
+
+            foreach($data as $d){
+
+                array_push($dataAll,
+
+                new User(
+                    $d['id'],
+                    $d['firstname'],
+                    $d['lastname'],
+                    $d['email'],
+                    $d['password'],
+                    $d['type']
+                ));
+
+            }
+
+            return $dataAll;
+
+        }
 
         public function create(){
 

@@ -70,6 +70,30 @@
 
         }
 
+        public static function getAll(){
+
+            self::applyConfig();
+
+            $dataAll = array();
+
+            $data = Database::run('SELECT * FROM '. self::$table);
+
+            foreach($data as $d){
+
+                array_push($dataAll,
+
+                new Avatar(
+                    $d['id'],
+                    $d['user_id'],
+                    $d['source']
+                ));
+
+            }
+
+            return $dataAll;
+
+        }
+
         public function create(){
 
             $this->validate();
