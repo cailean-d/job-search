@@ -3,47 +3,46 @@
     <!-- ************************************************************ -->
     <!--                      Список вакансий                         -->
     <!-- ************************************************************ -->
-
+    
     <?php 
-    include('scripts/read/get_vacancies.php');
-    if(!isset($is_result)) : ?>
+    if(count($vacancies) == 0) : ?>
         <div class="alert alert-info" role="alert">
             <strong>Вакансий нет.</strong>
         </div>
     <?php else : 
-        foreach($result as $res) :?>
+        foreach($vacancies as $vacancy) :?>
             <div class="card mb-4">
                 <div class="card-block">
                     <article class='vacancy'>
                         <header>
                             <div class="top">
                                 <div class='title'>
-                                    <a href='vacancy/<?=$res['id']?>'><?=$res['vacancy']?></a>
+                                    <a href='vacancy/<?=$vacancy->getId()?>'><?=$vacancy->getVacancyName()?></a>
                                 </div>
                                 <div class='salary'>
                                     <span>
-                                        <?=$res['salary_min']?><?=(!empty($res['salary_max'])) ? "-".$res['salary_max'] : ""?>р.
+                                        <?=$vacancy->getSalaryMin()?><?=(!empty($vacancy->getSalaryMax())) ? "-".$vacancy->getSalaryMax(): ""?>р.
                                     </span>
                                 </div>
                             </div>
                             <div class="bottom">
                                 <div>
-                                    в компанию <span class="company">"<?=$res['company']?>"</span>
+                                    в компанию <span class="company">"<?=$vacancy->getCompany()?>"</span>
                                 </div>
                                 <div>
-                                    график: <span class="emp"><?=mb_strtolower($res['schedule_name'], "UTF-8")?></span>
+                                    график: <span class="emp"><?=mb_strtolower($vacancy->getScheduleName(), "UTF-8")?></span>
                                 </div>
                             </div>
                         </header>
                         <p>
-                            <span class="dem">Требования: </span><?=str_replace(",", ", ", mb_strtolower($res['demands'], 'UTF-8'))?>
+                            <span class="dem">Требования: </span><?=str_replace(",", ", ", mb_strtolower($vacancy->getDemands(), 'UTF-8'))?>
                         </p>
                         <footer>
                             <div>
-                                <?=$res['location']?>
+                                <?=$vacancy->getLocation();?>
                             </div>
                             <div>
-                                <?=date("d.m.Y H:i:s", strtotime($res['date']));?>
+                                <?=date("d.m.Y H:i:s", strtotime($vacancy->getDate()));?>
                             </div>
                         </footer>
                     </article>
@@ -59,7 +58,6 @@
     <!--                        Фильтры                               -->
     <!-- ************************************************************ -->
 
-    <?php include('scripts/read/get_filter_data.php');?>
     <div class="card">
         <div class="card-block bg-faded">
             <h5 class="text-center">Фильтры</h5>
@@ -72,9 +70,9 @@
                 <div class="option">
                     <label>Зарплата :</label>
                     <span id="salary-view">
-                        <?=$min_salary_interval . " - " . $max_salary_interval?></span><span> p.
+                        <?=$minSalaryInterval . " - " . $maxSalaryInterval?></span><span> p.
                     </span>
-                    <input id="salary" type="text" class="span2" value="" data-slider-min="0" data-slider-max="<?=$max_salary_interval?>" data-slider-step="5000" data-slider-value="[<?=$min_salary_interval?>,<?=$max_salary_interval?>]"/>
+                    <input id="salary" type="text" class="span2" value="" data-slider-min="0" data-slider-max="<?=$maxSalaryInterval?>" data-slider-step="5000" data-slider-value="[<?=$minSalaryInterval?>,<?=$maxSalaryInterval?>]"/>
                 </div>
                 <div class="option industry">
                     <label>Отрасль :</label>
@@ -82,10 +80,10 @@
                         <option value="-1">Не имеет значения</option>
                         <?php foreach($industry as $res) :?>
                             <option 
-                            value="<?=$res['id']?>"
-                            <?=($_GET['industry'] == $res['id']) ? 'selected' : '' ?>
+                            value="<?=$res->getId()?>"
+                            <?=($_GET['industry'] == $res->getId()) ? 'selected' : '' ?>
                             >
-                                <?=$res['industry_name']?>
+                                <?=$res->getName()?>
                             </option>
                         <? endforeach ?>
                     </select>
@@ -95,10 +93,10 @@
                     <select name="location" class="form-control custom-select">
                         <option value="-1">Любой город</option>
                         <?php foreach($cities as $res): ?>
-                            <option value=<?=$res['location']?>
-                            <?=($_GET['location'] == $res['location']) ? 'selected' : '' ?>
+                            <option value=<?=$res?>
+                            <?=($_GET['location'] == $res) ? 'selected' : '' ?>
                             >
-                            <?=$res['location']?>
+                            <?=$res?>
                             </option>
                         <?php endforeach ?>
                     </select>
@@ -118,10 +116,10 @@
                     <select name="schedule" class="form-control custom-select">
                         <option value="-1">Не имеет значения</option>
                         <?php foreach($schedule as $res): ?>
-                            <option value=<?=$res['id']?>
-                            <?=($_GET['schedule'] == $res['id']) ? 'selected' : '' ?>
+                            <option value=<?=$res->getId()?>
+                            <?=($_GET['schedule'] == $res->getId()) ? 'selected' : '' ?>
                             >
-                            <?=$res['schedule_name']?>
+                            <?=$res->getName()?>
                             </option>
                         <?php endforeach ?>
                     </select>

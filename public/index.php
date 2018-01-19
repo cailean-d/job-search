@@ -24,7 +24,7 @@
     
     <!-- inject:css -->
     <!-- endinject -->
-    <title><?=$pageTitle?></title>
+    <title><?=$title?></title>
 </head>
 <body>
 
@@ -38,7 +38,7 @@
             <!-- загрузка основного части страницы -->
             <?php 
             
-                include(__DIR__.'/../'. $pageBodyURL);
+                include(__DIR__.'/../'. $body);
             
             ?>
             

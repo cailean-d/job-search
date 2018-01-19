@@ -1,7 +1,7 @@
 <?php
 
-    require __DIR__.'/../core/Database.php';
-    require __DIR__.'/../core/Model.php';
+    require_once __DIR__.'/../core/Database.php';
+    require_once __DIR__.'/../core/Model.php';
 
     final class Vacancy extends Model {
 
@@ -23,6 +23,7 @@
         private $description;
         private $status;
         private $date;
+        private $scheduleName;
 
         public function __construct($id = null, $senderName = null, $senderId = null, 
                                     $email = null, $company = null, $phone = null, 
@@ -30,7 +31,7 @@
                                     $experience = null, $location = null, $scheduleId = null, 
                                     $industryId = null, $demands = null, $duties = null, 
                                     $conditions = null, $description = null, $status = null, 
-                                    $date = null){
+                                    $date = null, $scheduleName = null){
 
             self::applyConfig();
 
@@ -53,6 +54,7 @@
             $this->description = htmlspecialchars(trim($description));
             $this->status = htmlspecialchars(trim($status));
             $this->date = htmlspecialchars(trim($date));
+            $this->scheduleName = htmlspecialchars(trim($scheduleName));
 
         }
 
@@ -126,6 +128,10 @@
 
         public function getDate(){
             return $this->date;
+        }
+
+        public function getScheduleName(){
+            return $this->scheduleName;
         }
 
         public function setSenderName($senderName){
@@ -381,6 +387,47 @@
                     $vac['description'],
                     $vac['status'],
                     $vac['date']
+                ));
+
+            }
+
+            return $vacancyAll;
+
+        }
+
+        public static function getFiltered(){
+           
+            self::applyConfig();
+
+            $vacancyAll = array();
+
+            $vacancy = Database::run(self::getFilteredSQL());
+
+            foreach($vacancy as $vac){
+
+                array_push($vacancyAll,
+
+                new Vacancy(
+                    $vac['id'],
+                    $vac['sender_name'],
+                    $vac['sender_id'],
+                    $vac['email'],
+                    $vac['company'],
+                    $vac['phone'],
+                    $vac['vacancy'],
+                    $vac['salary_min'],
+                    $vac['salary_max'],
+                    $vac['exp'],
+                    $vac['location'],
+                    $vac['schedule'],
+                    $vac['industry'],
+                    $vac['demands'],
+                    $vac['duties'],
+                    $vac['conditions'],
+                    $vac['description'],
+                    $vac['status'],
+                    $vac['date'],
+                    $vac['schedule_name']
                 ));
 
             }
@@ -675,6 +722,95 @@
             if(!is_null($this->description) && !preg_match($REGEXP_company, $this->description)){
                 throw new Exception('description');
             }
+
+        }
+
+        private static function getFilteredSQL(){
+                        
+            $sort = 'date';
+            $salary = '';
+            $industry = '';
+            $location = '';
+            $time = '';
+            $schedule = '';        
+            $query = '';
+        
+        
+            if($_GET['sort'] && $_GET['sort'] == 'salary'){
+                $sort = 'salary_min';
+            } 
+        
+            if($_GET['time']){
+                if($_GET['time'] == '1'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 1 DAY )';
+                } else if($_GET['time'] == '3'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 3 DAY )';
+                } else if($_GET['time'] == '7'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 7 DAY )';
+                } else if($_GET['time'] == '30'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 30 DAY )';
+                } else {
+                    $time =  '';
+                }
+            }
+        
+            if($_GET['salary']){
+                if($_GET['salary'] == '-1'){
+                    $salary = '';
+                } else{
+                    $salary = ' AND `salary_min` >='.$_GET['salary'];
+                } 
+            }
+        
+            if($_GET['industry']){
+                if($_GET['industry'] == '-1'){
+                    $industry = '';
+                } else{
+                    $industry = ' AND `industry`='.$_GET['industry'];
+                } 
+            }
+        
+            if($_GET['schedule']){
+                if($_GET['schedule'] == '-1'){
+                    $schedule = '';
+                } else{
+                    $schedule = ' AND `schedule`='.$_GET['schedule'];
+                } 
+            }
+        
+            if($_GET['location']){
+                if($_GET['location'] == '-1'){
+                    $location = '';
+                } else{
+                    $location = ' AND `location`="'.$_GET['location'].'"';
+                } 
+            }
+        
+            if($_GET['query']){
+                $query = " AND 
+                        `vacancy` LIKE '%".$_GET['query']."%' 
+                        OR 
+                        `description` LIKE '%".$_GET['query']."%'
+                        ";
+            }
+        
+            $sql = '
+                SELECT 
+                vacancies.*,
+                schedule.schedule_name
+                FROM `vacancies` 
+                LEFT JOIN schedule ON vacancies.schedule = schedule.id
+                WHERE status="1"
+                '.$salary.'
+                '.$industry.'
+                '.$location.'
+                '.$time.'
+                '.$schedule.'
+                '.$query.'
+                ORDER BY '.$sort.' DESC
+            ';
+
+            return $sql;
 
         }
 

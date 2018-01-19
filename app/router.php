@@ -1,10 +1,11 @@
 <?php
 
-    require __DIR__.'/core/Router.php';
+    require_once __DIR__.'/core/Router.php';
+    require_once __DIR__.'/controllers/VacanciesController.php';
 
     Router::get("", function($vars){
-        
-        Router::renderView("Вакансии", "vacancies");
+
+        VacanciesController::init();
     
     });
 
@@ -72,7 +73,7 @@
     Router::get("test", function($vars){
 
         // require __DIR__.'/app/models/User.php';
-        require __DIR__.'/core/View.php';
+        // require __DIR__.'/core/View.php';
 
 
         // $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");
@@ -82,7 +83,7 @@
 
         // $avatar = Resume::getAll();
 
-        $avatar = new View("QWERTY", "404");
+        // $avatar = new View("QWERTYQQWE", "404");
 
         // $avatar->render();
 

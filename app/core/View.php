@@ -6,6 +6,8 @@
         private $view;
         private $folder;
 
+        protected function viewAccess(){}
+
         public function __construct($title, $view){
 
             $this->applyConfig();
@@ -23,14 +25,18 @@
             return $this->folder;
         }
 
-        protected function access(){}
+        public function render(array $data = null){
 
-        public function render(){
-
-            $this->access();
+            $this->viewAccess();
 
             $title = $this->title;
             $body = $this->folder.'/'.$this->view.'.php';
+
+            if(!is_null($data)) {
+
+                extract($data);
+            
+            }
             
             include __DIR__.'/../../public/index.php';
 
