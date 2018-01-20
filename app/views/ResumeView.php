@@ -1,29 +1,42 @@
-<?php include('scripts/read/get_resume.php'); ?>
+<?php if(count($resume) == 0) : ?>
 
-<?php if(!isset($is_result)) : ?>
+
     <div class="mx-auto">
-        <?php if($_SESSION['id'] == $id) : ?>
+
+
+        <?php if($user['id'] == $router['id']) : ?>
+
+
             <div class="alert alert-info" role="alert">
                 <strong>Вы еще не заполнили резюме.</strong>
             </div>
             <a class="btn btn-outline-primary btn-lg btn-block" href="resume/add" role="button">
                 Заполнить резюме
             </a>
+
+
         <? else : ?>
+
+
             <div class="alert alert-info" role="alert">
                 <strong>Пользователь еще не создал резюме.</strong>
             </div>
+
+
         <? endif ?>
     </div>
+
+
 <?php else : ?>
-    <?php include('scripts/read/get_resume_secondary_data.php'); ?>
-    <div class="mx-auto d-flex <?php if($_SESSION['id'] != $id){echo 'justify-content-center';} ?>">
+
+
+    <div class="mx-auto d-flex w-100 <?php if($user['id'] != $router['id']){echo 'justify-content-center';}?>">
         <div class="col-9 mb-4">
             <div class="card">
                 <div class="card-block bg-faded">
                     <div class="d-flex">
                         <div class="avatar pl-0 col-4 minw-30">
-                            <img src="../<?=$avatar_data['source']?>" alt="" class="img-thumbnail rounded">
+                            <img src="<?=$avatar?>" alt="" class="img-thumbnail rounded">
                         </div>
                         <div class="info pl-2 pr-0">
                             <h4>Личная информация</h4>
@@ -32,22 +45,22 @@
                                     <tr>
                                         <th scope="row" class="text-muted w-35">Ф.И.О.</th>
                                         <td>
-                                            <?=$resume_data['lastname']?> 
-                                            <?=$resume_data['firstname']?> 
-                                            <?=$resume_data['patronymic']?>
+                                            <?=$resume->getLastname()?> 
+                                            <?=$resume->getFirstname()?> 
+                                            <?=$resume->getPatronymic()?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Пол</th>
-                                        <td><?=$resume_data['gender']?></td>
+                                        <td><?=$resume->getGender()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Дата рождения</th>
-                                        <td><?=$resume_data['birthday']?> г.</td>
+                                        <td><?=$resume->getBirthday()?> г.</td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Город</th>
-                                        <td><?=$resume_data['city']?></td>
+                                        <td><?=$resume->getCity()?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -59,11 +72,11 @@
                             <tbody>
                                 <tr>
                                     <th scope="row" class="text-muted w-35">Телефон</th>
-                                    <td><?=$resume_data['phone']?></td>
+                                    <td><?=$resume->getPhone()?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-muted">Email</th>
-                                    <td><?=$resume_data['email']?></td>
+                                    <td><?=$resume->getEmail()?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -74,86 +87,86 @@
                             <tbody>
                                 <tr>
                                     <th scope="row" class="text-muted w-35">Должность</th>
-                                    <td><?=$resume_data['post']?></td>
+                                    <td><?=$resume->getPost()?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-muted">Отрасль</th>
-                                    <td><?=$resume_data['industry_name']?></td>
+                                    <td><?=$resume->getIndustryName()?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-muted">График работы</th>
-                                    <td><?=$resume_data['schedule_name']?></td>
+                                    <td><?=$resume->getScheduleName()?></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-muted">Зарплата</th>
-                                    <td><?= number_format($resume_data['salary'], 0, ',', ' ')?> р.</td>
+                                    <td><?= number_format($resume->getSalary(), 0, ',', ' ')?> р.</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-muted">Место работы</th>
-                                    <td><?=$resume_data['work_place_name']?></td>
+                                    <td><?=$resume->getWorkPlaceName()?></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <?php foreach ($education_data as $key => $edu) : ?>
+                    <?php foreach ($education as $key => $edu) : ?>
                         <div class="mt-4">
                             <h4>Образование #<?=$key+1?></h4>
                             <table class="table resume-info">
                                 <tbody>
                                     <tr>
                                         <th scope="row" class="text-muted w-35">Уровень образования</th>
-                                        <td><?=$edu['education_name']?></td>
+                                        <td><?=$edu->getLevelName()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Учебное заведение</th>
-                                        <td><?=$edu['inst']?></td>
+                                        <td><?=$edu->getInstitute()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Город</th>
-                                        <td><?=$edu['city']?></td>
+                                        <td><?=$edu->getCity()?></td>
                                     </tr>
-                                    <?php if(!empty($edu['faculty'])) : ?>
+                                    <?php if(!empty($edu->getFaculty())) : ?>
                                     <tr>
                                         <th scope="row" class="text-muted">Факультет</th>
-                                        <td><?=$edu['faculty']?></td>
+                                        <td><?=$edu->getFaculty()?></td>
                                     </tr>
                                     <?php endif ?>
                                     <tr>
                                         <th scope="row" class="text-muted">Период учебы</th>
-                                        <td><?=$edu['study_period']?> гг.</td>
+                                        <td><?=$edu->getStudyPeriod()?> гг.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     <?php endforeach ?>
-                    <?php foreach ($experience_data as $key => $exp) : ?>
+                    <?php foreach ($experience as $key => $exp) : ?>
                         <div class="mt-4">
                             <h4>Опыт работы #<?=$key+1?></h4>
                             <table class="table resume-info">
                                 <tbody>
                                     <tr>
                                         <th scope="row" class="text-muted w-35">Должность</th>
-                                        <td><?=$exp['post']?></td>
+                                        <td><?=$exp->getPost()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Компания</th>
-                                        <td><?=$exp['company']?></td>
+                                        <td><?=$exp->getCompany()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Город</th>
-                                        <td><?=$exp['city']?></td>
+                                        <td><?=$exp->getCity()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Отрасль</th>
-                                        <td><?=$exp['industry_name']?></td>
+                                        <td><?=$exp->getIndustryName()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Период работы</th>
-                                        <td><?=$exp['work_period']?></td>
+                                        <td><?=$exp->getWorkPeriod()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Функции</th>
-                                        <td><?=$exp['functions']?></td>
+                                        <td><?=$exp->getFunctions()?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -163,34 +176,34 @@
                         <h4>Дополнительная информация</h4>
                         <table class="table resume-info">
                             <tbody>
-                                <?php if(!empty($langs)) : ?>
+                                <?php if(!empty($language)) : ?>
                                 <tr>
                                     <th scope="row" class="text-muted">Владение языками</th>
-                                    <td><?=$langs?></td>
+                                    <td><?=$language?></td>
                                 </tr>
                                 <?php endif ?>
-                                <?php if(!empty($resume_data['cs_name'])) :?>
+                                <?php if(!empty($resume->getCompSkillName())) :?>
                                     <tr>
                                         <th scope="row" class="text-muted w-35">Владение компьютером</th>
-                                        <td><?=$resume_data['cs_name']?></td>
+                                        <td><?=$resume->getCompSkillName()?></td>
                                     </tr>
                                 <?php endif ?>
-                                <?php if(!empty($resume_data['car'])) : ?>
+                                <?php if(!empty($resume->getCar())) : ?>
                                     <tr>
                                         <th scope="row" class="text-muted">Наличие автомобиля</th>
-                                        <td><?=$resume_data['car']?></td>
+                                        <td><?=$resume->getCar()?></td>
                                     </tr>
                                 <?php endif ?>
-                                <?php if(!empty($resume_data['courses'])) :?>
+                                <?php if(!empty($resume->getCourses())) :?>
                                     <tr>
                                         <th scope="row" class="text-muted">Навыки</th>
-                                        <td><?=$resume_data['courses']?></td>
+                                        <td><?=$resume->getCourses()?></td>
                                     </tr>
                                 <?php endif ?>
-                                <?php if(!empty($resume_data['skills'])) :?>
+                                <?php if(!empty($resume->getSkills())) :?>
                                     <tr>
                                         <th scope="row" class="text-muted">Пройденные курсы</th>
-                                        <td><?=$resume_data['skills']?></td>
+                                        <td><?=$resume->getSkills()?></td>
                                     </tr>
                                 <?php endif ?>
                             </tbody>
@@ -199,7 +212,12 @@
                 </div>
             </div>
         </div>
-        <?php if($_SESSION['id'] == $id) : ?>
+
+
+
+        <?php if($user['id'] == $router['id']) : ?>
+
+
             <div class="col-3">
                 <a class="btn btn-primary btn-lg btn-block" href="resume/edit" role="button">
                     Редактировать
@@ -208,6 +226,8 @@
                     Удалить
                 </a>
             </div>
+
+
         <? endif ?>
     </div>
 <?php endif ?>

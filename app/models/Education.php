@@ -12,8 +12,10 @@
         private $faculty;
         private $studyPeriod;
 
+        private $levelName;
+
         public function __construct($id = null, $userid = null, $levelId = null, $institute = null,
-                                    $city = null, $faculty = null, $studyPeriod = null){
+                                    $city = null, $faculty = null, $studyPeriod = null, $levelName = null){
 
             self::applyConfig();
 
@@ -24,6 +26,7 @@
             $this->city = htmlspecialchars(trim($city));
             $this->faculty = htmlspecialchars(trim($faculty));
             $this->studyPeriod = htmlspecialchars(trim($studyPeriod));
+            $this->levelName = htmlspecialchars(trim($levelName));
 
         }
 
@@ -49,6 +52,10 @@
 
         public function getStudyPeriod(){
             return $this->studyPeriod;
+        }
+
+        public function getLevelName(){
+            return $this->levelName;
         }
 
         public function setUserId($userid){
@@ -144,6 +151,41 @@
                     $edu['city'],
                     $edu['faculty'],
                     $edu['study_period']
+                ));
+
+            }
+
+            return $educationAll;
+
+        }
+
+        public static function getJoinedByUserid($id){
+
+            self::applyConfig();
+
+            $educationAll = array();
+
+            $education = Database::run('
+                SELECT 
+                '. self::$table .'.*,
+                education.education_name
+                FROM '. self::$table .'
+                LEFT JOIN education ON '. self::$table .'.level_id = education.id
+                WHERE user_id = ?', [$id]);
+
+            foreach($education as $edu){
+
+                array_push($educationAll,
+
+                new Education(
+                    $edu['id'],
+                    $edu['user_id'],
+                    $edu['level_id'],
+                    $edu['inst'],
+                    $edu['city'],
+                    $edu['faculty'],
+                    $edu['study_period'],
+                    $edu['education_name']
                 ));
 
             }

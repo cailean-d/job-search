@@ -2,6 +2,7 @@
 
     require_once __DIR__.'/core/Router.php';
     require_once __DIR__.'/controllers/VacanciesController.php';
+    require_once __DIR__.'/controllers/ResumeController.php';
 
     Router::get("", function($router){
 
@@ -9,16 +10,15 @@
     
     });
 
-    Router::get("resume", function($vars){
+    Router::get("resume", function($router){
         
-        Router::renderView("Мое резюме", "resume_show");
+        ResumeController::init(get_defined_vars());
     
     });
 
-    Router::get("resume/:id{number}", function($vars){
+    Router::get("resume/:id{number}", function($router){
 
-        $_GET['id'] = $vars['id'];
-        Router::renderView("Резюме", "resume_show");
+        ResumeController::init(get_defined_vars());
     
     });
 

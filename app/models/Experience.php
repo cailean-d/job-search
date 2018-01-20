@@ -13,9 +13,11 @@
         private $workPeriod;
         private $functions;
 
+        private $industryName;
+
         public function __construct($id = null, $userid = null, $post = null, 
                                     $company = null, $city = null, $industryId = null, 
-                                    $workPeriod = null, $functions = null){
+                                    $workPeriod = null, $functions = null, $industryName = null){
 
             self::applyConfig();
 
@@ -27,6 +29,7 @@
             $this->industryId = htmlspecialchars(trim($industryId));
             $this->workPeriod = htmlspecialchars(trim($workPeriod));
             $this->functions = htmlspecialchars(trim($functions));
+            $this->industryName = htmlspecialchars(trim($industryName));
 
         }
 
@@ -56,6 +59,10 @@
 
         public function getFunctions(){
             return $this->functions;
+        }
+
+        public function getIndustryName(){
+            return $this->industryName;
         }
 
         public function setUserId($userid){
@@ -190,6 +197,42 @@
                     $exp['industry_id'],
                     $exp['work_period'],
                     $exp['functions']
+                ));
+
+            }
+
+            return $experienceAll;
+
+        }
+
+        public static function getJoinedByUserid($id){
+            
+            self::applyConfig();
+
+            $experienceAll = array();
+
+            $experience = Database::run('
+                SELECT 
+                '. self::$table .'.*,
+                industry.industry_name
+                FROM '. self::$table .'
+                LEFT JOIN industry ON '. self::$table .'.industry_id = industry.id
+                WHERE user_id = ?', [$id]);
+
+            foreach($experience as $exp){
+
+                array_push($experienceAll,
+
+                new Experience(
+                    $exp['id'],
+                    $exp['user_id'],
+                    $exp['post'],
+                    $exp['company'],
+                    $exp['city'],
+                    $exp['industry_id'],
+                    $exp['work_period'],
+                    $exp['functions'],
+                    $exp['industry_name']
                 ));
 
             }

@@ -23,6 +23,7 @@
         private $description;
         private $status;
         private $date;
+        
         private $scheduleName;
 
         public function __construct($id = null, $senderName = null, $senderId = null, 

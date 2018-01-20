@@ -16,6 +16,16 @@
         private static $data;
 
         public static function getData(array $routerVars = null){
+                       
+            if($routerVars){
+
+                foreach ($routerVars as $key => $value) {
+                    
+                    self::$data[$key] = $value;
+
+                }
+
+            }
 
             self::$data['schedule'] = HelperSchedule::getAll();
             self::$data['industry'] = HelperIndustry::getAll();
@@ -32,17 +42,7 @@
             self::$data['filter']['location'] = $_GET['location'];
             self::$data['filter']['time'] = $_GET['time'];
             self::$data['filter']['schedule'] = $_GET['schedule'];
-            
-            if($routerVars){
-
-                foreach ($routerVars as $key => $value) {
-                    
-                    self::$data[$key] = $value;
-
-                }
-
-            }
-
+ 
         }
 
         public static function setAccess(){

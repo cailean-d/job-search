@@ -24,6 +24,11 @@
         private $courses;
         private $skills;
 
+        private $industryName;
+        private $scheduleName;
+        private $workPlaceName;
+        private $compSkillName;
+
         public function __construct($id = null,
                                         $userid = null,
                                         $firstname = null,
@@ -42,7 +47,11 @@
                                         $compSkillId = null,
                                         $car = null,
                                         $courses = null,
-                                        $skills = null){
+                                        $skills = null,
+                                        $industryName = null,
+                                        $scheduleName = null,
+                                        $workPlaceName = null,
+                                        $compSkillName = null){
 
             self::applyConfig();
 
@@ -65,6 +74,10 @@
             $this->car = htmlspecialchars(trim($car));
             $this->courses = htmlspecialchars(trim($courses));
             $this->skills = htmlspecialchars(trim($skills));
+            $this->industryName = htmlspecialchars(trim($industryName));
+            $this->scheduleName = htmlspecialchars(trim($scheduleName));
+            $this->workPlaceName = htmlspecialchars(trim($workPlaceName));
+            $this->compSkillName = htmlspecialchars(trim($compSkillName));
         }
 
         public function getUserid(){
@@ -137,6 +150,22 @@
 
         public function getSkills(){
             return $this->skills;
+        }
+
+        public function getIndustryName(){
+            return $this->industryName;
+        }
+
+        public function getScheduleName(){
+            return $this->scheduleName;
+        }
+
+        public function getWorkPlaceName(){
+            return $this->workPlaceName;
+        }
+
+        public function getCompSkillName(){
+            return $this->compSkillName;
         }
         
         public function setUserid($userid){
@@ -357,6 +386,53 @@
             }
 
             return $dataAll;
+
+        }
+
+        public static function getJoinedByUserId($userid){
+
+            
+            self::applyConfig();
+
+            $data = Database::run('
+                    SELECT 
+                    '. self::$table .'.*,
+                    schedule.schedule_name,
+                    industry.industry_name,
+                    work_place.work_place_name,
+                    comp_skills.cs_name
+                    FROM '. self::$table .' 
+                    LEFT JOIN schedule ON '. self::$table .'.schedule_id = schedule.id
+                    LEFT JOIN industry ON '. self::$table .'.industry_id = industry.id 
+                    LEFT JOIN work_place ON '. self::$table .'.work_place_id = work_place.id 
+                    LEFT JOIN comp_skills ON '. self::$table .'.comp_skill_id = comp_skills.id 
+                    WHERE user_id = ?', [$userid]);
+
+            return new Resume(
+                $data[0]['id'],
+                $data[0]['user_id'],
+                $data[0]['firstname'],
+                $data[0]['lastname'],
+                $data[0]['patronymic'],
+                $data[0]['gender'],
+                $data[0]['birthday'],
+                $data[0]['city'],
+                $data[0]['phone'],
+                $data[0]['email'],
+                $data[0]['post'],
+                $data[0]['industry_id'],
+                $data[0]['schedule_id'],
+                $data[0]['salary'],
+                $data[0]['work_place_id'],
+                $data[0]['comp_skill_id'],
+                $data[0]['car'],
+                $data[0]['courses'],
+                $data[0]['skills'],
+                $data[0]['industry_name'],
+                $data[0]['schedule_name'],
+                $data[0]['work_place_name'],
+                $data[0]['cs_name']
+            );
 
         }
 

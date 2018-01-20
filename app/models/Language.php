@@ -9,7 +9,10 @@
         private $langId;
         private $langLevel;
 
-        public function __construct($id = null, $userid = null, $langId = null, $langLevel = null){
+        private $langName;
+
+        public function __construct($id = null, $userid = null, 
+                                    $langId = null, $langLevel = null, $langName = null){
 
             self::applyConfig();
 
@@ -17,6 +20,7 @@
             $this->userid = htmlspecialchars(trim($userid));
             $this->langId = htmlspecialchars(trim($langId));
             $this->langLevel = htmlspecialchars(trim($langLevel));
+            $this->langName = htmlspecialchars(trim($langName));
 
         }
 
@@ -30,6 +34,10 @@
 
         public function getLangLevel(){
             return $this->langLevel;
+        }
+
+        public function getLangName(){
+            return $this->langName;
         }
 
         public function setUserid($userid){
@@ -120,6 +128,38 @@
                     $lang['user_id'],
                     $lang['lang_id'],
                     $lang['lang_level']
+                ));
+
+            }
+
+            return $languageAll;
+
+        }
+
+        public static function getJoinedByUserid($id){
+
+            self::applyConfig();
+
+            $languageAll = array();
+
+            $language = Database::run('
+                        SELECT 
+                        '. self::$table .'.*,
+                        languages.lang_name
+                        FROM '. self::$table .'
+                        LEFT JOIN languages ON '. self::$table .'.lang_id = languages.id
+                        WHERE user_id = ?', [$id]);
+
+            foreach($language as $lang){
+
+                array_push($languageAll,
+
+                new Language(
+                    $lang['id'],
+                    $lang['user_id'],
+                    $lang['lang_id'],
+                    $lang['lang_level'],
+                    $lang['lang_name']
                 ));
 
             }
