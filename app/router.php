@@ -3,9 +3,9 @@
     require_once __DIR__.'/core/Router.php';
     require_once __DIR__.'/controllers/VacanciesController.php';
 
-    Router::get("", function($vars){
+    Router::get("", function($router){
 
-        VacanciesController::init();
+        VacanciesController::init(get_defined_vars());
     
     });
 

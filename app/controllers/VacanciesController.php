@@ -12,81 +12,74 @@
 
     final class VacanciesController extends Controller{
 
-        private static $schedule;
-        private static $industry;
-        private static $workPlace;
-        private static $education;
-        private static $compSkills;
-        private static $languages;
-        private static $cities;
-        private static $minSalary;
-        private static $maxSalary;
-        private static $vacancies;
+        private static $view;
+        private static $data;
 
-        private static $minSalaryInterval;
-        private static $maxSalaryInterval;
+        public static function getData(array $routerVars = null){
 
-        public static function setData(){
+            self::$data['schedule'] = HelperSchedule::getAll();
+            self::$data['industry'] = HelperIndustry::getAll();
+            self::$data['workPlace'] = HelperWorkPlace::getAll();
+            self::$data['education'] = HelperEducation::getAll();
+            self::$data['compSkills'] = HelperCompSkill::getAll();
+            self::$data['languages'] = HelperLanguage::getAll();
+            self::$data['cities'] = Vacancy::getCities();
+            self::$data['minSalary'] = Vacancy::getMinSalary();
+            self::$data['maxSalary'] = Vacancy::getMaxSalary();
+            self::$data['vacancies'] = Vacancy::getFiltered();
+            self::$data['filter']['query'] = $_GET['query'];
+            self::$data['filter']['industry'] = $_GET['industry'];
+            self::$data['filter']['location'] = $_GET['location'];
+            self::$data['filter']['time'] = $_GET['time'];
+            self::$data['filter']['schedule'] = $_GET['schedule'];
+            
+            if($routerVars){
 
-            self::$schedule = HelperSchedule::getAll();
-            self::$industry = HelperIndustry::getAll();
-            self::$workPlace = HelperWorkPlace::getAll();
-            self::$education = HelperEducation::getAll();
-            self::$compSkills = HelperCompSkill::getAll();
-            self::$languages = HelperLanguage::getAll();
-            self::$cities = Vacancy::getCities();
-            self::$minSalary = Vacancy::getMinSalary();
-            self::$maxSalary = Vacancy::getMaxSalary();
-            self::$vacancies = Vacancy::getFiltered();
+                foreach ($routerVars as $key => $value) {
+                    
+                    self::$data[$key] = $value;
+
+                }
+
+            }
+
+        }
+
+        public static function setAccess(){
+
+            return true;
+
+        }
+
+        public static function init(array $routerVars = null){
+
+            self::$view = new View('Вакансии', 'VacanciesView');
+
+            self::getData($routerVars);
+
+            self::setSalaryInterval();
+
+            self::setAccess();
+
+            self::$view->render(self::$data);
 
         }
 
         private static function setSalaryInterval(){
     
-            if((int)self::$minSalary % 5000 != 0){
-                $a = (int)self::$minSalary / 5000;
-                self::$minSalaryInterval = 5000 * (int)$a;
+            if((int)self::$data['minSalary'] % 5000 != 0){
+                $a = (int)self::$data['minSalary'] / 5000;
+                self::$data['minSalaryInterval'] = 5000 * (int)$a;
             } else {
-                self::$minSalaryInterval = self::$minSalary;
+                self::$data['minSalaryInterval'] = self::$data['minSalary'];
             }
             
-            if((int)self::$maxSalary % 5000 != 0){
-                $a = (int)self::$maxSalary / 5000;
-                self::$maxSalaryInterval = 5000 * (int)++$a;
+            if((int)self::$data['maxSalary'] % 5000 != 0){
+                $a = (int)self::$data['maxSalary'] / 5000;
+                self::$data['maxSalaryInterval'] = 5000 * (int)++$a;
             } else {
-                self::$maxSalaryInterval = self::$maxSalary;
+                self::$data['maxSalaryInterval'] = self::$data['maxSalary'];
             }
-
-        }
-
-        private static function extractData(){
-
-            return array(
-
-                "schedule" => self::$schedule,
-                "industry" => self::$industry,
-                "workPlace" => self::$workPlace,
-                "education" => self::$education,
-                "compSkills" => self::$compSkills,
-                "languages" => self::$languages,
-                "cities" => self::$cities,
-                "minSalaryInterval" => self::$minSalaryInterval,
-                "maxSalaryInterval" => self::$maxSalaryInterval,
-                "vacancies" => self::$vacancies
-
-            );
-
-        }
-
-        public static function init(){
-
-            self::setData();
-
-            self::setSalaryInterval();
-
-            $view = new View('Вакансии', 'vacancies');
-
-            $view->render(self::extractData());
 
         }
 

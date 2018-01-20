@@ -6,9 +6,17 @@
         private $view;
         private $folder;
 
-        protected function viewAccess(){}
+        public function viewAccess(callable $callback = null){
 
-        public function __construct($title, $view){
+            if(isset($callback)){
+
+                $callback();
+
+            }
+
+        }
+
+        public function __construct($title = null, $view = null){
 
             $this->applyConfig();
 
@@ -19,6 +27,18 @@
 
         public function getView(){
             return $this->view;
+        }
+
+        public function getTitle(){
+            return $this->title;
+        }
+
+        public function setView($view){
+            $this->view = $view;
+        }
+
+        public function setTitle($title){
+            $this->title = $title;
         }
 
         public function getFolder(){

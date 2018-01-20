@@ -64,7 +64,7 @@
             <form id="filters">
                 <div class="option search">
                     <input name="query" type="text" placeholder="найти..."
-                        value="<?=($_GET['query']) ? $_GET['query'] : ''?>"
+                        value="<?=$filter['query']?>"
                     class="form-control">
                 </div>
                 <div class="option">
@@ -81,7 +81,7 @@
                         <?php foreach($industry as $res) :?>
                             <option 
                             value="<?=$res->getId()?>"
-                            <?=($_GET['industry'] == $res->getId()) ? 'selected' : '' ?>
+                            <?=($filter['industry'] == $res->getId()) ? 'selected' : '' ?>
                             >
                                 <?=$res->getName()?>
                             </option>
@@ -94,7 +94,7 @@
                         <option value="-1">Любой город</option>
                         <?php foreach($cities as $res): ?>
                             <option value=<?=$res?>
-                            <?=($_GET['location'] == $res) ? 'selected' : '' ?>
+                            <?=($filter['location'] == $res) ? 'selected' : '' ?>
                             >
                             <?=$res?>
                             </option>
@@ -104,11 +104,11 @@
                 <div class="option">
                     <label>Период : </label>
                     <select name="time" class="form-control custom-select">
-                        <option value="0"  <?=($_GET['time']=="0")  ? 'selected': ''?>>За все время</option>
-                        <option value="1"  <?=($_GET['time']=="1")  ? 'selected': ''?>>За последний день</option>
-                        <option value="3"  <?=($_GET['time']=="3")  ? 'selected': ''?>>За последние три дня</option>
-                        <option value="7"  <?=($_GET['time']=="7")  ? 'selected': ''?>>За последнюю неделю</option>
-                        <option value="30" <?=($_GET['time']=="30") ? 'selected': ''?>>За последний месяц</option>
+                        <option value="0"  <?=($filter['time']=="0")  ? 'selected': ''?>>За все время</option>
+                        <option value="1"  <?=($filter['time']=="1")  ? 'selected': ''?>>За последний день</option>
+                        <option value="3"  <?=($filter['time']=="3")  ? 'selected': ''?>>За последние три дня</option>
+                        <option value="7"  <?=($filter['time']=="7")  ? 'selected': ''?>>За последнюю неделю</option>
+                        <option value="30" <?=($filter['time']=="30") ? 'selected': ''?>>За последний месяц</option>
                     </select>
                 </div>
                 <div class="option">
@@ -117,7 +117,7 @@
                         <option value="-1">Не имеет значения</option>
                         <?php foreach($schedule as $res): ?>
                             <option value=<?=$res->getId()?>
-                            <?=($_GET['schedule'] == $res->getId()) ? 'selected' : '' ?>
+                            <?=($filter['schedule'] == $res->getId()) ? 'selected' : '' ?>
                             >
                             <?=$res->getName()?>
                             </option>
