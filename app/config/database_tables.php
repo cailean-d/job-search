@@ -16,16 +16,16 @@
 
         'vacancy' => 'vacancies',
 
-        'helperschedule' => 'schedule',
+        'helperschedule' => 'help_schedule',
 
-        'helperindustry' => 'industry',
+        'helperindustry' => 'help_industry',
 
-        'helperworkplace' => 'work_place',
+        'helperworkplace' => 'help_work_place',
 
-        'helpereducation' => 'education',
+        'helpereducation' => 'help_education',
 
-        'helpercompskill' => 'comp_skills',
+        'helpercompskill' => 'help_comp_skills',
 
-        'helperlanguage' => 'languages'
+        'helperlanguage' => 'help_languages'
 
     );

@@ -214,9 +214,9 @@
             $experience = Database::run('
                 SELECT 
                 '. self::$table .'.*,
-                industry.industry_name
+                help_industry.industry_name
                 FROM '. self::$table .'
-                LEFT JOIN industry ON '. self::$table .'.industry_id = industry.id
+                LEFT JOIN help_industry ON '. self::$table .'.industry_id = help_industry.id
                 WHERE user_id = ?', [$id]);
 
             foreach($experience as $exp){

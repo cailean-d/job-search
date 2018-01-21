@@ -797,10 +797,10 @@
         
             $sql = '
                 SELECT 
-                vacancies.*,
-                schedule.schedule_name
-                FROM `vacancies` 
-                LEFT JOIN schedule ON vacancies.schedule = schedule.id
+                '. self::$table .'.*,
+                help_schedule.schedule_name
+                FROM '. self::$table .' 
+                LEFT JOIN help_schedule ON '. self::$table .'.schedule = help_schedule.id
                 WHERE status="1"
                 '.$salary.'
                 '.$industry.'

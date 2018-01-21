@@ -168,9 +168,9 @@
             $education = Database::run('
                 SELECT 
                 '. self::$table .'.*,
-                education.education_name
+                help_education.education_name
                 FROM '. self::$table .'
-                LEFT JOIN education ON '. self::$table .'.level_id = education.id
+                LEFT JOIN help_education ON '. self::$table .'.level_id = help_education.id
                 WHERE user_id = ?', [$id]);
 
             foreach($education as $edu){

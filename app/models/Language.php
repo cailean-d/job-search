@@ -145,9 +145,9 @@
             $language = Database::run('
                         SELECT 
                         '. self::$table .'.*,
-                        languages.lang_name
+                        help_languages.lang_name
                         FROM '. self::$table .'
-                        LEFT JOIN languages ON '. self::$table .'.lang_id = languages.id
+                        LEFT JOIN help_languages ON '. self::$table .'.lang_id = help_languages.id
                         WHERE user_id = ?', [$id]);
 
             foreach($language as $lang){

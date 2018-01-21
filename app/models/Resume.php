@@ -397,15 +397,15 @@
             $data = Database::run('
                     SELECT 
                     '. self::$table .'.*,
-                    schedule.schedule_name,
-                    industry.industry_name,
-                    work_place.work_place_name,
-                    comp_skills.cs_name
+                    help_schedule.schedule_name,
+                    help_industry.industry_name,
+                    help_work_place.work_place_name,
+                    help_comp_skills.cs_name
                     FROM '. self::$table .' 
-                    LEFT JOIN schedule ON '. self::$table .'.schedule_id = schedule.id
-                    LEFT JOIN industry ON '. self::$table .'.industry_id = industry.id 
-                    LEFT JOIN work_place ON '. self::$table .'.work_place_id = work_place.id 
-                    LEFT JOIN comp_skills ON '. self::$table .'.comp_skill_id = comp_skills.id 
+                    LEFT JOIN help_schedule ON '. self::$table .'.schedule_id = help_schedule.id
+                    LEFT JOIN help_industry ON '. self::$table .'.industry_id = help_industry.id 
+                    LEFT JOIN help_work_place ON '. self::$table .'.work_place_id = help_work_place.id 
+                    LEFT JOIN help_comp_skills ON '. self::$table .'.comp_skill_id = help_comp_skills.id 
                     WHERE user_id = ?', [$userid]);
 
             return new Resume(
