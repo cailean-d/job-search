@@ -31,7 +31,7 @@
     <div class="wrapper">
 
         <!-- шапка сайта -->
-        <?php include("views/parts/header.php")?>
+        <?php include("app/views/parts/header.php")?>
 
         <div class="app-body">
 
@@ -53,10 +53,10 @@
     </div>
     
     <!-- модальный Alert -->
-    <?php include("views/parts/modal_alert.php")?>
+    <?php include("app/views/parts/modal_alert.php")?>
 
     <!-- модальный Confirm -->
-    <?php include("views/parts/modal_confirm.php")?>    
+    <?php include("app/views/parts/modal_confirm.php")?>    
     
 
     <!--<Deject>-->
