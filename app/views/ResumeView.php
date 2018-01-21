@@ -36,7 +36,7 @@
                 <div class="card-block bg-faded">
                     <div class="d-flex">
                         <div class="avatar pl-0 col-4 minw-30">
-                            <img src="<?=$avatar?>" alt="" class="img-thumbnail rounded">
+                            <img src="<?=$avatar->getSource()?>" alt="" class="img-thumbnail rounded">
                         </div>
                         <div class="info pl-2 pr-0">
                             <h4>Личная информация</h4>

@@ -15,17 +15,7 @@
         private static $view;
         private static $data;
 
-        public static function getData(array $routerVars = null){
-                       
-            if($routerVars){
-
-                foreach ($routerVars as $key => $value) {
-                    
-                    self::$data[$key] = $value;
-
-                }
-
-            }
+        public static function getData(){
 
             self::$data['schedule'] = HelperSchedule::getAll();
             self::$data['industry'] = HelperIndustry::getAll();
@@ -55,7 +45,9 @@
 
             self::$view = new View('Вакансии', 'VacanciesView');
 
-            self::getData($routerVars);
+            parent::setRouterVariables($routerVars, self::$data);
+
+            self::getData();
 
             self::setSalaryInterval();
 

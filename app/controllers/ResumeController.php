@@ -12,21 +12,10 @@
     final class ResumeController extends Controller{
 
         private static $view;
-        private static $data;
+        private static $data = array();
 
-        public static function getData(array $routerVars = null){
-            
-            if($routerVars){
+        public static function getData(){
 
-                foreach ($routerVars as $key => $value) {
-                    
-                    self::$data[$key] = $value;
-
-                }
-
-            }
-
-            self::$data['user']['id'] = $_SESSION['id'];
             self::$data['router']['id'] = self::getId();
 
             self::$data['resume'] = Resume::getJoinedByUserId(self::getId());
@@ -47,7 +36,9 @@
 
             self::$view = new View('Мое резюме', 'ResumeView');
 
-            self::getData($routerVars);
+            parent::setRouterVariables($routerVars, self::$data);
+
+            self::getData();
 
             self::langToString();
 
