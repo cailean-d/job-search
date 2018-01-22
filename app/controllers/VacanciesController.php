@@ -1,7 +1,6 @@
 <?php
 
     require_once __DIR__.'/../core/Controller.php';
-    require_once __DIR__.'/../core/View.php';
     require_once __DIR__.'/../models/Vacancy.php';
     require_once __DIR__.'/../helpers/HelperSchedule.php';
     require_once __DIR__.'/../helpers/HelperIndustry.php';
