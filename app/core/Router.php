@@ -173,7 +173,7 @@
 
         public static function redirectTo(string $url){
 
-            header("Location: " . $redirectURL);
+            header("Location: " . $url);
 
         }
 
