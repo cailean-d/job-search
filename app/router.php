@@ -6,27 +6,24 @@
     require_once __DIR__.'/controllers/ErrorPageController.php';
 
 
-   
-    // $_ResumeController = new ResumeController();
-    // $_ErrorPageController = new ErrorPageController();
-
-
     Router::get("", function($router){
 
-        $_VacanciesController = new VacanciesController($router);
+        $_VacanciesController = new VacanciesController(get_defined_vars());
         $_VacanciesController->render();
     
     });
 
     Router::get("resume", function($router){
         
-        // $_ResumeController->init(get_defined_vars());
+        $_ResumeController = new ResumeController(get_defined_vars());
+        $_ResumeController->render();
     
     });
 
     Router::get("resume/:id{number}", function($router){
 
-        // $_ResumeController->init(get_defined_vars());
+        $_ResumeController = new ResumeController(get_defined_vars());
+        $_ResumeController->render();
     
     });
 
@@ -105,6 +102,7 @@
 
     Router::PageNotFound(function(){
 
-        $_ErrorPageController->init(get_defined_vars());
+        $_ErrorPageController = new ErrorPageController(get_defined_vars());
+        $_ErrorPageController->render();
 
     });
