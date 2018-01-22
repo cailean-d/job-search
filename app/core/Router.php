@@ -171,6 +171,12 @@
 
         }
 
+        public static function redirectTo(string $url){
+
+            header("Location: " . $redirectURL);
+
+        }
+
         public static function PageNotFound(callable $callback){
 
             $matched = false;
