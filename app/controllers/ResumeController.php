@@ -11,64 +11,38 @@
 
     final class ResumeController extends Controller{
 
-        private static $view;
-        private static $data = array();
+        public function __construct($routerVars){
 
-        public static function getData(){
+            parent::__construct($routerVars);
 
-            self::$data['router']['id'] = self::getId();
+            $this->view->setTitle('Мое резюме');
+            $this->view->setView('ResumeView');
 
-            self::$data['resume'] = Resume::getJoinedByUserId(self::getId());
-            self::$data['avatar'] = Avatar::get(self::getId());
-            self::$data['education'] = Education::getJoinedByUserid(self::getId());
-            self::$data['experience'] = Experience::getJoinedByUserid(self::getId());
-            self::$data['language'] = Language::getJoinedByUserid(self::getId());
+            $this->data['router']['id'] = $this->getId();
+
+            $this->data['resume'] = Resume::getJoinedByUserId($this->getId());
+            $this->data['avatar'] = Avatar::get($this->getId());
+            $this->data['education'] = Education::getJoinedByUserid($this->getId());
+            $this->data['experience'] = Experience::getJoinedByUserid($this->getId());
+            $this->data['language'] = Language::getJoinedByUserid($this->getId());
+
+            $this->langToString();
 
         }
 
-        public static function setAccess(){
+        protected function setAccess(){
 
             return true;
 
         }
 
-        public static function init(array $routerVars = null){
+        protected function langToString(){
 
-            self::$view = new View('Мое резюме', 'ResumeView');
-
-            parent::setRouterVariables($routerVars, self::$data);
-
-            self::getData();
-
-            self::langToString();
-
-            self::setAccess();
-
-            self::$view->render(self::$data);
-
-        }
-
-        private static function langToString(){
-
-            foreach (self::$data['language'] as $value) {
+            foreach ($this->data['language'] as $value) {
                 $langs .= mb_strtolower($value->getLangName()) . " (" . mb_strtolower($value->getLangLevel(), 'UTF-8') . "), ";
             }
     
-            self::$data['language'] = substr($langs, 0, -2);
-
-        }
-
-        private static function getId(){
-
-            if(isset(self::$data['router']['id'])){
-
-                return self::$data['router']['id'];
-
-            } else {
-
-                return $_SESSION['id'];
-
-            }
+            $this->data['language'] = substr($langs, 0, -2);
 
         }
 

@@ -3,22 +3,30 @@
     require_once __DIR__.'/core/Router.php';
     require_once __DIR__.'/controllers/VacanciesController.php';
     require_once __DIR__.'/controllers/ResumeController.php';
+    require_once __DIR__.'/controllers/ErrorPageController.php';
+
+
+   
+    // $_ResumeController = new ResumeController();
+    // $_ErrorPageController = new ErrorPageController();
+
 
     Router::get("", function($router){
 
-        VacanciesController::init(get_defined_vars());
+        $_VacanciesController = new VacanciesController($router);
+        $_VacanciesController->render();
     
     });
 
     Router::get("resume", function($router){
         
-        ResumeController::init(get_defined_vars());
+        // $_ResumeController->init(get_defined_vars());
     
     });
 
     Router::get("resume/:id{number}", function($router){
 
-        ResumeController::init(get_defined_vars());
+        // $_ResumeController->init(get_defined_vars());
     
     });
 
@@ -97,6 +105,6 @@
 
     Router::PageNotFound(function(){
 
-        Router::renderView("Страница не найдена", "404");
+        $_ErrorPageController->init(get_defined_vars());
 
     });

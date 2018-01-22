@@ -1,31 +1,65 @@
 <?php 
 
+        require_once __DIR__.'/../core/View.php';
+        require_once __DIR__.'/../models/Avatar.php';
+
         class Controller {
 
-        public static function getData(){}
+        protected $view;
+        protected $data = array();
 
-        public static function setRouterVariables(array $routerVars, array &$data){
+        public function __construct($routerVars){
+
+            $this->view = new View();
+
+            $this->setRouterVariables($routerVars);
+            
+            $this->data['user']['id'] = $_SESSION['id'];
+            $this->data['user']['authorized'] = $_SESSION['authorized'];
+            $this->data['user']['firstname'] = $_SESSION['firstname'];
+            $this->data['user']['lastname'] = $_SESSION['lastname'];
+            $this->data['user']['type'] = $_SESSION['type'];
+
+            $this->data['avatar'] = Avatar::get($this->getId());
+
+            $this->setAccess();
+
+        }
+
+        protected function setRouterVariables(array $routerVars){
             
             if($routerVars){
 
                 foreach ($routerVars as $key => $value) {
                     
-                    $data[$key] = $value;
+                    $this->data[$key] = $value;
 
                 }
 
             }
+            
+        }
 
-            $data['user']['id'] = $_SESSION['id'];
-            $data['user']['authorized'] = $_SESSION['authorized'];
-            $data['user']['firstname'] = $_SESSION['firstname'];
-            $data['user']['lastname'] = $_SESSION['lastname'];
-            $data['user']['type'] = $_SESSION['type'];
+        protected function getId(){
+
+            if(isset($this->data['router']['id'])){
+
+                return $this->data['router']['id'];
+
+            } else {
+
+                return $_SESSION['id'];
+
+            }
 
         }
 
-        public static function setAccess(){}
+        protected function setAccess(){}
 
-        public static function init(array $routerVars = null){}
+        public function render(){
+
+            $this->view->render($this->data);
+
+        }
 
     }
