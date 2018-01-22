@@ -31,8 +31,11 @@
 
         protected function setAccess(){
 
-            return true;
+            if($this->data['user']['authorized'] !== true){
 
+                Router::redirectTo("/");
+
+            }
         }
 
         protected function langToString(){
