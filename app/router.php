@@ -2,22 +2,19 @@
 
     Router::get("", function($router){
 
-        $_VacanciesController = new VacanciesController(get_defined_vars());
-        $_VacanciesController->render();
+        return new VacanciesController(get_defined_vars());
     
     });
 
     Router::get("resume", function($router){
         
-        $_ResumeController = new ResumeController(get_defined_vars());
-        $_ResumeController->render();
+        return new ResumeController(get_defined_vars());
     
     });
 
     Router::get("resume/:id{number}", function($router){
 
-        $_ResumeController = new ResumeController(get_defined_vars());
-        $_ResumeController->render();
+        return new ResumeController(get_defined_vars());
     
     });
 
@@ -120,7 +117,6 @@
 
     Router::PageNotFound(function(){
 
-        $_ErrorPageController = new ErrorPageController(get_defined_vars());
-        $_ErrorPageController->render();
+        return new ErrorPageController(get_defined_vars());
 
     });

@@ -72,7 +72,13 @@
 
                 if(preg_match(self::createRegexpURL($url), self::getRequestURL(), $matches)){
                     
-                    $callback($matches);
+                    $_Controller = $callback($matches);
+
+                    if(method_exists($_Controller, 'render')){
+
+                        $_Controller->render();                        
+
+                    }
 
                 }
                 
