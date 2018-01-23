@@ -1,13 +1,5 @@
 <?php
 
-    require_once __DIR__.'/../core/Controller.php';
-    require_once __DIR__.'/../models/Resume.php';
-    require_once __DIR__.'/../models/Avatar.php';
-    require_once __DIR__.'/../models/Education.php';
-    require_once __DIR__.'/../models/Experience.php';
-    require_once __DIR__.'/../models/Language.php';
-
-
     final class ResumeController extends Controller{
 
         public function __construct($routerVars){

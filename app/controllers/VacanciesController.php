@@ -1,14 +1,5 @@
 <?php
 
-    require_once __DIR__.'/../core/Controller.php';
-    require_once __DIR__.'/../models/Vacancy.php';
-    require_once __DIR__.'/../helpers/HelperSchedule.php';
-    require_once __DIR__.'/../helpers/HelperIndustry.php';
-    require_once __DIR__.'/../helpers/HelperWorkPlace.php';
-    require_once __DIR__.'/../helpers/HelperEducation.php';
-    require_once __DIR__.'/../helpers/HelperCompSkill.php';
-    require_once __DIR__.'/../helpers/HelperLanguage.php';
-
     final class VacanciesController extends Controller{
 
         public function __construct($routerVars){

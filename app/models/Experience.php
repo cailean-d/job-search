@@ -1,8 +1,5 @@
 <?php
 
-    require_once __DIR__.'/../core/Database.php';
-    require_once __DIR__.'/../core/Model.php';
-
     final class Experience extends Model {
 
         private $userid;

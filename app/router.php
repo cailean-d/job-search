@@ -1,11 +1,5 @@
 <?php
 
-    require_once __DIR__.'/core/Router.php';
-    require_once __DIR__.'/controllers/VacanciesController.php';
-    require_once __DIR__.'/controllers/ResumeController.php';
-    require_once __DIR__.'/controllers/ErrorPageController.php';
-
-
     Router::get("", function($router){
 
         $_VacanciesController = new VacanciesController(get_defined_vars());
