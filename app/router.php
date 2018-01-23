@@ -80,6 +80,30 @@
         // require __DIR__.'/app/models/User.php';
         // require __DIR__.'/core/View.php';
 
+        $root = realpath(__DIR__.'/..');
+
+
+
+        function getClass($class){
+            
+
+            $dir = new RecursiveDirectoryIterator(__DIR__);
+            $iterator = new RecursiveIteratorIterator($dir);
+
+            foreach($iterator as $file) {
+
+                if(preg_match('/\\'.'\\'.$class.'\.php/', $file)){
+
+                    echo  $file ."<br>";
+                    break;
+
+                }
+            }
+
+        }
+
+
+        getClass('Database');
 
         // $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");
 
@@ -93,9 +117,9 @@
         // $avatar->render();
 
 
-        echo "<pre>";
-        var_dump($avatar);
-        echo "</pre>";
+        // echo "<pre>";
+        // var_dump($files);
+        // echo "</pre>";
 
 
     });
