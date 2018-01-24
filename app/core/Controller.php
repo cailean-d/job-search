@@ -17,7 +17,7 @@
             $this->data['user']['lastname'] = $_SESSION['lastname'];
             $this->data['user']['type'] = $_SESSION['type'];
 
-            $this->data['avatar'] = Avatar::get($this->getId());
+            $this->data['own_avatar'] = Avatar::get($this->data['user']['id']);
 
             $this->setAccess();
 

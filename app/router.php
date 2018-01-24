@@ -20,15 +20,13 @@
 
     Router::get("resume/add", function($vars){
 
-        $_GET['page'] = 'add';
-        Router::renderView("Добавить резюме", "resume");
+        return new ResumeEditController(get_defined_vars(), 'add');
     
     });
 
     Router::get("resume/edit", function($vars){
 
-        $_GET['page'] = 'edit';
-        Router::renderView("Редактировать резюме", "resume");
+        return new ResumeEditController(get_defined_vars(), 'edit');
     
     });
 

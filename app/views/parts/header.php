@@ -42,7 +42,22 @@
             </a>
             <div class="avatar">
                 <label for="avatar_upload" class="avatar mb-0 hand" title="Загрузить фото">
-                    <img src="<?=$avatar->getSource()?>" alt="avatar" id="avatar_preload">
+                    <img 
+                    
+                    src="<?
+
+                        if(!empty($own_avatar->getSource())){
+
+                            echo $own_avatar->getSource();
+
+                        } else {
+
+                            echo '/../../../public/images/user.jpg';
+                            
+                        }
+                    
+                    
+                    ?>" alt="avatar" id="avatar_preload">
                 </label>
                 <input type="file" id="avatar_upload" hidden>
             </div>
