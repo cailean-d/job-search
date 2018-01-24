@@ -22,6 +22,7 @@
         private $date;
         
         private $scheduleName;
+        private $industryName;
 
         public function __construct($id = null, $senderName = null, $senderId = null, 
                                     $email = null, $company = null, $phone = null, 
@@ -29,7 +30,7 @@
                                     $experience = null, $location = null, $scheduleId = null, 
                                     $industryId = null, $demands = null, $duties = null, 
                                     $conditions = null, $description = null, $status = null, 
-                                    $date = null, $scheduleName = null){
+                                    $date = null, $scheduleName = null, $industryName = null){
 
             self::applyConfig();
 
@@ -53,6 +54,7 @@
             $this->status = htmlspecialchars(trim($status));
             $this->date = htmlspecialchars(trim($date));
             $this->scheduleName = htmlspecialchars(trim($scheduleName));
+            $this->industryName = htmlspecialchars(trim($industryName));
 
         }
 
@@ -130,6 +132,10 @@
 
         public function getScheduleName(){
             return $this->scheduleName;
+        }
+
+        public function getIndustryName(){
+            return $this->industryName;
         }
 
         public function setSenderName($senderName){
@@ -434,6 +440,46 @@
 
         }
 
+        public static function getJoined($id){
+ 
+            self::applyConfig();
+
+            $vacancy = Database::run('
+                        SELECT 
+                        '. self::$table .'.*,
+                        help_schedule.schedule_name,
+                        help_industry.industry_name
+                        FROM '. self::$table .' 
+                        LEFT JOIN help_schedule ON '. self::$table .'.schedule = help_schedule.id
+                        LEFT JOIN help_industry ON '. self::$table .'.industry = help_industry.id
+                        WHERE '. self::$table .'.id= ?', [$id]);
+
+            return new Vacancy(
+                $vacancy[0]['id'],
+                $vacancy[0]['sender_name'],
+                $vacancy[0]['sender_id'],
+                $vacancy[0]['email'],
+                $vacancy[0]['company'],
+                $vacancy[0]['phone'],
+                $vacancy[0]['vacancy'],
+                $vacancy[0]['salary_min'],
+                $vacancy[0]['salary_max'],
+                $vacancy[0]['exp'],
+                $vacancy[0]['location'],
+                $vacancy[0]['schedule'],
+                $vacancy[0]['industry'],
+                $vacancy[0]['demands'],
+                $vacancy[0]['duties'],
+                $vacancy[0]['conditions'],
+                $vacancy[0]['description'],
+                $vacancy[0]['status'],
+                $vacancy[0]['date'],
+                $vacancy[0]['schedule_name'],
+                $vacancy[0]['industry_name']
+            );
+
+        }
+
         public static function getJoinedByUserId($id){
 
             
@@ -560,6 +606,24 @@
                                 ' WHERE status=? ', ['1']);
 
             return $res[0]['MIN'];
+
+        }
+
+        public static function isVacancyEmployed($id, $senderId){
+
+            self::applyConfig();
+
+            $vacancy = Database::run('SELECT * FROM '. self::$table .' WHERE id = ? AND sender_id = ?', [$id, $senderId]);
+            
+            if(empty($vacancy[0]['id'])){
+
+                return false;
+
+            } else {
+
+                return true;
+
+            }
 
         }
 

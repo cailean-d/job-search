@@ -16,6 +16,8 @@
 
         'vacancy' => 'vacancies',
 
+        'vacancyaddedresume' => 'vacancies_resume',
+
         'helperschedule' => 'help_schedule',
 
         'helperindustry' => 'help_industry',

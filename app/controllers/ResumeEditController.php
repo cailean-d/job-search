@@ -51,12 +51,12 @@
 
             }
         
-            // не пускать на страницу редактирования резюме, если его не существует
             if($this->data['router']['mode'] === "edit" && !isset($this->data['resume'])){
 
                 Router::redirectTo("/resume");
 
             }
+            
         }
 
     }

@@ -18,39 +18,38 @@
     
     });
 
-    Router::get("resume/add", function($vars){
+    Router::get("resume/add", function($router){
 
         return new ResumeEditController(get_defined_vars(), 'add');
     
     });
 
-    Router::get("resume/edit", function($vars){
+    Router::get("resume/edit", function($router){
 
         return new ResumeEditController(get_defined_vars(), 'edit');
     
     });
 
-    Router::get("vacancy", function($vars){
+    Router::get("vacancy", function($router){
 
         return new OwnVacanciesController(get_defined_vars());
 
     });
 
-    Router::get("vacancy/:id{number}", function($vars){
+    Router::get("vacancy/:id{number}", function($router){
 
-        $_GET['id'] = $vars['id'];
-        Router::renderView("Вакансия", "vacancy");
+        return new VacancyController(get_defined_vars());
     
     });
 
-    Router::get("vacancy/add", function($vars){
+    Router::get("vacancy/add", function($router){
 
         $_GET['page'] = 'add';
         Router::renderView("Добавить вакансию", "add_vacancy");
     
     });
 
-    Router::get("vacancy/edit/:id{number}", function($vars){
+    Router::get("vacancy/edit/:id{number}", function($router){
 
         $_GET['page'] = 'edit';
         $_GET['id'] = $vars['id'];
@@ -58,13 +57,13 @@
     
     });
 
-    Router::get("admin", function($vars){
+    Router::get("admin", function($router){
 
         echo "admin panel";
     
     });
 
-    Router::get("test", function($vars){
+    Router::get("test", function($router){
 
         // require __DIR__.'/app/models/User.php';
         // require __DIR__.'/core/View.php';

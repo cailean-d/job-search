@@ -1,16 +1,15 @@
 <main>
-    <?php include('scripts/read/get_vacancy.php');?>
 
     <div class="card mb-4 full_vacancy">
-        <div class="vacancy_id" hidden><?=$result['id'] ?></div>
+        <div class="vacancy_id" hidden><?=$vacancy->getId()?></div>
         <div class="card-block">
             <div class="header">
                 <div class="d-flex justify-content-between mb-4 wq">
                     <span class="vacancy_name">
-                        <?=$result['vacancy'] ?>
+                        <?=$vacancy->getVacancyName()?>
                     </span>
                     <span class="company">
-                        <?=$result['company'] ?>
+                        <?=$vacancy->getCompany() ?>
                     </span>
                 </div>
                 <div class="card">
@@ -20,7 +19,20 @@
                                 Зарплата
                             </div>
                             <div class="body">
-                            <?=$result['salary_min']?><?=(!empty($result['salary_max'])) ? "-".$result['salary_max'] : ""?>р.
+                            <?=$vacancy->getSalaryMin()?>
+                            <?php
+                            
+                                if(!empty($vacancy->getSalaryMax())){
+
+                                    echo "-".$vacancy->getSalaryMax();
+
+                                } else {
+
+                                    echo "";
+
+                                }
+
+                            ?>р.
                             </div>
                         </div>
                         <div class="city">
@@ -28,7 +40,7 @@
                                 Город
                             </div>
                             <div class="body">
-                                <?=$result['location'] ?>
+                                <?=$vacancy->getLocation()?>
                             </div>
                         </div>
                         <div class="exp">
@@ -36,22 +48,22 @@
                                 Требуемый опыт работы
                             </div>
                             <div class="body">
-                                <?=$result['exp'] ?> лет.
+                                <?=$vacancy->getExperience()?> лет.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="primary_info">
-                <?php if(!empty($result['description'])) : ?>
+                <?php if(!empty($vacancy->getDescription())) : ?>
                     <div class="description">
-                        <?=$result['description']?>
+                        <?=$vacancy->getDescription()?>
                     </div>
                 <?php endif ?>
                 <div class="conditions">
                     <h4 class="text-muted">Условия</h4>
                     <ul>
-                        <?php foreach($result['conditions'] as $cond) : ?>
+                        <?php foreach($conditions as $cond) : ?>
                             <li><?=$cond?></li>
                         <?php endforeach ?>
                     </ul>
@@ -59,7 +71,7 @@
                 <div class="duties">
                     <h4 class="text-muted">Обязанности</h4>
                     <ul>
-                        <?php foreach($result['duties'] as $dut) : ?>
+                        <?php foreach($duties as $dut) : ?>
                             <li><?=$dut?></li>
                         <?php endforeach ?>
                     </ul>
@@ -67,7 +79,7 @@
                 <div class="demands">
                     <h4 class="text-muted">Требования</h4>
                     <ul>
-                        <?php foreach($result['demands'] as $dem) : ?>
+                        <?php foreach($demands as $dem) : ?>
                             <li><?=$dem?></li>
                         <?php endforeach ?>
                     </ul>
@@ -77,7 +89,7 @@
                 <div class="schedule">
                     <h4 class="text-muted">Тип занятости</h4>
                     <div>
-                        <?=$result['schedule_name']?>
+                        <?=$vacancy->getScheduleName()?>
                     </div>
                 </div>
                 <div class="user_info">
@@ -86,17 +98,17 @@
                         <tbody>
                             <tr>
                                 <th scope="row" class="text-muted">
-                                    <?=$result['sender_name']?>
+                                    <?=$vacancy->getSenderName()?>
                                 </th>
                                 <td></td>
                             </tr>
                             <tr>
                                 <th scope="row" class="text-muted">Телефон:</th>
-                                <td><?=$result['phone']?></td>
+                                <td><?=$vacancy->getPhone()?></td>
                             </tr>
                             <tr>
                                 <th scope="row" class="text-muted">Почта</th>
-                                <td><?=$result['email']?></td>
+                                <td><?=$vacancy->getEmail()?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -104,58 +116,96 @@
                 </div>
             </div>
             <div class="footer">
-                <?php if($_SESSION['type'] == '0') : ?>
-                    <?php include("./scripts/read/get_resume_id.php"); ?>
-                    <?php if(count($resume_data) == 0) :?>
+
+
+                <?php if($user['type'] == '0') : ?>
+
+
+                    <?php if($isResume === false) : ?>
                         <div class="alert alert-info mb-0" role="alert">
                             <strong>Для того, чтобы оставить резюме, сначала необходимо создать его.</strong>
                         </div>
                     <?php else : ?>
-                        <?php include('scripts/read/get_vacancy_resume.php');?>
-                        <?php if(count($resume) == 0) :?>
+
+
+                        <?php if($isResumeSent === false) :?>
+
+
                             <button class="btn btn-primary btn-lg btn-block hand" id="send_resume">
                                 Отправить резюме
                             </button>
+
+
                         <?php else : ?>
+
+
                             <div class="alert alert-info" role="alert">
                                 <strong>Ваше резюме отправлено</strong>
                             </div>
                             <button class="btn btn-primary btn-lg btn-block hand" id="del_resume">
                                 Удалить резюме
                             </button>
+
+
                         <?php endif ?>
+
+                        
                     <?php endif ?>
+
+
                 <?php endif ?>
-                <?php if($_SESSION['type'] == '1') : ?>
-                    <?php include('scripts/read/get_vacancy_resume_ids.php') ?>
-                    <?php if(count($data_id) > 0) : ?>
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="text-muted mb-4">Оставленные резюме : </h4>
-                                <?php foreach($data_id as $row) :
-                                    $_POST['id'] = $row['user_id'];
-                                    include('scripts/read/get_user_data.php')
-                                    ?>
-                                    <a class="btn btn-outline-primary btn-lg btn-block" href="resume.php?id=<?=$row['user_id']?>" role="button">
-                                        <?php
-                                            echo $user_data['firstname'] . " ";
-                                            echo $user_data['lastname'] . " &lt;";
-                                            echo $user_data['email'] . "&gt;";
-                                        ?>
-                                    </a>
-                                <?php endforeach ?>
+
+
+                <?php if($user['type'] == '1') : ?>
+
+
+                    <?php  if($isResumeEmployed === true) : ?>
+
+
+                        <?php if(count($users) > 0) : ?>
+
+
+                            <div class="card">
+                                <div class="card-block">
+                                    <h4 class="text-muted mb-4">Оставленные резюме : </h4>
+                                    <?php foreach($users as $a) : ?>
+
+
+                                        <a class="btn btn-outline-primary btn-lg btn-block" href="resume/<?=$a->getUserid()?>" role="button">
+                                            <?php
+                                                echo $a->getUserFirstname() . " ";
+                                                echo $a->getUserLastname() . " &lt;";
+                                                echo $a->getUserEmail() . "&gt;";
+                                            ?>
+                                        </a>
+
+                                        
+                                    <?php endforeach ?>
+                                </div>
                             </div>
-                        </div>
-                    <?php else : ?>
-                        <div class="alert alert-info mb-0" role="alert">
-                            <strong>Еще никто не оставил резюме.</strong>
-                        </div>
-                    <?php endif ?>
+
+
+                        <?php else : ?>
+
+                            <div class="alert alert-info mb-0" role="alert">
+                                <strong>Еще никто не оставил резюме.</strong>
+                            </div>
+                            
+                        <?php endif ?>
+
+                    <?php  endif ?>
+
                 <?php endif ?>
-                <?php if(!isset($_SESSION['authorized'])) :?>
+
+
+                <?php if(!isset($user['authorized'])) :?>
+
+
                     <div class="alert alert-info mb-0" role="alert">
                         <strong>Для того, чтобы оставить резюме, зарегистрируйтесь или войдите.</strong>
                     </div>
+
+
                 <?php endif ?>
             </div>
         </div>
