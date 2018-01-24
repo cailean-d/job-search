@@ -434,6 +434,55 @@
 
         }
 
+        public static function getJoinedByUserId($id){
+
+            
+            self::applyConfig();
+
+            $vacancyAll = array();
+
+            $vacancy = Database::run('
+                        SELECT 
+                        '. self::$table .'.*,
+                        help_schedule.schedule_name
+                        FROM '. self::$table .' 
+                        LEFT JOIN help_schedule ON '. self::$table .'.schedule = help_schedule.id
+                        WHERE sender_id= ?
+                        ORDER BY `date` DESC', [$id]);
+
+            foreach($vacancy as $vac){
+
+                array_push($vacancyAll,
+
+                new Vacancy(
+                    $vac['id'],
+                    $vac['sender_name'],
+                    $vac['sender_id'],
+                    $vac['email'],
+                    $vac['company'],
+                    $vac['phone'],
+                    $vac['vacancy'],
+                    $vac['salary_min'],
+                    $vac['salary_max'],
+                    $vac['exp'],
+                    $vac['location'],
+                    $vac['schedule'],
+                    $vac['industry'],
+                    $vac['demands'],
+                    $vac['duties'],
+                    $vac['conditions'],
+                    $vac['description'],
+                    $vac['status'],
+                    $vac['date'],
+                    $vac['schedule_name']
+                ));
+
+            }
+
+            return $vacancyAll;
+
+        }
+
         public static function getCities(){
 
             self::applyConfig();

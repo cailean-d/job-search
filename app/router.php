@@ -32,7 +32,7 @@
 
     Router::get("vacancy", function($vars){
 
-        Router::renderView("Мои вакансии", "my_vacancies");
+        return new OwnVacanciesController(get_defined_vars());
 
     });
 

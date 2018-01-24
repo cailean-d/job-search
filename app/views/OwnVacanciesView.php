@@ -1,51 +1,66 @@
 <main>
 <?php 
-    include('scripts/read/get_my_vacancies.php');
-    if(!isset($is_result)) : ?>
+    if(count($vacancy) == 0) : ?>
         <div class="alert alert-info" role="alert">
             <strong>Вакансий нет.</strong>
         </div>
     <?php else : 
-        foreach($result as $res) :?>
+        foreach($vacancy as $res) :?>
             <div class="card mb-4 col-10 vacancyz mx-auto">
-                <div class="id" hidden="hidden"><?=$res['id']?></div> 
+                <div class="id" hidden="hidden"><?=$res->getId()?></div> 
                 <div class="card-block">
                     <article class='vacancy'>
                         <header>
                             <div class="top">
                                 <div class='title'>
-                                    <a href='vacancy/<?=$res['id']?>'><?=$res['vacancy']?></a>
+                                    <a href='vacancy/<?=$res->getId()?>'><?=$res->getVacancyName()?></a>
                                 </div>
                                 <div class='salary'>
                                     <span>
-                                        <?=$res['salary_min']?><?=(!empty($res['salary_max'])) ? "-".$res['salary_max'] : ""?>р.
+                                        <?=
+                                        
+                                        $res->getSalaryMin()?>
+                                        
+                                        <?
+
+                                        if(!empty($res->getSalaryMax())){
+
+                                            echo "-".$res->getSalaryMax();
+
+                                        } else {
+
+                                            echo "";
+
+                                        }
+                                        
+                                        ?>р.
                                     </span>
                                 </div>
                             </div>
                             <div class="bottom">
                                 <div>
-                                    в компанию <span class="company">"<?=$res['company']?>"</span>
+                                    в компанию <span class="company">"<?=$res->getCompany()?>"</span>
                                 </div>
                                 <div>
-                                    график: <span class="emp"><?=mb_strtolower($res['schedule_name'], "UTF-8")?></span>
+                                    график: <span class="emp"><?=mb_strtolower($res->getScheduleName(), "UTF-8")?></span>
                                 </div>
                             </div>
                         </header>
                         <p>
-                            <span class="dem">Требования: </span><?=str_replace(",", ", ", mb_strtolower($res['demands'], 'UTF-8'))?>
+                            <span class="dem">Требования: </span><?=str_replace(",", ", ", mb_strtolower($res->getDemands(), 'UTF-8'))?>
                         </p>
                         <footer>
                             <div>
-                                <?=$res['location']?>
+                                <?=$res->getLocation()?>
                             </div>
                             <div>
-                                <?=date("d.m.Y H:i:s", strtotime($res['date']));?>
+                                <?=date("d.m.Y H:i:s", strtotime($res->getDate()));?>
                             </div>
                         </footer>
                     </article>
                 </div>
                 <div class="edit-buttons">
-                    <a class="btn btn-primary btn-block" role="button" href="vacancy/edit/<?=$res['id']?>">
+                    <a class="btn btn-primary btn-block" role="button" href="vacancy/edit/<?=$res->getId()?>">
                         Редактировать
                     </a>
                     <a class="btn btn-outline-primary btn-block del" role="button" href="#">
