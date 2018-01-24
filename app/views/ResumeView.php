@@ -1,7 +1,7 @@
-<?php if(count($resume) == 0) : ?>
+<?php if(empty($resume->getId())) : ?>
 
 
-    <div class="mx-auto">
+    <div class="mx-auto w-100">
 
 
         <?php if($user['id'] == $router['id']) : ?>
