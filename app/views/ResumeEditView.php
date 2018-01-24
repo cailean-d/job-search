@@ -541,7 +541,7 @@
                                             <div class="group col-11">
                                                 <div class="form-group row">
                                                     <div class="hidden-xl-down lang_id"><?=$lang->getLangId()?></div>
-                                                    <label class="col-3 col-form-label pl-0"><?=$lang->getLangLevel()?></label>
+                                                    <label class="col-3 col-form-label pl-0"><?=$lang->getLangName()?></label>
                                                     <div class="col-9">
                                                         <select class="form-control custom-select" name="lang">
                                                             <option value="Не владею" 
