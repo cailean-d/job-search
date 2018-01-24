@@ -200,7 +200,13 @@
 
             if($matched === false){
 
-                $callback();
+                $_Controller = $callback($matches);
+
+                if(method_exists($_Controller, 'render')){
+
+                    $_Controller->render();                        
+
+                }
 
             }
 
