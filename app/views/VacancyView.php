@@ -123,7 +123,7 @@
 
                     <?php if($isResume === false) : ?>
                         <div class="alert alert-info mb-0" role="alert">
-                            <strong>Для того, чтобы оставить резюме, сначала необходимо создать его.</strong>
+                            <strong>Для того, чтобы оставить резюме, необходимо создать его.</strong>
                         </div>
                     <?php else : ?>
 

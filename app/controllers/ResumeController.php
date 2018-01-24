@@ -12,6 +12,9 @@
             $this->data['router']['id'] = $this->getId();
 
             $this->data['resume'] = Resume::getJoinedByUserId($this->getId());
+
+            $this->redirectOnFailure();
+
             $this->data['avatar'] = Avatar::get($this->getId());
             $this->data['education'] = Education::getJoinedByUserid($this->getId());
             $this->data['experience'] = Experience::getJoinedByUserid($this->getId());
@@ -37,6 +40,17 @@
             }
     
             $this->data['language'] = substr($langs, 0, -2);
+
+        }
+
+        private function redirectOnFailure(){
+
+            if(empty($this->data['resume']->getId()) && 
+            ($this->data['user']['id'] != $this->data['router']['id'])){
+
+                Router::redirectTo("/");
+
+            }
 
         }
 
