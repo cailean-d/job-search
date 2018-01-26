@@ -44,16 +44,13 @@
 
     Router::get("vacancy/add", function($router){
 
-        $_GET['page'] = 'add';
-        Router::renderView("Добавить вакансию", "add_vacancy");
+        return new VacancyEditController(get_defined_vars(), 'add');
     
     });
 
     Router::get("vacancy/edit/:id{number}", function($router){
 
-        $_GET['page'] = 'edit';
-        $_GET['id'] = $vars['id'];
-        Router::renderView("Редактировать вакансию", "add_vacancy");
+        return new VacancyEditController(get_defined_vars(), 'edit');
     
     });
 
@@ -68,30 +65,30 @@
         // require __DIR__.'/app/models/User.php';
         // require __DIR__.'/core/View.php';
 
-        $root = realpath(__DIR__.'/..');
+        // $root = realpath(__DIR__.'/..');
 
 
 
-        function getClass($class){
+        // function getClass($class){
             
 
-            $dir = new RecursiveDirectoryIterator(__DIR__);
-            $iterator = new RecursiveIteratorIterator($dir);
+        //     $dir = new RecursiveDirectoryIterator(__DIR__);
+        //     $iterator = new RecursiveIteratorIterator($dir);
 
-            foreach($iterator as $file) {
+        //     foreach($iterator as $file) {
 
-                if(preg_match('/\\'.'\\'.$class.'\.php/', $file)){
+        //         if(preg_match('/\\'.'\\'.$class.'\.php/', $file)){
 
-                    echo  $file ."<br>";
-                    break;
+        //             echo  $file ."<br>";
+        //             break;
 
-                }
-            }
+        //         }
+        //     }
 
-        }
+        // }
 
 
-        getClass('Database');
+        // getClass('Database');
 
         // $user = new User(null, "Вася", "Петрович", "test@test.com", "123456", "0");
 

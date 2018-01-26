@@ -1,11 +1,12 @@
 <main>
-    <?php include('scripts/read/get_filter_data.php');?>
-    <?php if($_GET['page'] === "edit") include('scripts/read/get_vacancy.php'); ?>
-
     <div class="card mx-auto col-8 bg-faded mb-4 add_vacancy">
-    <?php if($_GET['page'] === "edit"): ?>
-        <div id="vacancy_id" hidden><?=$result['id']?></div>
+
+    <?php if($router['mode'] === "edit"): ?>
+
+        <div id="vacancy_id" hidden><?=$vacancy->getId()?></div>
+
     <?php endif ?>
+
         <div class="card-block">
             <form id="vacancy">
                 <div class="group pl-0 pr-0">
@@ -14,7 +15,7 @@
                         <div class="input-group-addon">
                             <i class="fas fa-building"></i>
                         </div>
-                        <input name="company" type="text" class="form-control" id="company" value="<?=$result['company']?>">
+                        <input name="company" type="text" class="form-control" id="company" value="<?=$vacancy->getCompany()?>">
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
@@ -24,7 +25,7 @@
                         <div class="input-group-addon">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <input name="phone" type="text" class="form-control" id="phone" value="<?=$result['phone']?>">
+                        <input name="phone" type="text" class="form-control" id="phone" value="<?=$vacancy->getPhone()?>">
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
@@ -34,7 +35,7 @@
                         <div class="input-group-addon">
                             <i class="fas fa-at"></i>
                         </div>
-                        <input name="email" type="text" class="form-control" id="email" value="<?=$result['email']?>">
+                        <input name="email" type="text" class="form-control" id="email" value="<?=$vacancy->getEmail()?>">
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
@@ -44,7 +45,7 @@
                         <div class="input-group-addon">
                             <i class="fas fa-list-alt"></i>
                         </div>
-                        <input name="vacancy" type="text" class="form-control" id="vacancy" value="<?=$result['vacancy']?>">
+                        <input name="vacancy" type="text" class="form-control" id="vacancy" value="<?=$vacancy->getVacancyName()?>">
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
@@ -54,7 +55,7 @@
                         <div class="input-group-addon">
                             <i class="fas fa-ruble-sign"></i>
                         </div>
-                        <input name="salary" type="text" class="form-control" id="salary" value="<?=$result['salary_min']?><?=(!empty($result['salary_max'])) ? "-".$result['salary_max'] : ""?>">
+                        <input name="salary" type="text" class="form-control" id="salary" value="<?=$vacancy->getSalaryMin()?><?php if(!empty($vacancy->getSalaryMax())){echo "-".$vacancy->getSalaryMax();}else{echo "";}?>">
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
@@ -64,7 +65,7 @@
                         <div class="input-group-addon">
                         <i class="fas fa-building"></i>
                         </div>
-                        <input name="exp" type="text" class="form-control" id="exp" value="<?=$result['exp']?>">
+                        <input name="exp" type="text" class="form-control" id="exp" value="<?=$vacancy->getExperience()?>">
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
@@ -74,7 +75,7 @@
                         <div class="input-group-addon">
                             <i class="fas fa-globe"></i>
                         </div>
-                        <input name="location" type="text" class="form-control" id="location" value="<?=$result['location']?>">
+                        <input name="location" type="text" class="form-control" id="location" value="<?=$vacancy->getLocation()?>">
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
@@ -86,9 +87,9 @@
                         </div>
                         <select class="form-control custom-select" name="schedule">
                             <?php foreach($schedule as $res): ?>
-                                <option value=<?=$res['id']?>
-                                <?php if($result['schedule'] == $res['id']) echo " selected";?>
-                                ><?=$res['schedule_name']?></option>
+                                <option value=<?=$res->getId()?>
+                                <?php if($vacancy->getScheduleId() == $res->getId()) echo " selected";?>
+                                ><?=$res->getName()?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
@@ -101,24 +102,24 @@
                         </div>
                         <select class="form-control custom-select" name="industry">
                             <?php foreach($industry as $res) :?>
-                                <option value="<?=$res['id']?>" 
-                                <?php if($result['industry'] == $res['id']) echo " selected";?>
-                                ><?=$res['industry_name']?></option>
+                                <option value="<?=$res->getId()?>" 
+                                <?php if($vacancy->getIndustryId() == $res->getId()) echo " selected";?>
+                                ><?=$res->getName()?></option>
                             <? endforeach ?>
                         </select>
                     </div>
                 </div>
                 <div class="group pl-0 pr-0 demands">
                     <label for="demands" class="d-block text-center">Требования :</label>
-                    <?php if($_GET['page'] === "edit" && count($result['demands']) > 0) : ?>
-                        <?php for($i=0;$i<count($result['demands']); $i++) : ?>
+                    <?php if($router['mode'] === "edit" && count($demands) > 0) : ?>
+                        <?php for($i=0;$i<count($demands); $i++) : ?>
                             <div class="opt">
                                 <div class="d-flex justify-content-between">
                                     <div class="input-group mb-2 col-11 pl-0">
                                         <div class="input-group-addon">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <input name="demands" type="text" class="form-control" id="demands" value="<?=$result['demands'][$i]?>">
+                                        <input name="demands" type="text" class="form-control" id="demands" value="<?=$demands[$i]?>">
                                     </div>
                                     <button class="btn btn-outline-primary col-1 <?=($i==0) ? "add": "del";?>" role="button" style="height: 37px; padding: .5rem .3rem;" id="demand"><?=($i==0) ? "+": "-";?></button>
                                 </div>
@@ -142,15 +143,15 @@
                 </div>
                 <div class="group pl-0 pr-0 duties">
                     <label for="duties" class="d-block text-center">Должностные обязанности :</label>
-                    <?php if($_GET['page'] === "edit" && count($result['duties']) > 0) : ?>
-                        <?php for($i=0;$i<count($result['duties']); $i++) : ?>
+                    <?php if($router['mode'] === "edit" && count($duties) > 0) : ?>
+                        <?php for($i=0;$i<count($duties); $i++) : ?>
                             <div class="opt">
                                 <div class="d-flex justify-content-between">
                                     <div class="input-group mb-2 col-11 pl-0">
                                         <div class="input-group-addon">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <input name="duties" type="text" class="form-control" id="duties" value="<?=$result['duties'][$i]?>">
+                                        <input name="duties" type="text" class="form-control" id="duties" value="<?=$duties[$i]?>">
                                     </div>
                                     <button class="btn btn-outline-primary col-1 <?=($i==0) ? "add": "del";?>" role="button" style="height: 37px; padding: .5rem .3rem;" id="dutie"><?=($i==0) ? "+": "-";?></button>
                                 </div>
@@ -174,15 +175,15 @@
                 </div>
                 <div class="group pl-0 pr-0 conditions">
                     <label for="conditions" class="d-block text-center">Условия работы :</label>
-                    <?php if($_GET['page'] === "edit" && count($result['conditions']) > 0) : ?>
-                        <?php for($i=0;$i<count($result['conditions']); $i++) : ?>
+                    <?php if($router['mode'] === "edit" && count($conditions) > 0) : ?>
+                        <?php for($i=0;$i<count($conditions); $i++) : ?>
                             <div class="opt">
                                 <div class="d-flex justify-content-between">
                                     <div class="input-group mb-2 col-11 pl-0">
                                         <div class="input-group-addon">
                                             <i class="fas fa-check-circle"></i>
                                         </div>
-                                        <input name="conditions" type="text" class="form-control" id="conditions" value="<?=$result['conditions'][$i]?>">
+                                        <input name="conditions" type="text" class="form-control" id="conditions" value="<?=$conditions[$i]?>">
                                     </div>
                                     <button class="btn btn-outline-primary col-1 <?=($i==0) ? "add": "del";?>" role="button" style="height: 37px; padding: .5rem .3rem;" id="condition"><?=($i==0) ? "+": "-";?></button>
                                 </div>
@@ -207,7 +208,7 @@
                 <div class="group pl-0 pr-0">
                     <label for="desc" class="d-block text-center">Дополнительно :</label>
                     <div class="input-group mb-2">
-                        <textarea name="desc" id="desc" cols="20" rows="10" class="form-control"><?=$result['description']?></textarea>
+                        <textarea name="desc" id="desc" cols="20" rows="10" class="form-control"><?=$vacancy->getDescription()?></textarea>
                     </div>
                     <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
                 </div>
