@@ -394,15 +394,15 @@
             $data = Database::run('
                     SELECT 
                     '. self::$table .'.*,
-                    help_schedule.schedule_name,
-                    help_industry.industry_name,
-                    help_work_place.work_place_name,
-                    help_comp_skills.cs_name
+                    '. self::getClassTable('HelperSchedule') .'.schedule_name,
+                    '. self::getClassTable('HelperIndustry') .'.industry_name,
+                    '. self::getClassTable('HelperWorkPlace') .'.work_place_name,
+                    '. self::getClassTable('HelperCompSkill') .'.cs_name
                     FROM '. self::$table .' 
-                    LEFT JOIN help_schedule ON '. self::$table .'.schedule_id = help_schedule.id
-                    LEFT JOIN help_industry ON '. self::$table .'.industry_id = help_industry.id 
-                    LEFT JOIN help_work_place ON '. self::$table .'.work_place_id = help_work_place.id 
-                    LEFT JOIN help_comp_skills ON '. self::$table .'.comp_skill_id = help_comp_skills.id 
+                    LEFT JOIN '. self::getClassTable('HelperSchedule') .' ON '. self::$table .'.schedule_id = '. self::getClassTable('HelperSchedule') .'.id
+                    LEFT JOIN '. self::getClassTable('HelperIndustry') .' ON '. self::$table .'.industry_id = '. self::getClassTable('HelperIndustry') .'.id 
+                    LEFT JOIN '. self::getClassTable('HelperWorkPlace') .' ON '. self::$table .'.work_place_id = '. self::getClassTable('HelperWorkPlace') .'.id 
+                    LEFT JOIN '. self::getClassTable('HelperCompSkill') .' ON '. self::$table .'.comp_skill_id = '. self::getClassTable('HelperCompSkill') .'.id 
                     WHERE user_id = ?', [$userid]);
 
             return new Resume(

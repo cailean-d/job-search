@@ -447,11 +447,11 @@
             $vacancy = Database::run('
                         SELECT 
                         '. self::$table .'.*,
-                        help_schedule.schedule_name,
-                        help_industry.industry_name
+                        '. self::getClassTable('HelperSchedule') .'.schedule_name,
+                        '. self::getClassTable('HelperIndustry') .'.industry_name
                         FROM '. self::$table .' 
-                        LEFT JOIN help_schedule ON '. self::$table .'.schedule = help_schedule.id
-                        LEFT JOIN help_industry ON '. self::$table .'.industry = help_industry.id
+                        LEFT JOIN '. self::getClassTable('HelperSchedule') .' ON '. self::$table .'.schedule = '. self::getClassTable('HelperSchedule') .'.id
+                        LEFT JOIN '. self::getClassTable('HelperIndustry') .' ON '. self::$table .'.industry = '. self::getClassTable('HelperIndustry') .'.id
                         WHERE '. self::$table .'.id= ?', [$id]);
 
             return new Vacancy(
@@ -490,9 +490,9 @@
             $vacancy = Database::run('
                         SELECT 
                         '. self::$table .'.*,
-                        help_schedule.schedule_name
+                        '. self::getClassTable('HelperSchedule') .'.schedule_name
                         FROM '. self::$table .' 
-                        LEFT JOIN help_schedule ON '. self::$table .'.schedule = help_schedule.id
+                        LEFT JOIN '. self::getClassTable('HelperSchedule') .' ON '. self::$table .'.schedule = '. self::getClassTable('HelperSchedule') .'.id
                         WHERE sender_id= ?
                         ORDER BY `date` DESC', [$id]);
 
@@ -908,9 +908,9 @@
             $sql = '
                 SELECT 
                 '. self::$table .'.*,
-                help_schedule.schedule_name
+                '. self::getClassTable('HelperSchedule') .'.schedule_name
                 FROM '. self::$table .' 
-                LEFT JOIN help_schedule ON '. self::$table .'.schedule = help_schedule.id
+                LEFT JOIN '. self::getClassTable('HelperSchedule') .' ON '. self::$table .'.schedule = '. self::getClassTable('HelperSchedule') .'.id
                 WHERE status="1"
                 '.$salary.'
                 '.$industry.'

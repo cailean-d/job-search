@@ -136,11 +136,11 @@
 
             $data = Database::run('SELECT 
                             '. self::$table .'.*,
-                            users.firstname,
-                            users.lastname,
-                            users.email
+                            '. self::getClassTable('User') .'.firstname,
+                            '. self::getClassTable('User') .'.lastname,
+                            '. self::getClassTable('User') .'.email
                             FROM '. self::$table .' 
-                            LEFT JOIN users ON '. self::$table .'.user_id = users.id
+                            LEFT JOIN '. self::getClassTable('User') .' ON '. self::$table .'.user_id = '. self::getClassTable('User') .'.id
                             WHERE '. self::$table .'.vacancy_id= ?', [$id]);
 
             foreach($data as $d){

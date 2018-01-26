@@ -68,4 +68,12 @@
 
         }
 
+        protected function getClassTable($class){
+
+            $table = require __DIR__.'/../config/database_tables.php';
+
+            return $table[strtolower($class)];
+
+        }
+
     }
