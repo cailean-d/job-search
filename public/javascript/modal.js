@@ -21,7 +21,7 @@
     
         logout.onclick = function(e){
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', "scripts/logout.php");
+            xhr.open('POST', "app/user/logout");
             xhr.send();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4){

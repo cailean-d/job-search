@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="scripts/reg.php" method="post" id="registration">
+                <form action="api/user/register" method="post" id="registration">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
