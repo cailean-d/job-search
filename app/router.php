@@ -60,8 +60,8 @@
     
     });
 
-    // Router::PageNotFound(function(){
+    Router::PageNotFound(function(){
 
-    //     return new ErrorPageController(get_defined_vars());
+        return new ErrorPageController(get_defined_vars());
 
-    // });
+    });

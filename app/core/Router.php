@@ -185,27 +185,31 @@
 
         public static function PageNotFound(callable $callback){
 
-            $matched = false;
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+                $matched = false;
             
-            foreach (self::$routes as $route) {
-               
-                if(preg_match($route, self::getRequestURL(), $matches)){
-                    
-                    $matched = true;
-                    break;
-                    
+                foreach (self::$routes as $route) {
+    
+                    if(preg_match($route, self::getRequestURL(), $matches)){
+                        
+                        $matched = true;
+                        break;
+                        
+                    }
+    
                 }
-
-            }
-
-            if($matched === false){
-
-                $_Controller = $callback($matches);
-
-                if(method_exists($_Controller, 'render')){
-
-                    $_Controller->render();                        
-
+    
+                if($matched === false){
+    
+                    $_Controller = $callback($matches);
+    
+                    if(method_exists($_Controller, 'render')){
+    
+                        $_Controller->render();                        
+    
+                    }
+    
                 }
 
             }
