@@ -60,6 +60,12 @@
     
     });
 
+    Router::get("api", function($router){
+
+        return new ApiController(get_defined_vars());
+    
+    });
+
     Router::PageNotFound(function(){
 
         return new ErrorPageController(get_defined_vars());
