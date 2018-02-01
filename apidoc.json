@@ -4,7 +4,7 @@
     "description": "Сервис для поиска работы",
     "title": "API Документация",
     "url" : "http://localhost/api/1.0.0/",
-    "sampleUrl" : "http://localhost/api/1.0.0/",
+    "sampleUrl" : "http://project/api/",
     "withGenerator" : "false",
     "withCompare" : "false"
   }

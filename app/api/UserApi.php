@@ -1,5 +1,10 @@
 <?php
 
+    /**
+     * @apiDefine auth Необходима авторизация
+     * 
+     */
+
     final class UserApi{
 
         public static function init(){
@@ -25,6 +30,12 @@
             Router::get('api/user/:id{number}', function($router){
 
                 self::getUser($router['id']);
+
+            });
+
+            Router::delete('api/user', function(){
+
+                self::deleteUser();
 
             });
 
@@ -221,16 +232,36 @@
          * @apiGroup User
          * @apiVersion  1.0.0
          * 
+         * @apiPermission auth
+         * 
          * @apiSuccess (200) {String} success Сессия успешно завершена
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
          *      success : true
          *  }
+         * 
+         *   
+         * @apiError Auth Вы не авторизированы
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *   HTTP/1.1 400 Bad Request
+         *   {
+         *     "error": "Вы не авторизированы"
+         *   }
          *
          */
 
         private static function logout(){
+
+            if(!isset($_SESSION['id'])){
+
+                http_response_code(400);
+                echo json_encode(['error' => "Вы не авторизированы"]);
+                exit();
+
+            }
 
             session_destroy();
             echo json_encode(['success' => true]);
@@ -298,6 +329,52 @@
                 exit();
 
             }
+
+        }
+
+        /**
+         * 
+         * @api {delete} user Удаление учетной записи
+         * @apiName UserDelete
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} success Удаление прошло успешно
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Вы не авторизированы"
+         *     }
+         * 
+         */
+
+        private static function deleteUser(){
+
+            if(!isset($_SESSION['id'])){
+
+                http_response_code(400);
+                echo json_encode(['error' => "Вы не авторизированы"]);
+                exit();
+
+            }
+
+            $user = new User($_SESSION['id']);
+            $user->delete();
+            session_destroy();
+
+            echo json_encode(['success' => true]);
+            exit();
 
         }
 

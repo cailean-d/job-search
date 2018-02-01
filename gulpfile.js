@@ -55,3 +55,15 @@ gulp.task('apidoc-dev', function(done){
       includeFilters: [ ".*\\.php$" ]
     }, done);
 });
+
+gulp.task('test-php', function() {
+    return gulp.src(['./app/**/*.php', '!./app/doc/**/*.*'])
+      .pipe(concat('all.php'))
+      .pipe(gulp.dest('./test/'));
+});
+
+gulp.task('test-js', function() {
+    return gulp.src(['./public/javascript/*.js'])
+      .pipe(concat('all.js'))
+      .pipe(gulp.dest('./test/'));
+});
