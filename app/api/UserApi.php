@@ -167,17 +167,25 @@
          * @apiParam  {String} email Почта
          * @apiParam  {String} password Пароль
          * 
-         * @apiSuccess (200) {String} success Авторизация прошла успешно
-         * 
          * @apiParamExample  {json} Request-Example:
          * {
          *      email : example@test.com,
          *      password : 123456
          * }
          * 
+         * @apiSuccess (200) {String} id ID пользователя
+         * @apiSuccess (200) {String} firstname Имя пользователя
+         * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} email Email пользователя
+         * @apiSuccess (200) {String} type Тип учетной записи
+         * 
          * @apiSuccessExample {json} Success-Response:
          *  {
-         *      success : true
+         *      id : 1
+         *      firstname : Вася
+         *      lastname : Петренко
+         *      email : example@test.com
+         *      type : 0
          *  }
          * 
          * @apiError EmailExists Email не существует
@@ -185,10 +193,10 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
-         *     {
-         *       "error": "Неверный пароль"
-         *     }
+         *   HTTP/1.1 400 Bad Request
+         *   {
+         *     "error": "Неверный пароль"
+         *   }
          * 
          */
 
@@ -204,7 +212,16 @@
                 if(password_verify($password, $user->getPassword())){
 
                     self::setSessionData($user);
-                    echo json_encode(['success' => true]);
+                    echo json_encode([
+
+                        'id' => $user->getId(),
+                        'firstname' => $user->getFirstname(),
+                        'lastname' => $user->getLastname(),
+                        'email' => $user->getEmail(),
+                        'type' => $user->getType()
+    
+                        ]);
+
                     exit();
 
                 } else {
