@@ -1,0 +1,10 @@
+{
+    "name": "Поиск работы",
+    "version": "1.0.0",
+    "description": "Сервис для поиска работы",
+    "title": "API Документация",
+    "url" : "http://localhost/api/1.0.0/",
+    "sampleUrl" : "http://localhost/api/1.0.0/",
+    "withGenerator" : "false",
+    "withCompare" : "false"
+  }

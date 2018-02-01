@@ -24,6 +24,57 @@
 
         }
 
+        /**
+         * 
+         * @api {post} user/register Регистрация
+         * @apiName UserRegister
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiParam  {String} firstname Имя
+         * @apiParam  {String} lastname Фамилия
+         * @apiParam  {String} email Почта
+         * @apiParam  {String} password Пароль
+         * @apiParam  {String} type="0" Тип учетной записи
+         * 
+         * @apiSuccess (200) {String} id ID нового пользователя
+         * 
+         * @apiParamExample  {json} Request-Example:
+         * {
+         *      firstname : Вася,
+         *      lastname : Петренко,
+         *      email : example@test.com,
+         *      password : 123456,
+         *      type : 0
+         * }
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      id : 1
+         *  }
+         * 
+         * @apiError EmailExists Email уже существует
+         * 
+         * @apiError Empty-Firstname Поле <code>firstname</code> не должно быть пустым
+         * @apiError Empty-Lastname Поле <code>lastname</code> не должно быть пустым
+         * @apiError Empty-Email Поле <code>email</code> не должно быть пустым
+         * @apiError Empty-Password Поле <code>password</code> не должно быть пустым
+         * @apiError Empty-Type Поле <code>type</code> не должно быть пустым
+         * 
+         * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
+         * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
+         * @apiError Invalid-Email Некорректное поле <code>email</code>
+         * @apiError Invalid-Type Некорректное поле <code>type</code>
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Некорректное поле <firstname>"
+         *     }
+         * 
+         */
+
         private static function register(){
 
             $email = htmlspecialchars(trim($_POST['email']));
@@ -89,6 +140,41 @@
 
         }
 
+        /**
+         * 
+         * @api {post} user/login Авторизация
+         * @apiName UserLogin
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiParam  {String} email Почта
+         * @apiParam  {String} password Пароль
+         * 
+         * @apiSuccess (200) {String} success Авторизация прошла успешно
+         * 
+         * @apiParamExample  {json} Request-Example:
+         * {
+         *      email : example@test.com,
+         *      password : 123456
+         * }
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         * 
+         * @apiError EmailExists Email не существует
+         * @apiError Invalid-Password Неверный пароль
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Неверный пароль"
+         *     }
+         * 
+         */
+
         private static function login(){
 
             $email = htmlspecialchars(trim($_POST['email']));
@@ -101,26 +187,48 @@
                 if(password_verify($password, $user->getPassword())){
 
                     self::setSessionData($user);
+                    echo json_encode(['success' => true]);
+                    exit();
 
                 } else {
 
                     http_response_code(400);
-                    exit("Неверный пароль");
+                    echo json_encode(['error' => "Неверный пароль"]);
+                    exit();
 
                 }
 
             } else {
 
                     http_response_code(400);
-                    exit("Логин не найден");
+                    echo json_encode(['error' => "Логин не найден"]);
+                    exit();
 
             }
 
         }
 
+        /**
+         * 
+         * @api {post} user/logout Выход
+         * @apiName UserLogout
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiSuccess (200) {String} success Сессия успешно завершена
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         *
+         */
+
         private static function logout(){
 
             session_destroy();
+            echo json_encode(['success' => true]);
+            exit();
 
         }
 

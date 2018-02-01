@@ -11,7 +11,8 @@ var gulp            = require('gulp'),
     inject          = require('gulp-inject'),
     gulpRemoveHtml  = require('gulp-remove-html'),
     htmlmin         = require('gulp-html-minifier'),
-    {phpMinify}     = require('@cedx/gulp-php-minify');
+    {phpMinify}     = require('@cedx/gulp-php-minify'),
+    apidoc          = require('gulp-apidoc');
 
 gulp.task('clean-prod', function(){
     return gulp.src('./.prod/', {read: false})
@@ -44,4 +45,13 @@ gulp.task('build-index', function () {
     .pipe(gulpRemoveHtml())
     .pipe(htmlmin({collapseWhitespace: true, removeComments : true, ignoreCustomFragments : false}))
     .pipe(gulp.dest('./.prod/'));
+});
+
+gulp.task('apidoc-dev', function(done){
+    apidoc({
+      src: "app/api",
+      dest: "app/doc",
+      config: "./",
+      includeFilters: [ ".*\\.php$" ]
+    }, done);
 });

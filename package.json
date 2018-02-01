@@ -1,8 +1,12 @@
 {
   "name": "job-seacrh",
   "version": "1.0.0",
-  "description": "",
+  "description": "Сервис для поиска работы",
   "main": "index.js",
+  "apidoc": {
+    "title": "API Документация",
+    "url" : "http://localhost/api/1.0.0/"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +23,7 @@
   "devDependencies": {
     "@cedx/gulp-php-minify": "^7.1.1",
     "gulp": "^3.9.1",
+    "gulp-apidoc": "^0.2.6",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^3.9.0",

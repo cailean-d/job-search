@@ -46,6 +46,13 @@ AddDefaultCharset utf-8
 </IfModule>
 
 
+### Разрешить кросс-доменные запросы
+<ifModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "PUT,POST,GET,DELETE,OPTIONS"
+</IfModule>
+
+
 ### Подсказать браузеру схему кеширования через заголовки в ответе сервера
 <IfModule mod_expires.c>
     # Enable expires
