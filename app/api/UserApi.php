@@ -22,6 +22,12 @@
 
             });
 
+            Router::get('api/user/:id{number}', function($router){
+
+                self::getUser($router['id']);
+
+            });
+
         }
 
         /**
@@ -229,6 +235,69 @@
             session_destroy();
             echo json_encode(['success' => true]);
             exit();
+
+        }
+
+        /**
+         * 
+         * @api {get} user/:id Данные пользователя
+         * @apiName GetUser
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiParam  {String} id ID пользователя
+         * 
+         * @apiSuccess (200) {String} id ID пользователя
+         * @apiSuccess (200) {String} firstname Имя пользователя
+         * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} email Email пользователя
+         * @apiSuccess (200) {String} type Тип учетной записи
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      id : 1
+         *      firstname : Вася
+         *      lastname : Петренко
+         *      email : example@test.com
+         *      type : 0
+         *  }
+         * 
+         * @apiError UserNotFound Пользовтель <code>id</code> не найден.
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Пользователь не найден"
+         *     }
+         * 
+         */
+
+        private static function getUser($id){
+
+            $user = User::get($id);
+
+            if (empty($user->getId())) {
+
+                http_response_code(400);
+                echo json_encode(['error' => "Пользователь не найден"]);
+                exit();
+
+            } else {
+
+                echo json_encode([
+
+                    'id' => $user->getId(),
+                    'firstname' => $user->getFirstname(),
+                    'lastname' => $user->getLastname(),
+                    'email' => $user->getEmail(),
+                    'type' => $user->getType()
+
+                    ]);
+
+                exit();
+
+            }
 
         }
 
