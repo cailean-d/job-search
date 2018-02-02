@@ -81,7 +81,7 @@
         <script src="public/javascript/lib/fontawesome-all.min.js"></script>
         <script src="public/javascript/lib/datepicker.min.js"></script>
         <script src="public/javascript/filter.js?ewqqqqqqws"></script>
-        <script src="public/javascript/modal.js?ews"></script>
+        <script src="public/javascript/modal.js?eeqews"></script>
         <script src="public/javascript/active_page.js?eeeewqweqwewq"></script>
         <script src="public/javascript/login_valid.js?wqqeqwqewqqqew"></script>
         <script src="public/javascript/reg_valid.js?qqwwцewqewqqeqe"></script>

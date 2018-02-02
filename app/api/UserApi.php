@@ -39,6 +39,12 @@
                     'method' => 'delete',
                     'url' => 'user',
                     'handler' => 'deleteUser'
+                ],
+
+                [
+                    'method' => 'put',
+                    'url' => 'user',
+                    'handler' => 'updateUser'
                 ]
 
             );
@@ -58,8 +64,6 @@
          * @apiParam  {String} password Пароль
          * @apiParam  {String} type="0" Тип учетной записи
          * 
-         * @apiSuccess (200) {String} id ID нового пользователя
-         * 
          * @apiParamExample  {json} Request-Example:
          * {
          *      firstname : Вася,
@@ -69,9 +73,19 @@
          *      type : 0
          * }
          * 
+         * @apiSuccess (200) {String} id ID пользователя
+         * @apiSuccess (200) {String} firstname Имя пользователя
+         * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} email Email пользователя
+         * @apiSuccess (200) {String} type Тип учетной записи
+         * 
          * @apiSuccessExample {json} Success-Response:
          *  {
          *      id : 1
+         *      firstname : Вася
+         *      lastname : Петренко
+         *      email : example@test.com
+         *      type : 0
          *  }
          * 
          * @apiError EmailExists Email уже существует
@@ -163,6 +177,18 @@
             }
 
             self::setSessionData($newUser);
+            
+            echo json_encode([
+
+                'id' => $newUser->getId(),
+                'firstname' => $newUser->getFirstname(),
+                'lastname' => $newUser->getLastname(),
+                'email' => $newUser->getEmail(),
+                'type' => $newUser->getType()
+
+                ]);
+
+            exit();
 
         }
 
@@ -221,6 +247,7 @@
                 if(password_verify($password, $user->getPassword())){
 
                     self::setSessionData($user);
+
                     echo json_encode([
 
                         'id' => $user->getId(),
@@ -402,6 +429,159 @@
             session_destroy();
 
             echo json_encode(['success' => true]);
+            exit();
+
+        }
+
+        /**
+         * 
+         * @api {put} user Изменить данные
+         * @apiName UserUpdate
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiParam  {String} [firstname] Имя
+         * @apiParam  {String} [lastname] Фамилия
+         * @apiParam  {String} [email] Почта
+         * @apiParam  {String} [password] Пароль
+         * @apiParam  {String} [type="0"] Тип учетной записи
+         * 
+         * @apiSuccess (200) {String} id ID пользователя
+         * @apiSuccess (200) {String} firstname Имя пользователя
+         * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} email Email пользователя
+         * @apiSuccess (200) {String} type Тип учетной записи
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      firstname : Вася
+         *      lastname : Петренко
+         *      email : example@test.com
+         *      password : 123456
+         *      type : 0
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         * 
+         * @apiError Empty-Firstname Поле <code>firstname</code> не должно быть пустым
+         * @apiError Empty-Lastname Поле <code>lastname</code> не должно быть пустым
+         * @apiError Empty-Email Поле <code>email</code> не должно быть пустым
+         * @apiError Empty-Password Поле <code>password</code> не должно быть пустым
+         * @apiError Empty-Type Поле <code>type</code> не должно быть пустым
+         * 
+         * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
+         * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
+         * @apiError Invalid-Email Некорректное поле <code>email</code>
+         * @apiError Invalid-Type Некорректное поле <code>type</code>
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *   HTTP/1.1 400 Bad Request
+         *   {
+         *     "error": "Вы не авторизированы"
+         *   }
+         * 
+         */
+
+        public static function updateUser(){
+
+            parse_str(file_get_contents("php://input"), $GLOBALS['PUT']);
+
+            if(!isset($_SESSION['id'])){
+
+                http_response_code(400);
+                echo json_encode(['error' => "Вы не авторизированы"]);
+                exit();
+
+            }
+
+            $user = User::get($_SESSION['id']);
+
+            if(isset($GLOBALS['PUT']['firstname'])){
+
+                $user->setFirstname($GLOBALS['PUT']['firstname']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['lastname'])){
+
+                $user->setLastname($GLOBALS['PUT']['lastname']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['email'])){
+
+                $user->setEmail($GLOBALS['PUT']['email']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['password'])){
+
+                $user->setPassword($GLOBALS['PUT']['password']);
+                $user->encodePassword();
+
+            }
+
+            if(isset($GLOBALS['PUT']['type'])){
+
+                $user->setType($GLOBALS['PUT']['type']);
+
+            }
+
+            try{
+                
+                $user->save();
+
+            } catch(Exception $e){
+                
+                if($e->getMessage() == 'firstname'){
+
+                    http_response_code(400);
+                    echo json_encode(['error' => "Некорректное поле [firstname]"]);
+                    exit();
+
+                } else if ($e->getMessage() == 'lastname') {
+
+                    http_response_code(400);
+                    echo json_encode(['error' => "Некорректное поле [lastname]"]);
+                    exit();
+
+                } else if ($e->getMessage() == 'email') {
+
+                    http_response_code(400);
+                    echo json_encode(['error' => "Некорректное поле [email]"]);
+                    exit();
+
+                } else if ($e->getMessage() == 'password') {
+
+                    http_response_code(400);
+                    echo json_encode(['error' => "Некорректное поле [password]"]);
+                    exit();
+
+                } else if ($e->getMessage() == 'type') {
+
+                    http_response_code(400);
+                    echo json_encode(['error' => "Некорректное поле [type]"]);
+                    exit();
+
+                }
+
+            }
+
+            self::setSessionData($user);
+
+            echo json_encode([
+
+                'id' => $user->getId(),
+                'firstname' => $user->getFirstname(),
+                'lastname' => $user->getLastname(),
+                'email' => $user->getEmail(),
+                'type' => $user->getType()
+
+                ]);
+
             exit();
 
         }
