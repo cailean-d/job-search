@@ -1,6 +1,6 @@
 <?php
 
-    $_BASE_URL = 'api/';
+    $_BASE_URL = 'api/1.0.0/';
 
     $dir = new RecursiveDirectoryIterator(__DIR__ . '/api');
     $iterator = new RecursiveIteratorIterator($dir);
