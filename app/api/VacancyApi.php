@@ -4,29 +4,33 @@
 
         public static function init(){
 
-            Router::post('api/vacancy/add', function(){
+            return array(
 
-                self::add();
+                [
+                    'method' => 'post',
+                    'url' => 'vacancy/add',
+                    'handler' => 'add'
+                ],
 
-            });
+                [
+                    'method' => 'delete',
+                    'url' => 'vacancy/delete/:id{number}',
+                    'handler' => 'delete'
+                ],
 
-            Router::delete('api/vacancy/delete/:id{number}', function($router){
+                [
+                    'method' => 'put',
+                    'url' => 'vacancy/update/:id{number}',
+                    'handler' => 'update'
+                ],
 
-                self::delete($router);
+                [
+                    'method' => 'get',
+                    'url' => 'vacancy/:id{number}',
+                    'handler' => 'get'
+                ]
 
-            });
-
-            Router::put('api/vacancy/update/:id{number}', function($router){
-
-                self::update($router);
-
-            });
-
-            Router::get('api/vacancy/:id{number}', function($router){
-
-                self::get($router);
-
-            });
+            );
 
         }
 

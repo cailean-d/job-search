@@ -9,35 +9,39 @@
 
         public static function init(){
 
-            Router::post('api/user/register', function(){
+            return array(
 
-                self::register();
+                [
+                    'method' => 'post',
+                    'url' => 'user/register',
+                    'handler' => 'register'
+                ],
 
-            });
+                [
+                    'method' => 'post',
+                    'url' => 'user/login',
+                    'handler' => 'login'
+                ],
 
-            Router::post('api/user/login', function(){
+                [
+                    'method' => 'post',
+                    'url' => 'user/logout',
+                    'handler' => 'logout'
+                ],
 
-                self::login();
+                [
+                    'method' => 'get',
+                    'url' => 'user/:id{number}',
+                    'handler' => 'getUser'
+                ],
 
-            });
+                [
+                    'method' => 'delete',
+                    'url' => 'user',
+                    'handler' => 'deleteUser'
+                ]
 
-            Router::post('api/user/logout', function(){
-
-                self::logout();
-
-            });
-
-            Router::get('api/user/:id{number}', function($router){
-
-                self::getUser($router['id']);
-
-            });
-
-            Router::delete('api/user', function(){
-
-                self::deleteUser();
-
-            });
+            );
 
         }
 
@@ -92,7 +96,7 @@
          * 
          */
 
-        private static function register(){
+        public static function register(){
 
             $email = htmlspecialchars(trim($_POST['email']));
 
@@ -127,27 +131,32 @@
                 if($e->getMessage() == 'firstname'){
 
                     http_response_code(400);
-                    echo "Некорректное поле <firstname>";
+                    echo json_encode(['error' => "Некорректное поле [firstname]"]);
+                    exit();
 
                 } else if ($e->getMessage() == 'lastname') {
 
                     http_response_code(400);
-                    echo "Некорректное поле <lastname>";
+                    echo json_encode(['error' => "Некорректное поле [lastname]"]);
+                    exit();
 
                 } else if ($e->getMessage() == 'email') {
 
                     http_response_code(400);
-                    echo "Некорректное поле <email>";
+                    echo json_encode(['error' => "Некорректное поле [email]"]);
+                    exit();
 
                 } else if ($e->getMessage() == 'password') {
 
                     http_response_code(400);
-                    echo "Некорректное поле <password>";
+                    echo json_encode(['error' => "Некорректное поле [password]"]);
+                    exit();
 
                 } else if ($e->getMessage() == 'type') {
 
                     http_response_code(400);
-                    echo "Некорректное поле <type>";
+                    echo json_encode(['error' => "Некорректное поле [type]"]);
+                    exit();
 
                 }
 
@@ -200,7 +209,7 @@
          * 
          */
 
-        private static function login(){
+        public static function login(){
 
             $email = htmlspecialchars(trim($_POST['email']));
             $password = htmlspecialchars(trim($_POST['password']));
@@ -270,7 +279,7 @@
          *
          */
 
-        private static function logout(){
+        public static function logout(){
 
             if(!isset($_SESSION['id'])){
 
@@ -321,7 +330,9 @@
          * 
          */
 
-        private static function getUser($id){
+        public static function getUser($router){
+
+            $id = $router['id'];
 
             $user = User::get($id);
 
@@ -376,7 +387,7 @@
          * 
          */
 
-        private static function deleteUser(){
+        public static function deleteUser(){
 
             if(!isset($_SESSION['id'])){
 
