@@ -117,9 +117,8 @@
             $user = User::getByEmail($email);
 
             if(!empty($email) && $email == $user->getEmail()) { 
-                
-                http_response_code(400);
-                exit("Email уже существует!");
+
+                Application::error("Email уже существует!");
 
             } 
 
@@ -144,41 +143,32 @@
                 
                 if($e->getMessage() == 'firstname'){
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [firstname]"]);
-                    exit();
+                    Application::error("Некорректное поле [firstname]");
 
                 } else if ($e->getMessage() == 'lastname') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [lastname]"]);
-                    exit();
+                    Application::error("Некорректное поле [lastname]");
 
                 } else if ($e->getMessage() == 'email') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [email]"]);
-                    exit();
+                    Application::error("Некорректное поле [email]");
 
                 } else if ($e->getMessage() == 'password') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [password]"]);
-                    exit();
+                    Application::error("Некорректное поле [password]");
 
                 } else if ($e->getMessage() == 'type') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [type]"]);
-                    exit();
+                    Application::error("Некорректное поле [type]");
 
                 }
 
             }
 
             self::setSessionData($newUser);
-            
-            echo json_encode([
+
+
+            $res = [
 
                 'id' => $newUser->getId(),
                 'firstname' => $newUser->getFirstname(),
@@ -186,9 +176,9 @@
                 'email' => $newUser->getEmail(),
                 'type' => $newUser->getType()
 
-                ]);
+            ];
 
-            exit();
+            Application::response($res, 200);
 
         }
 
@@ -248,7 +238,7 @@
 
                     self::setSessionData($user);
 
-                    echo json_encode([
+                    $res = [
 
                         'id' => $user->getId(),
                         'firstname' => $user->getFirstname(),
@@ -256,23 +246,19 @@
                         'email' => $user->getEmail(),
                         'type' => $user->getType()
     
-                        ]);
+                    ];
 
-                    exit();
+                    Application::response($res, 200);
 
                 } else {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Неверный пароль"]);
-                    exit();
+                    Application::error('Неверный пароль');
 
                 }
 
             } else {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Логин не найден"]);
-                    exit();
+                    Application::error('Логин не найден');
 
             }
 
@@ -310,15 +296,11 @@
 
             if(!isset($_SESSION['id'])){
 
-                http_response_code(400);
-                echo json_encode(['error' => "Вы не авторизированы"]);
-                exit();
+                Application::error('Вы не авторизированы');
 
             }
 
-            session_destroy();
-            echo json_encode(['success' => true]);
-            exit();
+            Application::repsonse(['success' => true], 200);
 
         }
 
@@ -328,8 +310,6 @@
          * @apiName GetUser
          * @apiGroup User
          * @apiVersion  1.0.0
-         * 
-         * @apiParam  {String} id ID пользователя
          * 
          * @apiSuccess (200) {String} id ID пользователя
          * @apiSuccess (200) {String} firstname Имя пользователя
@@ -365,13 +345,11 @@
 
             if (empty($user->getId())) {
 
-                http_response_code(400);
-                echo json_encode(['error' => "Пользователь не найден"]);
-                exit();
+                Application::error('Пользователь не найден');
 
             } else {
 
-                echo json_encode([
+                $res = [
 
                     'id' => $user->getId(),
                     'firstname' => $user->getFirstname(),
@@ -379,9 +357,9 @@
                     'email' => $user->getEmail(),
                     'type' => $user->getType()
 
-                    ]);
+                ];
 
-                exit();
+                Application::response($res, 200);
 
             }
 
@@ -418,9 +396,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                http_response_code(400);
-                echo json_encode(['error' => "Вы не авторизированы"]);
-                exit();
+                Application::error('Вы не авторизированы');
 
             }
 
@@ -428,8 +404,7 @@
             $user->delete();
             session_destroy();
 
-            echo json_encode(['success' => true]);
-            exit();
+            Application::repsonse(['success' => true], 200);
 
         }
 
@@ -491,9 +466,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                http_response_code(400);
-                echo json_encode(['error' => "Вы не авторизированы"]);
-                exit();
+                Application::error('Вы не авторизированы');
 
             }
 
@@ -538,33 +511,23 @@
                 
                 if($e->getMessage() == 'firstname'){
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [firstname]"]);
-                    exit();
+                    Application::error('Некорректное поле [firstname]');
 
                 } else if ($e->getMessage() == 'lastname') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [lastname]"]);
-                    exit();
+                    Application::error('Некорректное поле [lastname]');
 
                 } else if ($e->getMessage() == 'email') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [email]"]);
-                    exit();
+                    Application::error('Некорректное поле [email]');
 
                 } else if ($e->getMessage() == 'password') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [password]"]);
-                    exit();
+                    Application::error('Некорректное поле [password]');
 
                 } else if ($e->getMessage() == 'type') {
 
-                    http_response_code(400);
-                    echo json_encode(['error' => "Некорректное поле [type]"]);
-                    exit();
+                    Application::error('Некорректное поле [type]');
 
                 }
 
@@ -572,7 +535,7 @@
 
             self::setSessionData($user);
 
-            echo json_encode([
+            $res = [
 
                 'id' => $user->getId(),
                 'firstname' => $user->getFirstname(),
@@ -580,9 +543,9 @@
                 'email' => $user->getEmail(),
                 'type' => $user->getType()
 
-                ]);
+            ];
 
-            exit();
+            Application::response($res, 200);
 
         }
 
