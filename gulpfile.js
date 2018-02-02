@@ -50,7 +50,7 @@ gulp.task('build-index', function () {
 gulp.task('apidoc-dev', function(done){
     apidoc({
       src: "app/api",
-      dest: "app/doc",
+      dest: "public/doc",
       config: "./",
       includeFilters: [ ".*\\.php$" ]
     }, done);

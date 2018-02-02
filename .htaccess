@@ -87,8 +87,23 @@ FileETag None
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-    # Handle Front Controller...
+    # Перенаправление файлов в public
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -F 
+    RewriteRule (.*) /public/$1 [S=1,L]
+
+    # Перенаправление файлов в public/doc для отображения документации
+    RewriteCond %{DOCUMENT_ROOT}/public/doc/$1 -F 
+    RewriteRule (.*) /public/doc/$1 [L]
+
+    #Запретить доступ к app
+    RewriteRule ^app  /  [R,L]
+
+    #Запретить доступ к htaccess
+    RewriteRule .htaccess  /  [R,L]
+
+    #Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !^favicon\.ico
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ start.php [L]
+    RewriteRule ^ start.php [QSA,L]
 </IfModule>

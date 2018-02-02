@@ -6,8 +6,11 @@
 
             parent::__construct($routerVars);
 
-            $this->view->setTitle('API Документация');
-            $this->view->setView('ApiView');
+        }
+
+        public function render(){
+
+            include realpath(__DIR__ . '/../../public/doc/index.html');
 
         }
 
