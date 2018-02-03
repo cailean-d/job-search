@@ -46,7 +46,7 @@
 
         public static function start(){
 
-            Router::doGet();
+            Router::init();
 
         }
 

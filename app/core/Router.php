@@ -260,6 +260,20 @@
 
         }
 
+        public static function getPostRoutes(){
+
+            $routes = array();
+
+            foreach (Router::$post_routes as $route) {
+
+                array_push($routes, $route['url']);
+
+            }
+
+            return $routes;
+
+        }
+
         public static function doGet(){
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -331,6 +345,13 @@
                 }
                 
             }
+
+        }
+
+        public static function init(){
+
+            self::doGet();
+            self::doPost();
 
         }
 
