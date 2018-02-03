@@ -1,10 +1,6 @@
 <?php
 
-    Router::get("", function($router){
-
-        return new VacanciesController(get_defined_vars());
-    
-    });
+    Router::get("", VacanciesController::class);
 
     Router::get("resume", function($router){
         
@@ -68,15 +64,24 @@
 
     Router::get("test", function($router){
 
-    //    Application::debug(apache_request_headers());
+
+    //    Application::debug(Router::$get_routes_test);
+
+        echo "qqqqq";
+
+    //    foreach (Router::$get_routes_test as $v) {
+
+    //         echo $v['url'] . '<br>';
+           
+    //    }
 
     //    echo $_SERVER['REMOTE_HOST'] . '<br>';
     //    echo $_SERVER['HTTP_HOST'] . '<br>';
     
     });
 
-    Router::PageNotFound(function(){
+    // Router::PageNotFound(function(){
 
-        return new ErrorPageController(get_defined_vars());
+    //     return new ErrorPageController(get_defined_vars());
 
-    });
+    // });

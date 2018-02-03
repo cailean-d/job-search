@@ -4,7 +4,7 @@
 
         private static $validRoute = '/^(([a-z0-9\.]+)|(:[a-z0-9\.]+(\{(.*)\})?))(\/(([a-z0-9\.]+)|(:[a-z]+(\{(.*)\})?))?)*$/';
 
-        public static $routes = array();
+        private static $get_routes = array();
 
         private static function isRouteValid(string $route){
             
@@ -105,25 +105,15 @@
 
         }
 
-        public static function get(string $url, callable $callback){
+        public static function get(string $url, $callback){
 
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            array_push(self::$get_routes, [
 
-                array_push(self::$routes, self::createRegexpURL($url));
+                'url' => $url,
+                'url_pattern' => self::createRegexpURL($url),
+                'handler' => $callback
 
-                if(preg_match(self::createRegexpURL($url), self::getRequestURL(), $matches)){
-                    
-                    $_Controller = $callback($matches);
-
-                    if(method_exists($_Controller, 'render')){
-
-                        $_Controller->render();                        
-
-                    }
-
-                }
-                
-            }
+            ]);
 
         }
 
@@ -230,7 +220,7 @@
 
                 $matched = false;
             
-                foreach (self::$routes as $route) {
+                foreach (self::$get_routes as $route) {
     
                     if(preg_match($route, self::getRequestURL(), $matches)){
                         
@@ -253,6 +243,60 @@
     
                 }
 
+            }
+
+        }
+
+        public static function doGet(){
+
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+                foreach (Router::$get_routes as $route) {
+
+                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
+
+                        $handler = $route['handler'];
+
+                        if(is_string($handler)){
+
+                            if(class_exists($handler)){
+
+                                $router['router'] = $matches;
+
+                                $_Controller = new $handler($router);
+    
+                                if(is_subclass_of($_Controller, 'Controller')){
+    
+                                    $_Controller->render();
+        
+                                } else {
+    
+                                    throw new Exception('Class must be inherited from Controller');
+    
+                                }
+    
+                            } else {
+
+                                throw new Exception('Class does not exist');
+
+                            }
+
+                        } else {
+                            
+                            $_Controller = $handler($matches);
+
+                            if(method_exists($_Controller, 'render')){
+
+                                $_Controller->render();                        
+
+                            }
+
+                        }
+
+                    }
+
+                }
+                
             }
 
         }
