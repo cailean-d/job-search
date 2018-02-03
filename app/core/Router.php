@@ -313,6 +313,18 @@
 
         }
 
+        public static function getRoutes(){
+
+            $routes['GET'] = self::getGetRoutes();
+            $routes['POST'] = self::getPostRoutes();
+            $routes['PUT'] = self::getPutRoutes();
+            $routes['PATCH'] = self::getPatchRoutes();
+            $routes['DELETE'] = self::getDeleteRoutes();
+
+            return $routes;
+
+        }
+
         public static function doGet(){
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {

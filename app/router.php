@@ -30,7 +30,7 @@
     Router::get("test", function($router){
 
 
-       Application::debug(Router::getPostRoutes());
+       Application::debug(Router::getRoutes());
 
 
     //    foreach (Router::$get_routes_test as $v) {
