@@ -1,5 +1,7 @@
 <?php
 
+    Router::PageNotFound(ErrorPageController::class);
+
     Router::get("", VacanciesController::class);
 
     Router::get("resume", ResumeController::class);
@@ -24,14 +26,5 @@
 
         echo "admin panel";
     
-    });
-
-    Router::PageNotFound(ErrorPageController::class);
-
-
-    Router::get("test", function($router){
-
-        Application::debug(Router::getRoutes());
-
     });
 

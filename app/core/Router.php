@@ -11,6 +11,7 @@
         private static $delete_routes = array();
 
         private static $middleware = array();
+        private static $page404;
 
         private static function isRouteValid(string $route){
             
@@ -220,62 +221,7 @@
 
         public static function PageNotFound($callback){
 
-            if ($_SERVER['REQUEST_METHOD'] == 'GET' && self::isBrowser()) {
-
-                $matched = false;
-            
-                foreach (self::$get_routes as $route) {
-    
-                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
-                        
-                        $matched = true;
-                        break;
-                        
-                    }
-    
-                }
-    
-                if($matched === false){
-
-                    if(is_string($callback)){
-
-                        if(class_exists($callback)){
-
-                            $router['router'] = $callback;
-
-                            $_Controller = new $callback($router);
-
-                            if(is_subclass_of($_Controller, 'Controller')){
-
-                                $_Controller->render();
-    
-                            } else {
-
-                                throw new Exception('Class must be inherited from Controller');
-
-                            }
-
-                        } else {
-
-                            throw new Exception('Class does not exist');
-
-                        }
-
-                    } else {
-                        
-                        $_Controller = $callback($matches);
-
-                        if(method_exists($_Controller, 'render')){
-
-                            $_Controller->render();                        
-
-                        }
-
-                    }
-    
-                }
-
-            }
+            self::$page404 = $callback;
 
         }
 
@@ -505,10 +451,74 @@
 
         }
 
+        public static function doPage404(){
+
+            if ($_SERVER['REQUEST_METHOD'] == 'GET' && self::isBrowser()) {
+
+                $matched = false;
+            
+                foreach (self::$get_routes as $route) {
+    
+                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
+                        
+                        $matched = true;
+                        break;
+                        
+                    }
+    
+                }
+    
+                if($matched === false){
+
+                    $callback = self::$page404;
+
+                    if(is_string($callback)){
+
+                        if(class_exists($callback)){
+
+                            $router['router'] = $callback;
+
+                            $_Controller = new $callback($router);
+
+                            if(is_subclass_of($_Controller, 'Controller')){
+
+                                $_Controller->render();
+    
+                            } else {
+
+                                throw new Exception('Class must be inherited from Controller');
+
+                            }
+
+                        } else {
+
+                            throw new Exception('Class does not exist');
+
+                        }
+
+                    } else {
+                        
+                        $_Controller = $callback($matches);
+
+                        if(method_exists($_Controller, 'render')){
+
+                            $_Controller->render();                        
+
+                        }
+
+                    }
+    
+                }
+
+            }
+
+        }
+
         public static function init(){
 
             self::doMiddleware();
             self::doGet();
+            self::doPage404();
             self::doPost();
             self::doPut();
             self::doPatch();
