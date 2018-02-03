@@ -464,8 +464,6 @@
 
         public static function updateUser(){
 
-            parse_str(file_get_contents("php://input"), $GLOBALS['PUT']);
-
             if(!isset($_SESSION['id'])){
 
                 Application::error('Вы не авторизированы');

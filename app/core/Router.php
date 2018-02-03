@@ -10,6 +10,8 @@
         private static $patch_routes = array();
         private static $delete_routes = array();
 
+        private static $middleware = array();
+
         private static function isRouteValid(string $route){
             
             if($route == ""){
@@ -133,7 +135,7 @@
 
         }
 
-        public static function put(string $url, callable $callback){
+        public static function put(string $url, $callback){
 
             array_push(self::$put_routes, [
 
@@ -145,7 +147,7 @@
 
         }
 
-        public static function patch(string $url, callable $callback){
+        public static function patch(string $url, $callback){
 
             array_push(self::$patch_routes, [
 
@@ -157,7 +159,7 @@
 
         }
 
-        public static function delete(string $url, callable $callback){
+        public static function delete(string $url, $callback){
 
             array_push(self::$delete_routes, [
 
@@ -166,6 +168,12 @@
                 'handler' => $callback
 
             ]);
+
+        }
+
+        public static function middleware(callable $callback){
+
+            array_push(self::$middleware, $callback);
 
         }
 
@@ -459,8 +467,19 @@
 
         }
 
+        public static function doMiddleware(){
+
+            foreach (Router::$middleware as $handler) {
+
+                $handler();
+            
+            }
+
+        }
+
         public static function init(){
 
+            self::doMiddleware();
             self::doGet();
             self::doPost();
             self::doPut();
