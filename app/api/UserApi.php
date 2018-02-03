@@ -300,7 +300,9 @@
 
             }
 
-            Application::repsonse(['success' => true], 200);
+            session_destroy();
+
+            Application::response(['success' => true], 200);
 
         }
 
@@ -404,7 +406,7 @@
             $user->delete();
             session_destroy();
 
-            Application::repsonse(['success' => true], 200);
+            Application::response(['success' => true], 200);
 
         }
 
