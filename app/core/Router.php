@@ -135,43 +135,37 @@
 
         public static function put(string $url, callable $callback){
 
-            if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-                
-                if(preg_match(self::createRegexpURL($url), self::getRequestURL(), $matches)){
-                    
-                    $callback($matches);
+            array_push(self::$put_routes, [
 
-                }
-                
-            }
+                'url' => $url,
+                'url_pattern' => self::createRegexpURL($url),
+                'handler' => $callback
+
+            ]);
 
         }
 
         public static function patch(string $url, callable $callback){
 
-            if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
+            array_push(self::$patch_routes, [
 
-                if(preg_match(self::createRegexpURL($url), self::getRequestURL(), $matches)){
-                    
-                    $callback($matches);
+                'url' => $url,
+                'url_pattern' => self::createRegexpURL($url),
+                'handler' => $callback
 
-                }
-                
-            }
+            ]);
 
         }
 
         public static function delete(string $url, callable $callback){
 
-            if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+            array_push(self::$delete_routes, [
 
-                if(preg_match(self::createRegexpURL($url), self::getRequestURL(), $matches)){
-                    
-                    $callback($matches);
-                    
-                }
-                
-            }
+                'url' => $url,
+                'url_pattern' => self::createRegexpURL($url),
+                'handler' => $callback
+
+            ]);
 
         }
 
@@ -393,10 +387,73 @@
 
         }
 
+        public static function doPut(){
+
+            if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+
+                foreach (Router::$put_routes as $route) {
+
+                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
+
+                        $handler = $route['handler'];
+                        
+                        $handler($matches);
+
+                    }
+                
+                }
+                
+            }
+
+        }
+
+        public static function doPatch(){
+
+            if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
+
+                foreach (Router::$patch_routes as $route) {
+
+                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
+
+                        $handler = $route['handler'];
+                        
+                        $handler($matches);
+
+                    }
+                
+                }
+                
+            }
+
+        }
+
+        public static function doDelete(){
+
+            if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+
+                foreach (Router::$delete_routes as $route) {
+
+                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
+
+                        $handler = $route['handler'];
+                        
+                        $handler($matches);
+
+                    }
+                
+                }
+                
+            }
+
+        }
+
         public static function init(){
 
             self::doGet();
             self::doPost();
+            self::doPut();
+            self::doPatch();
+            self::doDelete();
 
         }
 
