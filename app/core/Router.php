@@ -5,6 +5,7 @@
         private static $validRoute = '/^(([a-z0-9\.]+)|(:[a-z0-9\.]+(\{(.*)\})?))(\/(([a-z0-9\.]+)|(:[a-z]+(\{(.*)\})?))?)*$/';
 
         private static $get_routes = array();
+        private static $post_routes = array();
 
         private static function isRouteValid(string $route){
             
@@ -117,17 +118,15 @@
 
         }
 
-        public static function post(string $url, callable $callback){
+        public static function post(string $url, $callback){
 
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            array_push(self::$post_routes, [
 
-                if(preg_match(self::createRegexpURL($url), self::getRequestURL(), $matches)){
-                    
-                    $callback($matches);
+                'url' => $url,
+                'url_pattern' => self::createRegexpURL($url),
+                'handler' => $callback
 
-                }
-                
-            }
+            ]);
 
         }
 
@@ -309,6 +308,26 @@
 
                     }
 
+                }
+                
+            }
+
+        }
+
+        public static function doPost(){
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                foreach (Router::$post_routes as $route) {
+
+                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
+
+                        $handler = $route['handler'];
+                        
+                        $handler($matches);
+
+                    }
+                
                 }
                 
             }
