@@ -67,3 +67,20 @@ gulp.task('test-js', function() {
       .pipe(concat('all.js'))
       .pipe(gulp.dest('./test/'));
 });
+
+gulp.task('test-css', function() {
+    return gulp.src(['./public/stylesheet/*.css'])
+      .pipe(concat('all.css'))
+      .pipe(gulp.dest('./test/'));
+});
+
+gulp.task('test-all', function() {
+    return gulp.src([
+        './public/stylesheet/*.css', 
+        './app/**/*.php', 
+        '!./app/doc/**/*.*', 
+        './public/javascript/*.js'
+        ])
+      .pipe(concat('all.txt'))
+      .pipe(gulp.dest('./test/'));
+});
