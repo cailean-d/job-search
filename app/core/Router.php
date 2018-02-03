@@ -6,6 +6,9 @@
 
         private static $get_routes = array();
         private static $post_routes = array();
+        private static $put_routes = array();
+        private static $patch_routes = array();
+        private static $delete_routes = array();
 
         private static function isRouteValid(string $route){
             
@@ -265,6 +268,48 @@
             $routes = array();
 
             foreach (Router::$post_routes as $route) {
+
+                array_push($routes, $route['url']);
+
+            }
+
+            return $routes;
+
+        }
+
+        public static function getPutRoutes(){
+
+            $routes = array();
+
+            foreach (Router::$put_routes as $route) {
+
+                array_push($routes, $route['url']);
+
+            }
+
+            return $routes;
+
+        }
+
+        public static function getPatchRoutes(){
+
+            $routes = array();
+
+            foreach (Router::$patch_routes as $route) {
+
+                array_push($routes, $route['url']);
+
+            }
+
+            return $routes;
+
+        }
+
+        public static function getDeleteRoutes(){
+
+            $routes = array();
+
+            foreach (Router::$delete_routes as $route) {
 
                 array_push($routes, $route['url']);
 
