@@ -26,26 +26,12 @@
     
     });
 
+    Router::PageNotFound(ErrorPageController::class);
+
 
     Router::get("test", function($router){
 
+        Application::debug(Router::getRoutes());
 
-       Application::debug(Router::getRoutes());
-
-
-    //    foreach (Router::$get_routes_test as $v) {
-
-    //         echo $v['url'] . '<br>';
-           
-    //    }
-
-    //    echo $_SERVER['REMOTE_HOST'] . '<br>';
-    //    echo $_SERVER['HTTP_HOST'] . '<br>';
-    
     });
 
-    // Router::PageNotFound(function(){
-
-    //     return new ErrorPageController(get_defined_vars());
-
-    // });

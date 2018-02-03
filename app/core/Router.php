@@ -218,7 +218,7 @@
 
         }
 
-        public static function PageNotFound(callable $callback){
+        public static function PageNotFound($callback){
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET' && self::isBrowser()) {
 
@@ -226,7 +226,7 @@
             
                 foreach (self::$get_routes as $route) {
     
-                    if(preg_match($route, self::getRequestURL(), $matches)){
+                    if(preg_match($route['url_pattern'], self::getRequestURL(), $matches)){
                         
                         $matched = true;
                         break;
@@ -236,13 +236,41 @@
                 }
     
                 if($matched === false){
+
+                    if(is_string($callback)){
+
+                        if(class_exists($callback)){
+
+                            $router['router'] = $callback;
+
+                            $_Controller = new $callback($router);
+
+                            if(is_subclass_of($_Controller, 'Controller')){
+
+                                $_Controller->render();
     
-                    $_Controller = $callback($matches);
-    
-                    if(method_exists($_Controller, 'render')){
-    
-                        $_Controller->render();                        
-    
+                            } else {
+
+                                throw new Exception('Class must be inherited from Controller');
+
+                            }
+
+                        } else {
+
+                            throw new Exception('Class does not exist');
+
+                        }
+
+                    } else {
+                        
+                        $_Controller = $callback($matches);
+
+                        if(method_exists($_Controller, 'render')){
+
+                            $_Controller->render();                        
+
+                        }
+
                     }
     
                 }
