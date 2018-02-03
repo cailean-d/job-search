@@ -247,6 +247,20 @@
 
         }
 
+        public static function getGetRoutes(){
+
+            $routes = array();
+
+            foreach (Router::$get_routes as $route) {
+
+                array_push($routes, $route['url']);
+
+            }
+
+            return $routes;
+
+        }
+
         public static function doGet(){
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {

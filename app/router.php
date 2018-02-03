@@ -19,7 +19,6 @@
     Router::get("vacancy/edit/:id{number}", VacancyEditController::class);
 
     Router::get("api", ApiController::class);
-    
 
     Router::get("admin", function($router){
 
@@ -31,9 +30,8 @@
     Router::get("test", function($router){
 
 
-    //    Application::debug(Router::$get_routes_test);
+       Application::debug(Router::getGetRoutes());
 
-        echo "qqqqq";
 
     //    foreach (Router::$get_routes_test as $v) {
 
