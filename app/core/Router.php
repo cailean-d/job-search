@@ -30,7 +30,7 @@
             
             if(!empty($_SERVER['QUERY_STRING'])){
 
-                return substr($request, 1, strpos($request, $query) - 1);
+                return substr($request, 1, strpos($request, $query) - 2);
 
             } else {
 
@@ -59,6 +59,47 @@
             } else {
 
                 throw new Exception('Incorrect URL Pattern.');
+
+            }
+
+        }
+
+        private static function getBrowser(){
+
+            $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+            if(strpos($user_agent, 'OPR')){
+
+                return 'Opera';
+                
+            } else if(strpos($user_agent, 'Firefox')){
+
+                return 'Firefox';
+                
+            } else if(strpos($user_agent, 'Chrome')){
+
+                return 'Chrome';
+                
+            } else if(strpos($user_agent, '.NET')){
+                
+                return 'Internet Explorer';
+                
+            }
+
+        }
+
+        private static function isBrowser(){
+
+            if( self::getBrowser() == 'Opera' || 
+                self::getBrowser() == 'Firefox' ||
+                self::getBrowser() == 'Chrome' ||
+                self::getBrowser() == 'Internet Explorer' ){
+
+                return true;
+
+            } else {
+
+                return false;
 
             }
 
@@ -185,7 +226,7 @@
 
         public static function PageNotFound(callable $callback){
 
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET' && self::isBrowser()) {
 
                 $matched = false;
             

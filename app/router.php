@@ -66,6 +66,15 @@
     
     });
 
+    Router::get("test", function($router){
+
+    //    Application::debug(apache_request_headers());
+
+    //    echo $_SERVER['REMOTE_HOST'] . '<br>';
+    //    echo $_SERVER['HTTP_HOST'] . '<br>';
+    
+    });
+
     Router::PageNotFound(function(){
 
         return new ErrorPageController(get_defined_vars());
