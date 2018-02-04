@@ -2,3 +2,4 @@ node_modules/
 .prod/
 public/doc/
 test/
+app/logs/*.*

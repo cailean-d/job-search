@@ -16,6 +16,22 @@
 
         }
 
+        public static function log($file, $data, $append = true){
+
+            if($append){
+
+                file_put_contents(realpath(__DIR__.'/../logs').DIRECTORY_SEPARATOR.$file, 
+                '[ '.date('d-m-Y H:i:m').' ] >> '.$data . "\r\n", FILE_APPEND);
+
+            } else {
+
+                file_put_contents(realpath(__DIR__.'/../logs').DIRECTORY_SEPARATOR.$file, 
+                '[ '.date('d-m-Y H:i:m').' ] >> '.$data . "\r\n");
+
+            }
+
+        }
+
         public static function response($data, $code, $json = true){
 
             http_response_code($code);
