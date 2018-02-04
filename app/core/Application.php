@@ -44,6 +44,17 @@
 
         }
 
+        public static function global(array $data){
+
+            foreach($data as $var_name => $var_value) {
+
+                global $$var_name;
+                $$var_name = $var_value;
+
+            }
+
+        }
+
         public static function start(){
 
             Router::init();
