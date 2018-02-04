@@ -118,7 +118,7 @@
 
             if(!empty($email) && $email == $user->getEmail()) { 
 
-                Application::error("Email уже существует!");
+                Http::error("Email уже существует!");
 
             } 
 
@@ -143,23 +143,23 @@
                 
                 if($e->getMessage() == 'firstname'){
 
-                    Application::error("Некорректное поле [firstname]");
+                    Http::error("Некорректное поле [firstname]");
 
                 } else if ($e->getMessage() == 'lastname') {
 
-                    Application::error("Некорректное поле [lastname]");
+                    Http::error("Некорректное поле [lastname]");
 
                 } else if ($e->getMessage() == 'email') {
 
-                    Application::error("Некорректное поле [email]");
+                    Http::error("Некорректное поле [email]");
 
                 } else if ($e->getMessage() == 'password') {
 
-                    Application::error("Некорректное поле [password]");
+                    Http::error("Некорректное поле [password]");
 
                 } else if ($e->getMessage() == 'type') {
 
-                    Application::error("Некорректное поле [type]");
+                    Http::error("Некорректное поле [type]");
 
                 }
 
@@ -178,7 +178,7 @@
 
             ];
 
-            Application::response($res, 200);
+            Http::response($res, 200);
 
         }
 
@@ -248,17 +248,17 @@
     
                     ];
 
-                    Application::response($res, 200);
+                    Http::response($res, 200);
 
                 } else {
 
-                    Application::error('Неверный пароль');
+                    Http::error('Неверный пароль');
 
                 }
 
             } else {
 
-                    Application::error('Логин не найден');
+                    Http::error('Логин не найден');
 
             }
 
@@ -296,13 +296,13 @@
 
             if(!isset($_SESSION['id'])){
 
-                Application::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы');
 
             }
 
             session_destroy();
 
-            Application::response(['success' => true], 200);
+            Http::success();
 
         }
 
@@ -347,7 +347,7 @@
 
             if (empty($user->getId())) {
 
-                Application::error('Пользователь не найден');
+                Http::error('Пользователь не найден');
 
             } else {
 
@@ -361,7 +361,7 @@
 
                 ];
 
-                Application::response($res, 200);
+                Http::response($res, 200);
 
             }
 
@@ -398,7 +398,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Application::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы');
 
             }
 
@@ -406,7 +406,7 @@
             $user->delete();
             session_destroy();
 
-            Application::response(['success' => true], 200);
+            Http::success();
 
         }
 
@@ -466,7 +466,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Application::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы');
 
             }
 
@@ -511,23 +511,23 @@
                 
                 if($e->getMessage() == 'firstname'){
 
-                    Application::error('Некорректное поле [firstname]');
+                    Http::error('Некорректное поле [firstname]');
 
                 } else if ($e->getMessage() == 'lastname') {
 
-                    Application::error('Некорректное поле [lastname]');
+                    Http::error('Некорректное поле [lastname]');
 
                 } else if ($e->getMessage() == 'email') {
 
-                    Application::error('Некорректное поле [email]');
+                    Http::error('Некорректное поле [email]');
 
                 } else if ($e->getMessage() == 'password') {
 
-                    Application::error('Некорректное поле [password]');
+                    Http::error('Некорректное поле [password]');
 
                 } else if ($e->getMessage() == 'type') {
 
-                    Application::error('Некорректное поле [type]');
+                    Http::error('Некорректное поле [type]');
 
                 }
 
@@ -545,7 +545,7 @@
 
             ];
 
-            Application::response($res, 200);
+            Http::response($res, 200);
 
         }
 
