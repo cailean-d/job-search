@@ -4,6 +4,9 @@
         return;
     }
 
+    var vacancy_create_url = "api/1.0.0/vacancy/add";
+    var vacancy_update_url = "api/1.0.0/vacancy/update/";
+
     var vacancy_block = document.querySelector(".add_vacancy");
     var buttons = document.querySelectorAll("button.add");
     var del_buttons = document.querySelectorAll("button.del");
@@ -122,19 +125,25 @@
         var data = new FormData(that);
         var xhr = new XMLHttpRequest();
         var server_script;
+        var _id = "";
+        var method = null;
+
         data.set("demands", data.getAll("demands").join(';'))
         data.set("duties", data.getAll("duties").join(';'))
         data.set("conditions", data.getAll("conditions").join(';'))
         if(data.get("desc") == ""){ data.delete("desc"); }
 
-        if(window.location.href.indexOf("page=edit") != -1){
-            server_script = "scripts/update/update_vacancy.php";
-            data.append("id", document.getElementById("vacancy_id").innerHTML.trim());
+        if(window.location.href.indexOf("/edit") != -1){
+            server_script = vacancy_update_url;
+            _id = document.getElementById("vacancy_id").innerHTML.trim();
+            data.append("id", _id);
+            method = "PUT";
         } else {
-            server_script = "scripts/create/set_vacancy.php";
+            server_script = vacancy_create_url;
+            method = "POST";
         }
 
-        xhr.open('POST', server_script);
+        xhr.open(method, server_script + _id);
         xhr.send(data);
         var submit = form.querySelector("input[type=submit]");
         var btn_close = document.querySelectorAll(".btn-close");

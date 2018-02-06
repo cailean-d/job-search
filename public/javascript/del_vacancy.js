@@ -17,7 +17,7 @@
             var id = parent.querySelector(".id").innerHTML;
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', delete_url + id);
+            xhr.open('DELETE', delete_url + id);
             xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
             xhr.send();
 
