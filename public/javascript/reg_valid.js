@@ -2,11 +2,13 @@
 
     var form = document.getElementById("registration");
     
+    var reg_url = "api/1.0.0/user/register";
+    
     // если на странице нет формы регистрации, то не выполнять скрипт
     if(!form){
         return;
     }
-    
+
     // счетчик валидации
     var isValid = 0;
     
@@ -210,7 +212,7 @@
         // создание объекта для отправки
         var data = new FormData(that);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', that.action);
+        xhr.open('POST', reg_url);
         xhr.send(data);
 
         // кнопка отправки (скрытая)

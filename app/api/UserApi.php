@@ -563,6 +563,7 @@
          * @apiVersion  1.0.0
          * 
          * @apiPermission auth
+         * @apiSampleRequest off
          * 
          * @apiParam  {Blob} avatar Файл, новый аватар пользователя
          * 

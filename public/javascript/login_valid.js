@@ -5,6 +5,8 @@
     // текст модальнго окна
     var modal_message_text = document.querySelector("#modal .modal-body p");
 
+    var login_url = "api/1.0.0/user/login";
+
     // если на странице нет формы входа, то не выполнять скрипт
     if(!form){
         return;
@@ -137,7 +139,7 @@
         // создание объекта для отправки
         var data = new FormData(that);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', that.action);
+        xhr.open('POST', login_url);
         xhr.send(data);
 
         // кнопка отправки (скрытая)
