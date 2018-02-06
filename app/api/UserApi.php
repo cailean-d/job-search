@@ -45,6 +45,12 @@
                     'method' => 'put',
                     'url' => 'user',
                     'handler' => 'updateUser'
+                ],
+
+                [
+                    'method' => 'post',
+                    'url' => 'user/avatar',
+                    'handler' => 'setAvatar'
                 ]
 
             );
@@ -542,6 +548,97 @@
                 'lastname' => $user->getLastname(),
                 'email' => $user->getEmail(),
                 'type' => $user->getType()
+
+            ];
+
+            Http::response($res, 200);
+
+        }
+
+        /**
+         * 
+         * @api {post} user/avatar Изменить аватар
+         * @apiName UserAvatar
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiParam  {Blob} avatar Файл, новый аватар пользователя
+         * 
+         * @apiParamExample  {json} Request-Example:
+         * {
+         *      avatar : example.jpeg
+         * }
+         * 
+
+         * @apiSuccess (200) {String} source Путь к файлу
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      source : public/images/avatar/5a2fc338ba3e6.jpg
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         * 
+         * @apiError FileDoesNotExist Файл не был загружен
+         * @apiError FileMaxSize Файл не должен весить более 3МБ
+         * @apiError FileUploadError Ошибка загрузки файла
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Файл не должен весить более 3МБ"
+         *     }
+         * 
+         */
+
+        public static function setAvatar(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+
+            $avatar = Avatar::get($_SESSION['id']);
+
+
+            if(empty($avatar->getId())){
+
+                $avatar->setUserid($_SESSION['id']);
+
+            }
+
+            $avatar->setFile($_FILES["avatar"]);
+
+            try{
+                
+                $avatar->save();
+
+            } catch(Exception $e){
+                
+                if($e->getMessage() == 'FILE_DOES_NOT_EXIST'){
+
+                    Http::error("Файл не был загружен");
+
+                } else if ($e->getMessage() == 'UPLOAD_MAX_FIZESIZE') {
+
+                    Http::error("Файл не должен весить более 3МБ");
+
+                } else if ($e->getMessage() == 'UPLOAD_FILE_ERROR') {
+
+                    Http::error("Ошибка загрузки файла");
+
+                } 
+
+            }
+
+
+            $res = [
+
+                'source' => $avatar->getSource(),
 
             ];
 

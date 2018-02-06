@@ -43,6 +43,12 @@
 
         }
 
+        public function setFile($file){
+
+            $this->file = $file;
+
+        }
+
         public function reset(){
 
             parent::reset();
@@ -133,7 +139,7 @@
         protected function validate(){
 
             if(is_null($this->file) || is_null($this->file["tmp_name"])){
-                throw new Exception('FILE_DOES_NOT_EXISTS');
+                throw new Exception('FILE_DOES_NOT_EXIST');
             }
 
             if($this->file['size'] > 1024*3*1024){

@@ -2,6 +2,9 @@
 
     var name = document.querySelector("#header .name");
     var logout = document.querySelector("#header .logout");
+
+    var avatar_url = "api/1.0.0/user/avatar";
+    var logout_url = "api/1.0.0/user/logout";
     
     if(name != null){
         var isOpen = false;
@@ -21,7 +24,7 @@
     
         logout.onclick = function(e){
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', "api/1.0.0/user/logout");
+            xhr.open('POST', logout_url);
             xhr.send();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4){
@@ -62,7 +65,7 @@
 
                         var xhr = new XMLHttpRequest();
                 
-                        xhr.open('POST', "scripts/create/set_avatar.php");
+                        xhr.open('POST', avatar_url);
                         xhr.send(data);
 
                         btn.disabled = true;
