@@ -4,6 +4,8 @@
         return;
     }
 
+    var delete_url = "api/1.0.0/vacancy/delete/";
+
     var del_buttons = document.querySelectorAll(".vacancyz .del");
     var modal_message_text = document.querySelector("#modal .modal-body p");
 
@@ -13,12 +15,11 @@
             e.preventDefault();
             var parent = this.parentNode.parentNode;
             var id = parent.querySelector(".id").innerHTML;
-            var data = "id=" + id;
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', "scripts/delete/del_vacancy.php");
+            xhr.open('POST', delete_url + id);
             xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
-            xhr.send(data);
+            xhr.send();
 
             this.disabled = true;
             this.classList.add("disabled");

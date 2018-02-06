@@ -2,6 +2,11 @@
 
     final class VacancyApi {
 
+        /**
+         * @apiDefine employer Учетная запись должна быть типа "работодатель"
+         * 
+         */
+
         public static function init(){
 
             return array(
@@ -34,25 +39,77 @@
 
         }
 
-        private static function add(){
+        public static function add(){
 
             echo "add vacancy";
 
         }
 
-        private static function delete($router){
+        /**
+         * 
+         * @api {delete} vacancy/delete/:id Удаление вакансии
+         * @apiName VacancyDelete
+         * @apiGroup Vacancy
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission employer
+         * 
+         * @apiSuccess (200) {String} success Сессия успешно завершена
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         * 
+         * @apiError VacancyNotFound Вакансия не найдена
+         * @apiError PermissionDenied У вас недостаточно прав для выполнения данной операции
+         * @apiError PermissionDenied2 У вас недостаточно прав для удаления данной записи
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 403 Bad Request
+         *     {
+         *       "error": "У вас недостаточно прав для удаления данной записи"
+         *     }
+         * 
+         */
 
-            echo "delete vacancy " . $router['id'];
+        public static function delete($router){
+
+            $vacancy = Vacancy::get($router['id']);
+            
+            if (empty($vacancy->getId())) {
+
+                Http::error('Вакансия не найдена');
+
+            }
+
+            if($_SESSION['type'] != 1){
+
+                Http::error('У вас недостаточно прав для выполнения данной операции', 403);
+
+            }
+
+
+            if($vacancy->getSenderId() != $_SESSION['id']){
+
+                Http::error('У вас недостаточно прав для удаления данной записи', 403);
+
+            }
+
+            $vacancy->delete();
+           
+            Http::success();
 
         }
         
-        private static function update($router){
+        public static function update($router){
 
             echo "update vacancy " . $router['id'];
 
         }
 
-        private static function get($router){
+        public static function get($router){
 
             echo "get vacancy " . $router['id'];
 
