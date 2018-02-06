@@ -4,10 +4,9 @@
 
         public function __construct($routerVars, string $mode){
 
-            $this->data['router']['mode'] = $mode;
             $this->data['resume'] = Resume::getJoinedByUserId($this->getId());
 
-            parent::__construct($routerVars);
+            parent::__construct($routerVars, ['mode' => $mode]);
 
             if($mode == 'add'){
 
@@ -45,15 +44,15 @@
 
             }
 
-            if($this->data['router']['mode'] === "add" && isset($this->data['resume'])){
+            if($this->data['router']['mode'] === "add" && !empty($this->data['resume']->getId())){
 
-                Router::redirectTo("/resume");
+                Router::redirectTo("/resume/edit");
 
             }
         
-            if($this->data['router']['mode'] === "edit" && !isset($this->data['resume'])){
+            if($this->data['router']['mode'] === "edit" && empty($this->data['resume']->getId())){
 
-                Router::redirectTo("/resume");
+                Router::redirectTo("/resume/add");
 
             }
             

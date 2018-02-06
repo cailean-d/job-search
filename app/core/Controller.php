@@ -5,11 +5,12 @@
         protected $view;
         protected $data = array();
 
-        public function __construct($routerVars){
+        public function __construct($routerVars, $misc = null){
 
             $this->view = new View();
 
             $this->setRouterVariables($routerVars);
+            $this->additionalRouterVars($misc);
             
             $this->data['user']['id'] = $_SESSION['id'];
             $this->data['user']['authorized'] = $_SESSION['authorized'];
@@ -35,6 +36,20 @@
 
             }
             
+        }
+
+        protected function additionalRouterVars($data){
+
+            if($data){
+
+                foreach ($data as $key => $value) {
+
+                    $this->data['router'][$key] = $value;
+    
+                }
+
+            }
+
         }
 
         protected function getId(){

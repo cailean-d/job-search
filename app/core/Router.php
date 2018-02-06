@@ -112,13 +112,14 @@
 
         }
 
-        public static function get(string $url, $callback){
+        public static function get(string $url, $callback, $misc = null){
 
             array_push(self::$get_routes, [
 
                 'url' => $url,
                 'url_pattern' => self::createRegexpURL($url),
-                'handler' => $callback
+                'handler' => $callback,
+                'misc' => $misc
 
             ]);
 
@@ -323,7 +324,7 @@
 
                                 $router['router'] = $matches;
 
-                                $_Controller = new $handler($router);
+                                $_Controller = new $handler($router, $route['misc']);
     
                                 if(is_subclass_of($_Controller, 'Controller')){
     
