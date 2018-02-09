@@ -2,7 +2,7 @@
 
     class Router{
 
-        private static $validRoute = '/^(([a-z0-9\.]+)|(:[a-z0-9\.]+(\{(.*)\})?))(\/(([a-z0-9\.]+)|(:[a-z]+(\{(.*)\})?))?)*$/';
+        private static $validRoute = '/^(([a-z0-9\.\_]+)|(:[a-z0-9\.\_]+(\{(.*)\})?))(\/(([a-z0-9\.\_]+)|(:[a-z]+(\{(.*)\})?))?)*$/';
 
         private static $get_routes = array();
         private static $post_routes = array();
