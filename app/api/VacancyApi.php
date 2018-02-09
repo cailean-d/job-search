@@ -453,34 +453,34 @@
 
             }
 
-            if(isset($_POST['email'])){
+            if(isset($GLOBALS['PUT']['email'])){
 
-                $vacancy->setEmail($_POST['email']);
-
-            }
-
-            if(isset($_POST['company'])){
-
-                $vacancy->setCompany($_POST['company']);
+                $vacancy->setEmail($GLOBALS['PUT']['email']);
 
             }
 
-            if(isset($_POST['phone'])){
+            if(isset($GLOBALS['PUT']['company'])){
 
-                $vacancy->setPhone($_POST['phone']);
-
-            }
-
-            if(isset($_POST['vacancy'])){
-
-                $vacancy->setVacancyName($_POST['vacancy']);
+                $vacancy->setCompany($GLOBALS['PUT']['company']);
 
             }
 
-            if(isset($_POST['salary'])){
+            if(isset($GLOBALS['PUT']['phone'])){
+
+                $vacancy->setPhone($GLOBALS['PUT']['phone']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['vacancy'])){
+
+                $vacancy->setVacancyName($GLOBALS['PUT']['vacancy']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['salary'])){
 
 
-                $salary = explode("-",htmlspecialchars(trim($_POST['salary'])));
+                $salary = explode("-",htmlspecialchars(trim($GLOBALS['PUT']['salary'])));
                 $salary_min = $salary[0];
                 $salary_max = (isset($salary[1])) ? $salary[1] : '';
 
@@ -489,51 +489,51 @@
 
             }
 
-            if(isset($_POST['exp'])){
+            if(isset($GLOBALS['PUT']['exp'])){
 
-                $vacancy->setExperience($_POST['exp']);
-
-            }
-
-            if(isset($_POST['location'])){
-
-                $vacancy->setLocation($_POST['location']);
+                $vacancy->setExperience($GLOBALS['PUT']['exp']);
 
             }
 
-            if(isset($_POST['schedule'])){
+            if(isset($GLOBALS['PUT']['location'])){
 
-                $vacancy->setScheduleId($_POST['schedule']);
-
-            }
-
-            if(isset($_POST['industry'])){
-
-                $vacancy->setIndustryId($_POST['industry']);
+                $vacancy->setLocation($GLOBALS['PUT']['location']);
 
             }
 
-            if(isset($_POST['demands'])){
+            if(isset($GLOBALS['PUT']['schedule'])){
 
-                $vacancy->setDemands($_POST['demands']);
-
-            }
-
-            if(isset($_POST['duties'])){
-
-                $vacancy->setDuties($_POST['duties']);
+                $vacancy->setScheduleId($GLOBALS['PUT']['schedule']);
 
             }
 
-            if(isset($_POST['conditions'])){
+            if(isset($GLOBALS['PUT']['industry'])){
 
-                $vacancy->setConditions($_POST['conditions']);
+                $vacancy->setIndustryId($GLOBALS['PUT']['industry']);
 
             }
 
-            if(isset($_POST['desc'])){
+            if(isset($GLOBALS['PUT']['demands'])){
 
-                $vacancy->setDescription($_POST['desc']);
+                $vacancy->setDemands($GLOBALS['PUT']['demands']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['duties'])){
+
+                $vacancy->setDuties($GLOBALS['PUT']['duties']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['conditions'])){
+
+                $vacancy->setConditions($GLOBALS['PUT']['conditions']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['desc'])){
+
+                $vacancy->setDescription($GLOBALS['PUT']['desc']);
 
             }
 

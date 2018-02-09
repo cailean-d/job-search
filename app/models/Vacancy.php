@@ -762,10 +762,6 @@
                 throw new Exception('salaryMin');
             }
 
-            if(is_null($this->salaryMax) || $this->salaryMax === ''){
-                throw new Exception('salaryMax');
-            }
-
             if(is_null($this->experience) || $this->experience === ''){
                 throw new Exception('experience');
             }
@@ -818,7 +814,7 @@
                 throw new Exception('salaryMin');
             }
 
-            if(!preg_match($regexp_numbers, $this->salaryMax)){
+            if(!empty($this->salaryMax) && !preg_match($regexp_numbers, $this->salaryMax)){
                 throw new Exception('salaryMax');
             }
 
