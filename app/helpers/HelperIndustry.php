@@ -105,6 +105,12 @@
 
         }
 
+        public static function deleteAll(){
+
+            return Database::run('TRUNCATE TABLE '. self::$table);
+
+        }
+
         protected function validate(){}
 
     }
