@@ -11,7 +11,8 @@
 
             require_once $file;
 
-            $file = end(explode('\\', $file));
+            $tmp = explode(DIRECTORY_SEPARATOR, $file);
+            $file = end($tmp);
             $class = substr($file, 0, strlen($file) - 4);
 
             $api_methods = $class::init();

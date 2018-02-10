@@ -7,7 +7,7 @@
 
         foreach($iterator as $file) {
 
-            if(preg_match('/\\'.'\\'.$class.'\.php/', $file)){
+            if(preg_match('/\\'.DIRECTORY_SEPARATOR.$class.'\.php/', $file)){
 
                 require_once $file;
                 break;
