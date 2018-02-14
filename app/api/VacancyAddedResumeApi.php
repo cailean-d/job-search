@@ -123,8 +123,72 @@
 
         }
 
-        public static function delete(){}
+        /**
+         * 
+         * @api {delete} vacancy_resume/:id Удалить свое резюме из вакансии
+         * @apiName DeleteVacancyResume
+         * @apiGroup VacancyResume
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} success Удаление прошло успешно
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         * 
+         * @apiError RecordDoesNotExist Запись не существует
+         * @apiError VacancyDoesNotExist Вакансия не существует
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Запись не существует"
+         *     }
+         * 
+         */
 
-        
+
+        public static function delete($router){
+
+ 
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы', 403);
+
+            }
+
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетноый записью пользователя', 403);
+
+            } 
+
+            $vacancy = Vacancy::get($router['id']);
+
+            if(empty($vacancy->getId())){
+
+                Http::error('Вакансия не существует');
+
+            }
+
+            $addedResume = VacancyAddedResume::getByVacancyAndUserId($_SESSION['id'], $router['id']);
+
+            if(empty($addedResume->getId())){
+
+                Http::error('Запись не существует');
+
+            }
+                
+            $addedResume->delete();
+
+            Http::success();
+
+        }
 
     }
