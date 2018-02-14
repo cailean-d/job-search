@@ -128,6 +128,20 @@
 
         }
 
+        public static function getByVacancyAndUserId($user_id, $id){
+
+            self::applyConfig();
+
+            $data = Database::run('SELECT * FROM '. self::$table .' WHERE user_id = ? AND vacancy_id = ? ', [$user_id, $id]);
+
+            return new VacancyAddedResume(
+                $data[0]['id'],
+                $data[0]['vacancy_id'],
+                $data[0]['user_id']
+            );
+
+        }
+
         public static function getJoinedByVacancyId($id){
 
             self::applyConfig();
