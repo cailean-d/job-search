@@ -21,6 +21,12 @@
                     'method' => 'delete',
                     'url' => 'vacancy_resume/:id',
                     'handler' => 'delete'
+                ],
+
+                [
+                    'method' => 'get',
+                    'url' => 'vacancy_resume/user',
+                    'handler' => 'getUserVacancies'
                 ]
             );
 
@@ -153,7 +159,6 @@
          * 
          */
 
-
         public static function delete($router){
 
  
@@ -190,5 +195,79 @@
             Http::success();
 
         }
+
+        /**
+         * 
+         * @api {get} vacancy_resume/user Отправленные резюме
+         * @apiName GetUserVacancyResume
+         * @apiGroup VacancyResume
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} vacancy_id ID вакансии
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  [
+         *      {
+         *          "vacancy_id" : "4"
+         *      },
+         *      {
+         *          "vacancy_id" : "15"
+         *      },
+         *      {
+         *          "vacancy_id" : "7"
+         *      },
+         *      {
+         *          "vacancy_id" : "8"
+         *      }
+         *  ]
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетноый записью пользователя"
+         *     }
+         * 
+         */
+
+        public static function getUserVacancies(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы', 403);
+
+            }
+
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетноый записью пользователя', 403);
+
+            } 
+
+            $vacancies = VacancyAddedResume::getByUserId($_SESSION['id']);
+
+            $res = array();
+
+            foreach ($vacancies as $v) {
+
+                array_push($res,
+
+                [
+
+                    'vacancy_id' => $v->getVacancyId(),
+    
+                ]);
+
+            }
+
+            Http::response($res, 200);
+
+        }
+        
 
     }
