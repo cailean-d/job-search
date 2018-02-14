@@ -36,6 +36,12 @@
                     'method' => 'get',
                     'url' => 'vacancy_resume/employer/:id{number}',
                     'handler' => 'getEmployerResumes'
+                ],
+
+                [
+                    'method' => 'get',
+                    'url' => 'vacancy_resume/employer',
+                    'handler' => 'getAllEmployerResumes'
                 ]
             );
 
@@ -366,6 +372,91 @@
             Http::response($res, 200);
 
         }
+
+        /**
+         * 
+         * @api {get} vacancy_resume/employer Отправленные резюме для всех вакансий
+         * @apiName GetAllEmployerVacancyResume
+         * @apiGroup VacancyResume
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission employer
+         * 
+         * @apiSuccess (200) {String} user_id ID вакансии
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *    "6": [
+         *           {
+         *               "user_id": "3"
+         *           }
+         *    ],
+         *    "7": [
+         *           {
+         *               "user_id": "3"
+         *           },
+         *           {
+         *               "user_id": "4"
+         *           }
+         *    ]
+         *   }
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью работодателя
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 403 Forbidden
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетноый записью работодателя"
+         *     }
+         * 
+         */
+
+        public static function getAllEmployerResumes(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы', 403);
+
+            }
+
+            if($_SESSION['type'] != '1') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью работодателя', 403);
+
+            } 
+
+            $vacancies = Vacancy::getByUserId($_SESSION['id']);
+
+            $res = array();
+
+            foreach ($vacancies as $vac) {
+
+                $vacancy_resumes = VacancyAddedResume::getByVacancyId($vac->getId());
+
+                if(count($vacancy_resumes) > 0){
+
+                    $res[$vac->getId()] = array();
+    
+                    foreach ($vacancy_resumes as $v) {
         
+                        array_push($res[$vac->getId()],
+        
+                        [
+        
+                            'user_id' => $v->getUserId(),
+            
+                        ]);
+        
+                    }
+
+                }
+
+            }
+            
+            Http::response($res, 200);
+
+        }
 
     }
