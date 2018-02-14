@@ -2,7 +2,10 @@
 
     /**
      * @apiDefine auth Вы должны быть авторизированы под учетноый записью пользователя
-     * 
+     */
+
+    /**
+     * @apiDefine employer Вы должны быть авторизированы под учетноый записью работодателя
      */
 
     final class VacancyAddedResumeApi{
@@ -13,13 +16,13 @@
 
                 [
                     'method' => 'post',
-                    'url' => 'vacancy_resume/:id',
+                    'url' => 'vacancy_resume/:id{number}',
                     'handler' => 'add'
                 ],
 
                 [
                     'method' => 'delete',
-                    'url' => 'vacancy_resume/:id',
+                    'url' => 'vacancy_resume/:id{number}',
                     'handler' => 'delete'
                 ],
 
@@ -27,6 +30,12 @@
                     'method' => 'get',
                     'url' => 'vacancy_resume/user',
                     'handler' => 'getUserVacancies'
+                ],
+
+                [
+                    'method' => 'get',
+                    'url' => 'vacancy_resume/employer/:id{number}',
+                    'handler' => 'getEmployerResumes'
                 ]
             );
 
@@ -76,7 +85,7 @@
 
             if($_SESSION['type'] != '0') { 
 
-                Http::error('Вы должны быть авторизированы под учетноый записью пользователя', 403);
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
 
             } 
 
@@ -170,7 +179,7 @@
 
             if($_SESSION['type'] != '0') { 
 
-                Http::error('Вы должны быть авторизированы под учетноый записью пользователя', 403);
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
 
             } 
 
@@ -198,7 +207,7 @@
 
         /**
          * 
-         * @api {get} vacancy_resume/user Отправленные резюме
+         * @api {get} vacancy_resume/user Отправленные резюме для пользователя
          * @apiName GetUserVacancyResume
          * @apiGroup VacancyResume
          * @apiVersion  1.0.0
@@ -245,7 +254,7 @@
 
             if($_SESSION['type'] != '0') { 
 
-                Http::error('Вы должны быть авторизированы под учетноый записью пользователя', 403);
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
 
             } 
 
@@ -260,6 +269,95 @@
                 [
 
                     'vacancy_id' => $v->getVacancyId(),
+    
+                ]);
+
+            }
+
+            Http::response($res, 200);
+
+        }
+
+        /**
+         * 
+         * @api {get} vacancy_resume/employer/:id Отправленные резюме для вакансии
+         * @apiName GetEmployerVacancyResume
+         * @apiGroup VacancyResume
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission employer
+         * 
+         * @apiSuccess (200) {String} user_id ID вакансии
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  [
+         *      {
+         *          "user_id" : "4"
+         *      },
+         *      {
+         *          "user_id" : "15"
+         *      },
+         *      {
+         *          "user_id" : "7"
+         *      },
+         *      {
+         *          "user_id" : "8"
+         *      }
+         *  ]
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError VacancyDoesNotExist Вакансия не существует
+         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью работодателя
+         * @apiError PermissionDenied Вы не можете получить данные чужой записи
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 403 Forbidden
+         *     {
+         *       "error": "Вы не можете получить данные чужой записи"
+         *     }
+         * 
+         */
+
+        public static function getEmployerResumes($router){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы', 403);
+
+            }
+
+            if($_SESSION['type'] != '1') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью работодателя', 403);
+
+            } 
+
+            $vacancy = Vacancy::get($router['id']);
+            
+            if (empty($vacancy->getId())) {
+
+                Http::error('Вакансия не найдена');
+
+            }
+            
+            if ($vacancy->getSenderId() != $_SESSION['id']) {
+
+                Http::error('Вы не можете получить данные чужой записи', 403);
+
+            }
+
+            $vacancies = VacancyAddedResume::getByVacancyId($router['id']);
+
+            $res = array();
+
+            foreach ($vacancies as $v) {
+
+                array_push($res,
+
+                [
+
+                    'user_id' => $v->getUserId(),
     
                 ]);
 

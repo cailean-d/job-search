@@ -117,9 +117,9 @@
                 array_push($dataAll,
 
                 new VacancyAddedResume(
-                    $d[0]['id'],
-                    $d[0]['vacancy_id'],
-                    $d[0]['user_id']
+                    $d['id'],
+                    $d['vacancy_id'],
+                    $d['user_id']
                 ));
 
             }
