@@ -107,7 +107,7 @@
             return $languageAll;
 
         }
-        
+
         public static function getByUserAndLangId($id, $user_id){
 
             self::applyConfig();
@@ -218,7 +218,7 @@
 
         public function delete(){
 
-            $query = Database::run('DELETE FROM '. self::$table .' WHERE user_id = ? AND id = ?', [$this->userid, $this->id]);
+            $query = Database::run('DELETE FROM '. self::$table .' WHERE user_id = ? AND lang_id = ?', [$this->userid, $this->langId]);
 
             $this->reset();
             

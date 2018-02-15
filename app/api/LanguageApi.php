@@ -24,8 +24,14 @@
 
                 [
                     'method' => 'delete',
-                    'url' => 'language',
+                    'url' => 'language/:id{number}',
                     'handler' => 'delete'
+                ],
+
+                [
+                    'method' => 'delete',
+                    'url' => 'language',
+                    'handler' => 'deleteArray'
                 ]
 
             );
@@ -181,7 +187,64 @@
 
         }
 
-        public static function delete(){
+        /**
+         * 
+         * @api {delete} language/:id Удаление языка из резюме
+         * @apiName DeleteLanguage
+         * @apiGroup Resume_Language
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} success Удаление прошло успешно
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
+         * @apiError RecordNotFound Запись не найдена
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 403 Bad Request
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетноый записью пользователя"
+         *     }
+         * 
+         */
+
+        public static function delete($router){
+            
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+            
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            $lang = Language::getByUserAndLangId($_SESSION['id'], $router['id']);
+
+            if(empty($lang->getId())){
+
+                Http::error('Запись не найдена');
+
+            }
+
+            $lang->delete();
+
+            Http::success();
+
+        }
+
+        public static function deleteArray(){
 
         }
 
