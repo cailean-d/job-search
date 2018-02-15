@@ -51,7 +51,7 @@
          * 
          * @api {post} vacancy_resume/:id Добавить свое резюме к вакансии
          * @apiName AddVacancyResume
-         * @apiGroup VacancyResume
+         * @apiGroup Vacancy_Resume
          * @apiVersion  1.0.0
          * 
          * @apiPermission auth
@@ -148,7 +148,7 @@
          * 
          * @api {delete} vacancy_resume/:id Удалить свое резюме из вакансии
          * @apiName DeleteVacancyResume
-         * @apiGroup VacancyResume
+         * @apiGroup Vacancy_Resume
          * @apiVersion  1.0.0
          * 
          * @apiPermission auth
@@ -215,7 +215,7 @@
          * 
          * @api {get} vacancy_resume/user Отправленные резюме для пользователя
          * @apiName GetUserVacancyResume
-         * @apiGroup VacancyResume
+         * @apiGroup Vacancy_Resume
          * @apiVersion  1.0.0
          * 
          * @apiPermission auth
@@ -288,7 +288,7 @@
          * 
          * @api {get} vacancy_resume/employer/:id Отправленные резюме для вакансии
          * @apiName GetEmployerVacancyResume
-         * @apiGroup VacancyResume
+         * @apiGroup Vacancy_Resume
          * @apiVersion  1.0.0
          * 
          * @apiPermission employer
@@ -377,7 +377,7 @@
          * 
          * @api {get} vacancy_resume/employer Отправленные резюме для всех вакансий
          * @apiName GetAllEmployerVacancyResume
-         * @apiGroup VacancyResume
+         * @apiGroup Vacancy_Resume
          * @apiVersion  1.0.0
          * 
          * @apiPermission employer

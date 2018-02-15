@@ -107,6 +107,21 @@
             return $languageAll;
 
         }
+        
+        public static function getByUserAndLangId($id, $user_id){
+
+            self::applyConfig();
+
+            $lang = Database::run('SELECT * FROM '. self::$table .' WHERE user_id = ? AND lang_id = ?', [$id, $user_id]);
+
+            return new Language(
+                $lang[0]['id'],
+                $lang[0]['user_id'],
+                $lang[0]['lang_id'],
+                $lang[0]['lang_level']
+            );
+
+        }
 
         public static function getAll(){
 
