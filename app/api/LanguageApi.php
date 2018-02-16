@@ -127,12 +127,20 @@
                         Http::error('Объект должен содержать поле [lang_level]');
 
                     }
-                    
+
+                    $help_lang = HelperLanguage::get($obj->lang_id);
+
+                    if(empty($help_lang->getId())){
+
+                        Http::error('Язык ' . $obj->lang_id . ' не существует');
+
+                    }
+
                     $lang = Language::getByUserAndLangId($_SESSION['id'], $obj->lang_id);
 
                     if(!empty($lang->getId())){
 
-                        Http::error('Язык ' . $obj->lang_id . ' уже добавлен');
+                        Http::error('Язык [' . $help_lang->getName() . '] уже добавлен');
 
                     }
         
@@ -157,11 +165,19 @@
 
             } else {
 
+                $help_lang = HelperLanguage::get($_POST['lang_id']);
+
+                if(empty($help_lang->getId())){
+
+                    Http::error('Язык ' . $_POST['lang_id'] . ' не существует');
+
+                }
+
                 $lang = Language::getByUserAndLangId($_SESSION['id'], $_POST['lang_id']);
 
                 if(!empty($lang->getId())){
 
-                    Http::error('Язык ' . $_POST['lang_id'] . ' уже добавлен');
+                    Http::error('Язык [' . $help_lang->getName() . '] уже добавлен');
 
                 }
 
@@ -274,11 +290,19 @@
 
                     }
                     
+                    $help_lang = HelperLanguage::get($obj->lang_id);
+
+                    if(empty($help_lang->getId())){
+
+                        Http::error('Язык ' . $obj->lang_id . ' не существует');
+
+                    }
+                    
                     $lang = Language::getByUserAndLangId($_SESSION['id'], $obj->lang_id);
 
                     if(empty($lang->getId())){
 
-                        Http::error('Язык ' . $obj->lang_id . ' не найден');
+                        Http::error('Язык [' . $help_lang->getName() . '] не найден');
 
                     }
 
@@ -302,12 +326,20 @@
                 Http::response($res, 200);
 
             } else {
+                                    
+                $help_lang = HelperLanguage::get($GLOBALS['PUT']['lang_id']);
+
+                if(empty($help_lang->getId())){
+
+                    Http::error('Язык ' . $GLOBALS['PUT']['lang_id'] . ' не существует');
+
+                }
 
                 $lang = Language::getByUserAndLangId($_SESSION['id'], $GLOBALS['PUT']['lang_id']);
 
                 if(empty($lang->getId())){
 
-                    Http::error('Язык ' . $GLOBALS['PUT']['lang_id'] . ' не найден');
+                    Http::error('Язык [' . $help_lang->getName() . '] не найден');
 
                 }
 
@@ -371,7 +403,15 @@
 
                 Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
 
-            } 
+            }
+
+            $help_lang = HelperLanguage::get($router['id']);
+
+            if(empty($help_lang->getId())){
+
+                Http::error('Язык ' . $router['id'] . ' не существует');
+
+            }
 
             $lang = Language::getByUserAndLangId($_SESSION['id'], $router['id']);
 
@@ -448,6 +488,14 @@
             foreach ($data as $id) {
 
                 $_id = trim($id);
+                
+                $help_lang = HelperLanguage::get($_id);
+
+                if(empty($help_lang->getId())){
+
+                    Http::error('Язык ' . $_id . ' не существует');
+
+                }
     
                 $lang = Language::getByUserAndLangId($_SESSION['id'], $_id);
 
