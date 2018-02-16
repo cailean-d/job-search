@@ -278,7 +278,7 @@
         protected function validate(){
 
             $regexp_city = '/^[A-zА-яЁё\"\-\s?]{4,}$/u';
-            $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"\-\s?]{4,}$/u';
+            $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"\-\s?]{3,}$/u';
             $regexp_numbers = '/^[\d]{1,}$/u';
             $regexp_edu_period = '/^[\d]{4}\s\-\s[\d]{4}$/u';
     
@@ -296,10 +296,6 @@
 
             if(is_null($this->city) || $this->city === ''){
                 throw new Exception('city');
-            }
-
-            if(is_null($this->faculty) || $this->faculty === ''){
-                throw new Exception('faculty');
             }
 
             if(is_null($this->studyPeriod) || $this->studyPeriod === ''){
