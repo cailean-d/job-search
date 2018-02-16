@@ -108,11 +108,11 @@
 
         }
 
-        public static function getByUserAndLangId($id, $user_id){
+        public static function getByUserAndLangId($user_id, $lang_id){
 
             self::applyConfig();
 
-            $lang = Database::run('SELECT * FROM '. self::$table .' WHERE user_id = ? AND lang_id = ?', [$id, $user_id]);
+            $lang = Database::run('SELECT * FROM '. self::$table .' WHERE user_id = ? AND lang_id = ?', [$user_id, $lang_id]);
 
             return new Language(
                 $lang[0]['id'],

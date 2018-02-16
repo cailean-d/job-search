@@ -70,6 +70,7 @@
          * 
          * @apiError Auth Вы не авторизированы
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
+         * @apiError LanguageExists Язык <code>ID</code> уже добавлен
          * @apiError DataIsNotValid Некорректный объект <code>data</code>
          * @apiError DataFieldIsNotValid Объект должен содержать поле <code>lang_id</code>
          * @apiError DataFieldIsNotValid2 Объект должен содержать поле <code>lang_level</code>
@@ -127,11 +128,11 @@
 
                     }
                     
-                    $lang = Language::getByUserAndLangId($_SESSION['id'], $obj->lang_level);
+                    $lang = Language::getByUserAndLangId($_SESSION['id'], $obj->lang_id);
 
                     if(!empty($lang->getId())){
 
-                        Http::error('Язык ' . $obj->lang_level . ' уже добавлен');
+                        Http::error('Язык ' . $obj->lang_id . ' уже добавлен');
 
                     }
         
@@ -183,7 +184,149 @@
 
         }
 
+        /**
+         * 
+         * @api {put} language Обновить языки в резюме
+         * @apiName UpdateLanguage
+         * @apiGroup Resume_Language
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiParam  {String} lang_id ID языка
+         * @apiParam  {String} lang_level Уровень владения языком
+         * @apiParam  {String} [data] Вы можете отправить массив языков в json формате
+         * 
+         * @apiParamExample  {json} Request-Example:
+         * {
+         *      "lang_id" : "3",
+         *      "lang_level" : "Не владею"
+         * }
+         * 
+         * @apiSuccess (200) {String} id ID записи
+         * @apiSuccess (200) {String} lang_id ID языка
+         * @apiSuccess (200) {String} lang_level Уровень владения языком
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      "id" : "1"
+         *      "lang_id" : "3",
+         *      "lang_level" : "Не владею"
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
+         * @apiError LanguageDoesNotExist Язык <code>ID</code> не найден
+         * @apiError DataIsNotValid Некорректный объект <code>data</code>
+         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>lang_id</code>
+         * @apiError DataFieldIsNotValid2 Объект должен содержать поле <code>lang_level</code>
+         * 
+         * @apiError Invalid-LangId Некорректное поле <code>lang_id</code>
+         * @apiError Invalid-LangLevel Некорректное поле <code>lang_level</code>
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Некорректное поле [lang_level]"
+         *     }
+         * 
+         */
+
         public static function update(){
+    
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+            
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            if(isset($GLOBALS['PUT']['data'])){
+
+
+                if(!Model::isJson($data)){
+
+                    Http::error('Некорректный объект [data]');
+    
+                }
+
+                $data = json_decode($GLOBALS['PUT']['data']);
+
+                $res = array();
+        
+                foreach ($data as $obj) {
+
+                    if(!isset($obj->lang_id)){
+
+                        Http::error('Объект должен содержать поле [lang_id]');
+
+                    }
+
+                    if(!isset($obj->lang_level)){
+
+                        Http::error('Объект должен содержать поле [lang_level]');
+
+                    }
+                    
+                    $lang = Language::getByUserAndLangId($_SESSION['id'], $obj->lang_id);
+
+                    if(empty($lang->getId())){
+
+                        Http::error('Язык ' . $obj->lang_id . ' не найден');
+
+                    }
+
+                    $lang->setLangLevel($obj->lang_level);
+
+                    self::saveLang($lang);
+
+                    array_push($res, 
+                    
+                    [
+
+                        'id' => $lang->getId(),
+                        'user_id' => $lang->getUserid(),
+                        'lang_id' => $lang->getLangId(),
+                        'lang_level' => $lang->getLangLevel()
+        
+                    ]);
+
+                }
+
+                Http::response($res, 200);
+
+            } else {
+
+                $lang = Language::getByUserAndLangId($_SESSION['id'], $GLOBALS['PUT']['lang_id']);
+
+                if(empty($lang->getId())){
+
+                    Http::error('Язык ' . $GLOBALS['PUT']['lang_id'] . ' не найден');
+
+                }
+
+                $lang->setLangLevel($GLOBALS['PUT']['lang_level']);
+
+                self::saveLang($lang);
+
+                $res = [
+
+                    'id' => $lang->getId(),
+                    'user_id' => $lang->getUserid(),
+                    'lang_id' => $lang->getLangId(),
+                    'lang_level' => $lang->getLangLevel()
+    
+                ];
+    
+                Http::response($res, 200);
+
+            }
 
         }
 
@@ -336,11 +479,11 @@
 
                 } else if ($e->getMessage() == 'langId') {
 
-                    Http::error("Некорректное поле [langId]");
+                    Http::error("Некорректное поле [lang_id]");
 
                 } else if ($e->getMessage() == 'langLevel') {
 
-                    Http::error("Некорректное поле [langLevel]");
+                    Http::error("Некорректное поле [lang_level]");
 
                 }
 
