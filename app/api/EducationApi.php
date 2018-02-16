@@ -283,10 +283,10 @@
          * 
          * @apiError Auth Вы не авторизированы
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
-         * @apiError EducationExists Язык <code>ID</code> уже добавлен
          * @apiError DataIsNotValid Некорректный объект <code>data</code>
          * @apiError PermissionDenied Вы не можете редактировать чужую запись
          * 
+         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>record_id</code>
          * @apiError Invalid-LevelId Некорректное поле <code>edu_level</code>
          * @apiError Invalid-Institute Некорректное поле <code>edu_inst</code>
          * @apiError Invalid-City Некорректное поле <code>edu_city</code>
@@ -562,7 +562,7 @@
          * 
          * @apiPermission auth
          * 
-         * @apiParam  {String} data Массив ID языков, которые надо удалить
+         * @apiParam  {String} data Массив ID, которые надо удалить
          * 
          * @apiParamExample  {json} Request-Example:
          * {
@@ -580,6 +580,7 @@
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
          * @apiError RecordNotFound Запись не найдена
          * @apiError PermissionDenied Вы не можете удалить чужую запись
+         * @apiError Invalid-Data Некорректный массив <code>data</code>
          *
          * @apiErrorExample {json} Error-Response:
          * 

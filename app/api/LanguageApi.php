@@ -40,7 +40,7 @@
 
         /**
          * 
-         * @api {post} language Добавить языки к резюме
+         * @api {post} language Добавить
          * @apiName AddLanguage
          * @apiGroup Resume_Language
          * @apiVersion  1.0.0
@@ -202,20 +202,20 @@
 
         /**
          * 
-         * @api {put} language Обновить языки в резюме
+         * @api {put} language Обновить
          * @apiName UpdateLanguage
          * @apiGroup Resume_Language
          * @apiVersion  1.0.0
          * 
          * @apiPermission auth
          * 
-         * @apiParam  {String} lang_id ID языка
+         * @apiParam  {String} record_id ID записи
          * @apiParam  {String} lang_level Уровень владения языком
          * @apiParam  {String} [data] Вы можете отправить массив языков в json формате
          * 
          * @apiParamExample  {json} Request-Example:
          * {
-         *      "lang_id" : "3",
+         *      "record_id" : "3",
          *      "lang_level" : "Не владею"
          * }
          * 
@@ -232,12 +232,11 @@
          * 
          * @apiError Auth Вы не авторизированы
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
-         * @apiError LanguageDoesNotExist Язык <code>ID</code> не найден
          * @apiError DataIsNotValid Некорректный объект <code>data</code>
-         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>lang_id</code>
+         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>record_id</code>
          * @apiError DataFieldIsNotValid2 Объект должен содержать поле <code>lang_level</code>
+         * @apiError PermissionDenied Вы не можете редактировать чужую запись
          * 
-         * @apiError Invalid-LangId Некорректное поле <code>lang_id</code>
          * @apiError Invalid-LangLevel Некорректное поле <code>lang_level</code>
          *
          * @apiErrorExample {json} Error-Response:
@@ -277,32 +276,30 @@
                 $res = array();
         
                 foreach ($data as $obj) {
+                    
+                    if(!isset($obj->record_id)){
 
-                    if(!isset($obj->lang_id)){
+                        Http::error('Объект должен содержать поле [record_id]');
 
-                        Http::error('Объект должен содержать поле [lang_id]');
+                    }
 
+                    $lang = Language::get($obj->record_id);
+
+                    if(empty($lang->getId())){
+
+                        Http::error('Запись '.$obj->record_id.' не найдена');
+
+                    }
+                    
+                    if($lang->getUserid() != $_SESSION['id']){
+
+                        Http::error('Вы не можете редактировать чужую запись', 403);
+        
                     }
 
                     if(!isset($obj->lang_level)){
 
                         Http::error('Объект должен содержать поле [lang_level]');
-
-                    }
-                    
-                    $help_lang = HelperLanguage::get($obj->lang_id);
-
-                    if(empty($help_lang->getId())){
-
-                        Http::error('Язык ' . $obj->lang_id . ' не существует');
-
-                    }
-                    
-                    $lang = Language::getByUserAndLangId($_SESSION['id'], $obj->lang_id);
-
-                    if(empty($lang->getId())){
-
-                        Http::error('Язык [' . $help_lang->getName() . '] не найден');
 
                     }
 
@@ -326,20 +323,30 @@
                 Http::response($res, 200);
 
             } else {
-                                    
-                $help_lang = HelperLanguage::get($GLOBALS['PUT']['lang_id']);
 
-                if(empty($help_lang->getId())){
+                if(!isset($GLOBALS['PUT']['record_id'])){
 
-                    Http::error('Язык ' . $GLOBALS['PUT']['lang_id'] . ' не существует');
+                    Http::error('Объект должен содержать поле [record_id]');
 
                 }
 
-                $lang = Language::getByUserAndLangId($_SESSION['id'], $GLOBALS['PUT']['lang_id']);
+                $lang = Language::get($GLOBALS['PUT']['record_id']);
 
                 if(empty($lang->getId())){
 
-                    Http::error('Язык [' . $help_lang->getName() . '] не найден');
+                    Http::error('Запись '.$GLOBALS['PUT']['record_id'].' не найдена');
+
+                }
+                
+                if($lang->getUserid() != $_SESSION['id']){
+
+                    Http::error('Вы не можете редактировать чужую запись', 403);
+    
+                }
+
+                if(!isset($GLOBALS['PUT']['lang_level'])){
+
+                    Http::error('Объект должен содержать поле [lang_level]');
 
                 }
 
@@ -364,7 +371,7 @@
 
         /**
          * 
-         * @api {delete} language/:id Удаление языка из резюме
+         * @api {delete} language/:id Удалить
          * @apiName DeleteLanguage
          * @apiGroup Resume_Language
          * @apiVersion  1.0.0
@@ -381,12 +388,13 @@
          * @apiError Auth Вы не авторизированы
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
          * @apiError RecordNotFound Запись не найдена
+         * @apiError PermissionDenied Вы не можете удалить чужую запись
          *
          * @apiErrorExample {json} Error-Response:
          * 
          *     HTTP/1.1 403 Bad Request
          *     {
-         *       "error": "Вы должны быть авторизированы под учетноый записью пользователя"
+         *       "error": "Вы не можете удалить чужую запись"
          *     }
          * 
          */
@@ -405,19 +413,17 @@
 
             }
 
-            $help_lang = HelperLanguage::get($router['id']);
-
-            if(empty($help_lang->getId())){
-
-                Http::error('Язык ' . $router['id'] . ' не существует');
-
-            }
-
-            $lang = Language::getByUserAndLangId($_SESSION['id'], $router['id']);
+            $lang = Language::get($router['id']);
 
             if(empty($lang->getId())){
 
-                Http::error('Запись не найдена');
+                Http::error('Запись ' . $router['id'] . ' не найдена');
+
+            }
+
+            if($lang->getUserid() != $_SESSION['id']){
+
+                Http::error('Вы не можете удалить чужую запись', 403);
 
             }
 
@@ -429,14 +435,14 @@
 
         /**
          * 
-         * @api {delete} language Удаление нескольких языков из резюме
+         * @api {delete} language Удалить несколько
          * @apiName DeleteArrayLanguage
          * @apiGroup Resume_Language
          * @apiVersion  1.0.0
          * 
          * @apiPermission auth
          * 
-         * @apiParam  {String} data Массив ID языков, которые надо удалить
+         * @apiParam  {String} data Массив ID, которые надо удалить
          * 
          * @apiParamExample  {json} Request-Example:
          * {
@@ -453,6 +459,7 @@
          * @apiError Auth Вы не авторизированы
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
          * @apiError RecordNotFound Запись не найдена
+         * @apiError Invalid-Data Некорректный массив <code>data</code>
          *
          * @apiErrorExample {json} Error-Response:
          * 
@@ -482,26 +489,30 @@
                 Http::error('Отсутствует массив [data]');
 
             }
+            
+            if(!preg_match('/^((\s)*\d+(\s)*)((\s)*\,(\s)*\d+)*$/u', $GLOBALS['PUT']['data'])){
+
+                Http::error('Некорректный массив [data]');
+
+            }
 
             $data = explode(",", $GLOBALS['PUT']['data']);
 
             foreach ($data as $id) {
 
                 $_id = trim($id);
-                
-                $help_lang = HelperLanguage::get($_id);
 
-                if(empty($help_lang->getId())){
-
-                    Http::error('Язык ' . $_id . ' не существует');
-
-                }
-    
-                $lang = Language::getByUserAndLangId($_SESSION['id'], $_id);
+                $lang = Language::get($_id);
 
                 if(empty($lang->getId())){
 
-                    Http::error('Запись ['.$_id.'] не найдена');
+                    Http::error('Запись ' . $_id . ' не найдена');
+
+                }
+
+                if($lang->getUserid() != $_SESSION['id']){
+
+                    Http::error('Вы не можете удалить чужую запись', 403);
 
                 }
 
