@@ -40,7 +40,7 @@
 
         /**
          * 
-         * @api {post} education Добавить образование к резюме
+         * @api {post} education Добавить
          * @apiName AddEducation
          * @apiGroup Resume_Education
          * @apiVersion  1.0.0
@@ -81,8 +81,7 @@
          *  }
          * 
          * @apiError Auth Вы не авторизированы
-         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
-         * @apiError EducationExists Язык <code>ID</code> уже добавлен
+         * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
          * @apiError DataIsNotValid Некорректный объект <code>data</code>
          * @apiError DataFieldIsNotValid Объект должен содержать поле <code>edu_level</code>
          * @apiError DataFieldIsNotValid2 Объект должен содержать поле <code>edu_inst</code>
@@ -242,43 +241,57 @@
 
         /**
          * 
-         * @api {put} education Обновить языки в резюме
+         * @api {put} education Обновить
          * @apiName UpdateEducation
          * @apiGroup Resume_Education
          * @apiVersion  1.0.0
          * 
          * @apiPermission auth
          * 
-         * @apiParam  {String} edu_id ID языка
-         * @apiParam  {String} edu_level Уровень владения языком
+         * @apiParam  {String} record_id ID записи
+         * @apiParam  {String} [edu_level] ID Уровень образования
+         * @apiParam  {String} [edu_inst] Название учебного заведения
+         * @apiParam  {String} [edu_city] Город
+         * @apiParam  {String} [edu_fac] Факультет
+         * @apiParam  {String} [edu_period] Период учебы
          * @apiParam  {String} [data] Вы можете отправить массив языков в json формате
          * 
          * @apiParamExample  {json} Request-Example:
          * {
-         *      "edu_id" : "3",
-         *      "edu_level" : "Не владею"
+         *      "record_id" : "5",
+         *      "edu_level" : "3",
+         *      "edu_fac" : "Физико-математический",
+         *      "edu_period" : "2005-2010"
          * }
          * 
          * @apiSuccess (200) {String} id ID записи
-         * @apiSuccess (200) {String} edu_id ID языка
-         * @apiSuccess (200) {String} edu_level Уровень владения языком
+         * @apiSuccess (200) {String} level Уровень образования
+         * @apiSuccess (200) {String} institute Название учебного заведения
+         * @apiSuccess (200) {String} city Город
+         * @apiSuccess (200) {String} faculty Факультет
+         * @apiSuccess (200) {String} period Период учебы
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
-         *      "id" : "1"
-         *      "edu_id" : "3",
-         *      "edu_level" : "Не владею"
+         *      "id" : "1",
+         *      "level" : "Высшее",
+         *      "institute" : "МГУ",
+         *      "city" : "Москва",
+         *      "faculty" : "Физико-математический",
+         *      "period" : "2005-2010"
          *  }
          * 
          * @apiError Auth Вы не авторизированы
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
-         * @apiError EducationDoesNotExist Язык <code>ID</code> не найден
+         * @apiError EducationExists Язык <code>ID</code> уже добавлен
          * @apiError DataIsNotValid Некорректный объект <code>data</code>
-         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>edu_id</code>
-         * @apiError DataFieldIsNotValid2 Объект должен содержать поле <code>edu_level</code>
+         * @apiError PermissionDenied Вы не можете редактировать чужую запись
          * 
-         * @apiError Invalid-EduId Некорректное поле <code>edu_id</code>
-         * @apiError Invalid-EduLevel Некорректное поле <code>edu_level</code>
+         * @apiError Invalid-LevelId Некорректное поле <code>edu_level</code>
+         * @apiError Invalid-Institute Некорректное поле <code>edu_inst</code>
+         * @apiError Invalid-City Некорректное поле <code>edu_city</code>
+         * @apiError Invalid-Period Некорректное поле <code>edu_period</code>
+         * @apiError Invalid-Faculty Некорректное поле <code>edu_fac</code>
          *
          * @apiErrorExample {json} Error-Response:
          * 
@@ -289,8 +302,8 @@
          * 
          */
 
-        public static function update(){
-    
+        public static function update($router){
+         
             if(!isset($_SESSION['id'])){
 
                 Http::error('Вы не авторизированы');
@@ -303,7 +316,7 @@
 
             } 
 
-            if(isset($GLOBALS['PUT']['data'])){
+            if(isset($_POST['data'])){
 
 
                 if(!Model::isJson($data)){
@@ -312,41 +325,69 @@
     
                 }
 
-                $data = json_decode($GLOBALS['PUT']['data']);
+                $data = json_decode($_POST['data']);
 
                 $res = array();
         
                 foreach ($data as $obj) {
 
-                    if(!isset($obj->edu_id)){
+                    if(!isset($obj->record_id)){
 
-                        Http::error('Объект должен содержать поле [edu_id]');
-
-                    }
-
-                    if(!isset($obj->edu_level)){
-
-                        Http::error('Объект должен содержать поле [edu_level]');
+                        Http::error('Объект должен содержать поле [record_id]');
 
                     }
-                    
-                    $help_edu = HelperEducation::get($obj->edu_id);
 
-                    if(empty($help_edu->getId())){
-
-                        Http::error('Язык ' . $obj->edu_id . ' не существует');
-
-                    }
-                    
-                    $edu = Education::getByUserAndEduId($_SESSION['id'], $obj->edu_id);
+                    $edu = Education::get($obj->record_id);
 
                     if(empty($edu->getId())){
 
-                        Http::error('Язык [' . $help_edu->getName() . '] не найден');
+                        Http::error('Запись '.$obj->record_id.' не найдена');
 
                     }
 
-                    $edu->setEduLevel($obj->edu_level);
+                    if($edu->getUserId() != $_SESSION['id']){
+
+                        Http::error('Вы не можете редактировать чужую запись', 403);
+        
+                    }
+
+                    if(isset($obj->edu_level)){
+
+                        $help_edu = HelperEducation::get($obj->edu_level);
+
+                        if(empty($help_edu->getId())){
+        
+                            Http::error('Некорректное поле [edu_level]');
+        
+                        }
+
+                        $edu->setLevelId($obj->edu_level);
+
+                    }
+
+                    if(isset($obj->edu_inst)){
+
+                        $edu->setInstitute($obj->edu_inst);
+
+                    }
+
+                    if(isset($obj->edu_city)){
+
+                        $edu->setCity($obj->edu_city);
+
+                    }
+
+                    if(isset($obj->edu_fac)){
+
+                        $edu->setFaculty($obj->edu_fac);
+
+                    }
+
+                    if(isset($obj->edu_period)){
+
+                        $edu->setStudyPeriod($obj->edu_period);
+
+                    }
 
                     self::saveEdu($edu);
 
@@ -355,9 +396,12 @@
                     [
 
                         'id' => $edu->getId(),
-                        'user_id' => $edu->getUserid(),
-                        'edu_id' => $edu->getEduId(),
-                        'edu_level' => $edu->getEduLevel()
+                        'user_id' => $edu->getUserId(),
+                        'level_id' => $edu->getLevelId(),
+                        'inst' => $edu->getInstitute(),
+                        'city' => $edu->getCity(),
+                        'faculty' => $edu->getFaculty(),
+                        'period' => $edu->getStudyPeriod()
         
                     ]);
 
@@ -366,33 +410,76 @@
                 Http::response($res, 200);
 
             } else {
-                                    
-                $help_edu = HelperEducation::get($GLOBALS['PUT']['edu_id']);
 
-                if(empty($help_edu->getId())){
+                if(!isset($GLOBALS['PUT']['record_id'])){
 
-                    Http::error('Язык ' . $GLOBALS['PUT']['edu_id'] . ' не существует');
+                    Http::error('Объект должен содержать поле [record_id]');
 
                 }
 
-                $edu = Education::getByUserAndEduId($_SESSION['id'], $GLOBALS['PUT']['edu_id']);
+                $edu = Education::get($GLOBALS['PUT']['record_id']);
 
                 if(empty($edu->getId())){
 
-                    Http::error('Язык [' . $help_edu->getName() . '] не найден');
+                    Http::error('Запись '.$GLOBALS['PUT']['record_id'].' не найдена');
 
                 }
 
-                $edu->setEduLevel($GLOBALS['PUT']['edu_level']);
+                if($edu->getUserId() != $_SESSION['id']){
+
+                    Http::error('Вы не можете редактировать чужую запись', 403);
+    
+                }
+
+                if(isset($GLOBALS['PUT']['edu_level'])){
+
+                    $help_edu = HelperEducation::get($GLOBALS['PUT']['edu_level']);
+
+                    if(empty($help_edu->getId())){
+    
+                        Http::error('Некорректное поле [edu_level]');
+    
+                    }
+
+                    $edu->setLevelId($GLOBALS['PUT']['edu_level']);
+
+                }
+
+                if(isset($GLOBALS['PUT']['edu_inst'])){
+
+                    $edu->setInstitute($GLOBALS['PUT']['edu_inst']);
+
+                }
+
+                if(isset($GLOBALS['PUT']['edu_city'])){
+
+                    $edu->setCity($GLOBALS['PUT']['edu_city']);
+
+                }
+
+                if(isset($GLOBALS['PUT']['edu_fac'])){
+
+                    $edu->setFaculty($GLOBALS['PUT']['edu_fac']);
+
+                }
+
+                if(isset($GLOBALS['PUT']['edu_period'])){
+
+                    $edu->setStudyPeriod($GLOBALS['PUT']['edu_period']);
+
+                }
 
                 self::saveEdu($edu);
 
                 $res = [
 
                     'id' => $edu->getId(),
-                    'user_id' => $edu->getUserid(),
-                    'edu_id' => $edu->getEduId(),
-                    'edu_level' => $edu->getEduLevel()
+                    'user_id' => $edu->getUserId(),
+                    'level' => $help_edu->getName(),
+                    'inst' => $edu->getInstitute(),
+                    'city' => $edu->getCity(),
+                    'faculty' => $edu->getFaculty(),
+                    'period' => $edu->getStudyPeriod()
     
                 ];
     
@@ -404,7 +491,7 @@
 
         /**
          * 
-         * @api {delete} education/:id Удалить запись
+         * @api {delete} education/:id Удалить
          * @apiName DeleteEducation
          * @apiGroup Resume_Education
          * @apiVersion  1.0.0
@@ -468,7 +555,7 @@
 
         /**
          * 
-         * @api {delete} education Удалить несколько записей
+         * @api {delete} education Удалить несколько
          * @apiName DeleteArrayEducation
          * @apiGroup Resume_Education
          * @apiVersion  1.0.0
