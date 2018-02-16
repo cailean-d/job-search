@@ -610,6 +610,12 @@
 
             }
 
+            if(!preg_match('/^((\s)*\d+(\s)*)((\s)*\,(\s)*\d+)*$/u', $GLOBALS['PUT']['data'])){
+
+                Http::error('Некорректный массив [data]');
+
+            }
+
             $data = explode(",", $GLOBALS['PUT']['data']);
 
             foreach ($data as $id) {
