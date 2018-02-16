@@ -404,7 +404,7 @@
 
         /**
          * 
-         * @api {delete} education/:id Удаление языка из резюме
+         * @api {delete} education/:id Удалить запись
          * @apiName DeleteEducation
          * @apiGroup Resume_Education
          * @apiVersion  1.0.0
@@ -421,12 +421,13 @@
          * @apiError Auth Вы не авторизированы
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
          * @apiError RecordNotFound Запись не найдена
+         * @apiError PermissionDenied Вы не можете удалить чужую запись
          *
          * @apiErrorExample {json} Error-Response:
          * 
          *     HTTP/1.1 403 Bad Request
          *     {
-         *       "error": "Вы должны быть авторизированы под учетноый записью пользователя"
+         *       "error": "Вы не можете удалить чужую запись"
          *     }
          * 
          */
@@ -445,19 +446,17 @@
 
             }
 
-            $help_edu = HelperEducation::get($router['id']);
-
-            if(empty($help_edu->getId())){
-
-                Http::error('Язык ' . $router['id'] . ' не существует');
-
-            }
-
-            $edu = Education::getByUserAndEduId($_SESSION['id'], $router['id']);
+            $edu = Education::get($router['id']);
 
             if(empty($edu->getId())){
 
-                Http::error('Запись не найдена');
+                Http::error('Запись ' . $router['id'] . ' не найдена');
+
+            }
+
+            if($edu->getUserId() != $_SESSION['id']){
+
+                Http::error('Вы не можете удалить чужую запись', 403);
 
             }
 
