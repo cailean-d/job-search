@@ -244,7 +244,81 @@
 
         }
 
+        /**
+         * 
+         * @api {delete} language Удаление нескольких языков из резюме
+         * @apiName DeleteArrayLanguage
+         * @apiGroup Resume_Language
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiParam  {String} data Массив ID языков, которые надо удалить
+         * 
+         * @apiParamExample  {json} Request-Example:
+         * {
+         *      "data" : "1, 2, 3, 4, 5"
+         * }
+         * 
+         * @apiSuccess (200) {String} success Удаление прошло успешно
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
+         * @apiError RecordNotFound Запись не найдена
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 403 Forbidden
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетноый записью пользователя"
+         *     }
+         * 
+         */
+
         public static function deleteArray(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+            
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            if(!isset($GLOBALS['PUT']['data'])){
+
+                Http::error('Отсутствует массив [data]');
+
+            }
+
+            $data = explode(",", $GLOBALS['PUT']['data']);
+
+            foreach ($data as $id) {
+
+                $_id = trim($id);
+    
+                $lang = Language::getByUserAndLangId($_SESSION['id'], $_id);
+
+                if(empty($lang->getId())){
+
+                    Http::error('Запись ['.$_id.'] не найдена');
+
+                }
+
+                $lang->delete();
+
+            }
+
+            Http::success();
 
         }
 
