@@ -32,6 +32,12 @@
                     'method' => 'delete',
                     'url' => 'experience',
                     'handler' => 'deleteArray'
+                ],
+
+                [
+                    'method' => 'get',
+                    'url' => 'experience',
+                    'handler' => 'getAll'
                 ]
 
             );
@@ -696,6 +702,101 @@
             }
 
             Http::success();
+
+        }
+
+        /**
+         * 
+         * @api {get} experience Получить все
+         * @apiName GetExperience
+         * @apiGroup Resume_Experience
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} id ID записи
+         * @apiSuccess (200) {String} user_id ID пользователя
+         * @apiSuccess (200) {String} post Должность
+         * @apiSuccess (200) {String} company Компания
+         * @apiSuccess (200) {String} city Город
+         * @apiSuccess (200) {String} industry Отрасль
+         * @apiSuccess (200) {String} period Период работы
+         * @apiSuccess (200) {String} functions Обязанности и функции
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         * [
+         *      {
+         *          "id" : "2",
+         *          "user_id" : "5",
+         *          "post" : "Сторож",
+         *          "company" : "Компания",
+         *          "city" : "Москва",
+         *          "industry" : "Охрана, безопасность",
+         *          "period" : "Июнь 2016 - Август 2018",
+         *          "functions" : "Функции..."
+         *      },
+         *      {
+         *          "id" : "3",
+         *          "user_id" : "5",
+         *          "post" : "Бухгалер",
+         *          "company" : "Компания",
+         *          "city" : "Москва",
+         *          "industry" : "Финансы, бухгалтерия",
+         *          "period" : "Июнь 2015 - Июль 2016",
+         *          "functions" : "Функции..."
+         *      }
+         * ]
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетной записью пользователя"
+         *     }
+         * 
+         */
+        
+        public static function getAll(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+            
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            $experience = Experience::getByUserId($_SESSION['id']);
+
+            $res = array();
+
+            foreach ($experience as $exp) {
+
+                array_push($res,
+
+                [
+
+                    'id' => $exp->getId(),
+                    'user_id' => $exp->getUserId(),
+                    'post' => $exp->getPost(),
+                    'company' => $exp->getCompany(),
+                    'city' => $exp->getCity(),
+                    'industry' => $exp->getIndustryId(),
+                    'period' => $exp->getWorkPeriod(),
+                    'functions' => $exp->getFunctions()
+    
+                ]);
+
+            }
+
+            Http::response($res, 200);
 
         }
 
