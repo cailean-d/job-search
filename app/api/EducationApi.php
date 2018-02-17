@@ -32,6 +32,12 @@
                     'method' => 'delete',
                     'url' => 'education',
                     'handler' => 'deleteArray'
+                ],
+
+                [
+                    'method' => 'get',
+                    'url' => 'education',
+                    'handler' => 'getAll'
                 ]
 
             );
@@ -643,6 +649,94 @@
             }
 
             Http::success();
+
+        }
+
+        /**
+         * 
+         * @api {get} education Получить все
+         * @apiName GetEducation
+         * @apiGroup Resume_Education
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} id ID записи
+         * @apiSuccess (200) {String} level Уровень образования
+         * @apiSuccess (200) {String} institute Название учебного заведения
+         * @apiSuccess (200) {String} city Город
+         * @apiSuccess (200) {String} faculty Факультет
+         * @apiSuccess (200) {String} period Период учебы
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         * [
+         *     {
+         *          "id" : "1",
+         *          "level" : "Среднее",
+         *          "institute" : "ТГУ",
+         *          "city" : "Москва",
+         *          "faculty" : "",
+         *          "period" : "2002-2010"
+         *      },
+         *      {
+         *          "id" : "2",
+         *          "level" : "Высшее",
+         *          "institute" : "МГУ",
+         *          "city" : "Москва",
+         *          "faculty" : "Физико-математический",
+         *          "period" : "2010-2015"
+         *      }
+         * ]
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетной записью пользователя"
+         *     }
+         * 
+         */
+        
+        public static function getAll(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+            
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            $education = Education::getByUserId($_SESSION['id']);
+
+            $res = array();
+
+            foreach ($education as $edu) {
+
+                array_push($res,
+
+                [
+
+                    'id' => $edu->getId(),
+                    'user_id' => $edu->getUserId(),
+                    'level_id' => $edu->getLevelId(),
+                    'inst' => $edu->getInstitute(),
+                    'city' => $edu->getCity(),
+                    'faculty' => $edu->getFaculty(),
+                    'period' => $edu->getStudyPeriod()
+    
+                ]);
+
+            }
+
+            Http::response($res, 200);
 
         }
 
