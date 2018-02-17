@@ -285,6 +285,7 @@
          * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
          * @apiError DataIsNotValid Некорректный объект <code>data</code>
          * @apiError PermissionDenied Вы не можете редактировать чужую запись
+         * @apiError RecordNotFound Запись не найдена
          * 
          * @apiError DataFieldIsNotValid Объект должен содержать поле <code>record_id</code>
          * @apiError Invalid-LevelId Некорректное поле <code>edu_level</code>

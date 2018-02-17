@@ -274,49 +274,61 @@
          * @apiPermission auth
          * 
          * @apiParam  {String} record_id ID записи
-         * @apiParam  {String} [exp_level] ID Уровень образования
-         * @apiParam  {String} [exp_inst] Название учебного заведения
+         * @apiParam  {String} [exp_post] Должность
+         * @apiParam  {String} [exp_company] Компания
          * @apiParam  {String} [exp_city] Город
-         * @apiParam  {String} [exp_fac] Факультет
-         * @apiParam  {String} [exp_period] Период учебы
+         * @apiParam  {String} [exp_industry] ID отрасли
+         * @apiParam  {String} [work_period] Период работы
+         * @apiParam  {String} [exp_func] Период учебы
          * @apiParam  {String} [data] Вы можете отправить массив языков в json формате
          * 
          * @apiParamExample  {json} Request-Example:
          * {
          *      "record_id" : "5",
-         *      "exp_level" : "3",
-         *      "exp_fac" : "Физико-математический",
-         *      "exp_period" : "2005-2010"
+         *      "exp_post" : "Сторож",
+         *      "exp_industry" : "14",
+         *      "work_period" : "Сентябрь 2010 - Октябрь 2012"
          * }
          * 
          * @apiSuccess (200) {String} id ID записи
-         * @apiSuccess (200) {String} level Уровень образования
-         * @apiSuccess (200) {String} institute Название учебного заведения
+         * @apiSuccess (200) {String} user_id ID пользователя
+         * @apiSuccess (200) {String} post Должность
+         * @apiSuccess (200) {String} company Компания
          * @apiSuccess (200) {String} city Город
-         * @apiSuccess (200) {String} faculty Факультет
-         * @apiSuccess (200) {String} period Период учебы
+         * @apiSuccess (200) {String} industry Отрасль
+         * @apiSuccess (200) {String} period Период работы
+         * @apiSuccess (200) {String} functions Обязанности и функции
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
-         *      "id" : "1",
-         *      "level" : "Высшее",
-         *      "institute" : "МГУ",
+         *      "id" : "2",
+         *      "user_id" : "5",
+         *      "post" : "Сторож",
+         *      "company" : "Компания",
          *      "city" : "Москва",
-         *      "faculty" : "Физико-математический",
-         *      "period" : "2005-2010"
+         *      "industry" : "Охрана, безопасность",
+         *      "period" : "Июнь 2016 - Август 2018",
+         *      "functions" : "Функции..."
          *  }
          * 
          * @apiError Auth Вы не авторизированы
-         * @apiError UserAuth Вы должны быть авторизированы под учетноый записью пользователя
+         * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
          * @apiError DataIsNotValid Некорректный объект <code>data</code>
+         * @apiError RecordNotFound Запись не найдена
          * @apiError PermissionDenied Вы не можете редактировать чужую запись
+         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>exp_post</code>
+         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>exp_company</code>
+         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>exp_city</code>
+         * @apiError DataFieldIsNotValid2 Объект должен содержать поле <code>exp_industry</code>
+         * @apiError DataFieldIsNotValid3 Объект должен содержать поле <code>work_period</code>
+         * @apiError DataFieldIsNotValid4 Объект должен содержать поле <code>exp_func</code>
          * 
-         * @apiError DataFieldIsNotValid Объект должен содержать поле <code>record_id</code>
-         * @apiError Invalid-LevelId Некорректное поле <code>exp_level</code>
-         * @apiError Invalid-Institute Некорректное поле <code>exp_inst</code>
+         * @apiError Invalid-LevelId Некорректное поле <code>exp_post</code>
+         * @apiError Invalid-Institute Некорректное поле <code>exp_company</code>
          * @apiError Invalid-City Некорректное поле <code>exp_city</code>
-         * @apiError Invalid-Period Некорректное поле <code>exp_period</code>
-         * @apiError Invalid-Faculty Некорректное поле <code>exp_fac</code>
+         * @apiError Invalid-Period Некорректное поле <code>exp_industry</code>
+         * @apiError Invalid-Faculty Некорректное поле <code>work_period</code>
+         * @apiError Invalid-Faculty Некорректное поле <code>exp_func</code>
          *
          * @apiErrorExample {json} Error-Response:
          * 
@@ -324,6 +336,7 @@
          *     {
          *       "error": "Некорректное поле [exp_level]"
          *     }
+         * 
          * 
          */
 
@@ -376,23 +389,16 @@
         
                     }
 
-                    if(isset($obj->exp_level)){
+                    if(isset($obj->exp_post)){
 
-                        $help_exp = HelperIndustry::get($obj->exp_level);
 
-                        if(empty($help_exp->getId())){
-        
-                            Http::error('Некорректное поле [exp_level]');
-        
-                        }
-
-                        $exp->setLevelId($obj->exp_level);
+                        $exp->setPost($obj->exp_post);
 
                     }
 
-                    if(isset($obj->exp_inst)){
+                    if(isset($obj->exp_company)){
 
-                        $exp->setInstitute($obj->exp_inst);
+                        $exp->setCompany($obj->exp_company);
 
                     }
 
@@ -402,15 +408,29 @@
 
                     }
 
-                    if(isset($obj->exp_fac)){
+                    if(isset($obj->exp_industry)){
 
-                        $exp->setFaculty($obj->exp_fac);
+                        $help_exp = HelperIndustry::get($obj->exp_industry);
+
+                        if(empty($help_exp->getId())){
+        
+                            Http::error('Некорректное поле [exp_industry]');
+        
+                        }
+
+                        $exp->setIndustryId($obj->exp_industry);
 
                     }
 
-                    if(isset($obj->exp_period)){
+                    if(isset($obj->work_period)){
 
-                        $exp->setStudyPeriod($obj->exp_period);
+                        $exp->setWorkPeriod($obj->work_period);
+
+                    }
+
+                    if(isset($obj->exp_func)){
+
+                        $exp->setFunctions($obj->exp_func);
 
                     }
 
@@ -422,11 +442,12 @@
 
                         'id' => $exp->getId(),
                         'user_id' => $exp->getUserId(),
-                        'level_id' => $exp->getLevelId(),
-                        'inst' => $exp->getInstitute(),
+                        'post' => $exp->getPost(),
+                        'company' => $exp->getCompany(),
                         'city' => $exp->getCity(),
-                        'faculty' => $exp->getFaculty(),
-                        'period' => $exp->getStudyPeriod()
+                        'industry' => $exp->getIndustryId(),
+                        'period' => $exp->getWorkPeriod(),
+                        'functions' => $exp->getFunctions()
         
                     ]);
 
@@ -456,23 +477,16 @@
     
                 }
 
-                if(isset($GLOBALS['PUT']['exp_level'])){
+                if(isset($GLOBALS['PUT']['exp_post'])){
 
-                    $help_exp = HelperIndustry::get($GLOBALS['PUT']['exp_level']);
 
-                    if(empty($help_exp->getId())){
-    
-                        Http::error('Некорректное поле [exp_level]');
-    
-                    }
-
-                    $exp->setLevelId($GLOBALS['PUT']['exp_level']);
+                    $exp->setPost($GLOBALS['PUT']['exp_post']);
 
                 }
 
-                if(isset($GLOBALS['PUT']['exp_inst'])){
+                if(isset($GLOBALS['PUT']['exp_company'])){
 
-                    $exp->setInstitute($GLOBALS['PUT']['exp_inst']);
+                    $exp->setCompany($GLOBALS['PUT']['exp_company']);
 
                 }
 
@@ -482,15 +496,29 @@
 
                 }
 
-                if(isset($GLOBALS['PUT']['exp_fac'])){
+                if(isset($GLOBALS['PUT']['exp_industry'])){
 
-                    $exp->setFaculty($GLOBALS['PUT']['exp_fac']);
+                    $help_exp = HelperIndustry::get($GLOBALS['PUT']['exp_industry']);
+
+                    if(empty($help_exp->getId())){
+    
+                        Http::error('Некорректное поле [exp_industry]');
+    
+                    }
+
+                    $exp->setIndustryId($GLOBALS['PUT']['exp_industry']);
 
                 }
 
-                if(isset($GLOBALS['PUT']['exp_period'])){
+                if(isset($GLOBALS['PUT']['work_period'])){
 
-                    $exp->setStudyPeriod($GLOBALS['PUT']['exp_period']);
+                    $exp->setWorkPeriod($GLOBALS['PUT']['work_period']);
+
+                }
+
+                if(isset($GLOBALS['PUT']['exp_func'])){
+
+                    $exp->setFunctions($GLOBALS['PUT']['exp_func']);
 
                 }
 
@@ -500,11 +528,12 @@
 
                     'id' => $exp->getId(),
                     'user_id' => $exp->getUserId(),
-                    'level' => $help_exp->getName(),
-                    'inst' => $exp->getInstitute(),
+                    'post' => $exp->getPost(),
+                    'company' => $exp->getCompany(),
                     'city' => $exp->getCity(),
-                    'faculty' => $exp->getFaculty(),
-                    'period' => $exp->getStudyPeriod()
+                    'industry' => $exp->getIndustryId(),
+                    'period' => $exp->getWorkPeriod(),
+                    'functions' => $exp->getFunctions()
     
                 ];
     
