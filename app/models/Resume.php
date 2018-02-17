@@ -345,6 +345,36 @@
             );
 
         }
+
+        public static function getByUserId($id){
+
+            self::applyConfig();
+
+            $data = Database::run('SELECT * FROM '. self::$table .' WHERE user_id = ? ', [$id]);
+
+            return new Resume(
+                $data[0]['id'],
+                $data[0]['user_id'],
+                $data[0]['firstname'],
+                $data[0]['lastname'],
+                $data[0]['patronymic'],
+                $data[0]['gender'],
+                $data[0]['birthday'],
+                $data[0]['city'],
+                $data[0]['phone'],
+                $data[0]['email'],
+                $data[0]['post'],
+                $data[0]['industry_id'],
+                $data[0]['schedule_id'],
+                $data[0]['salary'],
+                $data[0]['work_place_id'],
+                $data[0]['comp_skill_id'],
+                $data[0]['car'],
+                $data[0]['courses'],
+                $data[0]['skills']
+            );
+
+        }
         
         public static function getAll(){
 

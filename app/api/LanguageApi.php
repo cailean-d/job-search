@@ -607,7 +607,6 @@
 
         }
 
-
         private function saveLang($language){
 
             try{
