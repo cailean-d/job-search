@@ -32,6 +32,12 @@
                     'method' => 'delete',
                     'url' => 'language',
                     'handler' => 'deleteArray'
+                ],
+
+                [
+                    'method' => 'get',
+                    'url' => 'language',
+                    'handler' => 'getAll'
                 ]
 
             );
@@ -524,6 +530,83 @@
             Http::success();
 
         }
+
+        /**
+         * 
+         * @api {get} language Получить все
+         * @apiName GetLanguage
+         * @apiGroup Resume_Language
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} id ID записи
+         * @apiSuccess (200) {String} lang_id ID языка
+         * @apiSuccess (200) {String} lang_level Уровень владения языком
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         * [
+         *      {
+         *          "id" : "1"
+         *          "lang_id" : "3",
+         *          "lang_level" : "Не владею"
+         *      },
+         *      {
+         *          "id" : "1"
+         *          "lang_id" : "3",
+         *          "lang_level" : "Не владею"
+         *      }
+         * ]
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетной записью пользователя"
+         *     }
+         * 
+         */
+        
+        public static function getAll(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+            
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            $language = Language::getByUserId($_SESSION['id']);
+
+            $res = array();
+
+            foreach ($language as $lang) {
+
+                array_push($res,
+
+                [
+
+                    'id' => $lang->getId(),
+                    'user_id' => $lang->getUserid(),
+                    'lang_id' => $lang->getLangId(),
+                    'lang_level' => $lang->getLangLevel()
+    
+                ]);
+
+            }
+
+            Http::response($res, 200);
+
+        }
+
 
         private function saveLang($language){
 
