@@ -429,7 +429,6 @@
          * @apiParam  {String} [lastname] Фамилия
          * @apiParam  {String} [email] Почта
          * @apiParam  {String} [password] Пароль
-         * @apiParam  {String} [type="0"] Тип учетной записи
          * 
          * @apiSuccess (200) {String} id ID пользователя
          * @apiSuccess (200) {String} firstname Имя пользователя
@@ -500,12 +499,6 @@
 
                 $user->setPassword($GLOBALS['PUT']['password']);
                 $user->encodePassword();
-
-            }
-
-            if(isset($GLOBALS['PUT']['type'])){
-
-                $user->setType($GLOBALS['PUT']['type']);
 
             }
 
