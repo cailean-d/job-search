@@ -64,7 +64,60 @@
 
         }
 
+        /**
+         * 
+         * @api {delete} resume Удалить
+         * @apiName DeleteResume
+         * @apiGroup Resume
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} success Запись успешно удалена
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      "success" : "true"
+         *  }
+         * 
+         * @apiError VacancyNotFound Запись не найдена
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 403 Bad Request
+         *     {
+         *       "error": "Вы должны быть авторизированы под учетной записью пользователя"
+         *     }
+         * 
+         */
+
         public static function delete(){
+                     
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+            
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            $resume = Resume::getByUserId($_SESSION['id']);
+            
+            if (empty($resume->getId())) {
+
+                Http::error('Запись не найдена');
+
+            }
+
+            $resume->delete();
+           
+            Http::success();
 
         }
         
@@ -287,7 +340,7 @@
 
         /**
          * 
-         * @api {get} resume/full Полное резюме
+         * @api {get} resume/:id/full Полная запись
          * @apiName MyFullResume
          * @apiGroup Resume
          * @apiVersion  1.0.0
@@ -439,7 +492,7 @@
 
         /**
          * 
-         * @api {get} resume/:id/full Полная запись
+         * @api {get} resume/full Полное резюме
          * @apiName GetFullResume
          * @apiGroup Resume
          * @apiVersion  1.0.0
