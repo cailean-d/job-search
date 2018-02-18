@@ -56,8 +56,375 @@
 
         }
 
+        /**
+         * 
+         * @api {post} resume Создать
+         * @apiName AddResume
+         * @apiGroup Resume
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiParam  {String} firstname Имя
+         * @apiParam  {String} lastname Фамилия
+         * @apiParam  {String} patronymic Отчество
+         * @apiParam  {String} gender Пол
+         * @apiParam  {String} birthday Дата рождения
+         * @apiParam  {String} city Город
+         * @apiParam  {String} phone Телефон
+         * @apiParam  {String} email Почта
+         * @apiParam  {String} post Желаемая должность
+         * @apiParam  {String} industry_id ID отрасли
+         * @apiParam  {String} schedule_id Желаемый график работы
+         * @apiParam  {String} salary Желаемая заплата
+         * @apiParam  {String} work_place_id Желаемое место работы
+         * @apiParam  {String} [comp_skill_id] Владение компьютером
+         * @apiParam  {String} [car] Наличие авто
+         * @apiParam  {String} [courses] Пройденные курсы, тренинги
+         * @apiParam  {String} [skills] Навыки и умения
+         * @apiParam  {Blob} [avatar] Файл
+         * 
+         * @apiParamExample  {json} Request-Example:
+         *  {
+         *      "firstname" : "Петр",
+         *      "lastname" : "Петров",
+         *      "patronymic" : "Владимирович",
+         *      "gender" : "Мужской",
+         *      "birthday" : "01.01.1980",
+         *      "city" : "Москва",
+         *      "phone" : "+79999999999",
+         *      "email" : "test@test.com",
+         *      "post" : "Сторож",
+         *      "industry_id" : "5",
+         *      "schedule_id" : "3",
+         *      "salary" : "99999",
+         *      "workplace_id" : "2",
+         *      "compskill_id" : "1",
+         *      "car" : "Нет",
+         *      "courses" : "Мои курсы...",
+         *      "skills" : "Мои навыки...",
+         *      "avatar" : "C://avatar.jpg",
+         *  }
+         * 
+         * @apiSuccess (200) {String} id ID записи
+         * @apiSuccess (200) {String} user_id ID пользователя
+         * @apiSuccess (200) {String} firstname Имя
+         * @apiSuccess (200) {String} lastname Фамилия
+         * @apiSuccess (200) {String} patronymic Отчество
+         * @apiSuccess (200) {String} gender Пол
+         * @apiSuccess (200) {String} birthday Дата рождения
+         * @apiSuccess (200) {String} city Город
+         * @apiSuccess (200) {String} phone Телефон
+         * @apiSuccess (200) {String} email Почта
+         * @apiSuccess (200) {String} post Желаемая должность
+         * @apiSuccess (200) {String} industry_id ID отрасли
+         * @apiSuccess (200) {String} schedule_id Желаемый график работы
+         * @apiSuccess (200) {String} salary Желаемая заплата
+         * @apiSuccess (200) {String} workplace_id Желаемое место работы
+         * @apiSuccess (200) {String} compskill_id Владение компьютером
+         * @apiSuccess (200) {String} car Наличие авто
+         * @apiSuccess (200) {String} courses Пройденные курсы, тренинги
+         * @apiSuccess (200) {String} skills Навыки и умения
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      "id" : "1",
+         *      "user_id" : "5",
+         *      "firstname" : "Петр",
+         *      "lastname" : "Петров",
+         *      "patronymic" : "Владимирович",
+         *      "gender" : "Мужской",
+         *      "birthday" : "01.01.1980",
+         *      "city" : "Москва",
+         *      "phone" : "+79999999999",
+         *      "email" : "test@test.com",
+         *      "post" : "Сторож",
+         *      "industry_id" : "5",
+         *      "schedule_id" : "3",
+         *      "salary" : "99999",
+         *      "workplace_id" : "2",
+         *      "compskill_id" : "1",
+         *      "car" : "Нет",
+         *      "courses" : "Мои курсы...",
+         *      "skills" : "Мои навыки...",
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
+         * 
+         * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
+         * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
+         * @apiError Invalid-Patronymic Некорректное поле <code>patronymic</code>
+         * @apiError Invalid-Gender Некорректное поле <code>gender</code>
+         * @apiError Invalid-Birthday Некорректное поле <code>birthday</code>
+         * @apiError Invalid-City Некорректное поле <code>city</code>
+         * @apiError Invalid-Phone Некорректное поле <code>phone</code>
+         * @apiError Invalid-Email Некорректное поле <code>email</code>
+         * @apiError Invalid-Post Некорректное поле <code>post</code>
+         * @apiError Invalid-IndustryId Некорректное поле <code>industry_id</code>
+         * @apiError Invalid-ScheduleId Некорректное поле <code>schedule_id</code>
+         * @apiError Invalid-Salary Некорректное поле <code>salary</code>
+         * @apiError Invalid-WorkplaceId Некорректное поле <code>work_place_id</code>
+         * @apiError Invalid-CompskillId Некорректное поле <code>comp_skill_id</code>
+         * @apiError Invalid-Car Некорректное поле <code>car</code>
+         * @apiError Invalid-Courses Некорректное поле <code>courses</code>
+         * @apiError Invalid-Skills Некорректное поле <code>skills</code>
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Некорректное поле [edu_level]"
+         *     }
+         * 
+         */
+
         public static function add(){
+                                 
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
             
+            if($_SESSION['type'] != '0') { 
+
+                Http::error('Вы должны быть авторизированы под учетной записью пользователя', 403);
+
+            } 
+
+            $resume = Resume::getByUserId($_SESSION['id']);
+
+            if (!empty($resume->getId())) {
+
+                Http::error('Запись уже существует');
+
+            }
+            
+            $help_edu = HelperIndustry::get($_POST['industry_id']);
+
+            if(empty($help_edu->getId())){
+
+                Http::error('Некорректное поле [industry_id]');
+
+            }
+
+            $help_schedule = HelperSchedule::get($_POST['schedule_id']);
+
+            if(empty($help_schedule->getId())){
+
+                Http::error('Некорректное поле [schedule_id]');
+
+            }
+
+            $help_work = HelperWorkPlace::get($_POST['work_place_id']);
+
+            if(empty($help_work->getId())){
+
+                Http::error('Некорректное поле [work_place_id]');
+
+            }
+
+            if(isset($_POST['comp_skill_id'])){
+
+
+                $help_compskill = HelperCompSkill::get($_POST['comp_skill_id']);
+
+                if(empty($help_compskill->getId())){
+    
+                    Http::error('Некорректное поле [comp_skill_id]');
+    
+                }
+    
+
+            }
+
+            if($_FILES["avatar"]){
+
+                $avatar = Avatar::get($_SESSION['id']);
+
+                if(empty($avatar->getId())){
+    
+                    $avatar->setUserid($_SESSION['id']);
+    
+                }
+    
+                $avatar->setFile($_FILES["avatar"]);
+    
+                try{
+                    
+                    $avatar->save();
+    
+                } catch(Exception $e){
+                    
+                    if($e->getMessage() == 'FILE_DOES_NOT_EXIST'){
+    
+                        Http::error("Файл не был загружен");
+    
+                    } else if ($e->getMessage() == 'UPLOAD_MAX_FIZESIZE') {
+    
+                        Http::error("Файл не должен весить более 3МБ");
+    
+                    } else if ($e->getMessage() == 'UPLOAD_FILE_ERROR') {
+    
+                        Http::error("Ошибка загрузки файла");
+    
+                    } 
+    
+                }
+
+            }
+
+            $resume = new Resume(
+                        
+                null, 
+                $_SESSION['id'], 
+                $_POST['firstname'],
+                $_POST['lastname'],
+                $_POST['patronymic'],
+                $_POST['gender'],
+                $_POST['birthday'],
+                $_POST['city'],
+                $_POST['phone'],
+                $_POST['email'],
+                $_POST['post'],
+                $_POST['industry_id'],
+                $_POST['schedule_id'],
+                $_POST['salary'],
+                $_POST['work_place_id']
+
+            );
+
+
+            if(isset($_POST['comp_skill_id'])){
+
+                $resume->setCompSkillId($_POST['comp_skill_id']);
+
+            }
+
+            if(isset($_POST['car'])){
+
+                $resume->setCar($_POST['car']);
+
+            }
+
+            if(isset($_POST['courses'])){
+
+                $resume->setCourses($_POST['courses']);
+
+            }
+
+            if(isset($_POST['skills'])){
+
+                $resume->setSkills($_POST['skills']);
+
+            }
+
+            try{
+                
+                $resume->save();
+
+            } catch(Exception $e){
+                
+                if($e->getMessage() == 'firstname'){
+
+                    Http::error("Некорректное поле [firstname]");
+
+                } else if ($e->getMessage() == 'lastname') {
+
+                    Http::error("Некорректное поле [lastname]");
+
+                } else if ($e->getMessage() == 'patronymic') {
+
+                    Http::error("Некорректное поле [patronymic]");
+
+                } else if ($e->getMessage() == 'gender') {
+
+                    Http::error("Некорректное поле [gender]");
+
+                } else if ($e->getMessage() == 'birthday') {
+
+                    Http::error("Некорректное поле [birthday]");
+
+                } else if ($e->getMessage() == 'city') {
+
+                    Http::error("Некорректное поле [city]");
+
+                } else if ($e->getMessage() == 'phone') {
+
+                    Http::error("Некорректное поле [phone]");
+
+                } else if ($e->getMessage() == 'email') {
+
+                    Http::error("Некорректное поле [email]");
+
+                } else if ($e->getMessage() == 'post') {
+
+                    Http::error("Некорректное поле [post]");
+
+                } else if ($e->getMessage() == 'industryId') {
+
+                    Http::error("Некорректное поле [industry_id]");
+
+                } else if ($e->getMessage() == 'scheduleId') {
+
+                    Http::error("Некорректное поле [schedule_id]");
+
+                } else if ($e->getMessage() == 'salary') {
+
+                    Http::error("Некорректное поле [salary]");
+
+                } else if ($e->getMessage() == 'workPlaceId') {
+
+                    Http::error("Некорректное поле [work_place_id]");
+
+                } else if ($e->getMessage() == 'compSkillId') {
+
+                    Http::error("Некорректное поле [comp_skill_id]");
+
+                } else if ($e->getMessage() == 'car') {
+
+                    Http::error("Некорректное поле [car]");
+
+                } else if ($e->getMessage() == 'courses') {
+
+                    Http::error("Некорректное поле [courses]");
+
+                } else if ($e->getMessage() == 'skills') {
+
+                    Http::error("Некорректное поле [skills]");
+
+                }
+
+            }
+
+            $res = [
+
+                'id' => $resume->getId(),
+                'user_id' => $resume->getUserid(),
+                'firstname' => $resume->getFirstname(),
+                'lastname' => $resume->getLastname(),
+                'patronymic' => $resume->getPatronymic(),
+                'gender' => $resume->getGender(),
+                'birthday' => $resume->getBirthday(),
+                'city' => $resume->getCity(),
+                'phone' => $resume->getPhone(),
+                'email' => $resume->getEmail(),
+                'post' => $resume->getPost(),
+                'industry_id' => $resume->getIndustryId(),
+                'schedule_id' => $resume->getScheduleId(),
+                'salary' => $resume->getSalary(),
+                'workplace_id' => $resume->getWorkPlaceId(),
+                'compskill_id' => $resume->getCompSkillId(),
+                'car' => $resume->getCar(),
+                'courses' => $resume->getCourses(),
+                'skills' => $resume->getSkills(),
+
+            ];
+
+            Http::response($res, 200);
+
+
         }
 
         public static function update(){

@@ -598,7 +598,6 @@
 
             $avatar = Avatar::get($_SESSION['id']);
 
-
             if(empty($avatar->getId())){
 
                 $avatar->setUserid($_SESSION['id']);
