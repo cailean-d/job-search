@@ -128,7 +128,7 @@
 
         public function delete(){
 
-            $query = Database::run('DELETE FROM '. self::$table .' WHERE user_id = ? ', [$this->id]);
+            $query = Database::run('DELETE FROM '. self::$table .' WHERE user_id = ? ', [$this->userid]);
 
             $this->reset();
             

@@ -51,6 +51,12 @@
                     'method' => 'post',
                     'url' => 'user/avatar',
                     'handler' => 'setAvatar'
+                ],
+
+                [
+                    'method' => 'delete',
+                    'url' => 'user/avatar',
+                    'handler' => 'deleteAvatar'
                 ]
 
             );
@@ -636,6 +642,48 @@
             ];
 
             Http::response($res, 200);
+
+        }
+
+        /**
+         * 
+         * @api {delete} user/avatar Удалить аватар
+         * @apiName DeleteAvatar
+         * @apiGroup User
+         * @apiVersion  1.0.0
+         * 
+         * @apiPermission auth
+         * 
+         * @apiSuccess (200) {String} success Удаление прошло успешно
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         *  {
+         *      success : true
+         *  }
+         * 
+         * @apiError Auth Вы не авторизированы
+         *
+         * @apiErrorExample {json} Error-Response:
+         * 
+         *     HTTP/1.1 400 Bad Request
+         *     {
+         *       "error": "Вы не авторизированы"
+         *     }
+         * 
+         */
+
+        public static function deleteAvatar(){
+
+            if(!isset($_SESSION['id'])){
+
+                Http::error('Вы не авторизированы');
+
+            }
+
+            $avatar = new Avatar(null, $_SESSION['id']);
+            $avatar->delete();
+
+            Http::success();
 
         }
 
