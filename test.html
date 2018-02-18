@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="form" action="http://project/api/1.0.0/resume/update" method="PUT">
+    
+        <input type="file" name="avatar" id="avatar">
+        <input type="text" name="test" id="test">
+        <input type="submit" value="send">
+    </form>
+
+    <script>
+    
+        document.getElementById("form").onsubmit = function(e){
+
+            e.preventDefault();
+
+            var data = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', this.action);
+            xhr.send(data);
+
+            xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4){
+                if (xhr.status == 200) {
+                    document.writeln(xhr.responseText);
+                } else {
+                    document.writeln(xhr.status + " : " + xhr.responseText);
+                }
+            } 
+        }
+
+        }
+        
+    </script>
+</body>
+</html>
