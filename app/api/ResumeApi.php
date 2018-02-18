@@ -890,7 +890,31 @@
             }
 
             $resume->delete();
+
+            $education = Education::getByUserId($_SESSION['id']);
+
+            foreach ($education as $edu) {
+
+                $edu->delete();
+
+            }
            
+            $experience = Experience::getByUserId($_SESSION['id']);
+
+            foreach ($experience as $exp) {
+
+                $exp->delete();
+
+            }
+                       
+            $language = Language::getByUserId($_SESSION['id']);
+
+            foreach ($language as $lang) {
+
+                $lang->delete();
+
+            }
+
             Http::success();
 
         }
