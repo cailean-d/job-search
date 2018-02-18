@@ -122,7 +122,7 @@
             
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -350,7 +350,7 @@
          
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -385,7 +385,7 @@
 
                     if(empty($exp->getId())){
 
-                        Http::error('Запись '.$obj->record_id.' не найдена');
+                        Http::error('Запись '.$obj->record_id.' не найдена', 404);
 
                     }
 
@@ -473,7 +473,7 @@
 
                 if(empty($exp->getId())){
 
-                    Http::error('Запись '.$GLOBALS['PUT']['record_id'].' не найдена');
+                    Http::error('Запись '.$GLOBALS['PUT']['record_id'].' не найдена', 404);
 
                 }
 
@@ -572,7 +572,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 403 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "Вы не можете удалить чужую запись"
          *     }
@@ -583,7 +583,7 @@
             
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -597,7 +597,7 @@
 
             if(empty($exp->getId())){
 
-                Http::error('Запись ' . $router['id'] . ' не найдена');
+                Http::error('Запись ' . $router['id'] . ' не найдена', 404);
 
             }
 
@@ -655,7 +655,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -687,7 +687,7 @@
 
                 if(empty($exp->getId())){
     
-                    Http::error('Запись ' . $_id . ' не найдена');
+                    Http::error('Запись ' . $_id . ' не найдена', 404);
     
                 }
     
@@ -752,7 +752,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "Вы должны быть авторизированы под учетной записью пользователя"
          *     }
@@ -763,7 +763,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             

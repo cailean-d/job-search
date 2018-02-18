@@ -71,7 +71,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 404 Not Found
          *     {
          *       "error": "Запись не найдена"
          *     }
@@ -84,7 +84,7 @@
 
             if (empty($help_education->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             } else {
 
@@ -184,7 +184,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Forbidden
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "У вас недостаточно прав для выполнения данной операции"
          *     }
@@ -250,7 +250,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Forbidden
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "У вас недостаточно прав для выполнения данной операции"
          *     }
@@ -269,7 +269,7 @@
             
             if(empty($help_education->getId())){
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             }
 
@@ -315,7 +315,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 403 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "У вас недостаточно прав для выполнения данной операции"
          *     }
@@ -334,7 +334,7 @@
             
             if (empty($help_education->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             }
 

@@ -100,7 +100,7 @@
 
             if(empty($vacancy->getId())){
 
-                Http::error('Вакансия не существует');
+                Http::error('Вакансия не существует', 404);
 
             }
 
@@ -167,7 +167,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 404 Not Found
          *     {
          *       "error": "Запись не существует"
          *     }
@@ -193,7 +193,7 @@
 
             if(empty($vacancy->getId())){
 
-                Http::error('Вакансия не существует');
+                Http::error('Вакансия не существует', 404);
 
             }
 
@@ -201,7 +201,7 @@
 
             if(empty($addedResume->getId())){
 
-                Http::error('Запись не существует');
+                Http::error('Запись не существует', 404);
 
             }
                 
@@ -243,7 +243,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "Вы должны быть авторизированы под учетноый записью пользователя"
          *     }
@@ -343,7 +343,7 @@
             
             if (empty($vacancy->getId())) {
 
-                Http::error('Вакансия не найдена');
+                Http::error('Вакансия не найдена', 404);
 
             }
             

@@ -139,7 +139,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *   HTTP/1.1 403 Bad Request
+         *   HTTP/1.1 403 Forbidden
          *   {
          *     "error": "У вас недостаточно прав для выполнения данной операции"
          *   }
@@ -295,7 +295,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 403 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "У вас недостаточно прав для удаления данной записи"
          *     }
@@ -314,7 +314,7 @@
             
             if (empty($vacancy->getId())) {
 
-                Http::error('Вакансия не найдена');
+                Http::error('Вакансия не найдена', 404);
 
             }
 
@@ -424,7 +424,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *   HTTP/1.1 403 Bad Request
+         *   HTTP/1.1 403 Forbidden
          *   {
          *     "error": "У вас недостаточно прав для выполнения данной операции"
          *   }
@@ -443,7 +443,7 @@
 
             if(empty($vacancy->getId())){
 
-                Http::error('Вакансия не найдена');
+                Http::error('Вакансия не найдена', 404);
 
             }
             
@@ -683,7 +683,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *   HTTP/1.1 400 Bad Request
+         *   HTTP/1.1 404 Not Found
          *   {
          *     "error": "Вакансия не найдена"
          *   }
@@ -696,7 +696,7 @@
 
             if (empty($vacancy->getId())) {
 
-                Http::error('Вакансия не найдена');
+                Http::error('Вакансия не найдена', 404);
 
             } else {
 

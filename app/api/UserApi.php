@@ -270,7 +270,7 @@
 
             } else {
 
-                    Http::error('Логин не найден');
+                Http::error('Логин не найден', 404);
 
             }
 
@@ -297,7 +297,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *   HTTP/1.1 400 Bad Request
+         *   HTTP/1.1 403 Forbidden
          *   {
          *     "error": "Вы не авторизированы"
          *   }
@@ -308,7 +308,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
 
@@ -344,7 +344,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 404 Not Found
          *     {
          *       "error": "Пользователь не найден"
          *     }
@@ -359,7 +359,7 @@
 
             if (empty($user->getId())) {
 
-                Http::error('Пользователь не найден');
+                Http::error('Пользователь не найден', 404);
 
             } else {
 
@@ -399,7 +399,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "Вы не авторизированы"
          *     }
@@ -410,7 +410,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
 
@@ -466,7 +466,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *   HTTP/1.1 400 Bad Request
+         *   HTTP/1.1 403 Forbidden
          *   {
          *     "error": "Вы не авторизированы"
          *   }
@@ -477,7 +477,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
 
@@ -598,7 +598,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
 
@@ -665,7 +665,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "Вы не авторизированы"
          *     }
@@ -676,7 +676,7 @@
 
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
 

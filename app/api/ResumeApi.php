@@ -2,9 +2,9 @@
 
     /**
      * @apiDefine auth Вы должны быть авторизированы под учетноый записью пользователя
-    */
+     */
 
-     final class ResumeApi{
+    final class ResumeApi{
 
         public static function init(){
 
@@ -184,7 +184,7 @@
                                  
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -545,7 +545,7 @@
                          
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -559,7 +559,7 @@
 
             if (empty($resume->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             }
             
@@ -860,7 +860,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 403 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "Вы должны быть авторизированы под учетной записью пользователя"
          *     }
@@ -871,7 +871,7 @@
                      
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -885,7 +885,7 @@
             
             if (empty($resume->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             }
 
@@ -973,7 +973,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 404 Not Found
          *     {
          *       "error": "Запись не найдена"
          *     }
@@ -986,7 +986,7 @@
 
             if (empty($resume->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             } else {
 
@@ -1077,7 +1077,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 403 Forbidden
          *     {
          *       "error": "Вы должны быть авторизированы под учетной записью пользователя"
          *     }
@@ -1088,7 +1088,7 @@
                      
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -1102,7 +1102,7 @@
 
             if (empty($resume->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             } else {
 
@@ -1238,7 +1238,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 404 Not Found
          *     {
          *       "error": "Запись не найдена"
          *     }
@@ -1251,7 +1251,7 @@
 
             if (empty($resume->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             } else {
 
@@ -1393,7 +1393,7 @@
          *
          * @apiErrorExample {json} Error-Response:
          * 
-         *     HTTP/1.1 400 Bad Request
+         *     HTTP/1.1 404 Not Found
          *     {
          *       "error": "Запись не найдена"
          *     }
@@ -1404,7 +1404,7 @@
                                  
             if(!isset($_SESSION['id'])){
 
-                Http::error('Вы не авторизированы');
+                Http::error('Вы не авторизированы', 403);
 
             }
             
@@ -1419,7 +1419,7 @@
 
             if (empty($resume->getId())) {
 
-                Http::error('Запись не найдена');
+                Http::error('Запись не найдена', 404);
 
             } else {
 
