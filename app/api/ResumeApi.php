@@ -226,7 +226,7 @@
 
             }
 
-            if(isset($_POST['comp_skill_id'])){
+            if(!empty($_POST['comp_skill_id'])){
 
 
                 $help_compskill = HelperCompSkill::get($_POST['comp_skill_id']);
@@ -664,13 +664,13 @@
                 $resume->setWorkPlaceId($_POST['work_place_id']);
             }
 
-            if(isset($_POST['comp_skill_id'])){
+            if(!empty($_POST['comp_skill_id'])){
 
                 $help_compskill = HelperCompSkill::get($_POST['comp_skill_id']);
 
                 if(empty($help_compskill->getId())){
     
-                    Http::error('Некорректное поле [comp_skill_id]');
+                    Http::error('Некорректное поле [comp_skill_id]!!!');
     
                 }
 

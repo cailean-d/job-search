@@ -87,8 +87,8 @@
         <script src="public/javascript/reg_valid.js?qqwwцewqewqqeqe"></script>
         <script src="public/javascript/vacancy_valid.js?eqewqqewqeqqqqew"></script>
         <script src="public/javascript/del_vacancy.js?eqqewqeqwqq"></script>
-        <script src="public/javascript/resume.js?kqwwqeqweqeqwq"></script>
-        <script src="public/javascript/vacancy_send_resume.js?qqqqewewew"></script>
+        <script src="public/javascript/resume.js?kqwweqeqqeqeqqeqeqqeqweqeqwq"></script>
+        <script src="public/javascript/vacancy_send_resume.js?qqqqeweeqwew"></script>
         <!--</Deject>-->
         
         <!-- inject:js -->

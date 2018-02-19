@@ -110,7 +110,7 @@
             if(isset($_POST['data'])){
 
 
-                if(!Model::isJson($data)){
+                if(!Model::isJson($_POST['data'])){
 
                     Http::error('Некорректный объект [data]');
     
@@ -272,7 +272,7 @@
             if(isset($GLOBALS['PUT']['data'])){
 
 
-                if(!Model::isJson($data)){
+                if(!Model::isJson($GLOBALS['PUT']['data'])){
 
                     Http::error('Некорректный объект [data]');
     

@@ -90,7 +90,7 @@
         
         }
 
-        public function setStudyPeriod($id){
+        public function setStudyPeriod($studyPeriod){
 
             $this->studyPeriod = htmlspecialchars(trim($studyPeriod));
             return $this;

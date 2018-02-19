@@ -126,7 +126,7 @@
             if(isset($_POST['data'])){
 
 
-                if(!Model::isJson($data)){
+                if(!Model::isJson($_POST['data'])){
 
                     Http::error('Некорректный объект [data]');
     
@@ -162,7 +162,7 @@
 
                     }
 
-                    $help_edu = HelperEducation::get($obj->edu_id);
+                    $help_edu = HelperEducation::get($obj->edu_level);
 
                     if(empty($help_edu->getId())){
 
@@ -323,16 +323,16 @@
 
             } 
 
-            if(isset($_POST['data'])){
+            if(isset($GLOBALS['PUT']['data'])){
 
 
-                if(!Model::isJson($data)){
+                if(!Model::isJson($GLOBALS['PUT']['data'])){
 
                     Http::error('Некорректный объект [data]');
     
                 }
 
-                $data = json_decode($_POST['data']);
+                $data = json_decode($GLOBALS['PUT']['data']);
 
                 $res = array();
         

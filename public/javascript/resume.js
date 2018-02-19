@@ -9,6 +9,14 @@
         return;
     }
 
+    var url_language = 'api/1.0.0/language';
+    var url_experience= 'api/1.0.0/experience';
+    var url_education= 'api/1.0.0/education';
+
+    var url_resume= 'api/1.0.0/resume';
+    var url_update_resume = 'api/1.0.0/resume/update';
+
+
     // блок формы
     var form = document.getElementById("resume");
     // кнопка для скрытия блока опыта работы (ОР)
@@ -385,7 +393,7 @@
         var regexp_city = /^[A-zА-яЁё\"-\s?]{4,}$/;
         var regexp_birth = /^[\d]{2}\.[\d]{2}\.[\d]{4}$/;
         var regexp_email = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var regexp_sentence = /^[A-zА-яЁё0-9\.,!:\\(\)#"-\s?]{4,}$/;
+        var regexp_sentence = /^[A-zА-яЁё0-9\.,!:\\(\)#"-\s?]{3,}$/;
         var regexp_numbers = /^[\d]{1,}$/;
         var regexp_work_period = /^[A-zА-яЁё]{3,8}\s[\d]{4}\s\-\s[A-zА-яЁё]{3,8}\s[\d]{4}$/;
         var regexp_edu_period = /^[\d]{4}\s\-\s[\d]{4}$/;
@@ -1102,13 +1110,16 @@
 
         var data, server_script;
 
+        var method;
+
         // данные для отправки
         if(mode == "create"){
 
             if(lang_array.length > 0){
 
+                method = "POST";
                 data = "data=" + JSON.stringify(lang_array);
-                server_script = "scripts/create/set_language.php";
+                server_script = url_language;
 
             } else {
 
@@ -1119,10 +1130,11 @@
 
         } else if (mode == "update"){
 
+            method = "PUT";
             if (lang_upd_array.length > 0){
 
                 data = "data=" + JSON.stringify(lang_upd_array);
-                server_script = "scripts/update/update_language.php";
+                server_script = url_language;
 
             } else {
 
@@ -1133,10 +1145,12 @@
             
         } else if (mode == "delete") {
 
+            method = "DELETE";
+
             if(lang_del_array.length > 0){
 
                 data = "data=" + lang_del_array;
-                server_script = "scripts/delete/del_language.php";
+                server_script = url_language;
 
             } else {
 
@@ -1151,12 +1165,14 @@
 
         }
 
-        ajax("POST", server_script, data, false, 
+        ajax(method, server_script, data, false, 
         function(status, res){
             if (next) next();
         }, 
         function(status, res){
-            modal_message_text.innerHTML = status + ': ' + res;
+            var res = JSON.parse(res);
+
+            modal_message_text.innerHTML = status + ': ' + res.error;
             $('#modal').modal('show');
 
             // разблокировать кнопку
@@ -1174,14 +1190,17 @@
     function send_work_exp(mode, next){
 
         var data, server_script;
+        var method;
         
         // данные для отправки
         if(mode == "create"){
+
+            method = "POST";
             
             if(exp_array.length > 0){
 
                 data = "data=" + JSON.stringify(exp_array);
-                server_script = "scripts/create/set_experience.php";
+                server_script = url_experience;
 
             } else {
 
@@ -1192,10 +1211,12 @@
 
         } else if (mode == "update"){
 
+            method = "PUT";
+
             if (exp_upd_array.length > 0){
 
                 data = "data=" + JSON.stringify(exp_upd_array);
-                server_script = "scripts/update/update_experience.php";
+                server_script = url_experience;
 
             } else {
 
@@ -1206,10 +1227,12 @@
             
         } else if (mode == "delete") {
 
+            method = "DELETE";
+
             if(exp_del_array.length > 0){
 
                 data = "data=" + exp_del_array;
-                server_script = "scripts/delete/del_experience.php";
+                server_script = url_experience;
 
             } else {
 
@@ -1224,12 +1247,14 @@
 
         }
 
-        ajax("POST", server_script, data, false, 
+        ajax(method, server_script, data, false, 
         function(status, res){
             if(next) next();
         }, 
         function(status, res){
-            modal_message_text.innerHTML = status + ': ' + res;
+            var res = JSON.parse(res);
+
+            modal_message_text.innerHTML = status + ': ' + res.error;
             $('#modal').modal('show');
 
             // разблокировать кнопку
@@ -1247,14 +1272,18 @@
     function send_education(mode, next){
         
         var data, server_script;
+
+        var method;
         
         // данные для отправки
         if(mode == "create"){
+
+            method = "POST";
             
             if(edu_array.length > 0){
 
                 data = "data=" + JSON.stringify(edu_array);
-                server_script = "scripts/create/set_education.php";
+                server_script = url_education;
 
             } else {
 
@@ -1265,10 +1294,12 @@
 
         } else if (mode == "update"){
 
+            method = "PUT";
+
             if (edu_upd_array.length > 0){
 
                 data = "data=" + JSON.stringify(edu_upd_array);
-                server_script = "scripts/update/update_education.php";
+                server_script = url_education;
 
             } else {
 
@@ -1279,10 +1310,12 @@
             
         } else if (mode == "delete") {
 
+            method = "DELETE";
+
             if(edu_del_array.length > 0){
 
                 data = "data=" + edu_del_array;
-                server_script = "scripts/delete/del_education.php";
+                server_script = url_education;
 
             } else {
 
@@ -1297,12 +1330,14 @@
 
         }
 
-        ajax("POST", server_script, data, false, 
+        ajax(method, server_script, data, false, 
         function(status, res){
             if(next) next(status, res);
         }, 
         function(status, res){
-            modal_message_text.innerHTML = status + ': ' + res;
+            var res = JSON.parse(res);
+
+            modal_message_text.innerHTML = status + ': ' + res.error;
             $('#modal').modal('show');
             
             // разблокировать кнопку
@@ -1357,9 +1392,9 @@
         var server_script;
 
         if(window.location.href.indexOf("resume/edit") != -1){
-            server_script = "scripts/update/update_resume.php"
+            server_script = url_update_resume
         } else {
-            server_script = "scripts/create/set_resume.php";
+            server_script = url_resume;
         }
 
         ajax("POST", server_script, data, true, 
@@ -1367,7 +1402,10 @@
             if(next) next(status, res);
         }, 
         function(status, res){
-            modal_message_text.innerHTML = status + ': ' + res;
+
+            var res = JSON.parse(res);
+
+            modal_message_text.innerHTML = status + ': ' + res.error;
             $('#modal').modal('show');
 
             // разблокировать кнопку
@@ -1701,6 +1739,8 @@
     if(window.location.pathname !== "/resume"){
         return;
     }
+
+    var url_resume= 'api/1.0.0/resume';
     
     // кнопка удаления резюме
     var delete_resume_button = document.getElementById("delete_resume");
@@ -1735,7 +1775,7 @@
             var xhr = new XMLHttpRequest();
         
             // отправка запроса
-            xhr.open("GET", "scripts/delete/del_resume.php", true);
+            xhr.open("DELETE", url_resume, true);
             xhr.send();        
     
             // заблокировать кнопку

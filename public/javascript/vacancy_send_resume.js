@@ -4,6 +4,8 @@
         return;
     }
 
+    var url_vacancy_resume = 'api/1.0.0/vacancy_resume/:id';
+
     var modal_message_text = document.querySelector("#modal .modal-body p");
     var id = document.querySelector(".vacancy_id").innerHTML.trim();
 
@@ -15,7 +17,7 @@
         var xhr = new XMLHttpRequest();
         
         // отправка запроса
-        xhr.open("POST", "scripts/create/set_vacancy_resume.php", true);
+        xhr.open("POST", url_vacancy_resume, true);
         xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
         xhr.send("id=" + id);    
 
@@ -72,7 +74,7 @@
         var xhr = new XMLHttpRequest();
         
         // отправка запроса
-        xhr.open("POST", "scripts/delete/del_vacancy_resume.php", true);
+        xhr.open("DELETE", url_vacancy_resume, true);
         xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
         xhr.send("id=" + id);    
         // заблокировать кнопку
