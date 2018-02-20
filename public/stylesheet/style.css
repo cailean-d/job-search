@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+*:active, *:hover, *:focus{
+    outline: none !important;
+}
+
 .wrapper{
     max-width: 1080px;
     width: 80%;    
@@ -82,7 +86,3 @@ main{
 .userinfo{
     display: flex;
 }
-
-.btn:focus {
-    outline: none;
- }

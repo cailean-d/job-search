@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="public/stylesheet/lib/bootstrap.min.css">
         <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-slider.min.css">
         <link rel="stylesheet" href="public/stylesheet/lib/datepicker.min.css">
-        <link rel="stylesheet" href="public/stylesheet/style.css?qqwqqeqqqgq">
+        <link rel="stylesheet" href="public/stylesheet/style.css?qqweqwqwewqqeqqqgq">
         <link rel="stylesheet" href="public/stylesheet/vacancy.css?eqweeeqwqwweqqeqq">
         <link rel="stylesheet" href="public/stylesheet/filter.css?qqeeeqeqewqwwwqq">
         <link rel="stylesheet" href="public/stylesheet/header.css?qqeqeqeqxqweqqqeweqwqwqqwq">
@@ -86,7 +86,7 @@
         <script src="public/javascript/lib/datepicker.min.js"></script>
         <script src="public/javascript/filter.js?ewqqqqqqws"></script>
         <script src="public/javascript/modal.js?eeeqewqqeqeqews"></script>
-        <script src="public/javascript/modal_profile.js?eeeqewqqeqeqewqewws"></script>
+        <script src="public/javascript/modal_profile.js?eeeqeewweqwqqeqeqewqewws"></script>
         <script src="public/javascript/active_page.js?eeqqeqqweqwewq"></script>
         <script src="public/javascript/login_valid.js?wqqeeqqwqewqqqew"></script>
         <script src="public/javascript/reg_valid.js?qqwwцeqewqewqqeqe"></script>
