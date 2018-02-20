@@ -14,12 +14,9 @@
             
             $this->data['user']['id'] = $_SESSION['id'];
             $this->data['user']['authorized'] = $_SESSION['authorized'];
-            $this->data['user']['firstname'] = $_SESSION['firstname'];
-            $this->data['user']['lastname'] = $_SESSION['lastname'];
-            $this->data['user']['type'] = $_SESSION['type'];
+            $this->data['own_avatar'] = Avatar::get($_SESSION['id']);
 
-            $this->data['own_avatar'] = Avatar::get($this->data['user']['id']);
-
+            $this->setUserData();            
             $this->setAccess();
 
         }
@@ -71,6 +68,18 @@
         public function render(){
 
             $this->view->render($this->data);
+
+        }
+
+        private function setUserData(){
+
+            $user = User::get($_SESSION['id']);
+
+            $this->data['user']['firstname'] = $user->getFirstname();
+            $this->data['user']['lastname'] = $user->getLastname();
+            $this->data['user']['type'] = $user->getType();
+            $this->data['user']['email'] = $user->getEmail();
+            $this->data['user']['gender'] = $user->getGender();
 
         }
 

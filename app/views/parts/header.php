@@ -35,10 +35,20 @@
 
         <div class='name'>
 
-            <a href='#' class="dropdown-toggle">
-                <span class="dd">
-                    <?=$user['firstname']." ".$user['lastname']?>
-                </span>
+            <a href='#' class="dropdown-toggle __dropdown_btn">
+                <div class="dd userinfo">
+                    <span class="__user_firstname mr-1">
+
+                        <?=$user['firstname']?>
+
+                    </span>
+                    <span class="__user_lastname">
+
+                        <?=$user['lastname']?>
+                        
+                    </span>
+                </div>
+
             </a>
             <div class="avatar">
                 <label for="avatar_upload" class="avatar mb-0 hand" title="Загрузить фото">
@@ -61,9 +71,14 @@
                 </label>
                 <input type="file" id="avatar_upload" hidden>
             </div>
-            <div class='logout triangle-up'>
+            <div class='drop_menu __drop_menu'>
                 <div>
-                    <button>
+                    <button class="__modal_profile_btn triangle-up">
+                        Профиль
+                    </button>
+                </div>
+                <div>
+                    <button class="logout">
                         Выйти
                     </button>
                 </div>

@@ -72,6 +72,7 @@
          * 
          * @apiParam  {String} firstname Имя
          * @apiParam  {String} lastname Фамилия
+         * @apiParam  {String} gender Пол
          * @apiParam  {String} email Почта
          * @apiParam  {String} password Пароль
          * @apiParam  {String} type="0" Тип учетной записи
@@ -80,6 +81,7 @@
          * {
          *      firstname : Вася,
          *      lastname : Петренко,
+         *      gender : Мужской,
          *      email : example@test.com,
          *      password : 123456,
          *      type : 0
@@ -88,6 +90,7 @@
          * @apiSuccess (200) {String} id ID пользователя
          * @apiSuccess (200) {String} firstname Имя пользователя
          * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} email Email пользователя
          * @apiSuccess (200) {String} type Тип учетной записи
          * 
@@ -96,6 +99,7 @@
          *      id : 1
          *      firstname : Вася
          *      lastname : Петренко
+         *      gender : Мужской
          *      email : example@test.com
          *      type : 0
          *  }
@@ -104,12 +108,14 @@
          * 
          * @apiError Empty-Firstname Поле <code>firstname</code> не должно быть пустым
          * @apiError Empty-Lastname Поле <code>lastname</code> не должно быть пустым
+         * @apiError Empty-Gender Поле <code>gender</code> не должно быть пустым
          * @apiError Empty-Email Поле <code>email</code> не должно быть пустым
          * @apiError Empty-Password Поле <code>password</code> не должно быть пустым
          * @apiError Empty-Type Поле <code>type</code> не должно быть пустым
          * 
          * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
          * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
+         * @apiError Invalid-Gender Некорректное поле <code>gender</code>
          * @apiError Invalid-Email Некорректное поле <code>email</code>
          * @apiError Invalid-Type Некорректное поле <code>type</code>
          *
@@ -136,9 +142,10 @@
 
             $newUser = new User(
 
-                '',
+                null,
                 $_POST['firstname'],
                 $_POST['lastname'],
+                $_POST['gender'],
                 $_POST['email'],
                 $_POST['password'],
                 $_POST['type']
@@ -185,6 +192,7 @@
                 'id' => $newUser->getId(),
                 'firstname' => $newUser->getFirstname(),
                 'lastname' => $newUser->getLastname(),
+                'gender' => $newUser->getGender(),
                 'email' => $newUser->getEmail(),
                 'type' => $newUser->getType()
 
@@ -213,6 +221,7 @@
          * @apiSuccess (200) {String} id ID пользователя
          * @apiSuccess (200) {String} firstname Имя пользователя
          * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} email Email пользователя
          * @apiSuccess (200) {String} type Тип учетной записи
          * 
@@ -221,6 +230,7 @@
          *      id : 1
          *      firstname : Вася
          *      lastname : Петренко
+         *      gender : Мужской
          *      email : example@test.com
          *      type : 0
          *  }
@@ -255,6 +265,7 @@
                         'id' => $user->getId(),
                         'firstname' => $user->getFirstname(),
                         'lastname' => $user->getLastname(),
+                        'gender' => $user->getGender(),
                         'email' => $user->getEmail(),
                         'type' => $user->getType()
     
@@ -328,6 +339,7 @@
          * @apiSuccess (200) {String} id ID пользователя
          * @apiSuccess (200) {String} firstname Имя пользователя
          * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} email Email пользователя
          * @apiSuccess (200) {String} type Тип учетной записи
          * 
@@ -336,6 +348,7 @@
          *      id : 1
          *      firstname : Вася
          *      lastname : Петренко
+         *      gender : Мужской
          *      email : example@test.com
          *      type : 0
          *  }
@@ -368,6 +381,7 @@
                     'id' => $user->getId(),
                     'firstname' => $user->getFirstname(),
                     'lastname' => $user->getLastname(),
+                    'gender' => $user->getGender(),
                     'email' => $user->getEmail(),
                     'type' => $user->getType()
 
@@ -433,6 +447,7 @@
          * 
          * @apiParam  {String} [firstname] Имя
          * @apiParam  {String} [lastname] Фамилия
+         * @apiParam  {String} [gender] Пол
          * @apiParam  {String} [email] Почта
          * @apiParam  {String} [password] Пароль
          * 
@@ -446,21 +461,23 @@
          *  {
          *      firstname : Вася
          *      lastname : Петренко
+         *      gender : Мужской
          *      email : example@test.com
          *      password : 123456
-         *      type : 0
          *  }
          * 
          * @apiError Auth Вы не авторизированы
          * 
          * @apiError Empty-Firstname Поле <code>firstname</code> не должно быть пустым
          * @apiError Empty-Lastname Поле <code>lastname</code> не должно быть пустым
+         * @apiError Empty-Gender Поле <code>gender</code> не должно быть пустым
          * @apiError Empty-Email Поле <code>email</code> не должно быть пустым
          * @apiError Empty-Password Поле <code>password</code> не должно быть пустым
          * @apiError Empty-Type Поле <code>type</code> не должно быть пустым
          * 
          * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
          * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
+         * @apiError Invalid-Gender Некорректное поле <code>gender</code>
          * @apiError Invalid-Email Некорректное поле <code>email</code>
          * @apiError Invalid-Type Некорректное поле <code>type</code>
          *
@@ -492,6 +509,12 @@
             if(isset($GLOBALS['PUT']['lastname'])){
 
                 $user->setLastname($GLOBALS['PUT']['lastname']);
+
+            }
+
+            if(isset($GLOBALS['PUT']['gender'])){
+
+                $user->setGender($GLOBALS['PUT']['gender']);
 
             }
 
@@ -545,6 +568,7 @@
                 'id' => $user->getId(),
                 'firstname' => $user->getFirstname(),
                 'lastname' => $user->getLastname(),
+                'gender' => $user->getGender(),
                 'email' => $user->getEmail(),
                 'type' => $user->getType()
 

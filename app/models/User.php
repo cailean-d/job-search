@@ -4,19 +4,22 @@
 
         private $firstname;
         private $lastname;
+        private $gender;
         private $email;
         private $password;
         private $type;
 
         public function __construct(string $id = null,  string $firstname = null,  
-                                    string $lastname = null, string $email = null, 
-                                    string $password = null, string $type = null){
+                                    string $lastname = null, string $gender = null, 
+                                    string $email = null, string $password = null, 
+                                    string $type = null){
 
             self::applyConfig();
 
             $this->id = htmlspecialchars(trim($id));
             $this->firstname = htmlspecialchars(trim($firstname));
             $this->lastname = htmlspecialchars(trim($lastname));
+            $this->gender = htmlspecialchars(trim($gender));
             $this->email = htmlspecialchars(trim($email));
             $this->password = htmlspecialchars(trim($password));
             $this->type = htmlspecialchars(trim($type));
@@ -28,6 +31,10 @@
 
         public function getLastname(){
             return $this->lastname;
+        }
+
+        public function getGender(){
+            return $this->gender;
         }
 
         public function getEmail(){
@@ -52,6 +59,13 @@
         public function setLastname($lastname){
 
             $this->lastname = htmlspecialchars(trim($lastname));
+            return $this;
+
+        }
+
+        public function setGender($gender){
+
+            $this->gender = htmlspecialchars(trim($gender));
             return $this;
 
         }
@@ -99,6 +113,7 @@
                 $user[0]['id'],
                 $user[0]['firstname'],
                 $user[0]['lastname'],
+                $user[0]['gender'],
                 $user[0]['email'],
                 $user[0]['password'],
                 $user[0]['type']
@@ -116,6 +131,7 @@
                 $user[0]['id'],
                 $user[0]['firstname'],
                 $user[0]['lastname'],
+                $user[0]['gender'],
                 $user[0]['email'],
                 $user[0]['password'],
                 $user[0]['type']
@@ -139,6 +155,7 @@
                     $d['id'],
                     $d['firstname'],
                     $d['lastname'],
+                    $d['gender'],
                     $d['email'],
                     $d['password'],
                     $d['type']
@@ -154,11 +171,12 @@
 
             $this->validate();
 
-            $query = Database::run('INSERT INTO '. self::$table .'(firstname, lastname, email, password, type) 
-                           VALUES (?, ?, ?, ?, ?)', 
+            $query = Database::run('INSERT INTO '. self::$table .'(firstname, lastname, gender, email, password, type) 
+                           VALUES (?, ?, ?, ?, ?, ?)', 
             [
                 $this->firstname,
                 $this->lastname,
+                $this->gender,
                 $this->email,
                 $this->password,
                 $this->type
@@ -178,6 +196,7 @@
                     'UPDATE '. self::$table .' SET 
                     firstname = ?,
                     lastname = ?,
+                    gender = ?,
                     email = ?,
                     password = ?,
                     type = ?
@@ -185,6 +204,7 @@
                     [
                         $this->firstname,
                         $this->lastname,
+                        $this->gender,
                         $this->email,
                         $this->password,
                         $this->type,
@@ -237,6 +257,10 @@
                 throw new Exception('lastname');
             }
 
+            if(is_null($this->gender) || $this->gender === ''){
+                throw new Exception('gender');
+            }
+
             if(is_null($this->email) || $this->email === ''){
                 throw new Exception('email');
             }
@@ -255,6 +279,10 @@
     
             if(!preg_match($regexp_name, $this->lastname)){
                 throw new Exception('lastname');
+            }
+
+            if($this->gender != "Мужской" && $this->gender != "Женский"){
+                throw new Exception('gender');
             }
     
             if(!preg_match($regexp_email, $this->email)){

@@ -1,23 +1,21 @@
 (function(){
 
     var name = document.querySelector("#header .name");
+    var drop_menu = document.querySelector("#header .drop_menu");
     var logout = document.querySelector("#header .logout");
 
     var avatar_url = "api/1.0.0/user/avatar";
     var logout_url = "api/1.0.0/user/logout";
     
     if(name != null){
-        var isOpen = false;
         
         document.querySelector("#header .name .dd").onclick = function(e){
         e.preventDefault();
-                if(isOpen){
-                    logout.style.display = "none";
-                    isOpen = false;
+                if(document.querySelector(".name > a").classList.contains("menu-active")){
+                    drop_menu.style.display = "none";
                     document.querySelector(".name > a").classList.remove("menu-active");
                 } else {
-                    logout.style.display = "block";
-                    isOpen = true;
+                    drop_menu.style.display = "block";
                     document.querySelector(".name > a").classList.add("menu-active");
                 }
         }

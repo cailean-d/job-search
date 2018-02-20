@@ -167,9 +167,11 @@
                     window.location.reload();
                 } else {
 
+                    var res = JSON.parse(xhr.responseText);
+
                     // показать блок с ошибкой
                     $("#ajax-error").removeClass("hidden-xl-down");
-                    $("#ajax-error > div").text(xhr.status + " : " + xhr.responseText);
+                    $("#ajax-error > div").text(xhr.status + " : " + res.error);
                     
                     // разблокировать кнопку, если возникла ошибка
                     submit.disabled = false;

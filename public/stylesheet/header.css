@@ -94,7 +94,7 @@
 }
 
 
-#header .logout{
+#header .drop_menu{
     position: absolute;
     padding: 0;
     text-align: center;
@@ -111,13 +111,13 @@
     height: initial;
 }
 
-#header .logout > div{
+#header .drop_menu > div{
     border-bottom: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
 }
 
-#header .logout button{
+#header .drop_menu button{
     color: #383838;
     border: none;
     background: #ffffff;
@@ -129,7 +129,7 @@
     transition: background-color 0.2s ease-in-out;
 }
 
-#header .logout button:hover{
+#header .drop_menu button:hover{
     background: rgba(209, 209, 209, 0.164);
     color: #000000;
 }

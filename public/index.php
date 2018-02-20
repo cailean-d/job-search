@@ -12,10 +12,10 @@
         <link rel="stylesheet" href="public/stylesheet/lib/bootstrap.min.css">
         <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-slider.min.css">
         <link rel="stylesheet" href="public/stylesheet/lib/datepicker.min.css">
-        <link rel="stylesheet" href="public/stylesheet/style.css?qqweqeeeqqeqqqgq">
+        <link rel="stylesheet" href="public/stylesheet/style.css?qqwqqeqqqgq">
         <link rel="stylesheet" href="public/stylesheet/vacancy.css?eqweeeqwqwweqqeqq">
-        <link rel="stylesheet" href="public/stylesheet/filter.css?qqeeeqewqwwwqq">
-        <link rel="stylesheet" href="public/stylesheet/header.css?qqxqweweqwqwqqwq">
+        <link rel="stylesheet" href="public/stylesheet/filter.css?qqeeeqeqewqwwwqq">
+        <link rel="stylesheet" href="public/stylesheet/header.css?qqeqeqeqxqweqqqeweqwqwqqwq">
         <link rel="stylesheet" href="public/stylesheet/my_vacancies.css?qqqeqweqwwqq">
         <link rel="stylesheet" href="public/stylesheet/full_vacancy.css?qeeeqwewqqewgq">
         <link rel="stylesheet" href="public/stylesheet/404.css?eqqqqeeqqewqew">
@@ -67,6 +67,10 @@
                 include('app/views/parts/modal_login.php');
                 include('app/views/parts/modal_reg.php');
 
+            } else {
+
+                include('app/views/parts/modal_profile.php');
+
             }
 
 
@@ -81,10 +85,11 @@
         <script src="public/javascript/lib/fontawesome-all.min.js"></script>
         <script src="public/javascript/lib/datepicker.min.js"></script>
         <script src="public/javascript/filter.js?ewqqqqqqws"></script>
-        <script src="public/javascript/modal.js?eeqews"></script>
+        <script src="public/javascript/modal.js?eeeqewqqeqeqews"></script>
+        <script src="public/javascript/modal_profile.js?eeeqewqqeqeqewqewws"></script>
         <script src="public/javascript/active_page.js?eeqqeqqweqwewq"></script>
-        <script src="public/javascript/login_valid.js?wqqeqwqewqqqew"></script>
-        <script src="public/javascript/reg_valid.js?qqwwцewqewqqeqe"></script>
+        <script src="public/javascript/login_valid.js?wqqeeqqwqewqqqew"></script>
+        <script src="public/javascript/reg_valid.js?qqwwцeqewqewqqeqe"></script>
         <script src="public/javascript/vacancy_valid.js?eqewqqewqeqqqqew"></script>
         <script src="public/javascript/del_vacancy.js?eqqewqeqwqq"></script>
         <script src="public/javascript/resume.js?kqwweqeqqeqeqqeqeqqeqweqeqwq"></script>

@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p></p>
+        <p class="__text"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary hand btn-close" data-dismiss="modal">Закрыть</button>

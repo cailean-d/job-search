@@ -240,8 +240,10 @@
                     window.location.reload();
                 } else {
                     // показать блок с ошибкой
+
+                    var res = JSON.parse(xhr.responseText);
                     $("#ajax-error-reg").removeClass("hidden-xl-down");
-                    $("#ajax-error-reg > div").text(xhr.status + " : " + xhr.responseText);
+                    $("#ajax-error-reg > div").text(xhr.status + " : " + res.error);
                     
                     // разблокировать кнопку, если возникла ошибка
                     submit.disabled = false;

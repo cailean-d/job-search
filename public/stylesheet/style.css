@@ -74,3 +74,15 @@ main{
     justify-content: center;
     align-items: center;
 }
+
+.modal{
+    z-index: 9999999999;
+}
+
+.userinfo{
+    display: flex;
+}
+
+.btn:focus {
+    outline: none;
+ }
