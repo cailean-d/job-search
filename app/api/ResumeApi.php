@@ -65,10 +65,6 @@
          * 
          * @apiPermission auth
          * 
-         * @apiParam  {String} firstname Имя
-         * @apiParam  {String} lastname Фамилия
-         * @apiParam  {String} patronymic Отчество
-         * @apiParam  {String} gender Пол
          * @apiParam  {String} birthday Дата рождения
          * @apiParam  {String} city Город
          * @apiParam  {String} phone Телефон
@@ -86,10 +82,6 @@
          * 
          * @apiParamExample  {json} Request-Example:
          *  {
-         *      "firstname" : "Петр",
-         *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
-         *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
          *      "phone" : "+79999999999",
@@ -102,16 +94,11 @@
          *      "compskill_id" : "1",
          *      "car" : "Нет",
          *      "courses" : "Мои курсы...",
-         *      "skills" : "Мои навыки...",
-         *      "avatar" : "C://avatar.jpg",
+         *      "skills" : "Мои навыки..."
          *  }
          * 
          * @apiSuccess (200) {String} id ID записи
          * @apiSuccess (200) {String} user_id ID пользователя
-         * @apiSuccess (200) {String} firstname Имя
-         * @apiSuccess (200) {String} lastname Фамилия
-         * @apiSuccess (200) {String} patronymic Отчество
-         * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} birthday Дата рождения
          * @apiSuccess (200) {String} city Город
          * @apiSuccess (200) {String} phone Телефон
@@ -130,10 +117,6 @@
          *  {
          *      "id" : "1",
          *      "user_id" : "5",
-         *      "firstname" : "Петр",
-         *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
-         *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
          *      "phone" : "+79999999999",
@@ -153,10 +136,6 @@
          * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
          * @apiError RecordExists Запись уже существует
          * 
-         * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
-         * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
-         * @apiError Invalid-Patronymic Некорректное поле <code>patronymic</code>
-         * @apiError Invalid-Gender Некорректное поле <code>gender</code>
          * @apiError Invalid-Birthday Некорректное поле <code>birthday</code>
          * @apiError Invalid-City Некорректное поле <code>city</code>
          * @apiError Invalid-Phone Некорректное поле <code>phone</code>
@@ -240,50 +219,11 @@
 
             }
 
-            if($_FILES["avatar"]){
-
-                $avatar = Avatar::get($_SESSION['id']);
-
-                if(empty($avatar->getId())){
-    
-                    $avatar->setUserid($_SESSION['id']);
-    
-                }
-    
-                $avatar->setFile($_FILES["avatar"]);
-    
-                try{
-                    
-                    $avatar->save();
-    
-                } catch(Exception $e){
-                    
-                    if($e->getMessage() == 'FILE_DOES_NOT_EXIST'){
-    
-                        Http::error("Файл не был загружен");
-    
-                    } else if ($e->getMessage() == 'UPLOAD_MAX_FIZESIZE') {
-    
-                        Http::error("Файл не должен весить более 3МБ");
-    
-                    } else if ($e->getMessage() == 'UPLOAD_FILE_ERROR') {
-    
-                        Http::error("Ошибка загрузки файла");
-    
-                    } 
-    
-                }
-
-            }
 
             $resume = new Resume(
                         
                 null, 
                 $_SESSION['id'], 
-                $_POST['firstname'],
-                $_POST['lastname'],
-                $_POST['patronymic'],
-                $_POST['gender'],
                 $_POST['birthday'],
                 $_POST['city'],
                 $_POST['phone'],
@@ -327,23 +267,7 @@
 
             } catch(Exception $e){
                 
-                if($e->getMessage() == 'firstname'){
-
-                    Http::error("Некорректное поле [firstname]");
-
-                } else if ($e->getMessage() == 'lastname') {
-
-                    Http::error("Некорректное поле [lastname]");
-
-                } else if ($e->getMessage() == 'patronymic') {
-
-                    Http::error("Некорректное поле [patronymic]");
-
-                } else if ($e->getMessage() == 'gender') {
-
-                    Http::error("Некорректное поле [gender]");
-
-                } else if ($e->getMessage() == 'birthday') {
+                if ($e->getMessage() == 'birthday') {
 
                     Http::error("Некорректное поле [birthday]");
 
@@ -403,10 +327,6 @@
 
                 'id' => $resume->getId(),
                 'user_id' => $resume->getUserid(),
-                'firstname' => $resume->getFirstname(),
-                'lastname' => $resume->getLastname(),
-                'patronymic' => $resume->getPatronymic(),
-                'gender' => $resume->getGender(),
                 'birthday' => $resume->getBirthday(),
                 'city' => $resume->getCity(),
                 'phone' => $resume->getPhone(),
@@ -437,10 +357,6 @@
          * 
          * @apiPermission auth
          * 
-         * @apiParam  {String} [firstname] Имя
-         * @apiParam  {String} [lastname] Фамилия
-         * @apiParam  {String} [patronymic] Отчество
-         * @apiParam  {String} [gender] Пол
          * @apiParam  {String} [birthday] Дата рождения
          * @apiParam  {String} [city] Город
          * @apiParam  {String} [phone] Телефон
@@ -458,10 +374,6 @@
          * 
          * @apiParamExample  {json} Request-Example:
          *  {
-         *      "firstname" : "Петр",
-         *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
-         *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
          *      "phone" : "+79999999999",
@@ -469,10 +381,6 @@
          * 
          * @apiSuccess (200) {String} id ID записи
          * @apiSuccess (200) {String} user_id ID пользователя
-         * @apiSuccess (200) {String} firstname Имя
-         * @apiSuccess (200) {String} lastname Фамилия
-         * @apiSuccess (200) {String} patronymic Отчество
-         * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} birthday Дата рождения
          * @apiSuccess (200) {String} city Город
          * @apiSuccess (200) {String} phone Телефон
@@ -491,10 +399,6 @@
          *  {
          *      "id" : "1",
          *      "user_id" : "5",
-         *      "firstname" : "Петр",
-         *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
-         *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
          *      "phone" : "+79999999999",
@@ -514,10 +418,6 @@
          * @apiError UserAuth Вы должны быть авторизированы под учетной записью пользователя
          * @apiError RecordDoesNotExist Запись не найдена
          * 
-         * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
-         * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
-         * @apiError Invalid-Patronymic Некорректное поле <code>patronymic</code>
-         * @apiError Invalid-Gender Некорректное поле <code>gender</code>
          * @apiError Invalid-Birthday Некорректное поле <code>birthday</code>
          * @apiError Invalid-City Некорректное поле <code>city</code>
          * @apiError Invalid-Phone Некорректное поле <code>phone</code>
@@ -560,30 +460,6 @@
             if (empty($resume->getId())) {
 
                 Http::error('Запись не найдена', 404);
-
-            }
-            
-            if(isset($_POST['firstname'])){
-
-                $resume->setFirstname($_POST['firstname']);
-
-            }
-
-            if(isset($_POST['lastname'])){
-
-                $resume->setLastname($_POST['lastname']);
-
-            }
-
-            if(isset($_POST['patronymic'])){
-
-                $resume->setPatronymic($_POST['patronymic']);
-
-            }
-
-            if(isset($_POST['gender'])){
-
-                $resume->setGender($_POST['gender']);
 
             }
 
@@ -738,23 +614,7 @@
 
             } catch(Exception $e){
                 
-                if($e->getMessage() == 'firstname'){
-
-                    Http::error("Некорректное поле [firstname]");
-
-                } else if ($e->getMessage() == 'lastname') {
-
-                    Http::error("Некорректное поле [lastname]");
-
-                } else if ($e->getMessage() == 'patronymic') {
-
-                    Http::error("Некорректное поле [patronymic]");
-
-                } else if ($e->getMessage() == 'gender') {
-
-                    Http::error("Некорректное поле [gender]");
-
-                } else if ($e->getMessage() == 'birthday') {
+                if ($e->getMessage() == 'birthday') {
 
                     Http::error("Некорректное поле [birthday]");
 
@@ -814,10 +674,6 @@
 
                 'id' => $resume->getId(),
                 'user_id' => $resume->getUserid(),
-                'firstname' => $resume->getFirstname(),
-                'lastname' => $resume->getLastname(),
-                'patronymic' => $resume->getPatronymic(),
-                'gender' => $resume->getGender(),
                 'birthday' => $resume->getBirthday(),
                 'city' => $resume->getCity(),
                 'phone' => $resume->getPhone(),
@@ -930,7 +786,6 @@
          * @apiSuccess (200) {String} user_id ID пользователя
          * @apiSuccess (200) {String} firstname Имя
          * @apiSuccess (200) {String} lastname Фамилия
-         * @apiSuccess (200) {String} patronymic Отчество
          * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} birthday Дата рождения
          * @apiSuccess (200) {String} city Город
@@ -945,6 +800,7 @@
          * @apiSuccess (200) {String} car Наличие авто
          * @apiSuccess (200) {String} courses Пройденные курсы, тренинги
          * @apiSuccess (200) {String} skills Навыки и умения
+         * @apiSuccess (200) {String} avatar Ссылка на аватар
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
@@ -952,7 +808,6 @@
          *      "user_id" : "5",
          *      "firstname" : "Петр",
          *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
          *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
@@ -967,6 +822,7 @@
          *      "car" : "Нет",
          *      "courses" : "Мои курсы...",
          *      "skills" : "Мои навыки...",
+         *      "avatar" : "public/images/avatar/avatar.jpg"
          *  }
          * 
          * @apiError RecordNotFound Запись не найдена
@@ -990,14 +846,16 @@
 
             } else {
 
+                $user = User::get($router['id']);
+                $avatar = Avatar::get($router['id']);
+
                 $res = [
 
                     'id' => $resume->getId(),
                     'user_id' => $resume->getUserid(),
-                    'firstname' => $resume->getFirstname(),
-                    'lastname' => $resume->getLastname(),
-                    'patronymic' => $resume->getPatronymic(),
-                    'gender' => $resume->getGender(),
+                    'firstname' => $user->getFirstname(),
+                    'lastname' => $user->getLastname(),
+                    'gender' => $user->getGender(),
                     'birthday' => $resume->getBirthday(),
                     'city' => $resume->getCity(),
                     'phone' => $resume->getPhone(),
@@ -1011,6 +869,7 @@
                     'car' => $resume->getCar(),
                     'courses' => $resume->getCourses(),
                     'skills' => $resume->getSkills(),
+                    'avatar' => $avatar->getSource()
 
                 ];
 
@@ -1033,7 +892,6 @@
          * @apiSuccess (200) {String} user_id ID пользователя
          * @apiSuccess (200) {String} firstname Имя
          * @apiSuccess (200) {String} lastname Фамилия
-         * @apiSuccess (200) {String} patronymic Отчество
          * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} birthday Дата рождения
          * @apiSuccess (200) {String} city Город
@@ -1048,6 +906,7 @@
          * @apiSuccess (200) {String} car Наличие авто
          * @apiSuccess (200) {String} courses Пройденные курсы, тренинги
          * @apiSuccess (200) {String} skills Навыки и умения
+         * @apiSuccess (200) {String} avatar Ссылка на аватар
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
@@ -1055,7 +914,6 @@
          *      "user_id" : "5",
          *      "firstname" : "Петр",
          *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
          *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
@@ -1070,6 +928,7 @@
          *      "car" : "Нет",
          *      "courses" : "Мои курсы...",
          *      "skills" : "Мои навыки...",
+         *      "avatar" : "public/images/avatar/avatar.jpg"
          *  }
          * 
          * @apiError Auth Вы не авторизированы
@@ -1106,14 +965,16 @@
 
             } else {
 
+                $user = User::get($_SESSION['id']);
+                $avatar = Avatar::get($_SESSION['id']);
+
                 $res = [
 
                     'id' => $resume->getId(),
                     'user_id' => $resume->getUserid(),
-                    'firstname' => $resume->getFirstname(),
-                    'lastname' => $resume->getLastname(),
-                    'patronymic' => $resume->getPatronymic(),
-                    'gender' => $resume->getGender(),
+                    'firstname' => $user->getFirstname(),
+                    'lastname' => $user->getLastname(),
+                    'gender' => $user->getGender(),
                     'birthday' => $resume->getBirthday(),
                     'city' => $resume->getCity(),
                     'phone' => $resume->getPhone(),
@@ -1127,6 +988,7 @@
                     'car' => $resume->getCar(),
                     'courses' => $resume->getCourses(),
                     'skills' => $resume->getSkills(),
+                    'avatar' => $avatar->getSource(),
 
                 ];
 
@@ -1147,7 +1009,6 @@
          * @apiSuccess (200) {String} user_id ID пользователя
          * @apiSuccess (200) {String} firstname Имя
          * @apiSuccess (200) {String} lastname Фамилия
-         * @apiSuccess (200) {String} patronymic Отчество
          * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} birthday Дата рождения
          * @apiSuccess (200) {String} city Город
@@ -1162,6 +1023,10 @@
          * @apiSuccess (200) {String} car Наличие авто
          * @apiSuccess (200) {String} courses Пройденные курсы, тренинги
          * @apiSuccess (200) {String} skills Навыки и умения
+         * @apiSuccess (200) {String} avatar Ссылка на аватар
+         * @apiSuccess (200) {String} education Образование
+         * @apiSuccess (200) {String} experience Опыт работы
+         * @apiSuccess (200) {String} language Владение языками
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
@@ -1169,7 +1034,6 @@
          *      "user_id" : "5",
          *      "firstname" : "Петр",
          *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
          *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
@@ -1184,6 +1048,7 @@
          *      "car" : "Нет",
          *      "courses" : "Мои курсы...",
          *      "skills" : "Мои навыки...",
+         *      "avatar" : "public/images/avatar/avatar.jpg",
          *      "education": [
          *           {
          *               "level": "Среднее",
@@ -1255,14 +1120,16 @@
 
             } else {
 
+                $user = User::get($router['id']);
+                $avatar = Avatar::get($router['id']);
+
                 $res = [
 
                     'id' => $resume->getId(),
                     'user_id' => $resume->getUserid(),
-                    'firstname' => $resume->getFirstname(),
-                    'lastname' => $resume->getLastname(),
-                    'patronymic' => $resume->getPatronymic(),
-                    'gender' => $resume->getGender(),
+                    'firstname' => $user->getFirstname(),
+                    'lastname' => $user->getLastname(),
+                    'gender' => $user->getGender(),
                     'birthday' => $resume->getBirthday(),
                     'city' => $resume->getCity(),
                     'phone' => $resume->getPhone(),
@@ -1276,6 +1143,7 @@
                     'car' => $resume->getCar(),
                     'courses' => $resume->getCourses(),
                     'skills' => $resume->getSkills(),
+                    'avatar' => $avatar->getSource(),
                     'education' => self::getEducation(),
                     'experience' => self::getExperience(),
                     'language' => self::getLanguage()
@@ -1301,7 +1169,6 @@
          * @apiSuccess (200) {String} user_id ID пользователя
          * @apiSuccess (200) {String} firstname Имя
          * @apiSuccess (200) {String} lastname Фамилия
-         * @apiSuccess (200) {String} patronymic Отчество
          * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} birthday Дата рождения
          * @apiSuccess (200) {String} city Город
@@ -1316,6 +1183,10 @@
          * @apiSuccess (200) {String} car Наличие авто
          * @apiSuccess (200) {String} courses Пройденные курсы, тренинги
          * @apiSuccess (200) {String} skills Навыки и умения
+         * @apiSuccess (200) {String} avatar Ссылка на аватар
+         * @apiSuccess (200) {String} education Образование
+         * @apiSuccess (200) {String} experience Опыт работы
+         * @apiSuccess (200) {String} language Владение языками
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
@@ -1323,7 +1194,6 @@
          *      "user_id" : "5",
          *      "firstname" : "Петр",
          *      "lastname" : "Петров",
-         *      "patronymic" : "Владимирович",
          *      "gender" : "Мужской",
          *      "birthday" : "01.01.1980",
          *      "city" : "Москва",
@@ -1338,6 +1208,7 @@
          *      "car" : "Нет",
          *      "courses" : "Мои курсы...",
          *      "skills" : "Мои навыки...",
+         *      "avatar" : "public/images/avatar/avatar.jpg",
          *      "education": [
          *           {
          *               "level": "Среднее",
@@ -1423,14 +1294,16 @@
 
             } else {
 
+                $user = User::get($_SESSION['id']);
+                $avatar = Avatar::get($_SESSION['id']);
+
                 $res = [
 
                     'id' => $resume->getId(),
                     'user_id' => $resume->getUserid(),
-                    'firstname' => $resume->getFirstname(),
-                    'lastname' => $resume->getLastname(),
-                    'patronymic' => $resume->getPatronymic(),
-                    'gender' => $resume->getGender(),
+                    'firstname' => $user->getFirstname(),
+                    'lastname' => $user->getLastname(),
+                    'gender' => $user->getGender(),
                     'birthday' => $resume->getBirthday(),
                     'city' => $resume->getCity(),
                     'phone' => $resume->getPhone(),
@@ -1444,6 +1317,7 @@
                     'car' => $resume->getCar(),
                     'courses' => $resume->getCourses(),
                     'skills' => $resume->getSkills(),
+                    'avatar' => $avatar->getSource(),
                     'education' => self::getEducation(),
                     'experience' => self::getExperience(),
                     'language' => self::getLanguage()
