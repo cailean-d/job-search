@@ -97,6 +97,7 @@
 
             $this->firstname = null;
             $this->lastname = null;
+            $this->gender = null;
             $this->email = null;
             $this->password = null;
             $this->type = null;

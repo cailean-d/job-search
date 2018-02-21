@@ -3,10 +3,6 @@
     final class Resume extends Model {
 
         private $userid;
-        private $firstname;
-        private $lastname;
-        private $patronymic;
-        private $gender;
         private $birthday;
         private $city;
         private $phone;
@@ -28,10 +24,6 @@
 
         public function __construct($id = null,
                                         $userid = null,
-                                        $firstname = null,
-                                        $lastname = null,
-                                        $patronymic = null,
-                                        $gender = null,
                                         $birthday = null,
                                         $city = null,
                                         $phone = null,
@@ -54,10 +46,6 @@
 
             $this->id = htmlspecialchars(trim($id));
             $this->userid = htmlspecialchars(trim($userid));
-            $this->firstname = htmlspecialchars(trim($firstname));
-            $this->lastname = htmlspecialchars(trim($lastname));
-            $this->patronymic = htmlspecialchars(trim($patronymic));
-            $this->gender = htmlspecialchars(trim($gender));
             $this->birthday = htmlspecialchars(trim($birthday));
             $this->city = htmlspecialchars(trim($city));
             $this->phone = htmlspecialchars(trim($phone));
@@ -79,22 +67,6 @@
 
         public function getUserid(){
             return $this->userid;
-        }
-
-        public function getFirstname(){
-            return $this->firstname;
-        }
-
-        public function getLastname(){
-            return $this->lastname;
-        }
-
-        public function getPatronymic(){
-            return $this->patronymic;
-        }
-
-        public function getGender(){
-            return $this->gender;
         }
 
         public function getBirthday(){
@@ -168,34 +140,6 @@
         public function setUserid($userid){
 
             $this->userid = htmlspecialchars(trim($userid));
-            return $this;
-
-        }
-
-        public function setFirstname($firstname){
-
-            $this->firstname = htmlspecialchars(trim($firstname));
-            return $this;
-
-        }
-
-        public function setLastname($lastname){
-
-            $this->lastname = htmlspecialchars(trim($lastname));
-            return $this;
-
-        }
-
-        public function setPatronymic($patronymic){
-
-            $this->patronymic = htmlspecialchars(trim($patronymic));
-            return $this;
-
-        }
-
-        public function setGender($gender){
-
-            $this->gender = htmlspecialchars(trim($gender));
             return $this;
 
         }
@@ -296,10 +240,6 @@
             parent::reset();
 
             $userid = null;
-            $firstname = null;
-            $lastname = null;
-            $patronymic = null;
-            $gender = null;
             $birthday = null;
             $city = null;
             $phone = null;
@@ -325,10 +265,6 @@
             return new Resume(
                 $data[0]['id'],
                 $data[0]['user_id'],
-                $data[0]['firstname'],
-                $data[0]['lastname'],
-                $data[0]['patronymic'],
-                $data[0]['gender'],
                 $data[0]['birthday'],
                 $data[0]['city'],
                 $data[0]['phone'],
@@ -355,10 +291,6 @@
             return new Resume(
                 $data[0]['id'],
                 $data[0]['user_id'],
-                $data[0]['firstname'],
-                $data[0]['lastname'],
-                $data[0]['patronymic'],
-                $data[0]['gender'],
                 $data[0]['birthday'],
                 $data[0]['city'],
                 $data[0]['phone'],
@@ -391,10 +323,6 @@
                 new Resume(
                     $d['id'],
                     $d['user_id'],
-                    $d['firstname'],
-                    $d['lastname'],
-                    $d['patronymic'],
-                    $d['gender'],
                     $d['birthday'],
                     $d['city'],
                     $d['phone'],
@@ -438,10 +366,6 @@
             return new Resume(
                 $data[0]['id'],
                 $data[0]['user_id'],
-                $data[0]['firstname'],
-                $data[0]['lastname'],
-                $data[0]['patronymic'],
-                $data[0]['gender'],
                 $data[0]['birthday'],
                 $data[0]['city'],
                 $data[0]['phone'],
@@ -469,18 +393,13 @@
 
             $query = Database::run('INSERT INTO '. self::$table .'
             (
-                user_id, firstname, lastname, patronymic,
-                gender, birthday, city, phone, email, post,
+                user_id, birthday, city, phone, email, post,
                 industry_id, schedule_id, salary, work_place_id, 
                 comp_skill_id, car, courses, skills
             ) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
             [
                 $this->userid,
-                $this->firstname,
-                $this->lastname,
-                $this->patronymic,
-                $this->gender,
                 $this->birthday,
                 $this->city,
                 $this->phone,
@@ -508,10 +427,6 @@
 
             return Database::run(
                     'UPDATE '. self::$table .' SET 
-                    firstname =  ?,
-                    lastname = ?,
-                    patronymic = ?,
-                    gender = ?,
                     birthday = ?,
                     city = ?,
                     phone = ?,
@@ -527,10 +442,6 @@
                     skills = ? 
                     WHERE user_id = ?', 
                     [
-                        $this->firstname,
-                        $this->lastname,
-                        $this->patronymic,
-                        $this->gender,
                         $this->birthday,
                         $this->city,
                         $this->phone,
@@ -561,7 +472,6 @@
 
         protected function validate(){
 
-            $regexp_name = '/^[A-ZА-ЯЁ]{1}[a-zа-яё\s?]{2,}$/u';
             $regexp_phone = '/^\+[\d]{11}$/u';
             $regexp_city = '/^[A-zА-яЁё\"\-\s?]{4,}$/u';
             $regexp_birth = '/^[\d]{2}\.[\d]{2}\.[\d]{4}$/u';
@@ -569,23 +479,7 @@
             $regexp_sentence = '/^[A-zА-яЁё0-9\.,!:\\(\)#"\-\s?]{4,}$/u';
             $regexp_numbers = '/^[\d]{1,}$/u';
 
-            if(is_null($this->firstname) || $this->firstname === ''){
-                throw new Exception('firstname');
-            }
-
-            elseif(is_null($this->lastname) || $this->lastname === ''){
-                throw new Exception('lastname');
-            }
-
-            elseif(is_null($this->patronymic) || $this->patronymic === ''){
-                throw new Exception('patronymic');
-            }
-
-            elseif(is_null($this->gender) || $this->gender === ''){
-                throw new Exception('gender');
-            }
-
-            elseif(is_null($this->birthday) || $this->birthday === ''){
+            if(is_null($this->birthday) || $this->birthday === ''){
                 throw new Exception('birthday');
             }
 
@@ -619,18 +513,6 @@
 
             elseif(is_null($this->workPlaceId) || $this->workPlaceId === ''){
                 throw new Exception('workPlaceId');
-            }
-
-            elseif(!preg_match($regexp_name, $this->firstname)){
-                throw new Exception('firstname');
-            }
-
-            elseif(!preg_match($regexp_name, $this->lastname)){
-                throw new Exception('lastname');
-            }
-
-            elseif(!preg_match($regexp_name, $this->patronymic)){
-                throw new Exception('patronymic');
             }
 
             elseif(!preg_match($regexp_birth, $this->birthday)){
@@ -667,10 +549,6 @@
 
             elseif(!preg_match($regexp_numbers, $this->salary)){
                 throw new Exception('salary');
-            }
-
-            elseif($this->gender != "Мужской" && $this->gender != "Женский"){
-                throw new Exception('gender');
             }
 
             elseif(
