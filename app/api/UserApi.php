@@ -453,14 +453,16 @@
          * @apiParam  {String} [lastname] Фамилия
          * @apiParam  {String} [gender] Пол
          * @apiParam  {String} [email] Почта
-         * @apiParam  {String} [password] Пароль
+         * @apiParam  {String} [old_password] Старый пароль. Необходим для смены пароля
+         * @apiParam  {String} [password] Новый пароль
          * 
          * @apiSuccess (200) {String} id ID пользователя
          * @apiSuccess (200) {String} firstname Имя пользователя
          * @apiSuccess (200) {String} lastname Фамилия пользователя
          * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} email Email пользователя
-         * @apiSuccess (200) {String} type Тип учетной записи
+         * @apiSuccess (200) {String} old_password Старый пароль
+         * @apiSuccess (200) {String} password Новый пароль
          * 
          * @apiSuccessExample {json} Success-Response:
          *  {
@@ -468,7 +470,8 @@
          *      lastname : Петренко
          *      gender : Мужской
          *      email : example@test.com
-         *      password : 123456
+         *      old_password : 123456
+         *      password : 1234567
          *  }
          * 
          * @apiError Auth Вы не авторизированы
@@ -478,13 +481,12 @@
          * @apiError Empty-Gender Поле <code>gender</code> не должно быть пустым
          * @apiError Empty-Email Поле <code>email</code> не должно быть пустым
          * @apiError Empty-Password Поле <code>password</code> не должно быть пустым
-         * @apiError Empty-Type Поле <code>type</code> не должно быть пустым
          * 
          * @apiError Invalid-Firstname Некорректное поле <code>firstname</code>
          * @apiError Invalid-Lastname Некорректное поле <code>lastname</code>
          * @apiError Invalid-Gender Некорректное поле <code>gender</code>
          * @apiError Invalid-Email Некорректное поле <code>email</code>
-         * @apiError Invalid-Type Некорректное поле <code>type</code>
+         * @apiError Invalid-OldPassword Некорректное поле <code>old_password</code>
          *
          * @apiErrorExample {json} Error-Response:
          * 
@@ -531,9 +533,23 @@
 
             if(isset($GLOBALS['PUT']['password'])){
 
-                $user->setPassword($GLOBALS['PUT']['password']);
-                $user->encodePassword();
+                if(!isset($GLOBALS['PUT']['old_password'])){
 
+                    Http::error('Некорректное поле [old_password]');
+    
+                }
+
+                if(password_verify($GLOBALS['PUT']['old_password'], $user->getPassword())){
+
+                    $user->setPassword($GLOBALS['PUT']['password']);
+                    $user->encodePassword();
+    
+                } else {
+
+                    Http::error('Неверный пароль [old_password]');
+
+                }
+               
             }
 
             try{
@@ -561,10 +577,6 @@
                 } else if ($e->getMessage() == 'password') {
 
                     Http::error('Некорректное поле [password]');
-
-                } else if ($e->getMessage() == 'type') {
-
-                    Http::error('Некорректное поле [type]');
 
                 }
 
