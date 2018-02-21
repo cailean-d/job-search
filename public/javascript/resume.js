@@ -90,9 +90,6 @@
 
     // все поля, требующие проверки
     var fields = [
-        form.elements["firstname"],
-        form.elements["lastname"],
-        form.elements["patronymic"],
         form.elements["phone"],
         form.elements["birth"],
         form.elements["city"],
@@ -410,11 +407,7 @@
         }
 
         // присваивание регулярного выражения в зависимости от поля
-        if(that.name == "lastname" ||
-        that.name == "firstname" ||
-        that.name == "patronymic") {
-        regexp = regexp_name;
-        } else if (that.name == "phone") {
+        if (that.name == "phone") {
             regexp = regexp_phone;
         } else if (that.name == "birth") {
             regexp = regexp_birth;
@@ -645,17 +638,6 @@
         exp_is_update = false;
         this.innerHTML = "Добавить место работы";
 
-    }
-
-    // прелоадер для загрузки аватара
-    avatar_input.onchange = function(){
-        if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.readAsDataURL(this.files[0]);
-            reader.onload = function (e) {
-                avatar_image.src = e.target.result;
-            };
-        }
     }
 
     // удаление созданных блоков с ОР
@@ -1360,11 +1342,6 @@
         var xskill = form.elements["add_courses"].value;
 
         // добавление данных в объект FormData
-        if(avatar_input.files[0]){data.append('avatar', avatar_input.files[0], 'avatar.jpg');}
-        data.append('firstname', form.elements["firstname"].value);
-        data.append('lastname', form.elements["lastname"].value);
-        data.append('patronymic', form.elements["patronymic"].value);
-        data.append('gender', form.elements["gender"].value);
         data.append('birthday', form.elements["birth"].value);
         data.append('city', form.elements["city"].value);
         data.append('phone', form.elements["phone"].value);

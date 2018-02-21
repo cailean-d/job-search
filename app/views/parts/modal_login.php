@@ -14,7 +14,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-at"></i>
                             </div>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Почта">
+                            <input type="text" class="form-control" name="email" placeholder="Почта">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -23,7 +23,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-unlock-alt"></i>
                             </div>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                            <input type="password" class="form-control" name="password" placeholder="Пароль">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>

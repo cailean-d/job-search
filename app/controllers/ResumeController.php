@@ -12,6 +12,7 @@
             $this->data['router']['id'] = $this->getId();
 
             $this->data['resume'] = Resume::getJoinedByUserId($this->getId());
+            $this->data['resume_user'] = User::get($this->getId());
 
             $this->redirectOnFailure();
 

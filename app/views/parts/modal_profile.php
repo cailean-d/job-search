@@ -15,7 +15,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-user-circle"></i>
                             </div>
-                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Имя" value="<?=$user['firstname']?>">
+                            <input type="text" class="form-control" name="firstname" placeholder="Имя" value="<?=$user['firstname']?>">
                         </div>
                         <div class="__error_msg form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -25,7 +25,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-user-circle"></i>
                             </div>
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Фамилия" value="<?=$user['lastname']?>">
+                            <input type="text" class="form-control" name="lastname" placeholder="Фамилия" value="<?=$user['lastname']?>">
                         </div>
                         <div class="__error_msg form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -35,7 +35,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-at"></i>
                             </div>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Почта" value="<?=$user['email']?>">
+                            <input type="email" class="form-control" name="email" placeholder="Почта" value="<?=$user['email']?>">
                         </div>
                         <div class="__error_msg form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -59,7 +59,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-unlock-alt"></i>
                             </div>
-                            <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Старый пароль">
+                            <input type="password" class="form-control" name="old_password" placeholder="Старый пароль">
                         </div>
                         <div class="__error_msg form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -69,7 +69,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-unlock-alt"></i>
                             </div>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                            <input type="password" class="form-control" name="password" placeholder="Пароль">
                         </div>
                         <div class="__error_msg form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -79,7 +79,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-unlock-alt"></i>
                             </div>
-                            <input type="password" class="form-control" id="password2" name="password2" placeholder="Повторите пароль">
+                            <input type="password" class="form-control" name="password2" placeholder="Повторите пароль">
                         </div>
                         <div class="__error_msg form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>

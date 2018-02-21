@@ -36,23 +36,35 @@
                 <div class="card-block bg-faded">
                     <div class="d-flex">
                         <div class="avatar pl-0 col-4 minw-30">
-                            <img src="<?=$avatar->getSource()?>" alt="" class="img-thumbnail rounded">
+                            <img src="<?
+
+                            if(!empty($avatar->getSource())){
+
+                                echo $avatar->getSource();
+
+                            } else {
+
+                                echo '/../../../public/images/user.jpg';
+                                
+                            }
+
+
+                            ?>" alt="" class="img-thumbnail rounded" draggable="false">
                         </div>
                         <div class="info pl-2 pr-0">
                             <h4>Личная информация</h4>
                             <table class="table resume-info">
                                 <tbody>
                                     <tr>
-                                        <th scope="row" class="text-muted w-35">Ф.И.О.</th>
+                                        <th scope="row" class="text-muted" style="min-width: 150px">Ф.И.О.</th>
                                         <td>
-                                            <?=$resume->getLastname()?> 
-                                            <?=$resume->getFirstname()?> 
-                                            <?=$resume->getPatronymic()?>
+                                            <?=$resume_user->getLastname()?> 
+                                            <?=$resume_user->getFirstname()?> 
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Пол</th>
-                                        <td><?=$resume->getGender()?></td>
+                                        <td><?=$resume_user->getGender()?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row" class="text-muted">Дата рождения</th>
@@ -110,7 +122,7 @@
                     </div>
                     <?php foreach ($education as $key => $edu) : ?>
                         <div class="mt-4">
-                            <h4>Образование #<?=$key+1?></h4>
+                            <h4>Образование №<?=$key+1?></h4>
                             <table class="table resume-info">
                                 <tbody>
                                     <tr>
@@ -141,7 +153,7 @@
                     <?php endforeach ?>
                     <?php foreach ($experience as $key => $exp) : ?>
                         <div class="mt-4">
-                            <h4>Опыт работы #<?=$key+1?></h4>
+                            <h4>Опыт работы №<?=$key+1?></h4>
                             <table class="table resume-info">
                                 <tbody>
                                     <tr>

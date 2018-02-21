@@ -36,81 +36,7 @@
 
 
                     <!-- Основная информация -->
-                    <div role="tabpanel" class="card card-block bg-faded tab-pane fade show active" id="uinfo">
-                        <div class="group d-inline-block d-flex justify-content-center">
-                            <label for="avatar" style="cursor: pointer;">
-                                <img 
-                                src=<?
-
-                                    if(!empty($avatar->getSource())){
-
-                                        echo $avatar->getSource();
-
-                                    } else {
-
-                                        echo "../../public/images/user.jpg";
-
-                                    }
-
-                                ?> 
-                                alt="avatar" title="загрузить фото" class="img-thumbnail rounded" style="width: 200px; height: auto" id="avatar_img">
-                            </label>
-                            <input type="file" name="avatar" id="avatar" hidden><br>
-                        </div>
-                        <div class="group col-11 pl-0 pr-0 mx-auto">
-                            <label for="lastname" class="d-block text-center">Фамилия :</label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-addon input-type">
-                                    <i class="fas fa-user-circle"></i>
-                                </div>
-                                <input name="lastname" type="text" class="form-control" id="lastname" <?="value=" . $resume->getLastname()?>>
-                            </div>
-                            <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
-                        </div>
-                        <div class="group col-11 pl-0 pr-0 mx-auto">
-                            <label for="firstname" class="d-block text-center">Имя :</label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-addon input-type">
-                                    <i class="fas fa-user-circle"></i>
-                                </div>
-                                <input name="firstname" type="text" class="form-control" id="firstname" <?="value=" . $resume->getFirstname()?>>
-                            </div>
-                            <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
-                        </div>
-                        <div class="group col-11 pl-0 pr-0 mx-auto">
-                            <label for="patronymic" class="d-block text-center">Отчество :</label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-addon input-type">
-                                    <i class="fas fa-user-circle"></i>
-                                </div>
-                                <input name="patronymic" type="text" class="form-control" id="patronymic" <?="value=" . $resume->getPatronymic()?>>
-                            </div>
-                            <div class="error-block form-control-feedback hidden-xl-down text-center mb-2"></div>
-                        </div>
-                        <div class="group col-11 pl-0 pr-0 mx-auto">
-                            <label class="d-block text-center">Пол :</label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-addon input-type">
-                                    <i class="fas fa-transgender"></i>
-                                </div>
-                                <select class="form-control custom-select" name="gender">
-                                    <option value="Мужской" 
-                                        <?php 
-                                        
-                                            if($resume->getGender() == "Мужской") echo "selected" 
-                                        
-                                        ?>
-                                    >Мужской</option>
-                                    <option value="Женский" 
-                                        <?php 
-
-                                        if($resume->getGender() == "Женский") echo "selected" 
-                                        
-                                        ?>
-                                    >Женский</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div role="tabpanel" class="card card-block bg-faded tab-pane fade show active" id="uinfo" style="min-height: 500px;">
                         <div class="group col-11 pl-0 pr-0 mx-auto">
                             <label for="birth_input" class="d-block text-center">Дата рождения :</label>
                             <div class="input-group mb-2">
@@ -706,7 +632,7 @@
                     </div>
                 </div>
                 <input type="submit" id="sub_form" hidden>
-                <label for="sub_form" class="btn btn-outline-primary btn-lg btn-block mt-4 mb-5" role="button" id="send_form">
+                <label for="sub_form" class="btn btn-primary btn-lg btn-block mt-4 mb-5" role="button" id="send_form">
                     <?php 
                         if($router['mode'] == 'edit'){
 

@@ -736,6 +736,7 @@
 
             $_SESSION['authorized'] = true;
             $_SESSION['id'] = $user->getId();
+            $_SESSION['type'] = $user->getType();
 
         }
 
