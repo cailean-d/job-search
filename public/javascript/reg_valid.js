@@ -16,6 +16,7 @@
     var fields = [
         form.elements["firstname"],
         form.elements["lastname"],
+        form.elements["gender"],
         form.elements["email"],
         form.elements["password"],
         form.elements["password2"],
@@ -68,6 +69,28 @@
         } else if(that.name == "email"){
             regexp = regexp_email;
         } 
+
+        if(that.name == "gender"){
+
+            if(that.value.length == 0 || !that.value){
+
+                error_message.innerHTML = "Это поле обязательно для заполения!";
+                error_message.classList.remove("hidden-xl-down");
+                if(!outer_block.classList.contains("has-danger")){isValid--;}
+                outer_block.classList.add("has-danger");
+                return;
+
+            } else {
+
+                error_message.innerHTML = "";
+                error_message.classList.add("hidden-xl-down");
+                if(outer_block.classList.contains("has-danger")){isValid++;}
+                outer_block.classList.remove("has-danger");
+                return;
+
+            }
+
+        }
     
         // проверки для поля "password"
         if(that.name == "password"){

@@ -86,10 +86,10 @@
         <script src="public/javascript/lib/datepicker.min.js"></script>
         <script src="public/javascript/filter.js?ewqqqqqqws"></script>
         <script src="public/javascript/modal.js?eeeqewqqeqeqews"></script>
-        <script src="public/javascript/modal_profile.js?eeeqeewweqwqqeqeqewqewws"></script>
+        <script src="public/javascript/modal_profile.js?eeeqqewqewws"></script>
         <script src="public/javascript/active_page.js?eeqqeqqweqwewq"></script>
         <script src="public/javascript/login_valid.js?wqqeeqqwqewqqqew"></script>
-        <script src="public/javascript/reg_valid.js?qqwwцeqewqewqqeqe"></script>
+        <script src="public/javascript/reg_valid.js?qqwwцeqeewqewqqeqe"></script>
         <script src="public/javascript/vacancy_valid.js?eqewqqewqeqqqqew"></script>
         <script src="public/javascript/del_vacancy.js?eqqewqeqwqq"></script>
         <script src="public/javascript/resume.js?kqwweqeqqeqeqqeqeqqeqweqeqwq"></script>

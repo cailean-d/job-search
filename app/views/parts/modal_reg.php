@@ -14,7 +14,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-user-circle"></i>
                             </div>
-                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Имя">
+                            <input type="text" class="form-control" name="firstname" placeholder="Имя">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -32,7 +32,7 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-at"></i>
                             </div>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Почта">
+                            <input type="email" class="form-control" name="email" placeholder="Почта">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -49,12 +49,16 @@
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group __field">
                         <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fas fa-unlock-alt"></i>
+                            <div class="input-group-addon input-type">
+                                <i class="fas fa-transgender"></i>
                             </div>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                            <select name="gender" class="form-control custom-select">
+                                <option value="" disabled selected>Пол</option>
+                                <option value="Мужской">Мужской</option>
+                                <option value="Женский">Женский</option>
+                            </select>
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
@@ -63,7 +67,16 @@
                             <div class="input-group-addon">
                                 <i class="fas fa-unlock-alt"></i>
                             </div>
-                            <input type="password" class="form-control" id="password2" name="password2" placeholder="Повторите пароль">
+                            <input type="password" class="form-control" name="password" placeholder="Пароль">
+                        </div>
+                        <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fas fa-unlock-alt"></i>
+                            </div>
+                            <input type="password" class="form-control" name="password2" placeholder="Повторите пароль">
                         </div>
                         <div class="error-block form-control-feedback text-center mb-2 hidden-xl-down"></div>
                     </div>
