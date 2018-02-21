@@ -96,7 +96,7 @@
             hideFormMessage(modal_profile);
             hideAllErrors(fields);
             disableButton(submit_label, submit_btn);
-            modal_profile.reset();
+            restoreFormValues(modal_profile, fields_values);
             
         });
 
@@ -446,6 +446,24 @@
             var field_value = input[i].value;
 
             output[field_name] = field_value;
+
+        }
+
+    }
+
+    function restoreFormValues(form, obj){
+
+        for(var i = 0; i < form.elements.length; i++){
+
+            var el = form.elements[i];
+
+            console.log(el.name);
+
+            if(obj[el.name]){
+
+                el.value = obj[el.name];
+
+            }
 
         }
 
