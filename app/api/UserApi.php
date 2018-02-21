@@ -168,6 +168,10 @@
 
                     Http::error("Некорректное поле [lastname]");
 
+                } else if ($e->getMessage() == 'gender') {
+
+                    Http::error("Некорректное поле [gender]");
+
                 } else if ($e->getMessage() == 'email') {
 
                     Http::error("Некорректное поле [email]");
@@ -454,6 +458,7 @@
          * @apiSuccess (200) {String} id ID пользователя
          * @apiSuccess (200) {String} firstname Имя пользователя
          * @apiSuccess (200) {String} lastname Фамилия пользователя
+         * @apiSuccess (200) {String} gender Пол
          * @apiSuccess (200) {String} email Email пользователя
          * @apiSuccess (200) {String} type Тип учетной записи
          * 
@@ -544,6 +549,10 @@
                 } else if ($e->getMessage() == 'lastname') {
 
                     Http::error('Некорректное поле [lastname]');
+
+                } else if ($e->getMessage() == 'gender') {
+
+                    Http::error('Некорректное поле [gender]');
 
                 } else if ($e->getMessage() == 'email') {
 
@@ -715,9 +724,6 @@
 
             $_SESSION['authorized'] = true;
             $_SESSION['id'] = $user->getId();
-            $_SESSION['firstname'] = $user->getFirstname();
-            $_SESSION['lastname'] = $user->getLastname();
-            $_SESSION['type'] = $user->getType();
 
         }
 
