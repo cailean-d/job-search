@@ -27,7 +27,7 @@
         <title><?=$title?></title>
     </head>
     <body>
-
+ 
         <div class="wrapper">
         
             <!-- шапка сайта -->
