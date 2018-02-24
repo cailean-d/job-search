@@ -457,8 +457,6 @@
 
             var el = form.elements[i];
 
-            console.log(el.name);
-
             if(obj[el.name]){
 
                 el.value = obj[el.name];

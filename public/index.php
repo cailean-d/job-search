@@ -12,10 +12,10 @@
         <link rel="stylesheet" href="public/stylesheet/lib/bootstrap.min.css">
         <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-slider.min.css">
         <link rel="stylesheet" href="public/stylesheet/lib/datepicker.min.css">
-        <link rel="stylesheet" href="public/stylesheet/style.css?qqweqwqwewqqeqqqgq">
-        <link rel="stylesheet" href="public/stylesheet/vacancy.css?eqweeeqwqwweqqeqq">
-        <link rel="stylesheet" href="public/stylesheet/filter.css?qqeeeqeqewqwwwqq">
-        <link rel="stylesheet" href="public/stylesheet/header.css?qqeqeqeqxqweqqqeweqwqwqqwq">
+        <link rel="stylesheet" href="public/stylesheet/style.css?qqweqwqweqqqeqqqgq">
+        <link rel="stylesheet" href="public/stylesheet/vacancy.css?eqweeeqqwweqqeqq">
+        <link rel="stylesheet" href="public/stylesheet/filter.css?qqqqqweqeqwwqq">
+        <link rel="stylesheet" href="public/stylesheet/header.css?qqeqeqqqqqwq">
         <link rel="stylesheet" href="public/stylesheet/my_vacancies.css?qqqeqweqwwqq">
         <link rel="stylesheet" href="public/stylesheet/full_vacancy.css?qeeeqwewqqewgq">
         <link rel="stylesheet" href="public/stylesheet/404.css?eqqqqeeqqewqew">

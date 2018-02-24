@@ -65,3 +65,14 @@
 .vacancy p{
     color: #3a3a3a;
 }
+
+.vacancy_block{
+    min-width: 500px;
+    border-right: none !important;
+    border-left: none !important;
+    padding: 0 10px;
+}
+
+.vacancy_block:not(:first-child) {
+    border-top: none;
+}

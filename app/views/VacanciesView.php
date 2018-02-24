@@ -1,4 +1,4 @@
-<main class="col-8">
+<main class="col-xl-9 col-md-12">
         
     <!-- ************************************************************ -->
     <!--                      Список вакансий                         -->
@@ -11,7 +11,7 @@
         </div>
     <?php else : 
         foreach($vacancies as $vacancy) :?>
-            <div class="card mb-4">
+            <div class="card vacancy_block">
                 <div class="card-block">
                     <article class='vacancy'>
                         <header>
@@ -52,15 +52,15 @@
     endif ?>
 
 </main>
-<aside class="col-4">
+<aside class="col-xl-4 hidden-sm-down">
     
     <!-- ************************************************************ -->
     <!--                        Фильтры                               -->
     <!-- ************************************************************ -->
 
-    <div class="card">
-        <div class="card-block bg-faded">
-            <h5 class="text-center">Фильтры</h5>
+    <div class="card filter">
+        <div class="card-block bg-faded filter_less_padding">
+            <h5 class="filter__header">Фильтры</h5>
             <form id="filters">
                 <div class="option search">
                     <input name="query" type="text" placeholder="найти..."

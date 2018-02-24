@@ -1,6 +1,6 @@
 #filters .option{
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     border-bottom: 1px solid #cccccc;
 }
 
@@ -27,4 +27,27 @@
 
 h5{
     color: #7d7d7d;
+}
+
+.filter{
+    min-width: 250px;
+    max-width: 320px;
+    position: fixed;
+    right: 1rem;
+}
+
+.filter__header{
+    text-align: center;
+    margin: 0.2rem;
+}
+
+.filter_less_padding{
+    padding: 0.8rem 1.25rem;
+}
+
+
+@media screen and (max-width: 600px ) {
+    .filter{
+        display: none;
+    }
 }
