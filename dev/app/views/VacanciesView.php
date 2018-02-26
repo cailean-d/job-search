@@ -59,7 +59,7 @@
     <!-- ************************************************************ -->
 
     <div class="card filter">
-        <div class="card-block bg-faded filter_less_padding">
+        <div class="card-block bg-faded filter-less-padding">
             <h5 class="filter__header">Фильтры</h5>
             <form id="filters">
                 <div class="option search">

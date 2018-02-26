@@ -1,4 +1,131 @@
+@import "./../../__common/main";
+@import "./../../__common/lib/style/bootstrap-slider.min";
 
-body{
-    background: #000;
+.vacancy_block{
+    min-width: 500px;
+    border-right: none !important;
+    border-left: none !important;
+    padding: 0 10px;
+
+    &:not(:first-child) {
+        border-top: none;
+    }
+
+    .vacancy{
+        max-width: 100%;
+        margin-bottom: 10px;
+        
+        header{
+            margin-bottom: 10px;
+    
+            a{
+                text-decoration: none;
+                color: #3498db;
+                font-size: 25px;
+                
+                &:hover{
+                    color: #025aa5;
+                }
+            }
+    
+            .top{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+            
+            .bottom{
+                display: flex;
+    
+                div{
+                    margin-right: 20px;
+                    color: #727272;
+                }
+            }
+    
+            .company{
+                color: #0275d8;
+            }
+    
+            .emp{
+                color: #000000;
+            }
+    
+        }
+        
+        footer{
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            color: #727272;
+            font-size: 15px;
+        }
+    
+        .salary{
+            display: flex;
+            align-items: flex-end;
+    
+            span{
+                color: #7d7d7d;
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+    
+        p{
+            color: #3a3a3a;
+        }
+    
+    }
+    
 }
+
+.filter{
+    min-width: 250px;
+    max-width: 320px;
+    position: fixed;
+    right: 1rem;
+    
+    @media screen and (max-width: 600px) {
+        display: none;
+    }
+
+    &__header{
+        text-align: center;
+        margin: 0.2rem;
+        color: #7d7d7d;
+    }
+
+    &-less-padding{
+        padding: 0.8rem 1.25rem;
+    }
+    
+    .slider-selection {
+        background: #bfc9e0;
+    }
+
+    .slider-track-low, .slider-track-high{
+        background: #fff;
+        border: 1px solid #c3c3c3;
+    }
+
+    .slider.slider-horizontal{
+        width: 100%;
+    }
+
+    .slider-handle{
+        cursor: pointer;
+    }
+    
+    #filters .option{
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #cccccc;
+    }
+
+    #filters .option:last-child{
+        border:none;
+    }
+    
+}
+
