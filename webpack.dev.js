@@ -9,14 +9,14 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     output: {
       filename: 'javascript/[name].bundle.js',
-      path: path.resolve(__dirname, 'public')
+      path: path.resolve(__dirname, 'dev/public')
     },
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000
     },
     plugins: [
-      new CleanWebpackPlugin(['public/javascript', 'public/stylesheet']),
+      // new CleanWebpackPlugin(['dev/public/javascript', 'dev/public/stylesheet']),
       new ExtractTextPlugin("stylesheet/[name].bundle.css"),
       new BrowserSyncPlugin({
         host: 'localhost',

@@ -54,8 +54,8 @@ gulp.task('build-index', function () {
 
 gulp.task('apidoc-dev', function(done){
     apidoc({
-      src: "app/api",
-      dest: "public/doc",
+      src: "dev/app/api",
+      dest: "dev/public/doc",
       config: "./",
       includeFilters: [ ".*\\.php$" ]
     }, done);
@@ -104,9 +104,8 @@ gulp.task("webpack", function(callback) {
 
 gulp.task('build', ['webpack'], function() {
     
-    var task1 = gulp.src(['./start.php', '.htaccess']).pipe(phpMinify()).pipe(gulp.dest('./.prod/'));
-
-    var task2 = gulp.src(['app/**/*']).pipe(gulp.dest('./.prod/app/'));
+    var task1 = gulp.src(['./dev/start.php','./dev/.htaccess']).pipe(phpMinify()).pipe(gulp.dest('./.prod/'));
+    var task2 = gulp.src(['./dev/app/**/*']).pipe(gulp.dest('./.prod/app/'));
 
     return [task1, task2];
 });
