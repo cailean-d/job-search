@@ -10,12 +10,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(common, {
     output: {
-        filename: 'js/[name].bundle.js',
-        path: path.resolve(__dirname, 'prod/public')
+        filename: 'script/[name].bundle.js',
+        path: path.resolve(__dirname, '.prod/public')
     },
     plugins: [
-        new CleanWebpackPlugin(['prod']),
-        new ExtractTextPlugin("css/[name].bundle.css"),
+        new CleanWebpackPlugin(['.prod']),
+        new ExtractTextPlugin("style/[name].bundle.css"),
         new webpack.optimize.AggressiveMergingPlugin(),
         new UglifyJsPlugin({
             sourceMap: false,

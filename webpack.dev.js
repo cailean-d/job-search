@@ -7,17 +7,21 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = merge(common, {
     devtool: 'inline-source-map',
+    output: {
+      filename: 'javascript/[name].bundle.js',
+      path: path.resolve(__dirname, 'public')
+    },
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
-      new ExtractTextPlugin("[name].bundle.css"),
+      new CleanWebpackPlugin(['public/javascript', 'public/stylesheet']),
+      new ExtractTextPlugin("stylesheet/[name].bundle.css"),
       new BrowserSyncPlugin({
         host: 'localhost',
         port: 3000,
-		notify: false,
+		    notify: false,
         files: ['./index.html'],
         server: {
           baseDir: "./",

@@ -3,16 +3,21 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    vacancies: './src/first/js/testjsx.tsx'
+    vacancies: './src/vacancies/script/index.tsx'
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      Tether: 'tether'
+    })
   ],
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ]
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'js/[name].bundle.js',
+    path: path.resolve(__dirname, 'public')
   }
 };

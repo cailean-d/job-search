@@ -12,7 +12,12 @@ var gulp            = require('gulp'),
     gulpRemoveHtml  = require('gulp-remove-html'),
     htmlmin         = require('gulp-html-minifier'),
     {phpMinify}     = require('@cedx/gulp-php-minify'),
-    apidoc          = require('gulp-apidoc');
+    apidoc          = require('gulp-apidoc'),
+    webpack         = require("webpack");
+
+
+var webpack_config = require('./webpack.prod');
+
 
 gulp.task('clean-prod', function(){
     return gulp.src('./.prod/', {read: false})
@@ -83,4 +88,25 @@ gulp.task('test-all', function() {
         ])
       .pipe(concat('all.txt'))
       .pipe(gulp.dest('./test/'));
+});
+
+
+gulp.task("webpack", function(callback) {
+
+    webpack(webpack_config, function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({}));
+        callback();
+    });
+
+    return this;
+});
+
+gulp.task('build', ['webpack'], function() {
+    
+    var task1 = gulp.src(['./start.php', '.htaccess']).pipe(phpMinify()).pipe(gulp.dest('./.prod/'));
+
+    var task2 = gulp.src(['app/**/*']).pipe(gulp.dest('./.prod/app/'));
+
+    return [task1, task2];
 });
