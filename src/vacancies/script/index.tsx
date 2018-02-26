@@ -1,11 +1,13 @@
-import './../style/index.scss';
+import { Main } from "./../../__common/main"; // general scripts, styles
+import "./../style/index.scss"; // styles for current view
 
-import './../../__common/lib/script/fontawesome-all.min.js';
-import './../../__common/lib/script/bootstrap.min.js';
-import './../../__common/lib/script/bootstrap-slider.min.js';
+// external libraries
+import "./../../__common/lib/script/fontawesome-all.min.js";
+import "./../../__common/lib/script/bootstrap.min.js";
+import "./../../__common/lib/script/bootstrap-slider.min.js";
 
-import { Filter } from './filter';
+// custom modules
+import { Filter } from "./filter";
 
-let filter : Filter = new Filter();
-
-filter.slider();
+Main.activePage();
+Filter.slider();

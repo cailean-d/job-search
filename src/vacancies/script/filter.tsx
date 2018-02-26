@@ -1,6 +1,6 @@
 export class Filter{
 
-    slider () {
+    static slider () {
 
         let range : HTMLElement = document.getElementById("salary");
         let view : HTMLElement = document.getElementById("salary-view");
