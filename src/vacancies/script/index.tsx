@@ -13,4 +13,5 @@ Main.activePage();
 Main.modalProfile();
 Main.modalLogin();
 Main.modalReg();
+Main.dropMenu();
 Filter.slider();
