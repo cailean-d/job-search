@@ -10,4 +10,5 @@ import "./../../__common/lib/script/bootstrap-slider.min.js";
 import { Filter } from "./filter";
 
 Main.activePage();
+Main.modalProfile();
 Filter.slider();
