@@ -1,5 +1,7 @@
 node_modules/
 .prod/
-public/doc/
+dev/public/doc/
+dev/public/javascript
+dev/public/stylesheet
 test/
-app/logs/*.*
+dev/app/logs/*.*
