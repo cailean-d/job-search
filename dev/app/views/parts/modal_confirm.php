@@ -1,4 +1,3 @@
-<!-- Modal Confirm -->
 <div class="modal fade ns" id="confirm">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

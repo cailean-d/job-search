@@ -1,4 +1,3 @@
-<!-- Modal Alert -->
 <div class="modal fade ns" id="modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
