@@ -12,4 +12,5 @@ import { Filter } from "./filter";
 Main.activePage();
 Main.modalProfile();
 Main.modalLogin();
+Main.modalReg();
 Filter.slider();
