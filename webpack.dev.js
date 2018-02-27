@@ -20,14 +20,12 @@ module.exports = merge(common, {
       // new CleanWebpackPlugin(['dev/public/javascript', 'dev/public/stylesheet']),
       new ExtractTextPlugin("stylesheet/[name].bundle.css"),
       new BrowserSyncPlugin({
+        open: true,
         host: 'localhost',
         port: 3000,
-		    notify: false,
-        files: ['./index.html'],
-        server: {
-          baseDir: "./",
-          index: "index.html"
-        }
+        files: ['./dev/public/index.php', './dev/app/views/*.php'],
+        notify: false,
+        proxy: "job:80"
       })
     ],
     module: {
