@@ -2,31 +2,45 @@
 
 
     <nav>
-        <a id="index_page" href="/">
-        <span>Главная</span>
+        <a class="__home link" href="/">
+            <div class="icon">
+                <i class="fas fa-home fa-lg"></i>
+            </div>
+            <div class="text">
+                Главная
+            </div>
         </a>
-
+        <a class="header-menu-toggle link __toggle-hmenu">
+            <i class="fas fa-bars fa-lg"></i>
+        </a>
         
-        <?php if($user['type'] == '1') : ?>      <!-- Работодатель -->
+        <div class="header-menu">
+            <?php if($user['type'] == '1') : ?>      <!-- Работодатель -->
+
+                <a class="__vacancy-add link" href="vacancy/add">
+                    <div class="text">
+                        Разместить вакансию
+                    </div>
+                </a>
+                <a class="__my-vacancies link" href="vacancy">
+                    <div class="text">
+                        Мои вакансии
+                    </div>
+                </a>
+
+                <?php elseif($user['type'] == '0') : ?>     <!-- Пользователь -->
 
 
-            <a id="add_vacancy_page" href="vacancy/add">
-                <span>Разместить вакансию</span> 
-            </a>
-            <a id="my_vacancies_page" href="vacancy">
-                <span>Мои вакансии</span>
-            </a>
+                <a href="resume" class="__resume link">
+                    <div class="text">
+                        Мое резюме
+                    </div>
+                </a>
 
+            <?php endif ?>   
+        </div>
+         
 
-        <?php elseif($user['type'] == '0') : ?>     <!-- Пользователь -->
-
-
-            <a id="resume_page" href="resume">
-                <span>Мое резюме</span>
-            </a>
-
-
-        <?php endif ?>        
     </nav>
 
 
@@ -35,20 +49,8 @@
 
         <div class='name'>
 
-            <a href='#' class="dropdown-toggle __dropdown_btn">
-                <div class="dd userinfo">
-                    <span class="__user_firstname mr-1">
-
-                        <?=$user['firstname']?>
-
-                    </span>
-                    <span class="__user_lastname">
-
-                        <?=$user['lastname']?>
-                        
-                    </span>
-                </div>
-
+            <a href='#' class="link dropdown-toggle __dropdown_btn">
+                <i class="fas fa-user fa-lg"></i>
             </a>
             <div class="avatar">
                 <label for="avatar_upload" class="avatar mb-0 hand" title="Загрузить фото">
@@ -106,5 +108,33 @@
 
 
     <?php endif ?>
+
+    <div class="header-menu-m">
+
+        <?php if($user['type'] == '1') : ?>      <!-- Работодатель -->
+
+            <a class="__vacancy-add list-group-item list-group-item-action" href="vacancy/add">
+                <div class="text">
+                    Разместить вакансию
+                </div>
+            </a>
+            <a class="__my-vacancies list-group-item list-group-item-action" href="vacancy">
+                <div class="text">
+                    Мои вакансии
+                </div>
+            </a>
+
+            <?php elseif($user['type'] == '0') : ?>     <!-- Пользователь -->
+
+
+            <a href="resume" class="__resume list-group-item list-group-item-action">
+                <div class="text">
+                    Мое резюме
+                </div>
+            </a>
+
+        <?php endif ?>   
+
+    </div>
     
 </header>

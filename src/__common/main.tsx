@@ -9,29 +9,21 @@ export class Main{
         let regexp_resume = /resume(\/?(add|edit))?$/;
         let regexp_vacancy = /vacancy$/;
 
-        if(page.indexOf("/") == 0 && page.length == 1){
+        if((page.indexOf("/") == 0 && page.length == 1) && (document.querySelector(".__home"))){
 
-            if(document.getElementById("index_page")){
-                document.getElementById("index_page").classList.add("active");
-            }
+            document.querySelector(".__home").classList.add("active");
 
-        } else if(regexp_vacancy_add.test(page)){
+        } else if(regexp_vacancy_add.test(page) && document.querySelector(".__vacancy-add")){
 
-            if(document.getElementById("add_vacancy_page")){
-                document.getElementById("add_vacancy_page").classList.add("active");
-            }
+            document.querySelector(".__vacancy-add").classList.add("active");
 
-        } else if(regexp_resume.test(page)){
+        } else if(regexp_resume.test(page) && document.querySelector(".__resume")){
 
-            if(document.getElementById("resume_page")){
-                document.getElementById("resume_page").classList.add("active");
-            }
+            document.querySelector(".__resume").classList.add("active");
 
-        } else if(regexp_vacancy.test(page)){
+        } else if(regexp_vacancy.test(page) && document.querySelector(".__my-vacancies")){
 
-            if(document.getElementById("my_vacancies_page")){
-                document.getElementById("my_vacancies_page").classList.add("active");
-            }
+            document.querySelector(".__my-vacancies").classList.add("active");
 
         } 
 
@@ -43,9 +35,6 @@ export class Main{
         var modal_profile : any = document.getElementById("__profile_update_form");
         var submit_label = document.getElementById("__save_profile_label");
         var submit_btn = document.getElementById("__save_profile");
-    
-        var header_firstname = document.querySelector(".__user_firstname");
-        var header_lastname = document.querySelector(".__user_lastname");
     
         var url = "api/1.0.0/user";
     
@@ -113,7 +102,6 @@ export class Main{
                             showFormSuccess(this, "Данные успешно сохранены");
                             buttonText(submit_label, "Сохранить");
                             saveFormValues(fields, fields_values);
-                            changeHeaderUserInfo(fields_values.firstname, fields_values.lastname, header_firstname, header_lastname);
     
                         } else {
                             
@@ -527,13 +515,6 @@ export class Main{
                 };
     
             }
-    
-        }
-    
-        function changeHeaderUserInfo(fname : any, lname : any, hfname : any, hlname : any){
-    
-            hfname.innerHTML = fname;
-            hlname.innerHTML = lname;
     
         }
 
@@ -1034,21 +1015,28 @@ export class Main{
         var name = document.querySelector("#header .name");
         var drop_menu : any = document.querySelector("#header .drop_menu");
         var logout : HTMLElement = document.querySelector("#header .logout");
+        let toggle_menu : HTMLElement = document.querySelector(".header-menu-m");
     
         var avatar_url = "api/1.0.0/user/avatar";
         var logout_url = "api/1.0.0/user/logout";
         
         if(name != null){
             
-            (document.querySelector("#header .name .dd") as any).onclick = function(e : any){
-            e.preventDefault();
-                    if(document.querySelector(".name > a").classList.contains("menu-active")){
-                        drop_menu.style.display = "none";
-                        document.querySelector(".name > a").classList.remove("menu-active");
-                    } else {
-                        drop_menu.style.display = "block";
-                        document.querySelector(".name > a").classList.add("menu-active");
-                    }
+            (document.querySelector(".__dropdown_btn") as any).onclick = function(e : any){
+
+                e.preventDefault();
+
+                if(toggle_menu.classList.contains("header-menu-m-fadein")){
+                    toggle_menu.classList.remove("header-menu-m-fadein");
+                }
+
+                if(document.querySelector(".name > a").classList.contains("menu-active")){
+                    drop_menu.style.display = "none";
+                    document.querySelector(".name > a").classList.remove("menu-active");
+                } else {
+                    drop_menu.style.display = "block";
+                    document.querySelector(".name > a").classList.add("menu-active");
+                }
             }
         
             logout.onclick = function(e : any){
@@ -1142,5 +1130,32 @@ export class Main{
             }
         }
                 
+    }
+
+    static headerDropMenu(){
+
+        let toggle_button : HTMLAnchorElement = document.querySelector(".__toggle-hmenu");
+        let toggle_drop_menu : HTMLAnchorElement = document.querySelector(".__dropdown_btn");
+        let toggle_menu : HTMLElement = document.querySelector(".header-menu-m");
+        let drop_menu : HTMLElement = document.querySelector("#header .drop_menu");
+
+        toggle_button.onclick = () => {
+
+            if(toggle_drop_menu.classList.contains("menu-active")){
+                drop_menu.style.display = "none";
+                toggle_drop_menu.classList.remove("menu-active");
+            }
+
+            if(toggle_menu.classList.contains("header-menu-m-fadein")){
+
+                toggle_menu.classList.remove("header-menu-m-fadein");
+
+            } else {
+
+                toggle_menu.classList.add("header-menu-m-fadein");
+                
+            }
+            
+        }
     }
 }
