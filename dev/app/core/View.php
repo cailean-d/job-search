@@ -5,6 +5,7 @@
         private $title;
         private $view;
         private $folder;
+        private $index;
 
         public function viewAccess(callable $callback = null){
 
@@ -32,6 +33,10 @@
         public function getTitle(){
             return $this->title;
         }
+        
+        public function getFolder(){
+            return $this->folder;
+        }
 
         public function setView($view){
             $this->view = $view;
@@ -41,11 +46,11 @@
             $this->title = $title;
         }
 
-        public function getFolder(){
-            return $this->folder;
+        public function setIndex($index){
+            $this->index = $index;
         }
 
-        public function render(array $data = null){
+        public function render(array $data = null, string $view = null){
 
             $this->viewAccess();
 
@@ -58,7 +63,7 @@
             
             }
             
-            include __DIR__.'/../../public/index.php';
+            include $this->index;
 
         }
 
@@ -67,6 +72,7 @@
             $path = require __DIR__.'/../config/paths.php';
 
             $this->folder = $path['view'];
+            $this->index = $path['index'];
 
         }
 

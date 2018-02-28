@@ -67,7 +67,7 @@
 
         public function render(){
 
-            $this->view->render($this->data);
+            $this->view->render($this->data, strtolower(substr(get_class($this), 0, -10)));
 
         }
 
