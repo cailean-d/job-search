@@ -92,16 +92,21 @@
 
 
         <div class="side-menu">
-
-            <a id="reg_link" data-toggle="modal" data-target="#modal_reg">
-                <span>
+            <a id="reg_link" class="link" data-toggle="modal" data-target="#modal_reg">
+                <div class="icon">
+                    <i class="fas fa-user-plus fa-lg"></i>
+                </div>
+                <div class="text">
                     Регистрация
-                </span> 
+                </div> 
             </a>
-            <a id="login_link" data-toggle="modal" data-target="#modal_login">
-                <span>
+            <a id="login_link" class="link" data-toggle="modal" data-target="#modal_login">
+                <div class="icon">
+                    <i class="fas fa-sign-in-alt fa-lg"></i>
+                </div>
+                <div class="text">
                     Войти
-                </span> 
+                </div> 
             </a>
 
         </div>
@@ -134,6 +139,16 @@
             </a>
 
         <?php endif ?>   
+
+        <?php if($view = 'vacancies') : ?>
+        
+            <a href="#" class="__modal-filter-btn list-group-item list-group-item-action">
+                <div class="text">
+                    Фильтры
+                </div>
+            </a>
+                        
+        <?php endif ?>
 
     </div>
     

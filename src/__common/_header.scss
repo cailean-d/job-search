@@ -195,6 +195,7 @@ $adaptive-header: 700px;
     }
 
     .header-menu-m{
+        user-select: none;
         background: #ffffff;
         position: fixed;
         top: $header-height - 1;
@@ -205,6 +206,11 @@ $adaptive-header: 700px;
         transform: scaleY(0);    
         transform-origin: top;
         transition: transform 0.5s ease;
+        display: none;
+
+        @media screen and (max-width: $adaptive-header) {
+            display: block;
+        }
 
         .text{
             text-align: center;

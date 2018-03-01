@@ -1141,7 +1141,7 @@ export class Main{
 
         toggle_button.onclick = () => {
 
-            if(toggle_drop_menu.classList.contains("menu-active")){
+            if(toggle_drop_menu && toggle_drop_menu.classList.contains("menu-active")){
                 drop_menu.style.display = "none";
                 toggle_drop_menu.classList.remove("menu-active");
             }
@@ -1156,6 +1156,26 @@ export class Main{
                 
             }
             
+        }
+
+       this.hideHeaderMenu();
+    }
+
+    private static hideHeaderMenu(){
+        let toggle_menu : HTMLElement = document.querySelector(".header-menu-m");
+        let drop_menu : HTMLElement = document.querySelector("#header .drop_menu");
+        let toggle_drop_menu : HTMLAnchorElement = document.querySelector(".__dropdown_btn");
+
+        document.onscroll = () => {
+
+            if(toggle_menu.classList.contains("header-menu-m-fadein")){
+                toggle_menu.classList.remove("header-menu-m-fadein");
+            } 
+
+            if(toggle_drop_menu && toggle_drop_menu.classList.contains("menu-active")){
+                drop_menu.style.display = "none";
+                toggle_drop_menu.classList.remove("menu-active");
+            }
         }
     }
 }
