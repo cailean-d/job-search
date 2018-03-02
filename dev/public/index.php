@@ -43,10 +43,10 @@
         </div>
 
 
-        <div class="modal-disable">
+        <!-- <div class="modal-disable">
             <i class="fas fa-spinner fa-pulse fa-10x"></i>
         </div>
-        
+         -->
         <?php include("app/views/parts/modal_alert.php")?>
 
         <?php include("app/views/parts/modal_confirm.php")?>    

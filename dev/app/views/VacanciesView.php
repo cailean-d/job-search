@@ -1,4 +1,4 @@
-<main class="col-xl-9 col-md-12">
+<main class="col-xl-9 col-lg-9 col-md-12">
         
     <!-- ************************************************************ -->
     <!--                      Список вакансий                         -->
@@ -27,10 +27,10 @@
                             </div>
                             <div class="bottom">
                                 <div>
-                                    в компанию <span class="company">"<?=$vacancy->getCompany()?>"</span>
+                                    Компания <span class="company">"<?=$vacancy->getCompany()?>"</span>
                                 </div>
                                 <div>
-                                    график: <span class="emp"><?=mb_strtolower($vacancy->getScheduleName(), "UTF-8")?></span>
+                                    График: <span class="emp"><?=mb_strtolower($vacancy->getScheduleName(), "UTF-8")?></span>
                                 </div>
                             </div>
                         </header>
@@ -38,11 +38,17 @@
                             <span class="dem">Требования: </span><?=str_replace(",", ", ", mb_strtolower($vacancy->getDemands(), 'UTF-8'))?>
                         </p>
                         <footer>
-                            <div>
-                                <?=$vacancy->getLocation();?>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="text">
+                                    <?=$vacancy->getLocation();?>
+                                </div>
                             </div>
-                            <div>
-                                <?=date("d.m.Y H:i:s", strtotime($vacancy->getDate()));?>
+                            <div class="date">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div class="text">
+                                    <?=date("d.m.Y H:i:s", strtotime($vacancy->getDate()));?>
+                                </div>
                             </div>
                         </footer>
                     </article>
@@ -52,7 +58,7 @@
     endif ?>
 
 </main>
-<aside class="col-xl-4 hidden-sm-down">
+<aside class="col-xl-4 col-lg-4">
     
     <!-- ************************************************************ -->
     <!--                        Фильтры                               -->
