@@ -6,7 +6,10 @@ module.exports = {
     vacancies: './src/vacancies/script/index.tsx',
     vacancy: './src/vacancy/script/index.tsx',
     ownvacancies: './src/ownvacancies/script/index.tsx',
-    errorpage: './src/errorpage/script/index.tsx'
+    errorpage: './src/errorpage/script/index.tsx',
+    vacancyedit: './src/vacancyedit/script/index.tsx',
+    resume: './src/resume/script/index.tsx',
+    resumeedit: './src/resumeedit/script/index.tsx'
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
