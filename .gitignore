@@ -1,8 +1,8 @@
 node_modules/
 .prod/
 dev/public/doc/
-dev/public/javascript
-dev/public/stylesheet
+dev/public/script
+dev/public/style
 test/
 dev/app/logs/*.*
 old/

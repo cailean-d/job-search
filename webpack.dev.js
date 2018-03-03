@@ -9,7 +9,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 module.exports = merge(common, {
     devtool: 'inline-source-map',
     output: {
-      filename: 'javascript/[name].bundle.js',
+      filename: 'script/[name].bundle.js',
       path: path.resolve(__dirname, 'dev/public')
     },
     watchOptions: {
@@ -17,8 +17,8 @@ module.exports = merge(common, {
       poll: 1000
     },
     plugins: [
-      // new CleanWebpackPlugin(['dev/public/javascript', 'dev/public/stylesheet']),
-      new ExtractTextPlugin("stylesheet/[name].bundle.css"),
+      new CleanWebpackPlugin(['dev/public/script', 'dev/public/style']),
+      new ExtractTextPlugin("style/[name].bundle.css"),
       new BrowserSyncPlugin({
         open: true,
         host: 'localhost',
