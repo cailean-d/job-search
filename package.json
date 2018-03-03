@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build-dev": "webpack --config webpack.dev.js",
-    "build-dev-watch": "webpack --config webpack.dev.js --watch --progress",
+    "dev-watch": "webpack --config webpack.dev.js --watch --progress",
     "build": "set NODE_ENV=production && gulp build"
   },
   "repository": {

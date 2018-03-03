@@ -1,0 +1,118 @@
+.full_vacancy{
+
+    .vacancy_name{
+        font-size: 35px;
+        color: #636363;
+        font-weight: bold;
+    }
+
+    .company{
+        color: #1878af;
+        font-size: 35px;
+    }
+
+    .vacancy_info{
+        display: flex;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .vacancy_info > *{
+        flex-grow: 1;
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .vacancy_info > * .header{
+        color: #7c7c7c;
+        margin-bottom: 10px;
+    }
+    
+    .vacancy_info > * .body{
+        color: #757575;
+        font-weight: bold;
+    }
+
+    .primary_info, .secondary_info{
+        padding: 20px;
+    }
+    
+    .primary_info ul{
+        margin-left: 50px;
+    }
+
+    .primary_info ul li{
+        margin-bottom: 5px;
+    }
+    
+    .primary_info > *{
+        margin-bottom: 20px;
+    }
+    
+    .primary_info > * h4{
+        margin-bottom: 5px;
+    }
+    
+    .primary_info > .demands{
+        margin-bottom: 0;
+    }
+    
+    .secondary_info > * {
+        margin-bottom: 20px;
+    }
+    
+    .secondary_info > * h4{
+        margin-bottom: 30px;
+        color: #646464;
+    }
+
+    .contact_info{
+        width: auto !important;
+        margin: 10px 0 0 32px;
+    }
+    
+    .contact_info td,
+    .contact_info th{
+        white-space: nowrap;
+        padding: 7px 50px 7px 0;
+        border: 0;
+    }
+    
+    .secondary_info .schedule > div,
+    .secondary_info .name{
+        margin-left: 10px;
+    }
+    
+    .secondary_info .name{
+        color: #252525;
+        font-weight: bold;
+    }
+    
+    .wq{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .description{
+        font-style: italic;
+        font-weight: 500;
+        font-size: 19px;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

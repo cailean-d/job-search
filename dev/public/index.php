@@ -1,3 +1,4 @@
+<?php $_view = $view;?>
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -6,7 +7,7 @@
         <base href="/">
         <link rel="shortcut icon" href="favicon.png">
 
-        <link rel="stylesheet" href="public/stylesheet/<?=$view?>.bundle.css?<?=uniqid()?>">
+        <link rel="stylesheet" href="public/stylesheet/<?=$_view?>.bundle.css?<?=uniqid()?>">
 
         <!-- <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-reboot.min.css">
         <link rel="stylesheet" href="public/stylesheet/lib/bootstrap-grid.min.css">
@@ -70,7 +71,7 @@
         ?>
         
 
-        <script src="public/javascript/<?=$view?>.bundle.js?<?=uniqid()?>"></script>
+        <script src="public/javascript/<?=$_view?>.bundle.js?<?=uniqid()?>"></script>
 
         <!-- <script src="public/javascript/lib/jquery.min.js"></script>
         <script src="public/javascript/lib/tether.min.js"></script>

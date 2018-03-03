@@ -1,5 +1,8 @@
 import "./main.scss";
 
+import "./lib/script/fontawesome-all.min.js";
+import "./lib/script/bootstrap.min.js";
+
 export class Main{
 
     static activePage(){

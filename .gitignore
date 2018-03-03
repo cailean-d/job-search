@@ -5,3 +5,4 @@ dev/public/javascript
 dev/public/stylesheet
 test/
 dev/app/logs/*.*
+old/
