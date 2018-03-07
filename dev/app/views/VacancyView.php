@@ -1,10 +1,10 @@
 <main>
     <div class="d-flex justify-content-center">
-        <div class="card mb-4 full_vacancy col-10">
+        <div class="card mb-4 full_vacancy col-11 col-sm-10">
             <div class="vacancy_id" hidden><?=$vacancy->getId()?></div>
             <div class="card-block">
                 <div class="header">
-                    <div class="d-flex justify-content-between mb-4 wq">
+                    <div class="d-flex justify-content-between mb-4 wq header__top">
                         <span class="vacancy_name">
                             <?=$vacancy->getVacancyName()?>
                         </span>
@@ -12,7 +12,7 @@
                             <?=$vacancy->getCompany() ?>
                         </span>
                     </div>
-                    <div class="card">
+                    <div class="card header__bottom">
                         <div class="vacancy_info card-block bg-faded">
                             <div class="salary">
                                 <div class="header">

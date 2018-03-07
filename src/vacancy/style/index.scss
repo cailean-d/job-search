@@ -1,45 +1,113 @@
 .full_vacancy{
 
+    @media screen and (max-width: 600px){
+        padding: 0 !important;
+        width: 94%;
+        max-width: 100%;
+    }
+
+    > .card-block{
+
+        @media screen and (max-width: 600px){
+            padding: 0.5rem;
+        }
+    }
+
+    .header{
+        
+        &__top{
+            @media screen and (max-width: 600px){
+                display: block !important;
+            }
+
+            .vacancy_name, .company{
+                @media screen and (max-width: 600px){
+                    display: block;
+                    width: 100%;
+                    max-width: 100%;
+                    text-align: center;
+                }
+            }
+
+            .company{
+                color: #1878af;
+                font-size: 35px;
+                @media screen and (max-width: 600px){
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        
+        .vacancy_info{
+            display: flex;
+            padding-top: 15px;
+            padding-bottom: 15px;
+
+            > *{
+                flex-grow: 1;
+                text-align: center;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            
+            > * .header{
+                color: #7c7c7c;
+                margin-bottom: 10px;
+            }
+            
+            
+            > * .body{
+                color: #757575;
+                font-weight: bold;
+            }
+
+            @media screen and (max-width: 600px){
+                display: block !important;
+                padding: 0.7rem !important;
+            }
+             
+            .salary, .city, .exp{
+                @media screen and (max-width: 600px){
+                    margin-bottom: 10px;
+                }
+                .header{
+                    @media screen and (max-width: 600px){
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
     .vacancy_name{
         font-size: 35px;
         color: #636363;
         font-weight: bold;
     }
 
-    .company{
-        color: #1878af;
-        font-size: 35px;
+    .primary_info{
+        .conditions h4, .duties h4, .demands h4{
+            @media screen and (max-width: 600px){
+                text-align: center;
+            }
+        }
     }
 
-    .vacancy_info{
-        display: flex;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .vacancy_info > *{
-        flex-grow: 1;
-        text-align: center;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .vacancy_info > * .header{
-        color: #7c7c7c;
-        margin-bottom: 10px;
-    }
-    
-    .vacancy_info > * .body{
-        color: #757575;
-        font-weight: bold;
-    }
 
     .primary_info, .secondary_info{
         padding: 20px;
+        @media screen and (max-width: 600px){
+            padding: 0.3rem;
+        }
     }
     
     .primary_info ul{
         margin-left: 50px;
+        @media screen and (max-width: 600px){
+            margin-left: 1rem;
+            font-size: 1rem;
+        }
     }
 
     .primary_info ul li{
@@ -56,6 +124,30 @@
     
     .primary_info > .demands{
         margin-bottom: 0;
+    }
+
+    .secondary_info{
+        .schedule h4, .user_info h4{
+            @media screen and (max-width: 600px){
+                text-align: center;
+            }
+        }
+        .user_info{
+            .table{
+                @media screen and (max-width: 600px){
+                    margin-left: 0 !important;
+                    max-width: 100% !important;
+                    width: 90%;
+                }
+
+                th, td{
+                    @media screen and (max-width: 600px){
+                        padding: 0;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
     }
     
     .secondary_info > * {
@@ -92,6 +184,10 @@
     .wq{
         padding-left: 20px;
         padding-right: 20px;
+
+        @media screen and (max-width: 600px){
+            padding: 0;
+        }
     }
     
     .description{
