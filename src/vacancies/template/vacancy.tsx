@@ -13,7 +13,7 @@ interface Properties{
     salaryMax : string
 }
 
-export const Hello = (props : Properties) => {
+export const Vacancy = (props : Properties) => {
      
     return (
             
