@@ -6,6 +6,7 @@ import "./../../__common/lib/script/bootstrap-slider.min.js";
 
 // custom modules
 import { Filter } from "./filter";
+import { Pagination } from "./../../__common/pagination";
 
 Main.activePage();
 Main.modalProfile();
@@ -14,3 +15,6 @@ Main.modalReg();
 Main.dropMenu();
 Main.headerDropMenu();
 Filter.slider();
+
+
+let pag : Pagination = new Pagination('vacancies');
