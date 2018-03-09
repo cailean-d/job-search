@@ -25,26 +25,28 @@ let pag : Pagination = new Pagination('vacancies');
 
 let MainContainer : HTMLElement = document.querySelector("main");
 
-window.onscroll = pag.getData((st, err) : any =>{
+window.onscroll = () => {
+    pag.getData((st, err) : any =>{
     
-    console.log("error");
-
-}, () : any =>{
-
-    for (const el of pag.data) {
-
-        appendNode(<Vacancy
-                    id = {13}
-                    name = "aa"
-                    company = "aa"
-                    schedule = "aa"
-                    demands =  "aa"
-                    location =  "aa"
-                    date =  "aa"
-                    salaryMin = "aa"
-                    salaryMax = "aa"
-                    />, MainContainer);
-   
-    }
-
-}) as any;
+        console.log("error");
+    
+    }, () : any =>{
+    
+        for (const el of pag.data) {
+    
+            appendNode(<Vacancy
+                        id = {13}
+                        name = "aa"
+                        company = "aa"
+                        schedule = "aa"
+                        demands =  "aa"
+                        location =  "aa"
+                        date =  "aa"
+                        salaryMin = "aa"
+                        salaryMax = "aa"
+                        />, MainContainer);
+       
+        }
+    
+    }) as any;
+}
