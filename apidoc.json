@@ -4,7 +4,7 @@
     "description": "Сервис для поиска работы",
     "title": "API Документация",
     "url" : "http://domain/api/1.0.0/",
-    "sampleUrl" : "http://project/api/1.0.0/",
+    "sampleUrl" : "http://job/api/1.0.0/",
     "withGenerator" : "false",
     "withCompare" : "false"
   }

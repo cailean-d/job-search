@@ -33,7 +33,13 @@
                     'method' => 'get',
                     'url' => 'vacancy/:id{number}',
                     'handler' => 'get'
-                ]
+                ],
+
+                [
+                    'method' => 'get',
+                    'url' => 'vacancy/get/:limit{number}/:offset{number}',
+                    'handler' => 'getLimited'
+                ],
 
             );
 
@@ -727,6 +733,122 @@
                 Http::response($res, 200);
 
             }
+
+        }
+
+        /**
+         * 
+         * @api {get} vacancy/get/:limit/:offset Получить вакансии
+         * @apiName GetAllVacancy
+         * @apiGroup Vacancy
+         * @apiVersion  1.0.0
+         * 
+         * @apiSuccess (200) {String} id ID вакансии
+         * @apiSuccess (200) {String} sender_name Имя работодателя
+         * @apiSuccess (200) {String} sender_id ID пользователя
+         * @apiSuccess (200) {String} email Email пользователя
+         * @apiSuccess (200) {String} company Название компании
+         * @apiSuccess (200) {String} phone Телефонный номер работодателя
+         * @apiSuccess (200) {String} vacancy_name Название вакансии
+         * @apiSuccess (200) {String} salary_min Минимальная зарплата
+         * @apiSuccess (200) {String} salary_max Максимальная зарплата
+         * @apiSuccess (200) {String} experience Необходимый опыт работы
+         * @apiSuccess (200) {String} location Место работы
+         * @apiSuccess (200) {String} demands Требования
+         * @apiSuccess (200) {String} duties Обязанности
+         * @apiSuccess (200) {String} conditions Условаия работы
+         * @apiSuccess (200) {String} description Описание вакансии
+         * @apiSuccess (200) {String} status Статус (опубликована или нет)
+         * @apiSuccess (200) {String} date Дата публикации
+         * @apiSuccess (200) {String} schedule_name График работы
+         * @apiSuccess (200) {String} industry_name Отрасль
+         * 
+         * @apiSuccessExample {json} Success-Response:
+         * [
+         *      {
+         *          id : "1",
+         *          sender_name : "Василий Петренко",
+         *          sender_id : "5",
+         *          email : "example@test.com",
+         *          company : "ООО Серебряный век",
+         *          phone : "+79999999999",
+         *          vacancy_name : "Сторож",
+         *          salary_min : "22000",
+         *          salary_max : "25000",
+         *          experience : "1",
+         *          location : "Волгоград",
+         *          demands : "Требования",
+         *          duties : "Обязанностит",
+         *          conditions : "Условия работы",
+         *          description : "Описание...",
+         *          status : "1",
+         *          date : "2017-11-27 08:59:16",
+         *          schedule_name : "Полный день",
+         *          industry_name : "Охрана, безопасность",
+         *      },
+         *      {
+         *          id : "2",
+         *          sender_name : "Василий Петренко",
+         *          sender_id : "5",
+         *          email : "example@test.com",
+         *          company : "ООО Серебряный век",
+         *          phone : "+79999999999",
+         *          vacancy_name : "Сторож",
+         *          salary_min : "44000",
+         *          salary_max : "25000",
+         *          experience : "5",
+         *          location : "Москва",
+         *          demands : "Требования",
+         *          duties : "Обязанностит",
+         *          conditions : "Условия работы",
+         *          description : "Описание...",
+         *          status : "1",
+         *          date : "2017-11-27 01:59:16",
+         *          schedule_name : "Полный день",
+         *          industry_name : "Охрана, безопасность",
+         *      },
+         * ]
+
+         * 
+         */
+
+        public static function getLimited($router){
+            
+            $vacancy = Vacancy::getLimited($router['limit'], $router['offset']);
+                
+            $res = array();
+
+            foreach ($vacancy as $vac) {
+
+                array_push($res,
+
+                [
+
+                    'id' => $vac->getId(),
+                    'sender_name' => $vac->getSenderName(),
+                    'sender_id' => $vac->getSenderId(),
+                    'email' => $vac->getEmail(),
+                    'company' => $vac->getCompany(),
+                    'phone' => $vac->getPhone(),
+                    'vacancy_name' => $vac->getVacancyName(),
+                    'salary_min' => $vac->getSalaryMin(),
+                    'salary_max' => $vac->getSalaryMax(),
+                    'experience' => $vac->getExperience(),
+                    'location' => $vac->getLocation(),
+                    'demands' => $vac->getDemands(),
+                    'duties' => $vac->getDuties(),
+                    'conditions' => $vac->getConditions(),
+                    'description' => $vac->getDescription(),
+                    'status' => $vac->getStatus(),
+                    'date' => $vac->getDate(),
+                    'schedule_name' => $vac->getScheduleName(),
+                    'industry_name' => $vac->getIndustryName(),
+
+                ]);
+
+            }
+
+            Http::response($res, 200);
 
         }
 
