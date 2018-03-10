@@ -21,30 +21,36 @@ Main.headerDropMenu();
 Filter.slider();
 
 
-let pag : Pagination = new Pagination('vacancies');
+// ajax onscroll pagination
 
 let MainContainer : HTMLElement = document.querySelector("main");
+let vacancies : NodeListOf <HTMLElement> = document.querySelectorAll('.vacancy_block');
+let vacabcies_count : number = vacancies.length;
+let pag : Pagination = new Pagination('vacancy/get', null, vacabcies_count);
+let modal : HTMLElement = document.querySelector("#modal __text");
+
 
 window.onscroll = () => {
     pag.getData((st, err) : any =>{
     
-        console.log("error");
+        modal.innerHTML = err;
+        $('#modal').modal('show');
     
     }, () : any =>{
     
         for (const el of pag.data) {
     
             appendNode(<Vacancy
-                        id = {13}
-                        name = "aa"
-                        company = "aa"
-                        schedule = "aa"
-                        demands =  "aa"
-                        location =  "aa"
-                        date =  "aa"
-                        salaryMin = "aa"
-                        salaryMax = "aa"
-                        />, MainContainer);
+                id = {(el as any).id}
+                name = {(el as any).vacancy_name}
+                company = {(el as any).company}
+                schedule = {(el as any).schedule_name}
+                demands =  {(el as any).demands}
+                location =  {(el as any).location}
+                date =  {(el as any).date}
+                salaryMin = {(el as any).salary_min}
+                salaryMax = {(el as any).salary_max}
+            />, MainContainer);
        
         }
     

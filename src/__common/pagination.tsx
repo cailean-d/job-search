@@ -1,6 +1,6 @@
 export class Pagination{
     
-    public dataLimit : number = 20;
+    public dataLimit : number = 2;
     public dataLoaded : number = 0;
     public data : {}[];
     public baseUrl : string = "api/1.0.0/";
@@ -11,9 +11,10 @@ export class Pagination{
     private isLoading : boolean = false;
     private stopLoad : boolean = false;
 
-    constructor(api : string , limit? : number){
+    constructor(api : string , limit? : number, loaded? : number){
         this.apiUrl = api;
-        this.dataLimit = limit;
+        if(limit) this.dataLimit = limit;
+        if(loaded) this.dataLoaded = loaded;
     }
 
     public setLoader(){}
@@ -23,18 +24,19 @@ export class Pagination{
     public getData(onerror? : (st : number, err : string)=>{}, onsuccess? : ()=>{}){
 	
         if (this.win.pageYOffset >= this.doc.offsetHeight - this.doc.clientHeight){
-            
-            if(!(this.isLoading && this.stopLoad)){
+
+            if(!(this.isLoading || this.stopLoad)){
 
                 this.isLoading = true;
                 this.setLoader();
 
                 let url : string = this.baseUrl + this.apiUrl;
-                let request : string = '?limit=' + this.dataLimit + '&offset=' + this.dataLoaded;
+                let data : string = '/' + this.dataLimit + '/' + this.dataLoaded;
+                let request = url + data;
 
                 let xhr : XMLHttpRequest = new XMLHttpRequest();
 
-                xhr.open('GET', url + request);
+                xhr.open('GET', request);
                 xhr.send();
 
                 xhr.onload = () => {
@@ -50,7 +52,7 @@ export class Pagination{
                         if(this.data.length < this.dataLimit){
                             this.stopLoad = true;
                         }
-                            
+
                         onsuccess();
 
                     } else {
