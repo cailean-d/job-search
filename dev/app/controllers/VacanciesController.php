@@ -18,7 +18,7 @@
             $this->data['cities'] = Vacancy::getCities();
             $this->data['minSalary'] = Vacancy::getMinSalary();
             $this->data['maxSalary'] = Vacancy::getMaxSalary();
-            $this->data['vacancies'] = Vacancy::getFiltered();
+            $this->data['vacancies'] = Vacancy::getLimited(10);
             $this->data['filter']['query'] = $_GET['query'];
             $this->data['filter']['industry'] = $_GET['industry'];
             $this->data['filter']['location'] = $_GET['location'];
