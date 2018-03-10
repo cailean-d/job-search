@@ -480,6 +480,46 @@
 
         }
 
+        public static function getLimited($limit = 20, $offset = 0){
+
+            self::applyConfig();
+
+            $vacancyAll = array();
+
+            $vacancy = Database::run('SELECT * FROM '. self::$table.' WHERE status="1" ORDER BY id DESC LIMIT '.$limit.' OFFSET '.$offset);
+
+            foreach($vacancy as $vac){
+
+                array_push($vacancyAll,
+
+                new Vacancy(
+                    $vac['id'],
+                    $vac['sender_name'],
+                    $vac['sender_id'],
+                    $vac['email'],
+                    $vac['company'],
+                    $vac['phone'],
+                    $vac['vacancy'],
+                    $vac['salary_min'],
+                    $vac['salary_max'],
+                    $vac['exp'],
+                    $vac['location'],
+                    $vac['schedule'],
+                    $vac['industry'],
+                    $vac['demands'],
+                    $vac['duties'],
+                    $vac['conditions'],
+                    $vac['description'],
+                    $vac['status'],
+                    $vac['date']
+                ));
+
+            }
+
+            return $vacancyAll;
+
+        }
+
         public static function getJoinedByUserId($id){
 
             
