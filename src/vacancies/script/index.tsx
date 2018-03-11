@@ -10,6 +10,7 @@ import { Pagination } from "./../../__common/pagination";
 import { appendNode } from "./../../__common/appendNode";
 import { Filter } from './filter';
 import { Vacancy } from "./../template/vacancy";
+import { Alert } from "./../template/alert";
 
 
 Main.activePage();
@@ -48,20 +49,28 @@ filter.on("query_changed", () => {
 
 let drawData = () : void => {
 
-    for (const el of pagination.data) {
+    if(pagination.data.length > 0){
+
+        for (const el of pagination.data) {
             
-        appendNode(<Vacancy
-            id          = {el.id}
-            name        = {el.vacancy_name}
-            company     = {el.company}
-            schedule    = {el.schedule_name}
-            demands     = {el.demands}
-            location    = {el.location}
-            date        = {el.date}
-            salaryMin   = {el.salary_min}
-            salaryMax   = {el.salary_max}
-        />, MainContainer);
-   
+            appendNode(<Vacancy
+                id          = {el.id}
+                name        = {el.vacancy_name}
+                company     = {el.company}
+                schedule    = {el.schedule_name}
+                demands     = {el.demands}
+                location    = {el.location}
+                date        = {el.date}
+                salaryMin   = {el.salary_min}
+                salaryMax   = {el.salary_max}
+            />, MainContainer);
+       
+        }
+
+    } else {
+
+        appendNode(<Alert/>, MainContainer);
+
     }
 
 }
