@@ -743,6 +743,21 @@
          * @apiGroup Vacancy
          * @apiVersion  1.0.0
          * 
+         * @apiParam  {String} [query] Поиск по фразе
+         * @apiParam  {String} [sort=date] Сортировка (date, salary)
+         * @apiParam  {String} [time] Период (1, 3, 7, 30)
+         * @apiParam  {String} [salary_min] Минимальная зарплата
+         * @apiParam  {String} [salary_max] Максимальная заплата
+         * @apiParam  {String} [industry] ID Отрасли
+         * @apiParam  {String} [schedule] ID Типа занятости
+         * 
+         * @apiParamExample  {json} Request-Example:
+         * {
+         *      query : "Сторож",
+         *      sort : "salary"
+         *      time : "3"
+         * }
+         * 
          * @apiSuccess (200) {String} id ID вакансии
          * @apiSuccess (200) {String} sender_name Имя работодателя
          * @apiSuccess (200) {String} sender_id ID пользователя

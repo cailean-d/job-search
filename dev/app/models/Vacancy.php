@@ -486,7 +486,9 @@
 
             $vacancyAll = array();
 
-            $vacancy = Database::run('SELECT * FROM '. self::$table.' WHERE status="1" ORDER BY id DESC LIMIT '.$limit.' OFFSET '.$offset);
+            $vacancy = Database::run('SELECT * FROM '. self::$table.' WHERE status="1"'.self::getFilter().' LIMIT '.$limit.' OFFSET '.$offset);
+
+            Application::log("filter.txt", self::getFilter());
 
             foreach($vacancy as $vac){
 
@@ -958,6 +960,92 @@
             ';
 
             return $sql;
+
+        }
+
+        public static function getFilter(){
+                            
+            $sort = 'date';
+            $salary_min = '';
+            $salary_max = '';
+            $industry = '';
+            $location = '';
+            $time = '';
+            $schedule = '';        
+            $query = '';
+        
+        
+            if($_GET['sort'] && $_GET['sort'] == 'salary'){
+                $sort = 'salary_min';
+            } 
+        
+            if($_GET['time']){
+                if($_GET['time'] == '1'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 1 DAY )';
+                } else if($_GET['time'] == '3'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 3 DAY )';
+                } else if($_GET['time'] == '7'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 7 DAY )';
+                } else if($_GET['time'] == '30'){
+                    $time = ' AND date >= ( CURDATE() - INTERVAL 30 DAY )';
+                } else {
+                    $time =  '';
+                }
+            }
+        
+            if($_GET['salary_min']){
+                if($_GET['salary_min'] == '-1'){
+                    $salary_min = '';
+                } else{
+                    $salary_min = ' AND `salary_min` >='.$_GET['salary_min'];
+                } 
+            }
+        
+            if($_GET['salary_max']){
+                if($_GET['salary_max'] == '-1'){
+                    $salary_max = '';
+                } else{
+                    $salary_max = ' AND `salary_max` <='.$_GET['salary_max'];
+                } 
+            }
+        
+            if($_GET['industry']){
+                if($_GET['industry'] == '-1'){
+                    $industry = '';
+                } else{
+                    $industry = ' AND `industry`='.$_GET['industry'];
+                } 
+            }
+        
+            if($_GET['schedule']){
+                if($_GET['schedule'] == '-1'){
+                    $schedule = '';
+                } else{
+                    $schedule = ' AND `schedule`='.$_GET['schedule'];
+                } 
+            }
+        
+            if($_GET['location']){
+                if($_GET['location'] == '-1'){
+                    $location = '';
+                } else{
+                    $location = ' AND `location`="'.$_GET['location'].'"';
+                } 
+            }
+        
+            if($_GET['query']){
+                $query = " AND 
+                        `vacancy` LIKE '%".$_GET['query']."%' 
+                        OR 
+                        `description` LIKE '%".$_GET['query']."%'
+                        ";
+            }
+        
+            $filter = $salary_min.''.$salary_max.''.$industry.''
+                     .$location.''.$time.''.$schedule.''
+                     .$query.' ORDER BY '.$sort.' DESC';
+
+            return $filter;
 
         }
 

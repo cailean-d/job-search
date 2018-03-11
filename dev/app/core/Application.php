@@ -21,12 +21,12 @@
             if($append){
 
                 file_put_contents(realpath(__DIR__.'/../logs').DIRECTORY_SEPARATOR.$file, 
-                '[ '.date('d-m-Y H:i:m').' ] >> '.$data . "\r\n", FILE_APPEND);
+                '[ '.date('d-m-Y H:i:m').' ] >> '.preg_replace('/\s+/S', " ", $data). "\r\n", FILE_APPEND);
 
             } else {
 
                 file_put_contents(realpath(__DIR__.'/../logs').DIRECTORY_SEPARATOR.$file, 
-                '[ '.date('d-m-Y H:i:m').' ] >> '.$data . "\r\n");
+                '[ '.date('d-m-Y H:i:m').' ] >> '.preg_replace('/\s+/S', " ", $data). "\r\n");
 
             }
 

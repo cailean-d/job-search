@@ -7,7 +7,7 @@
     <?php 
     if(count($vacancies) == 0) : ?>
         <div class="alert alert-info" role="alert">
-            <strong>Вакансий нет.</strong>
+            <strong>По Вашему запросу вакансии не найдены.</strong>
         </div>
     <?php else : 
         foreach($vacancies as $vacancy) :?>
