@@ -76,9 +76,12 @@
                 <div class="option">
                     <label>Зарплата :</label>
                     <span id="salary-view">
-                        <?=$minSalaryInterval . " - " . $maxSalaryInterval?></span><span> p.
+                        <?=($_GET['salary_min']) ? $_GET['salary_min'] : $minSalaryInterval?> - <?=($_GET['salary_max']) ? $_GET['salary_max'] : $maxSalaryInterval?>p.
                     </span>
-                    <input id="salary" type="text" class="span2" value="" data-slider-min="0" data-slider-max="<?=$maxSalaryInterval?>" data-slider-step="5000" data-slider-value="[<?=$minSalaryInterval?>,<?=$maxSalaryInterval?>]"/>
+                    <span hidden id="__default-salary">
+                        <?=$minSalaryInterval . "," . $maxSalaryInterval?>
+                    </span>
+                    <input hidden id="salary" name="salary" type="text" class="span2" value="" data-slider-min="0" data-slider-max="<?=$maxSalaryInterval?>" data-slider-step="5000" data-slider-value="[<?=($_GET['salary_min']) ? $_GET['salary_min'] : $minSalaryInterval?>,<?=($_GET['salary_max']) ? $_GET['salary_max'] : $maxSalaryInterval?>]"/>
                 </div>
                 <div class="option industry">
                     <label>Отрасль :</label>
@@ -130,8 +133,11 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-                <button type="submit" class="apply btn btn-primary btn-block hand">
+                <button type="submit" class="__apply-filter btn btn-primary btn-block hand">
                     Применить фильтр
+                </button>
+                <button type="reset" class="__reset-filter btn btn-outline-primary btn-block hand">
+                    Сбросить фильтр
                 </button>
             </form>
         </div>

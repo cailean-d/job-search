@@ -8,7 +8,7 @@ import "./../../__common/lib/script/bootstrap-slider.min.js";
 // custom modules
 import { Pagination } from "./../../__common/pagination";
 import { appendNode } from "./../../__common/appendNode";
-import { Filter } from "./filter";
+import { Filter } from './filter';
 import { Vacancy } from "./../template/vacancy";
 
 
@@ -18,41 +18,79 @@ Main.modalLogin();
 Main.modalReg();
 Main.dropMenu();
 Main.headerDropMenu();
-Filter.slider();
-
 
 // ajax onscroll pagination
+
+let w : Window = window;
+let doc : HTMLElement = document.documentElement;
 
 let MainContainer : HTMLElement = document.querySelector("main");
 let vacancies : NodeListOf <HTMLElement> = document.querySelectorAll('.vacancy_block');
 let vacabcies_count : number = vacancies.length;
-let pag : Pagination = new Pagination('vacancy/get', null, vacabcies_count);
+let pagination : Pagination = new Pagination('vacancy/get', 5, vacabcies_count);
 let modal : HTMLElement = document.querySelector("#modal __text");
+let reset_filter : HTMLButtonElement = document.querySelector(".__reset-filter");
+
+let filter : Filter = new Filter(MainContainer);
+filter.slider();
+filter.applyFilter();
 
 
-window.onscroll = () => {
-    pag.getData((st, err) : any =>{
+filter.on("query_changed", () => {
+
+    pagination.dataLoaded = 0;
+    pagination.stopLoad = false;
+    pagination.parameters = filter.queryString;    
+    pagination.getData(showError, drawData);
+
+});
+
+
+let drawData = () : void => {
+
+    for (const el of pagination.data) {
+            
+        appendNode(<Vacancy
+            id          = {el.id}
+            name        = {el.vacancy_name}
+            company     = {el.company}
+            schedule    = {el.schedule_name}
+            demands     = {el.demands}
+            location    = {el.location}
+            date        = {el.date}
+            salaryMin   = {el.salary_min}
+            salaryMax   = {el.salary_max}
+        />, MainContainer);
+   
+    }
+
+}
+
+let showError = (status : number, err : string) => {
+
+    modal.innerHTML = err;
+    $('#modal').modal('show');
+
+}
+
+
+window.onwheel = (e : WheelEvent) => {
     
-        modal.innerHTML = err;
-        $('#modal').modal('show');
-    
-    }, () : any =>{
-    
-        for (const el of pag.data) {
-    
-            appendNode(<Vacancy
-                id = {(el as any).id}
-                name = {(el as any).vacancy_name}
-                company = {(el as any).company}
-                schedule = {(el as any).schedule_name}
-                demands =  {(el as any).demands}
-                location =  {(el as any).location}
-                date =  {(el as any).date}
-                salaryMin = {(el as any).salary_min}
-                salaryMax = {(el as any).salary_max}
-            />, MainContainer);
-       
-        }
-    
-    }) as any;
+    if(e.deltaY > 0) {
+
+        if (w.pageYOffset >= doc.offsetHeight - doc.clientHeight){
+
+            pagination.getData(showError, drawData);
+
+        }        
+
+    }
+
+}
+
+reset_filter.onclick = (e : MouseEvent) => {
+
+    e.preventDefault();
+    filter.resetForm();
+
 }
