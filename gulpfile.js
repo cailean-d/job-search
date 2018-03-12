@@ -61,30 +61,24 @@ gulp.task('apidoc-dev', function(done){
     }, done);
 });
 
-gulp.task('test-php', function() {
-    return gulp.src(['./app/**/*.php', '!./app/doc/**/*.*'])
+gulp.task('concat-php', function() {
+    return gulp.src(['./dev/app/**/*.php'])
       .pipe(concat('all.php'))
       .pipe(gulp.dest('./test/'));
 });
 
-gulp.task('test-js', function() {
-    return gulp.src(['./public/javascript/*.js'])
+gulp.task('concat-js', function() {
+    return gulp.src(['./src/**/*', '!./src/__common/lib/**/*'])
       .pipe(concat('all.js'))
       .pipe(gulp.dest('./test/'));
 });
 
-gulp.task('test-css', function() {
-    return gulp.src(['./public/stylesheet/*.css'])
-      .pipe(concat('all.css'))
-      .pipe(gulp.dest('./test/'));
-});
 
-gulp.task('test-all', function() {
+gulp.task('concat-all', function() {
     return gulp.src([
-        './public/stylesheet/*.css', 
-        './app/**/*.php', 
-        '!./app/doc/**/*.*', 
-        './public/javascript/*.js'
+        './dev/app/**/*.php', 
+        './src/**/*', 
+        '!./src/__common/lib/**/*' 
         ])
       .pipe(concat('all.txt'))
       .pipe(gulp.dest('./test/'));
