@@ -20,7 +20,7 @@ export class Pagination{
     public data : IData[];
     public baseUrl : string = "api/1.0.0/";
     public apiUrl : string;
-    public parameters : string = "";
+    private _parameters : string = "";
 
     private doc : HTMLElement = document.documentElement;
     private win : Window = window;
@@ -31,6 +31,18 @@ export class Pagination{
         this.apiUrl =  this.baseUrl + api;
         if(limit) this.dataLimit = limit;
         if(loaded) this.dataLoaded = loaded;
+    }
+
+    get parameters(){
+        return this._parameters;
+    }
+
+    set parameters(p : string){
+        this._parameters = p;
+    }
+
+    private getPar(){
+        return this._parameters;
     }
 
     public setLoader(){}

@@ -4,7 +4,7 @@ export const Alert = () => {
      
     return (
             
-        <div className="alert alert-info" role="alert">
+        <div className="alert alert-info __alert-vacancy" role="alert">
             <strong>По Вашему запросу вакансий не найдено.</strong>
         </div>
         

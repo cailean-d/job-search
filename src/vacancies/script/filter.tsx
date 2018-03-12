@@ -36,7 +36,9 @@ export class Filter extends EventEmitter{
 
     set queryString(q : string){
         this._queryString = q;
-        this.emit("query_changed");
+        setTimeout(()=>{
+            this.emit("query_changed");
+        }, 0);
     }
 
     constructor(el : HTMLElement){
@@ -46,7 +48,6 @@ export class Filter extends EventEmitter{
 
     slider () : void {
 
-        let range : HTMLElement = document.getElementById("salary");
         let slider_view : HTMLElement = document.getElementById("salary-view");
 
         $("#salary").slider({
@@ -55,7 +56,7 @@ export class Filter extends EventEmitter{
             range : true,
         });
         
-        $("#salary").on("slide", function(e) {
+        $("#salary").on("slide", (e : any) => {
             slider_view.innerHTML = (e.value as any)[0] + " - " + (e.value as any)[1];
         });
 
@@ -94,6 +95,9 @@ export class Filter extends EventEmitter{
 
             this.changeUrl();
             this.clearContainer();
+            setTimeout(()=>{
+                this.emit("filter_applied");
+            }, 0);
 
         }
         

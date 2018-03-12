@@ -6,7 +6,7 @@
     
     <?php 
     if(count($vacancies) == 0) : ?>
-        <div class="alert alert-info" role="alert">
+        <div class="alert alert-info __alert-vacancy" role="alert">
             <strong>По Вашему запросу вакансии не найдены.</strong>
         </div>
     <?php else : 

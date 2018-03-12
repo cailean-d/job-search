@@ -27,8 +27,8 @@ let doc : HTMLElement = document.documentElement;
 
 let MainContainer : HTMLElement = document.querySelector("main");
 let vacancies : NodeListOf <HTMLElement> = document.querySelectorAll('.vacancy_block');
-let vacabcies_count : number = vacancies.length;
-let pagination : Pagination = new Pagination('vacancy/get', 5, vacabcies_count);
+let vacancies_count : number = vacancies.length;
+let pagination : Pagination = new Pagination('vacancy/get', 5, vacancies_count);
 let modal : HTMLElement = document.querySelector("#modal __text");
 let reset_filter : HTMLButtonElement = document.querySelector(".__reset-filter");
 
@@ -39,11 +39,16 @@ filter.applyFilter();
 
 filter.on("query_changed", () => {
 
+    pagination.parameters = filter.queryString;    
+
+});
+
+filter.on("filter_applied", () => {
+    
     pagination.dataLoaded = 0;
     pagination.stopLoad = false;
-    pagination.parameters = filter.queryString;    
     pagination.getData(showError, drawData);
-
+    
 });
 
 
@@ -69,7 +74,14 @@ let drawData = () : void => {
 
     } else {
 
-        appendNode(<Alert/>, MainContainer);
+        let alert : HTMLElement = document.querySelector(".__alert-vacancy");
+        let len : number = document.querySelectorAll('.vacancy_block').length;
+
+        if(len == 0 && !alert){
+
+            appendNode(<Alert/>, MainContainer);
+
+        }
 
     }
 
