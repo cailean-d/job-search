@@ -46,14 +46,12 @@ export class Filter extends EventEmitter{
         this.container = el;
     }
 
-    slider () : void {
+    slider() : void {
 
         let slider_view : HTMLElement = document.getElementById("salary-view");
 
         $("#salary").slider({
-            tooltip : "show",
-            tooltip_position: "top",
-            range : true,
+            range : true
         });
         
         $("#salary").on("slide", (e : any) => {

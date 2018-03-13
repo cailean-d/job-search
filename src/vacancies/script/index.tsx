@@ -12,7 +12,6 @@ import { Filter } from './filter';
 import { Vacancy } from "./../template/vacancy";
 import { Alert } from "./../template/alert";
 
-
 Main.activePage();
 Main.modalProfile();
 Main.modalLogin();
