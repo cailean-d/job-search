@@ -56,6 +56,8 @@ let drawData = () : void => {
     if(pagination.data.length > 0){
 
         for (const el of pagination.data) {
+
+            console.log(el);
             
             appendNode(<Vacancy
                 id          = {el.id}

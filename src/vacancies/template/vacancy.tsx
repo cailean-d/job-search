@@ -23,7 +23,7 @@ export const Vacancy = (props : Properties) => {
                     <header>
                         <div className="top">
                             <div className='title'>
-                                <a href='vacancy/{props.id}'>{props.name}</a>
+                                <a href={'vacancy/' + props.id}>{props.name}</a>
                             </div>
                             <div className='salary'>
                                 <span>
