@@ -208,6 +208,33 @@
 
                     <?php endif ?>
                 </div>
+
+                <div class="misc">
+                    <div class="resume_count">
+                        <div class="description">
+                            Оставлено резюме: 
+                        </div>
+                        <div class="counter">
+                            <?=$vacancy->getViews()?>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                    </div>
+                    <div class="views">
+                        <div class="description">
+                            Просмотров: 
+                        </div>
+                        <div class="counter">
+                            <?=$vacancy->getViews()?>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
