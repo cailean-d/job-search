@@ -18,6 +18,7 @@
         private $duties;
         private $conditions;
         private $description;
+        private $views;
         private $status;
         private $date;
         
@@ -30,7 +31,7 @@
                                     $experience = null, $location = null, $scheduleId = null, 
                                     $industryId = null, $demands = null, $duties = null, 
                                     $conditions = null, $description = null, $status = null, 
-                                    $date = null, $scheduleName = null, $industryName = null){
+                                    $date = null, $scheduleName = null, $industryName = null, $views = 0){
 
             self::applyConfig();
 
@@ -55,6 +56,7 @@
             $this->date = htmlspecialchars(trim($date));
             $this->scheduleName = htmlspecialchars(trim($scheduleName));
             $this->industryName = htmlspecialchars(trim($industryName));
+            $this->views = htmlspecialchars(trim($views));
 
         }
 
@@ -120,6 +122,10 @@
 
         public function getDescription(){
             return $this->description;
+        }
+
+        public function getViews(){
+            return $this->views;
         }
 
         public function getStatus(){
@@ -250,6 +256,13 @@
 
         }
 
+        public function setViews($views){
+
+            $this->views = htmlspecialchars(trim($views));
+            return $this;
+
+        }
+
         public function setStatus($status){
 
             $this->status = htmlspecialchars(trim($status));
@@ -286,6 +299,8 @@
             $this->description = null;
             $this->status = null;
             $this->date = null;
+            $this->views = null;
+            $this->scheduleName = null;
 
         }
 
@@ -314,7 +329,10 @@
                 $vacancy[0]['conditions'],
                 $vacancy[0]['description'],
                 $vacancy[0]['status'],
-                $vacancy[0]['date']
+                $vacancy[0]['date'],
+                null,
+                null,
+                $vacancy[0]['views']
             );
 
         }
@@ -350,7 +368,10 @@
                     $vac['conditions'],
                     $vac['description'],
                     $vac['status'],
-                    $vac['date']
+                    $vac['date'],
+                    null,
+                    null,
+                    $vac['views']
                 ));
 
             }
@@ -390,7 +411,10 @@
                     $vac['conditions'],
                     $vac['description'],
                     $vac['status'],
-                    $vac['date']
+                    $vac['date'],
+                    null,
+                    null,
+                    $vac['views']
                 ));
 
             }
@@ -431,7 +455,9 @@
                     $vac['description'],
                     $vac['status'],
                     $vac['date'],
-                    $vac['schedule_name']
+                    $vac['schedule_name'],
+                    null,
+                    $vac['views']
                 ));
 
             }
@@ -475,7 +501,8 @@
                 $vacancy[0]['status'],
                 $vacancy[0]['date'],
                 $vacancy[0]['schedule_name'],
-                $vacancy[0]['industry_name']
+                $vacancy[0]['industry_name'],
+                $vacancy[0]['views']
             );
 
         }
@@ -513,7 +540,10 @@
                     $vac['conditions'],
                     $vac['description'],
                     $vac['status'],
-                    $vac['date']
+                    $vac['date'],
+                    null,
+                    null,
+                    $vac['views']
                 ));
 
             }
@@ -562,7 +592,9 @@
                     $vac['description'],
                     $vac['status'],
                     $vac['date'],
-                    $vac['schedule_name']
+                    $vac['schedule_name'],
+                    null,
+                    $vac['views']
                 ));
 
             }
@@ -577,7 +609,7 @@
 
             $a = array();
             
-            $res = Database::run('SELECT DISTINCT location FROM '. self::$table);
+            $res = Database::run('SELECT DISTINCT location FROM '. self::$table.' WHERE status="1"');
 
             foreach($res as $r){
 
@@ -737,7 +769,8 @@
                     demands = ?,
                     duties = ?,
                     conditions = ?,
-                    email = ?
+                    email = ?,
+                    views = ? 
                     WHERE sender_id = ? AND id = ?', 
                     [
                         $this->company,
@@ -754,6 +787,7 @@
                         $this->duties,
                         $this->conditions,
                         $this->email,
+                        $this->views,
                         $this->senderId,
                         $this->id
                     ]);
@@ -1047,6 +1081,11 @@
 
             return $filter;
 
+        }
+
+        public function increaseViews(){
+            $this->views = (string)++$this->views;
+            return $this;
         }
 
     }

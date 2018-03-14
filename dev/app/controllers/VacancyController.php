@@ -11,6 +11,8 @@
 
             $this->data['vacancy'] = Vacancy::getJoined($this->data['router']['id']);
 
+            $this->data['vacancy']->increaseViews()->save();
+
             $this->redirectOnFailure();
 
             $this->addInfoToArray();

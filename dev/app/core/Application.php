@@ -2,10 +2,8 @@
 
     class Application {
 
-        private static $root = __DIR__.'/../..';
-
         public static function getRoot(){
-            return realpath(self::$root);
+            return realpath(__DIR__.'/../..');
         }
 
         public static function debug($data){
