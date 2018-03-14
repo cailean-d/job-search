@@ -128,6 +128,16 @@
 
         }
 
+        public static function getCountByVacancyId($id){
+
+            self::applyConfig();
+
+            $data = Database::run('SELECT COUNT(id) as count FROM '. self::$table .' WHERE vacancy_id = ?', [$id]);
+
+            return $data[0]['count'];
+
+        }
+
         public static function getByVacancyAndUserId($user_id, $id){
 
             self::applyConfig();

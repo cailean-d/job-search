@@ -11,6 +11,10 @@
 
             $this->data['vacancy'] = Vacancy::getJoined($this->data['router']['id']);
 
+            $v_id = $this->data['vacancy']->getId();
+
+            $this->data['resume_count'] = VacancyAddedResume::getCountByVacancyId($v_id);
+
             $this->data['vacancy']->increaseViews()->save();
 
             $this->redirectOnFailure();

@@ -215,7 +215,7 @@
                             Оставлено резюме: 
                         </div>
                         <div class="counter">
-                            <?=$vacancy->getViews()?>
+                            <?=$resume_count?>
                         </div>
                         <div class="icon">
                             <i class="fas fa-file-alt"></i>
