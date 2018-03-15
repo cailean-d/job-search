@@ -25,13 +25,15 @@
         private $scheduleName;
         private $industryName;
 
+        private $mistake;
+
         public function __construct($id = null, $senderName = null, $senderId = null, 
                                     $email = null, $company = null, $phone = null, 
                                     $vacancyName = null, $salaryMin = null, $salaryMax = null, 
                                     $experience = null, $location = null, $scheduleId = null, 
                                     $industryId = null, $demands = null, $duties = null, 
                                     $conditions = null, $description = null, $status = null, 
-                                    $date = null, $scheduleName = null, $industryName = null, $views = 0){
+                                    $date = null, $scheduleName = null, $industryName = null, $views = 0, $mistake = null){
 
             self::applyConfig();
 
@@ -57,6 +59,7 @@
             $this->scheduleName = htmlspecialchars(trim($scheduleName));
             $this->industryName = htmlspecialchars(trim($industryName));
             $this->views = htmlspecialchars(trim($views));
+            $this->mistake = htmlspecialchars(trim($mistake));
 
         }
 
@@ -142,6 +145,10 @@
 
         public function getIndustryName(){
             return $this->industryName;
+        }
+
+        public function getMistake(){
+            return $this->mistake;
         }
 
         public function setSenderName($senderName){
@@ -310,6 +317,8 @@
 
             $vacancy = Database::run('SELECT * FROM '. self::$table .' WHERE id = ? ', [$id]);
 
+            $mistake = VacancyMistakes::getByVacancyId($vacancy[0]['id']);
+
             return new Vacancy(
                 $vacancy[0]['id'],
                 $vacancy[0]['sender_name'],
@@ -332,7 +341,8 @@
                 $vacancy[0]['date'],
                 null,
                 null,
-                $vacancy[0]['views']
+                $vacancy[0]['views'],
+                $mistake->getDescription()
             );
 
         }
@@ -346,6 +356,8 @@
             $vacancy = Database::run('SELECT * FROM '. self::$table .' WHERE sender_id = ? ', [$id]);
 
             foreach($vacancy as $vac){
+
+                $mistake = VacancyMistakes::getByVacancyId($vac['id']);
 
                 array_push($vacancyAll,
 
@@ -371,7 +383,8 @@
                     $vac['date'],
                     null,
                     null,
-                    $vac['views']
+                    $vac['views'],
+                    $mistake->getDescription()
                 ));
 
             }
@@ -390,6 +403,8 @@
 
             foreach($vacancy as $vac){
 
+                $mistake = VacancyMistakes::getByVacancyId($vac['id']);
+
                 array_push($vacancyAll,
 
                 new Vacancy(
@@ -414,7 +429,8 @@
                     $vac['date'],
                     null,
                     null,
-                    $vac['views']
+                    $vac['views'],
+                    $mistake->getDescription()
                 ));
 
             }
@@ -432,6 +448,8 @@
             $vacancy = Database::run(self::getFilteredSQL());
 
             foreach($vacancy as $vac){
+
+                $mistake = VacancyMistakes::getByVacancyId($vac['id']);
 
                 array_push($vacancyAll,
 
@@ -457,7 +475,8 @@
                     $vac['date'],
                     $vac['schedule_name'],
                     null,
-                    $vac['views']
+                    $vac['views'],
+                    $mistake->getDescription()
                 ));
 
             }
@@ -479,6 +498,8 @@
                         LEFT JOIN '. self::getClassTable('HelperSchedule') .' ON '. self::$table .'.schedule = '. self::getClassTable('HelperSchedule') .'.id
                         LEFT JOIN '. self::getClassTable('HelperIndustry') .' ON '. self::$table .'.industry = '. self::getClassTable('HelperIndustry') .'.id
                         WHERE '. self::$table .'.id= ?', [$id]);
+
+            $mistake = VacancyMistakes::getByVacancyId($vacancy[0]['id']);
 
             return new Vacancy(
                 $vacancy[0]['id'],
@@ -502,7 +523,8 @@
                 $vacancy[0]['date'],
                 $vacancy[0]['schedule_name'],
                 $vacancy[0]['industry_name'],
-                $vacancy[0]['views']
+                $vacancy[0]['views'],
+                $mistake->getDescription()
             );
 
         }
@@ -518,6 +540,8 @@
             Application::log("filter.txt", self::getFilter());
 
             foreach($vacancy as $vac){
+
+                $mistake = VacancyMistakes::getByVacancyId($vac['id']);
 
                 array_push($vacancyAll,
 
@@ -543,7 +567,8 @@
                     $vac['date'],
                     null,
                     null,
-                    $vac['views']
+                    $vac['views'],
+                    $mistake->getDescription()
                 ));
 
             }
@@ -570,6 +595,8 @@
 
             foreach($vacancy as $vac){
 
+                $mistake = VacancyMistakes::getByVacancyId($vacancy[0]['id']);
+
                 array_push($vacancyAll,
 
                 new Vacancy(
@@ -594,7 +621,8 @@
                     $vac['date'],
                     $vac['schedule_name'],
                     null,
-                    $vac['views']
+                    $vac['views'],
+                    $mistake->getDescription()
                 ));
 
             }
@@ -631,6 +659,8 @@
 
             foreach($vacancy as $vac){
 
+                $mistake = VacancyMistakes::getByVacancyId($vacancy[0]['id']);
+
                 array_push($vacancyAll,
 
                 new Vacancy(
@@ -652,7 +682,11 @@
                     $vac['conditions'],
                     $vac['description'],
                     $vac['status'],
-                    $vac['date']
+                    $vac['date'],
+                    null,
+                    null,
+                    null,
+                    $mistake->getDescription()
                 ));
 
             }

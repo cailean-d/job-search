@@ -17,8 +17,6 @@
 
             $this->data['resume_count'] = VacancyAddedResume::getCountByVacancyId($v_id);
 
-
-
             $this->addInfoToArray();
 
             $this->getUserAdditionalInfo();
