@@ -12,8 +12,17 @@
                     <article class='vacancy'>
                         <header>
                             <div class="top">
-                                <div class='title'>
+                                <div class='title' style="display: flex; justify-content: space-between;">
                                     <a href='vacancy/<?=$res->getId()?>'><?=$res->getVacancyName()?></a>
+                                    <?php if ($res->getStatus() == '1') : ?>
+                                        <div class="bg-success text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
+                                            Размещено
+                                        </div>
+                                    <?php elseif ($res->getStatus() == '0') : ?>
+                                        <div class="bg-warning text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
+                                            Обрабатывается
+                                        </div>
+                                    <?php endif ?>
                                 </div>
                                 <div class='salary'>
                                     <span>
