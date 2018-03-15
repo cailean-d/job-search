@@ -1024,7 +1024,6 @@ export class Main{
         var logout : HTMLElement = document.querySelector("#header .logout");
         let toggle_menu : HTMLElement = document.querySelector(".header-menu-m");
     
-        var avatar_url = "api/1.0.0/user/avatar";
         var logout_url = "api/1.0.0/user/logout";
         
         if(name != null){
@@ -1058,81 +1057,6 @@ export class Main{
                             alert(xhr.status + ': ' + xhr.statusText);
                         }
                     }
-                }
-            }
-        }
-    
-        if(document.getElementById("avatar_upload")){
-            var input : any = document.getElementById("avatar_upload");
-            var temp_img : any, preload : any= document.getElementById("avatar_preload");
-            var confirm_message_text = document.querySelector("#confirm .modal-body p");
-            var modal_message_text = document.querySelector("#modal .modal-body p");
-            var confirm_btn1 : HTMLElement = document.querySelector("#confirm .option1");
-            var confirm_btn2 : HTMLElement = document.querySelector("#confirm .option2");
-    
-            input.onchange = function(){
-                if ((this as any).files && (this as any).files[0]) {
-                    var reader = new FileReader();
-                    reader.readAsDataURL((this as any).files[0]);
-                    reader.onload = function (e : any) {
-                        temp_img = preload.src;
-                        preload.src = e.target.result;
-    
-                        confirm_message_text.innerHTML = "Изменить аватар?";
-                        confirm_btn1.innerHTML = "Да";
-                        confirm_btn2.innerHTML = "Нет";
-                        confirm_btn1.onclick = function(){
-    
-                            var btn : any = this;
-                            var data = new FormData();
-                            data.append('avatar', input.files[0], 'avatar.jpg');
-    
-                            var xhr = new XMLHttpRequest();
-                    
-                            xhr.open('POST', avatar_url);
-                            xhr.send(data);
-    
-                            btn.disabled = true;
-                            btn.classList.add("disabled");
-                            btn.style.pointerEvents = "auto";
-                            btn.innerHTML = "Отправка данных <i class=\"fas fa-spinner fa-pulse\"></i>";
-                        
-                            xhr.onreadystatechange = function() {
-                                if (xhr.readyState == 4){
-                                    if (xhr.status == 200) {
-                        
-                                        modal_message_text.innerHTML = "Аватар изменен!";
-                                        $('#confirm').modal('hide');
-    
-                                        setTimeout(function(){
-                                            $('#modal').modal('show');
-                                        }, 500);
-                        
-                                        btn.disabled = false;
-                                        btn.classList.remove("disabled");
-                                        btn.innerHTML = "";
-                        
-                                    } else {
-                                        modal_message_text.innerHTML = xhr.status + ': ' + xhr.statusText + ", " + xhr.responseText;
-                                        $('#modal').modal('show');
-                        
-                                        btn.disabled = false;
-                                        btn.classList.remove("disabled");
-                                        btn.innerHTML = "Да";
-                                    }
-                                } 
-                            }
-                        }
-                    
-                        confirm_btn2.onclick = function(){
-                            preload.src = temp_img;
-                            input.value = null;
-                            $('#confirm').modal('hide');
-                        };
-    
-                        $('#confirm').modal('show');
-                    };
-                    
                 }
             }
         }
@@ -1305,7 +1229,6 @@ export class Main{
                     loadZone.style.display = "block";
                     previewBox.classList.remove("preview-show");
                     this.loadPreview(file, headerAvatar);
-                    console.log(resumeAvatar);
                     if(resumeAvatar) this.loadPreview(file, resumeAvatar);
                 } else {
                     let res = JSON.parse(xhr.responseText);

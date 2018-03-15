@@ -53,7 +53,7 @@
                 <i class="fas fa-user fa-lg"></i>
             </a>
             <div class="avatar">
-                <label for="avatar_upload" class="avatar mb-0 hand" title="Загрузить фото">
+                <label for="avatar_upload" class="avatar mb-0">
                     <img 
                     
                     src="<?
@@ -71,7 +71,6 @@
                     
                     ?>" alt="avatar" id="avatar_preload">
                 </label>
-                <input type="file" id="avatar_upload" hidden>
             </div>
             <div class='drop_menu __drop_menu'>
                 <div>
