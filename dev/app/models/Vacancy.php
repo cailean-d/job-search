@@ -595,7 +595,7 @@
 
             foreach($vacancy as $vac){
 
-                $mistake = VacancyMistakes::getByVacancyId($vacancy[0]['id']);
+                $mistake = VacancyMistakes::getByVacancyId($vac['id']);
 
                 array_push($vacancyAll,
 

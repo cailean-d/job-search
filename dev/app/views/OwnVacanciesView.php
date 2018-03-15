@@ -18,6 +18,10 @@
                                         <div class="bg-success text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
                                             Размещено
                                         </div>
+                                    <?php elseif ($res->getStatus() == '0' && !empty($res->getMistake())) : ?>
+                                        <div class="bg-danger text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
+                                            Исправьте ошибки
+                                        </div>
                                     <?php elseif ($res->getStatus() == '0') : ?>
                                         <div class="bg-warning text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
                                             Обрабатывается
