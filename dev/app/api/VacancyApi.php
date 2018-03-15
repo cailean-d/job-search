@@ -543,6 +543,8 @@
 
             }
 
+            $vacancy->setStatus('0');
+
             try{
                 
                 $vacancy->save();
