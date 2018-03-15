@@ -28,6 +28,8 @@
 
         'helpercompskill' => 'help_comp_skills',
 
-        'helperlanguage' => 'help_languages'
+        'helperlanguage' => 'help_languages',
+
+        'vacancymistakes' => 'vacancy_mistakes'
 
     );
