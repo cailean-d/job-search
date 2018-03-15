@@ -10,14 +10,14 @@
             $this->view->setView('VacancyView');
 
             $this->data['vacancy'] = Vacancy::getJoined($this->data['router']['id']);
+            $this->redirectOnFailure();
+            $this->data['vacancy']->increaseViews()->save();
 
             $v_id = $this->data['vacancy']->getId();
 
             $this->data['resume_count'] = VacancyAddedResume::getCountByVacancyId($v_id);
 
-            $this->data['vacancy']->increaseViews()->save();
 
-            $this->redirectOnFailure();
 
             $this->addInfoToArray();
 
@@ -89,7 +89,7 @@
 
         private function redirectOnFailure(){
 
-            if(empty($this->data['vacancy']->getId())){
+            if(empty($this->data['vacancy']->getId()) || $this->data['vacancy']->getStatus() == '0'){
 
                 Router::redirectTo("/");
 
