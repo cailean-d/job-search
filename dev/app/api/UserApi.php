@@ -647,6 +647,12 @@
 
             }
 
+            if(!isset($_FILES["avatar"])){
+
+                Http::error("Файл не был загружен", 400);
+
+            }
+
             $avatar = Avatar::get($_SESSION['id']);
 
             if(empty($avatar->getId())){

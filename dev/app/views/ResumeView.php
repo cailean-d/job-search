@@ -48,7 +48,7 @@
                             }
 
 
-                            ?>" alt="" class="img-thumbnail rounded" draggable="false">
+                            ?>" alt="" class="img-thumbnail rounded __resume_avatar" draggable="false">
                         </div>
                         <div class="info pl-2 pr-0">
                             <h4>Личная информация</h4>

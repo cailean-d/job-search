@@ -11,3 +11,4 @@ Main.dropMenu();
 Main.headerDropMenu();
 Vacancy.send_resume();
 Vacancy.delete_resume();
+Main.init();

@@ -10,4 +10,5 @@ Main.modalReg();
 Main.dropMenu();
 Main.headerDropMenu();
 Vacancy.del();
+Main.init();
 

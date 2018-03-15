@@ -45,9 +45,7 @@
 
         public function save(){
 
-            $object = $this::get($this->id);
-
-            if($object->getId() === '' || is_null($object->getId())){
+            if($this->getId() === '' || is_null($this->getId())){
 
                 $this->create();
 

@@ -5,6 +5,10 @@ import "./lib/script/bootstrap.min.js";
 
 export class Main{
 
+    static init(){
+        this.modalAvatar();
+    }
+
     static activePage(){
 
         let page = window.location.pathname;
@@ -1179,6 +1183,151 @@ export class Main{
                 drop_menu.style.display = "none";
                 toggle_drop_menu.classList.remove("menu-active");
             }
+        }
+    }
+
+    static modalAvatar(){
+
+        let loadZone : HTMLElement = document.querySelector('.loadFileZone');
+        let preview : HTMLImageElement = document.querySelector('.preview__img');
+        let previewBox : HTMLDivElement = document.querySelector('.preview');
+        let cancelPreview : HTMLDivElement = document.querySelector('.preview .cancel');
+        let fileInput : HTMLInputElement = document.querySelector("#loadfile");
+        let sendAvatar : HTMLButtonElement = document.querySelector("#__save_avatar_label");
+        let progressBar : HTMLDivElement = document.querySelector("#avatar_progress");
+        let progressBarBox : HTMLDivElement = document.querySelector(".progress");
+        let modal_message_text : HTMLElement = document.querySelector("#modal .modal-body p");
+        let headerAvatar : HTMLImageElement = document.getElementById("avatar_preload") as HTMLImageElement;
+        let resumeAvatar : HTMLImageElement = document.querySelector(".__resume_avatar");
+        let avatar_url = "api/1.0.0/user/avatar";
+        let file : File;
+
+        
+        function disableButton(button : any){
+    
+            button.disabled = true;
+            button.classList.add("disabled");
+            button.style.pointerEvents = "auto";
+    
+        }
+            
+        function enableButton(button : any){
+    
+            button.disabled = false;
+            button.classList.remove("disabled");
+    
+        }
+    
+        function buttonLoading(button : any){
+    
+            button.innerHTML = "Отправка данных <i class=\"fas fa-spinner fa-pulse\"></i>";
+    
+        }
+    
+        function buttonText(button : any, text : any){
+    
+            button.innerHTML = text;
+    
+        }
+
+        function loadStartFunction(){
+            progressBarBox.style.display = "block";
+        }
+
+        function progressFunction(e : ProgressEvent){
+            let progressPercent = Math.floor((e.loaded / e.total) * 100);
+            progressBar.innerHTML = progressPercent + "%";
+            progressBar.style.width = progressPercent + "%";
+        }
+
+        function transferCompleteFunction(){
+            progressBarBox.style.display = "none";
+            progressBar.innerHTML = "0%";
+            progressBar.style.width = "0%";
+        }
+
+        this.preventWindowDrop();
+
+        loadZone.ondragover = function(){
+            this.classList.add('loadFileZone-hover');
+        }
+
+        loadZone.ondragleave = function(){
+            this.classList.remove('loadFileZone-hover');
+        }
+
+        loadZone.ondrop = (e : DragEvent) => {
+            e.preventDefault();
+            loadZone.classList.remove('loadFileZone-hover');
+            file = e.dataTransfer.files[0];
+            this.loadPreview(file, preview);
+            previewBox.classList.add("preview-show");
+            loadZone.style.display = "none";
+            enableButton(sendAvatar);
+        }
+
+        cancelPreview.onclick = (e : MouseEvent) => {
+            e.preventDefault();
+            loadZone.style.display = "block";
+            previewBox.classList.remove("preview-show");
+            disableButton(sendAvatar);
+        }
+
+        fileInput.onchange = () => {
+            if(fileInput.files[0]){
+                file = fileInput.files[0];
+                this.loadPreview(file, preview);
+                previewBox.classList.add("preview-show");
+                loadZone.style.display = "none";
+                enableButton(sendAvatar);
+            }
+        }
+
+        sendAvatar.onclick = (e : MouseEvent) => {
+            let data = new FormData();
+            data.append('avatar', file, 'avatar.jpg');
+
+            let xhr = new XMLHttpRequest();
+    
+            xhr.open('POST', avatar_url);
+            xhr.send(data);
+
+            disableButton(e.target);
+            buttonLoading(e.target);
+
+            xhr.upload.addEventListener("loadstart", loadStartFunction, false);  
+            xhr.upload.addEventListener("progress", progressFunction, false);  
+            xhr.upload.addEventListener("load", transferCompleteFunction, false);  
+
+            xhr.onload = () => {
+                if(xhr.status == 200){
+                    buttonText(sendAvatar, "Загрузить");
+                    loadZone.style.display = "block";
+                    previewBox.classList.remove("preview-show");
+                    this.loadPreview(file, headerAvatar);
+                    console.log(resumeAvatar);
+                    if(resumeAvatar) this.loadPreview(file, resumeAvatar);
+                } else {
+                    let res = JSON.parse(xhr.responseText);
+                    modal_message_text.innerHTML = xhr.status + ': ' + res.error;
+                    $('#modal').modal('show');
+                    enableButton(sendAvatar);
+                    buttonText(sendAvatar, "Загрузить");
+                }
+            }
+        }
+    }
+
+    private static preventWindowDrop(){
+        window.ondrop = (e) => { e.preventDefault(); }
+        window.ondragover = (e) => { e.preventDefault(); }
+    }
+
+    private static loadPreview(file : File, el: HTMLImageElement){
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e : Event) => {
+            el.src = (e.target as any).result;
         }
     }
 }

@@ -122,7 +122,7 @@
             $this->saveFile();
 
             return Database::run('UPDATE '. self::$table .' SET source = ? WHERE user_id = ?', 
-            [$this->source, $this->id]);
+            [$this->source, $this->userid]);
 
         }
 

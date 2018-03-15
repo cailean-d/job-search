@@ -11,4 +11,5 @@ Main.modalReg();
 Main.dropMenu();
 Main.headerDropMenu();
 Resume.init();
+Main.init();
 

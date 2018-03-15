@@ -10,4 +10,4 @@ Main.modalReg();
 Main.dropMenu();
 Main.headerDropMenu();
 Vacancy.init();
-
+Main.init();

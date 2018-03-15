@@ -18,6 +18,7 @@ Main.modalLogin();
 Main.modalReg();
 Main.dropMenu();
 Main.headerDropMenu();
+Main.init();
 
 // ajax onscroll pagination
 
