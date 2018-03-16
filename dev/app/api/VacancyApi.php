@@ -545,6 +545,12 @@
 
             $vacancy->setStatus('0');
 
+            $mistake = VacancyMistakes::getByVacancyId($vacancy->getId());
+
+            if(!empty($mistake->getId())){
+                $mistake->delete();
+            }
+
             try{
                 
                 $vacancy->save();
