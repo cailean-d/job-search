@@ -15,20 +15,28 @@
                                 <div class='title' style="display: flex; justify-content: space-between;">
                                     <a href='vacancy/<?=$res->getId()?>'><?=$res->getVacancyName()?></a>
                                     <?php if ($res->getStatus() == '1') : ?>
-                                        <div class="bg-success text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
+                                        <div class="bg-success status">
                                             Размещено
                                         </div>
                                     <?php elseif ($res->getStatus() == '0' && !empty($res->getMistake())) : ?>
-                                        <div class="bg-danger text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
+                                        <button type="button" class="btn btn-danger dropdown-toggle status" data-toggle="collapse" data-target="#mistake" aria-expanded="false">
                                             Исправьте ошибки
-                                        </div>
+                                        </button>
                                     <?php elseif ($res->getStatus() == '0') : ?>
-                                        <div class="bg-warning text-white" style="margin-left: 1rem; padding: 0.1rem 0.5rem; border-radius: 4px;">
+                                        <div class="bg-warning status">
                                             Обрабатывается
                                         </div>
                                     <?php endif ?>
                                 </div>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body bg-danger mistakes">
+                                        <?=$res->getMistake()?>
+                                    </div>
+                                </div>
                                 <div class='salary'>
+                                    <div class="description">
+                                        Зарплата: 
+                                    </div>
                                     <span>
                                         <?=
                                         
@@ -51,23 +59,46 @@
                                 </div>
                             </div>
                             <div class="bottom">
-                                <div>
-                                    в компанию <span class="company">"<?=$res->getCompany()?>"</span>
+                                <div class="company">
+                                    <div class="description">
+                                        Компания: 
+                                    </div>
+                                    <span class="company">
+                                        "<?=$res->getCompany()?>"
+                                    </span>
                                 </div>
-                                <div>
-                                    график: <span class="emp"><?=mb_strtolower($res->getScheduleName(), "UTF-8")?></span>
+                                <div class="schedule">
+                                    <div class="description">
+                                        График:
+                                    </div>
+                                    <span class="emp">
+                                        <?=mb_strtolower($res->getScheduleName(), "UTF-8")?>
+                                    </span>
                                 </div>
                             </div>
                         </header>
-                        <p>
-                            <span class="dem">Требования: </span><?=str_replace(",", ", ", mb_strtolower($res->getDemands(), 'UTF-8'))?>
-                        </p>
-                        <footer>
-                            <div>
-                                <?=$res->getLocation()?>
+                        <div class="body">
+                            <div class="demands">
+                                <div class="description">
+                                    Требования:
+                                </div>
+                                <span>
+                                    <?=str_replace(",", ", ", mb_strtolower($res->getDemands(), 'UTF-8'))?>
+                                </span>
                             </div>
-                            <div>
-                                <?=date("d.m.Y H:i:s", strtotime($res->getDate()));?>
+                        </div>
+                        <footer>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="text">
+                                    <?=$res->getLocation();?>
+                                </div>
+                            </div>
+                            <div class="date">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div class="text">
+                                    <?=date("d.m.Y H:i:s", strtotime($res->getDate()));?>
+                                </div>
                             </div>
                         </footer>
                     </article>

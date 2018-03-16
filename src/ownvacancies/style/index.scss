@@ -1,20 +1,120 @@
-.edit-buttons{
-    position: absolute;
-    top: 0;
-    left: 100%;
-    background: #ffffff;
-    padding: 10px;
-    display: none;
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 1px;
-}
+$description_offset : 0.5rem;
 
-.vacancyz:hover{
-    background: #f7f7f7;
-}
+.vacancyz{
 
-.vacancyz:hover .edit-buttons{
-    display: flex;
+    cursor: default;
+
+    &:hover{
+        background: #f7f7f7;
+    }
+
+    &:hover .edit-buttons{
+        display: flex;
+    }
+
+    .edit-buttons{
+        position: absolute;
+        top: 0;
+        left: 100%;
+        background: #ffffff;
+        padding: 10px;
+        display: none;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 1px;
+    }
+
+    header{
+        .top{
+            .title{
+                margin-bottom: 1rem;
+        
+                a{
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+
+                .status{
+                    margin-left: 1rem; 
+                    padding: 0.1rem 0.5rem; 
+                    border-radius: 4px;
+                    color: #ffffff;
+                }
+
+                button.status{
+                    cursor: pointer;
+                }
+            }
+
+            .mistakes{
+                padding: 1rem;
+                color: #ffffff;
+                margin-bottom: 1rem;
+            }
+    
+            .salary{
+                display: flex;
+                
+                .description{
+                    margin-right: $description_offset;
+                    color: #a2a2a2;
+                }
+    
+                span{
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .bottom{
+            .company{
+                display: flex;
+                .description{
+                    margin-right: $description_offset;
+                    color: #a2a2a2;
+                } 
+
+                span{
+                    color: #3f6ca5;
+                }
+            }
+
+            .schedule{
+                display: flex;
+                .description{
+                    margin-right: $description_offset;
+                    color: #a2a2a2;
+                } 
+            }
+        }
+    
+    }
+
+    .body{
+        .demands{
+            display: flex;
+            .description{
+                margin-right: $description_offset;
+                color: #a2a2a2;
+            } 
+        }
+    }
+
+    footer{
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        color: #727272;
+        font-size: 15px;
+    
+        .location, .date{
+            display: flex;
+            align-items: center;
+            .text{
+                margin-left: 7px;
+            }
+        }
+    }
 }

@@ -12,3 +12,15 @@ Main.headerDropMenu();
 Vacancy.del();
 Main.init();
 
+
+let mistakeButtons : NodeListOf<HTMLButtonElement> = document.querySelectorAll("button.status");
+
+for (let i = 0; i < mistakeButtons.length; i++) {
+    let btn : HTMLButtonElement = mistakeButtons[i];
+    let parent : Node = mistakeButtons[i].parentNode;
+    let collapse : Node = parent.nextSibling.nextSibling;
+
+    btn.onclick = () => {
+        $(collapse).collapse('toggle');
+    }
+}
