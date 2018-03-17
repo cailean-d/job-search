@@ -16,15 +16,20 @@
         
         <div class="header-menu">
             <?php if($user['type'] == '1') : ?>      <!-- Работодатель -->
-
+            
+                <a class="__my-vacancies link" href="vacancy">
+                    <div class="text">
+                        Мои вакансии
+                    </div>
+                </a>
                 <a class="__vacancy-add link" href="vacancy/add">
                     <div class="text">
                         Разместить вакансию
                     </div>
                 </a>
-                <a class="__my-vacancies link" href="vacancy">
+                <a class="__resumes link" href="resumes">
                     <div class="text">
-                        Мои вакансии
+                        Список резюме
                     </div>
                 </a>
 
