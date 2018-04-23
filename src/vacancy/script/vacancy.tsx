@@ -8,7 +8,7 @@ export class Vacancy{
 
         let __thisClass__ = this;
     
-        var url_vacancy_resume = 'api/1.0.0/vacancy_resume/:id';
+        var url_vacancy_resume = 'api/1.0.0/vacancy_resume/';
     
         var modal_message_text = document.querySelector("#modal .modal-body p");
         var id = document.querySelector(".vacancy_id").innerHTML.trim();
@@ -21,9 +21,9 @@ export class Vacancy{
             var xhr = new XMLHttpRequest();
             
             // отправка запроса
-            xhr.open("POST", url_vacancy_resume, true);
+            xhr.open("POST", url_vacancy_resume + id, true);
             xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
-            xhr.send("id=" + id);    
+            xhr.send();    
     
             // заблокировать кнопку
             (this as HTMLButtonElement).disabled = true;
