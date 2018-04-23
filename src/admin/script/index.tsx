@@ -29,8 +29,6 @@ for(let i = 0; i < public_btn.length; i++){
         xhr.open('GET', '?public=true&id=' + vacancy_id);
         xhr.send();
         xhr.onload = () => {
-
-            console.log(xhr);
             
             if (xhr.readyState == 4 && xhr.status == 200) {
                     
