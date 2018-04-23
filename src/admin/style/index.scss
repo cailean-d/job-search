@@ -44,8 +44,30 @@
                 background: #5b6a7d;
             }
 
-            label{
-                margin: 0;
+ 
+        }
+
+        input{
+            background: transparent;
+            display: block;
+            width: 100%;
+            border: none;
+            color: #fff;
+            outline: none;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            padding: 15px 20px;
+            color: #fff;
+            background: #394554;
+            cursor: pointer;
+
+            &:active, &:visited{
+                color: #fff;
+            }
+
+            &:hover{
+                background: #5b6a7d;
             }
         }
     }

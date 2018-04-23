@@ -1,0 +1,43 @@
+
+
+.resume{
+    display: flex;
+
+    .avatar{
+        max-width: 200px;
+        width: 200px;
+    
+        img{
+            width: 100%;
+        }
+    }
+
+    .main{
+        padding-left: 20px;
+    
+        header{
+            a{
+                font-size: 22px;
+            }
+        }
+    }
+
+
+    .vacancy_block{
+        margin-bottom: 20px !important;
+    }
+
+
+    .row{
+        width: 100px;
+    }
+
+    th, td{
+        border: none !important;
+    }
+
+    .table{
+        margin-top: 20px;
+    }
+}
+

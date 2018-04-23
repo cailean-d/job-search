@@ -21,6 +21,8 @@
         private $scheduleName;
         private $workPlaceName;
         private $compSkillName;
+        private $avatar;
+        private $user;
 
         public function __construct($id = null,
                                         $userid = null,
@@ -40,7 +42,9 @@
                                         $industryName = null,
                                         $scheduleName = null,
                                         $workPlaceName = null,
-                                        $compSkillName = null){
+                                        $compSkillName = null,
+                                        $avatar = null,
+                                        $user = null){
 
             self::applyConfig();
 
@@ -63,6 +67,8 @@
             $this->scheduleName = htmlspecialchars(trim($scheduleName));
             $this->workPlaceName = htmlspecialchars(trim($workPlaceName));
             $this->compSkillName = htmlspecialchars(trim($compSkillName));
+            $this->avatar = htmlspecialchars(trim($avatar));
+            $this->user = $user;
         }
 
         public function getUserid(){
@@ -135,6 +141,14 @@
 
         public function getCompSkillName(){
             return $this->compSkillName;
+        }
+
+        public function getAvatar() {
+            return $this->avatar;
+        }
+
+        public function getUser() {
+            return $this->user;
         }
         
         public function setUserid($userid){
@@ -318,6 +332,8 @@
 
             foreach($data as $d){
 
+                $avatar = Avatar::get($d['user_id']);
+
                 array_push($dataAll,
 
                 new Resume(
@@ -335,7 +351,13 @@
                     $d['comp_skill_id'],
                     $d['car'],
                     $d['courses'],
-                    $d['skills']
+                    $d['skills'],
+                    null,
+                    null,
+                    null,
+                    null,
+                    $avatar->getSource(),
+                    User::get($d['user_id'])
                 ));
 
             }

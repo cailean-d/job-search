@@ -2,7 +2,9 @@
 	$config = require realpath(__DIR__.'/../config/admin_panel.php');
 	$db_config = require realpath(__DIR__.'/../config/database_connection.php');
 
-	if (isset($_GET['ADMIN'])) {
+	if(isset($_GET['logout'])) {
+		unset($_SESSION['admin']);
+	} else if (isset($_GET['ADMIN'])) {
 		if ($_GET['login'] != $config['login']) {
 		  	$no_login = true;
 		  if ($_GET['password'] != $config['password']) {
@@ -13,10 +15,6 @@
 		if (!isset($no_pass) && !isset($no_login)) {
 			$_SESSION['admin'] = true;
 		}
-	}
-
-	if(isset($_GET['logout'])) {
-		unset($_SESSION['admin']);
 	}
 
 	if(isset($_GET['mistake'])) {
@@ -81,19 +79,12 @@
 		</div>
 	<?php else : ?>
 		<div class="container2">
-			<form hidden>
-				<input type="submit" name="logout" id="exit" value="q"/>
-			</form>
 			<aside class="side-panel">
 				<nav>
 					<a href="" class="active">Новые вакансии</a>
-					<a href=""><label for="exit">Выход</label></a>
-					<?php 
-					
-						if(isset($_GET['qqq'])) {
-							echo "qqww";
-						}
-					?>
+					<form >
+						<input type="submit" name="logout" id="exit" value="Выход"/>
+					</form>
 				</nav>
 			</aside>
 			<main>

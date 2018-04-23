@@ -10,7 +10,8 @@ module.exports = {
     vacancyedit: './src/vacancyedit/script/index.tsx',
     resume: './src/resume/script/index.tsx',
     resumeedit: './src/resumeedit/script/index.tsx',
-    admin: './src/admin/script/index.tsx'
+    admin: './src/admin/script/index.tsx',
+    resumes: './src/resumes/script/index.tsx'
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),

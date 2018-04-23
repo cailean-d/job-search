@@ -23,3 +23,5 @@
     Router::get("api", ApiController::class);
 
     Router::get("admin", AdminController::class);
+
+    Router::get("resumes", ResumesController::class);
