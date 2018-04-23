@@ -101,5 +101,7 @@ gulp.task('build', ['webpack'], function() {
     var task1 = gulp.src(['./dev/start.php','./dev/.htaccess']).pipe(phpMinify()).pipe(gulp.dest('./.prod/'));
     var task2 = gulp.src(['./dev/app/**/*']).pipe(gulp.dest('./.prod/app/'));
 
-    return [task1, task2];
+    var task3 = gulp.src(['!./dev/public/style/**/*', '!./dev/public/script/**/*', './dev/public/**/*']).pipe(gulp.dest('./.prod/public/'));
+
+    return [task1, task2, task3];
 });
