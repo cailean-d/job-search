@@ -22,9 +22,4 @@
 
     Router::get("api", ApiController::class);
 
-    Router::get("admin", function($router){
-
-        echo "admin panel";
-    
-    });
-
+    Router::get("admin", AdminController::class);

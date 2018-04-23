@@ -9,7 +9,8 @@ module.exports = {
     errorpage: './src/errorpage/script/index.tsx',
     vacancyedit: './src/vacancyedit/script/index.tsx',
     resume: './src/resume/script/index.tsx',
-    resumeedit: './src/resumeedit/script/index.tsx'
+    resumeedit: './src/resumeedit/script/index.tsx',
+    admin: './src/admin/script/index.tsx'
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
